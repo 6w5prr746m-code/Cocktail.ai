@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Cocktails d'été",
+    "iconName": "sun.max.fill",
+    "cocktailNames": ["Mojito", "Cuba Libre", "Virgin Mojito", "Piña Colada", "Mai Tai", "Margarita"]
+  },
+  {
+    "name": "Apéritifs",
+    "iconName": "wineglass.fill",
+    "cocktailNames": ["Cuba Libre", "Daiquiri", "Aperol Spritz"]
+  },
+  {
+    "name": "Sans alcool",
+    "iconName": "leaf.fill",
+    "cocktailNames": ["Virgin Mojito", "Shirley Temple"]
+  },
+  {
+    "name": "Soirée chic",
+    "iconName": "sparkles",
+    "cocktailNames": ["Old Cuban", "Daiquiri", "Espresso Martini", "Bramble"]
+  },
+  {
+    "name": "Classiques intemporels",
+    "iconName": "clock.arrow.circlepath",
+    "cocktailNames": ["Mojito", "Cuba Libre", "Daiquiri", "Whiskey Sour", "Margarita"]
+  },
+  {
+    "name": "Soirée d'hiver",
+    "iconName": "snowflake",
+    "cocktailNames": ["Hot Toddy", "Old Cuban"]
+  },
+  {
+    "name": "Ambiance Tiki",
+    "iconName": "leaf.arrow.circlepath",
+    "cocktailNames": ["Mai Tai", "Piña Colada"]
+  }
+]

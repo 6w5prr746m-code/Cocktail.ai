@@ -1,0 +1,989 @@
+[
+  {
+    "name": "Mojito",
+    "category": "Classique",
+    "origin": "Cuba",
+    "history": "Né à La Havane, popularisé au XXe siècle, symbole du rafraîchissement cubain.",
+    "difficulty": 1,
+    "mainSpirit": "Rhum blanc",
+    "preparationTimeMinutes": 4,
+    "glassware": "Verre Highball",
+    "iceType": "Glace pilée",
+    "garnish": "Brin de menthe",
+    "tips": "Presser la menthe sans l'écraser pour éviter l'amertume.",
+    "imageURL": "seed_mojito",
+    "ingredients": [
+      {
+        "slug": "rhum_blanc",
+        "name": "Rhum blanc",
+        "category": "Alcool",
+        "colorHex": "#F5F1E8",
+        "quantity": 6,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "primarySpirit"
+      },
+      {
+        "slug": "citron_vert",
+        "name": "Citron vert",
+        "category": "Fruit",
+        "colorHex": "#2DD4BF",
+        "quantity": 0.5,
+        "unit": "pièce",
+        "isOptional": false,
+        "role": "modifier"
+      },
+      {
+        "slug": "menthe",
+        "name": "Menthe fraîche",
+        "category": "Herbe",
+        "colorHex": "#2DD4BF",
+        "quantity": 8,
+        "unit": "feuilles",
+        "isOptional": false,
+        "role": "modifier"
+      },
+      {
+        "slug": "sucre_canne",
+        "name": "Sucre de canne",
+        "category": "Sucre",
+        "colorHex": "#C9A227",
+        "quantity": 2,
+        "unit": "cc",
+        "isOptional": false,
+        "role": "modifier"
+      },
+      {
+        "slug": "eau_gazeuse",
+        "name": "Eau gazeuse",
+        "category": "Autre",
+        "colorHex": null,
+        "quantity": 6,
+        "unit": "cl",
+        "isOptional": true,
+        "role": "mixer"
+      }
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "instruction": "Presser le demi-citron vert dans le verre.",
+        "durationSeconds": null
+      },
+      {
+        "order": 2,
+        "instruction": "Ajouter le sucre de canne et la menthe, piler délicatement.",
+        "durationSeconds": null
+      },
+      {
+        "order": 3,
+        "instruction": "Ajouter le rhum blanc et bien mélanger.",
+        "durationSeconds": null
+      },
+      {
+        "order": 4,
+        "instruction": "Remplir de glace pilée et compléter à l'eau gazeuse.",
+        "durationSeconds": null
+      },
+      {
+        "order": 5,
+        "instruction": "Décorer d'un brin de menthe.",
+        "durationSeconds": null
+      }
+    ]
+  },
+  {
+    "name": "Cuba Libre",
+    "category": "Classique",
+    "origin": "Cuba",
+    "history": "Créé au début du XXe siècle à Cuba, mélange de rhum et de cola.",
+    "difficulty": 1,
+    "mainSpirit": "Rhum blanc",
+    "preparationTimeMinutes": 2,
+    "glassware": "Verre Highball",
+    "iceType": "Glaçons",
+    "garnish": "Rondelle de citron vert",
+    "tips": null,
+    "imageURL": "seed_cuba_libre",
+    "ingredients": [
+      {
+        "slug": "rhum_blanc",
+        "name": "Rhum blanc",
+        "category": "Alcool",
+        "colorHex": "#F5F1E8",
+        "quantity": 5,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "primarySpirit"
+      },
+      {
+        "slug": "coca",
+        "name": "Coca",
+        "category": "Soda",
+        "colorHex": "#5B2A2A",
+        "quantity": 12,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "mixer"
+      },
+      {
+        "slug": "citron_vert",
+        "name": "Citron vert",
+        "category": "Fruit",
+        "colorHex": "#2DD4BF",
+        "quantity": 1,
+        "unit": "pièce",
+        "isOptional": false,
+        "role": "modifier"
+      }
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "instruction": "Remplir le verre de glaçons.",
+        "durationSeconds": null
+      },
+      {
+        "order": 2,
+        "instruction": "Ajouter le rhum blanc puis le Coca.",
+        "durationSeconds": null
+      },
+      {
+        "order": 3,
+        "instruction": "Presser un quartier de citron vert et mélanger.",
+        "durationSeconds": null
+      }
+    ]
+  },
+  {
+    "name": "Daiquiri",
+    "category": "Classique",
+    "origin": "Cuba",
+    "history": "Inventé près de Santiago de Cuba à la fin du XIXe siècle.",
+    "difficulty": 2,
+    "mainSpirit": "Rhum blanc",
+    "preparationTimeMinutes": 3,
+    "glassware": "Verre à cocktail",
+    "iceType": "Aucune (servi sans glace, shaké avec glace)",
+    "garnish": "Zeste de citron vert",
+    "tips": "Bien shaker pour obtenir une texture mousseuse.",
+    "imageURL": "seed_daiquiri",
+    "ingredients": [
+      {
+        "slug": "rhum_blanc",
+        "name": "Rhum blanc",
+        "category": "Alcool",
+        "colorHex": "#F5F1E8",
+        "quantity": 6,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "primarySpirit"
+      },
+      {
+        "slug": "citron_vert",
+        "name": "Citron vert",
+        "category": "Fruit",
+        "colorHex": "#2DD4BF",
+        "quantity": 2.5,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "modifier"
+      },
+      {
+        "slug": "sirop_sucre",
+        "name": "Sirop de sucre",
+        "category": "Sirop",
+        "colorHex": "#C9A227",
+        "quantity": 1.5,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "modifier"
+      }
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "instruction": "Verser tous les ingrédients dans un shaker rempli de glaçons.",
+        "durationSeconds": null
+      },
+      {
+        "order": 2,
+        "instruction": "Shaker vigoureusement.",
+        "durationSeconds": 15
+      },
+      {
+        "order": 3,
+        "instruction": "Filtrer dans un verre à cocktail glacé.",
+        "durationSeconds": null
+      }
+    ]
+  },
+  {
+    "name": "Old Cuban",
+    "category": "Moderne",
+    "origin": "États-Unis",
+    "history": "Créé dans les années 2000, un Mojito habillé pour le soir avec du champagne.",
+    "difficulty": 2,
+    "mainSpirit": "Rhum ambré",
+    "preparationTimeMinutes": 4,
+    "glassware": "Verre à cocktail",
+    "iceType": "Aucune (servi sans glace)",
+    "garnish": "Feuille de menthe",
+    "tips": null,
+    "imageURL": "seed_old_cuban",
+    "ingredients": [
+      {
+        "slug": "rhum_ambre",
+        "name": "Rhum ambré",
+        "category": "Alcool",
+        "colorHex": "#C9A227",
+        "quantity": 4.5,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "primarySpirit"
+      },
+      {
+        "slug": "citron_vert",
+        "name": "Citron vert",
+        "category": "Fruit",
+        "colorHex": "#2DD4BF",
+        "quantity": 2,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "modifier"
+      },
+      {
+        "slug": "sirop_sucre",
+        "name": "Sirop de sucre",
+        "category": "Sirop",
+        "colorHex": "#C9A227",
+        "quantity": 2,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "modifier"
+      },
+      {
+        "slug": "angostura",
+        "name": "Angostura",
+        "category": "Bitter",
+        "colorHex": "#5B2A2A",
+        "quantity": 2,
+        "unit": "trait",
+        "isOptional": false,
+        "role": "modifier"
+      },
+      {
+        "slug": "champagne",
+        "name": "Champagne",
+        "category": "Effervescent",
+        "colorHex": "#E8D9A8",
+        "quantity": 6,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "mixer"
+      }
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "instruction": "Verser le rhum, le citron, le sirop et l'Angostura dans un shaker avec glace.",
+        "durationSeconds": null
+      },
+      {
+        "order": 2,
+        "instruction": "Shaker.",
+        "durationSeconds": 15
+      },
+      {
+        "order": 3,
+        "instruction": "Filtrer dans un verre à cocktail.",
+        "durationSeconds": null
+      },
+      {
+        "order": 4,
+        "instruction": "Compléter avec le champagne.",
+        "durationSeconds": null
+      }
+    ]
+  },
+  {
+    "name": "Virgin Mojito",
+    "category": "Sans alcool",
+    "origin": "Cuba (adaptation)",
+    "history": "Version sans alcool du Mojito, pensée pour tous les invités.",
+    "difficulty": 1,
+    "mainSpirit": "Aucun",
+    "preparationTimeMinutes": 3,
+    "glassware": "Verre Highball",
+    "iceType": "Glace pilée",
+    "garnish": "Brin de menthe",
+    "tips": null,
+    "imageURL": "seed_virgin_mojito",
+    "ingredients": [
+      {
+        "slug": "citron_vert",
+        "name": "Citron vert",
+        "category": "Fruit",
+        "colorHex": "#2DD4BF",
+        "quantity": 0.5,
+        "unit": "pièce",
+        "isOptional": false,
+        "role": "modifier"
+      },
+      {
+        "slug": "menthe",
+        "name": "Menthe fraîche",
+        "category": "Herbe",
+        "colorHex": "#2DD4BF",
+        "quantity": 8,
+        "unit": "feuilles",
+        "isOptional": false,
+        "role": "modifier"
+      },
+      {
+        "slug": "sucre_canne",
+        "name": "Sucre de canne",
+        "category": "Sucre",
+        "colorHex": "#C9A227",
+        "quantity": 2,
+        "unit": "cc",
+        "isOptional": false,
+        "role": "modifier"
+      },
+      {
+        "slug": "eau_gazeuse",
+        "name": "Eau gazeuse",
+        "category": "Autre",
+        "colorHex": null,
+        "quantity": 12,
+        "unit": "cl",
+        "isOptional": true,
+        "role": "mixer"
+      }
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "instruction": "Presser le demi-citron vert dans le verre.",
+        "durationSeconds": null
+      },
+      {
+        "order": 2,
+        "instruction": "Ajouter le sucre et la menthe, piler délicatement.",
+        "durationSeconds": null
+      },
+      {
+        "order": 3,
+        "instruction": "Remplir de glace pilée et compléter à l'eau gazeuse.",
+        "durationSeconds": null
+      }
+    ]
+  },
+  {
+    "name": "Piña Colada",
+    "category": "Tropical",
+    "origin": "Porto Rico",
+    "history": "Créée à San Juan dans les années 1950, devenue l'archétype du cocktail de plage.",
+    "difficulty": 2,
+    "mainSpirit": "Rhum blanc",
+    "preparationTimeMinutes": 5,
+    "glassware": "Verre Hurricane",
+    "iceType": "Glace pilée (mixée)",
+    "garnish": "Tranche d'ananas",
+    "tips": "Utiliser de l'ananas frais mixé donne un bien meilleur résultat que le jus en bouteille.",
+    "imageURL": "seed_pina_colada",
+    "ingredients": [
+      {
+        "slug": "rhum_blanc",
+        "name": "Rhum blanc",
+        "category": "Alcool",
+        "colorHex": "#F5F1E8",
+        "quantity": 6,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "primarySpirit"
+      },
+      {
+        "slug": "jus_ananas",
+        "name": "Jus d'ananas",
+        "category": "Jus",
+        "colorHex": "#FFD166",
+        "quantity": 9,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "modifier"
+      },
+      {
+        "slug": "creme_coco",
+        "name": "Crème de coco",
+        "category": "Autre",
+        "colorHex": "#F5F1E8",
+        "quantity": 3,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "modifier"
+      }
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "instruction": "Mixer tous les ingrédients avec de la glace pilée.",
+        "durationSeconds": 20
+      },
+      {
+        "order": 2,
+        "instruction": "Verser dans un verre Hurricane.",
+        "durationSeconds": null
+      },
+      {
+        "order": 3,
+        "instruction": "Décorer d'une tranche d'ananas.",
+        "durationSeconds": null
+      }
+    ]
+  },
+  {
+    "name": "Mai Tai",
+    "category": "Tiki",
+    "origin": "États-Unis",
+    "history": "Créé en 1944 par Victor Bergeron, figure fondatrice du mouvement Tiki.",
+    "difficulty": 2,
+    "mainSpirit": "Rhum ambré",
+    "preparationTimeMinutes": 4,
+    "glassware": "Verre Old Fashioned",
+    "iceType": "Glace pilée",
+    "garnish": "Brin de menthe et quartier de citron vert",
+    "tips": null,
+    "imageURL": "seed_mai_tai",
+    "ingredients": [
+      {
+        "slug": "rhum_ambre",
+        "name": "Rhum ambré",
+        "category": "Alcool",
+        "colorHex": "#C9A227",
+        "quantity": 4,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "primarySpirit"
+      },
+      {
+        "slug": "rhum_agricole",
+        "name": "Rhum agricole",
+        "category": "Alcool",
+        "colorHex": "#F5F1E8",
+        "quantity": 2,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "secondarySpirit"
+      },
+      {
+        "slug": "triple_sec",
+        "name": "Triple sec",
+        "category": "Liqueur",
+        "colorHex": "#FFD166",
+        "quantity": 1.5,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "modifier"
+      },
+      {
+        "slug": "citron_vert",
+        "name": "Citron vert",
+        "category": "Fruit",
+        "colorHex": "#2DD4BF",
+        "quantity": 2,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "modifier"
+      },
+      {
+        "slug": "sirop_orgeat",
+        "name": "Sirop d'orgeat",
+        "category": "Sirop",
+        "colorHex": "#E8D9A8",
+        "quantity": 1,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "modifier"
+      }
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "instruction": "Verser tous les ingrédients dans un shaker avec glace.",
+        "durationSeconds": null
+      },
+      {
+        "order": 2,
+        "instruction": "Shaker.",
+        "durationSeconds": 12
+      },
+      {
+        "order": 3,
+        "instruction": "Verser sans filtrer dans le verre rempli de glace pilée.",
+        "durationSeconds": null
+      }
+    ]
+  },
+  {
+    "name": "Whiskey Sour",
+    "category": "Classique",
+    "origin": "États-Unis",
+    "history": "Un des cocktails les plus anciens recensés, popularisé dès le milieu du XIXe siècle.",
+    "difficulty": 2,
+    "mainSpirit": "Whisky",
+    "preparationTimeMinutes": 4,
+    "glassware": "Verre Old Fashioned",
+    "iceType": "Glaçons",
+    "garnish": "Zeste d'orange et cerise confite",
+    "tips": "Le blanc d'œuf est optionnel mais donne une texture mousseuse caractéristique.",
+    "imageURL": "seed_whiskey_sour",
+    "ingredients": [
+      {
+        "slug": "whisky",
+        "name": "Whisky",
+        "category": "Alcool",
+        "colorHex": "#C9A227",
+        "quantity": 6,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "primarySpirit"
+      },
+      {
+        "slug": "citron_jaune",
+        "name": "Citron jaune",
+        "category": "Fruit",
+        "colorHex": "#FFD166",
+        "quantity": 3,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "modifier"
+      },
+      {
+        "slug": "sirop_sucre",
+        "name": "Sirop de sucre",
+        "category": "Sirop",
+        "colorHex": "#C9A227",
+        "quantity": 2,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "modifier"
+      },
+      {
+        "slug": "blanc_oeuf",
+        "name": "Blanc d'œuf",
+        "category": "Autre",
+        "colorHex": null,
+        "quantity": 1,
+        "unit": "pièce",
+        "isOptional": true,
+        "role": "modifier"
+      }
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "instruction": "Verser tous les ingrédients dans un shaker sans glace, shaker à sec.",
+        "durationSeconds": 10
+      },
+      {
+        "order": 2,
+        "instruction": "Ajouter de la glace et shaker à nouveau.",
+        "durationSeconds": 12
+      },
+      {
+        "order": 3,
+        "instruction": "Filtrer dans le verre rempli de glaçons.",
+        "durationSeconds": null
+      }
+    ]
+  },
+  {
+    "name": "Aperol Spritz",
+    "category": "Apéritif",
+    "origin": "Italie",
+    "history": "Né dans la Vénétie du début du XXe siècle, devenu un incontournable de l'apéritif estival.",
+    "difficulty": 1,
+    "mainSpirit": "Aperol",
+    "preparationTimeMinutes": 2,
+    "glassware": "Verre à vin",
+    "iceType": "Glaçons",
+    "garnish": "Rondelle d'orange",
+    "tips": null,
+    "imageURL": "seed_aperol_spritz",
+    "ingredients": [
+      {
+        "slug": "aperol",
+        "name": "Aperol",
+        "category": "Liqueur",
+        "colorHex": "#FF7A59",
+        "quantity": 6,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "primarySpirit"
+      },
+      {
+        "slug": "prosecco",
+        "name": "Prosecco",
+        "category": "Effervescent",
+        "colorHex": "#E8D9A8",
+        "quantity": 9,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "mixer"
+      },
+      {
+        "slug": "eau_gazeuse",
+        "name": "Eau gazeuse",
+        "category": "Autre",
+        "colorHex": null,
+        "quantity": 3,
+        "unit": "cl",
+        "isOptional": true,
+        "role": "mixer"
+      }
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "instruction": "Remplir le verre de glaçons.",
+        "durationSeconds": null
+      },
+      {
+        "order": 2,
+        "instruction": "Verser l'Aperol puis le Prosecco.",
+        "durationSeconds": null
+      },
+      {
+        "order": 3,
+        "instruction": "Compléter avec un trait d'eau gazeuse et décorer.",
+        "durationSeconds": null
+      }
+    ]
+  },
+  {
+    "name": "Espresso Martini",
+    "category": "Moderne",
+    "origin": "Royaume-Uni",
+    "history": "Créé à Londres à la fin des années 1980 par le barman Dick Bradsell.",
+    "difficulty": 2,
+    "mainSpirit": "Vodka",
+    "preparationTimeMinutes": 4,
+    "glassware": "Verre à cocktail",
+    "iceType": "Aucune (servi sans glace)",
+    "garnish": "3 grains de café",
+    "tips": "Utiliser un café fraîchement extrait, encore chaud, pour une mousse plus généreuse.",
+    "imageURL": "seed_espresso_martini",
+    "ingredients": [
+      {
+        "slug": "vodka",
+        "name": "Vodka",
+        "category": "Alcool",
+        "colorHex": "#F5F1E8",
+        "quantity": 5,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "primarySpirit"
+      },
+      {
+        "slug": "liqueur_cafe",
+        "name": "Liqueur de café",
+        "category": "Liqueur",
+        "colorHex": "#5B2A2A",
+        "quantity": 2,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "secondarySpirit"
+      },
+      {
+        "slug": "espresso",
+        "name": "Café espresso",
+        "category": "Autre",
+        "colorHex": "#5B2A2A",
+        "quantity": 3,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "modifier"
+      }
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "instruction": "Verser tous les ingrédients dans un shaker avec glace.",
+        "durationSeconds": null
+      },
+      {
+        "order": 2,
+        "instruction": "Shaker vigoureusement pour obtenir une mousse.",
+        "durationSeconds": 15
+      },
+      {
+        "order": 3,
+        "instruction": "Filtrer dans un verre à cocktail glacé.",
+        "durationSeconds": null
+      }
+    ]
+  },
+  {
+    "name": "Hot Toddy",
+    "category": "Hiver",
+    "origin": "Écosse",
+    "history": "Boisson chaude traditionnelle, souvent associée aux remèdes d'hiver contre le rhume.",
+    "difficulty": 1,
+    "mainSpirit": "Whisky",
+    "preparationTimeMinutes": 5,
+    "glassware": "Verre à pied résistant à la chaleur",
+    "iceType": "Aucune (servi chaud)",
+    "garnish": "Bâton de cannelle et rondelle de citron",
+    "tips": null,
+    "imageURL": "seed_hot_toddy",
+    "ingredients": [
+      {
+        "slug": "whisky",
+        "name": "Whisky",
+        "category": "Alcool",
+        "colorHex": "#C9A227",
+        "quantity": 5,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "primarySpirit"
+      },
+      {
+        "slug": "miel",
+        "name": "Miel",
+        "category": "Sucre",
+        "colorHex": "#C9A227",
+        "quantity": 2,
+        "unit": "cc",
+        "isOptional": false,
+        "role": "modifier"
+      },
+      {
+        "slug": "citron_jaune",
+        "name": "Citron jaune",
+        "category": "Fruit",
+        "colorHex": "#FFD166",
+        "quantity": 1,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "modifier"
+      },
+      {
+        "slug": "eau_chaude",
+        "name": "Eau chaude",
+        "category": "Autre",
+        "colorHex": null,
+        "quantity": 10,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "mixer"
+      }
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "instruction": "Verser le whisky, le miel et le citron dans le verre.",
+        "durationSeconds": null
+      },
+      {
+        "order": 2,
+        "instruction": "Compléter avec l'eau chaude et mélanger jusqu'à dissolution du miel.",
+        "durationSeconds": null
+      },
+      {
+        "order": 3,
+        "instruction": "Décorer d'un bâton de cannelle.",
+        "durationSeconds": null
+      }
+    ]
+  },
+  {
+    "name": "Margarita",
+    "category": "Classique",
+    "origin": "Mexique",
+    "history": "Les origines exactes sont débattues, mais elle s'impose dès les années 1940 comme le cocktail signature de la tequila.",
+    "difficulty": 2,
+    "mainSpirit": "Tequila",
+    "preparationTimeMinutes": 4,
+    "glassware": "Verre à Margarita",
+    "iceType": "Glaçons",
+    "garnish": "Bord givré de sel, rondelle de citron vert",
+    "tips": "Givrer le bord du verre avant de servir, en le trempant dans du citron vert puis du gros sel.",
+    "imageURL": "seed_margarita",
+    "ingredients": [
+      {
+        "slug": "tequila",
+        "name": "Tequila",
+        "category": "Alcool",
+        "colorHex": "#F5F1E8",
+        "quantity": 5,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "primarySpirit"
+      },
+      {
+        "slug": "triple_sec",
+        "name": "Triple sec",
+        "category": "Liqueur",
+        "colorHex": "#FFD166",
+        "quantity": 2,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "secondarySpirit"
+      },
+      {
+        "slug": "citron_vert",
+        "name": "Citron vert",
+        "category": "Fruit",
+        "colorHex": "#2DD4BF",
+        "quantity": 2.5,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "modifier"
+      }
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "instruction": "Givrer le bord du verre au sel.",
+        "durationSeconds": null
+      },
+      {
+        "order": 2,
+        "instruction": "Verser tous les ingrédients dans un shaker avec glace.",
+        "durationSeconds": null
+      },
+      {
+        "order": 3,
+        "instruction": "Shaker et filtrer dans le verre rempli de glaçons.",
+        "durationSeconds": null
+      }
+    ]
+  },
+  {
+    "name": "Bramble",
+    "category": "Moderne",
+    "origin": "Royaume-Uni",
+    "history": "Créé à Londres dans les années 1980 par Dick Bradsell, inspiré des mûres sauvages de son enfance.",
+    "difficulty": 2,
+    "mainSpirit": "Gin",
+    "preparationTimeMinutes": 4,
+    "glassware": "Verre Old Fashioned",
+    "iceType": "Glace pilée",
+    "garnish": "Mûres fraîches",
+    "tips": null,
+    "imageURL": "seed_bramble",
+    "ingredients": [
+      {
+        "slug": "gin",
+        "name": "Gin",
+        "category": "Alcool",
+        "colorHex": "#F5F1E8",
+        "quantity": 5,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "primarySpirit"
+      },
+      {
+        "slug": "citron_jaune",
+        "name": "Citron jaune",
+        "category": "Fruit",
+        "colorHex": "#FFD166",
+        "quantity": 2,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "modifier"
+      },
+      {
+        "slug": "sirop_sucre",
+        "name": "Sirop de sucre",
+        "category": "Sirop",
+        "colorHex": "#C9A227",
+        "quantity": 1,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "modifier"
+      },
+      {
+        "slug": "creme_mure",
+        "name": "Crème de mûre",
+        "category": "Liqueur",
+        "colorHex": "#5B2A2A",
+        "quantity": 2,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "modifier"
+      }
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "instruction": "Verser le gin, le citron et le sirop sur glace pilée.",
+        "durationSeconds": null
+      },
+      {
+        "order": 2,
+        "instruction": "Mélanger.",
+        "durationSeconds": null
+      },
+      {
+        "order": 3,
+        "instruction": "Arroser lentement de crème de mûre pour un effet dégradé.",
+        "durationSeconds": null
+      }
+    ]
+  },
+  {
+    "name": "Shirley Temple",
+    "category": "Sans alcool",
+    "origin": "États-Unis",
+    "history": "Créé dans les années 1930, nommé en hommage à la jeune actrice du même nom.",
+    "difficulty": 1,
+    "mainSpirit": "Aucun",
+    "preparationTimeMinutes": 2,
+    "glassware": "Verre Highball",
+    "iceType": "Glaçons",
+    "garnish": "Cerise confite",
+    "tips": null,
+    "imageURL": "seed_shirley_temple",
+    "ingredients": [
+      {
+        "slug": "ginger_ale",
+        "name": "Ginger ale",
+        "category": "Soda",
+        "colorHex": "#FFD166",
+        "quantity": 15,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "mixer"
+      },
+      {
+        "slug": "sirop_grenadine",
+        "name": "Sirop de grenadine",
+        "category": "Sirop",
+        "colorHex": "#EF476F",
+        "quantity": 1.5,
+        "unit": "cl",
+        "isOptional": false,
+        "role": "modifier"
+      }
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "instruction": "Remplir le verre de glaçons.",
+        "durationSeconds": null
+      },
+      {
+        "order": 2,
+        "instruction": "Verser le ginger ale puis la grenadine.",
+        "durationSeconds": null
+      },
+      {
+        "order": 3,
+        "instruction": "Décorer d'une cerise confite.",
+        "durationSeconds": null
+      }
+    ]
+  }
+]
