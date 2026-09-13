@@ -1,3 +1,9 @@
+# Cocktail.ai
+
+## Version Web
+
+En plus de l'app iOS documentée ci-dessous, ce dépôt contient désormais une **version web équivalente, déployable en quelques minutes** : voir [`web/`](./web) (React + TypeScript + Vite + Tailwind, persistance locale, aucun backend requis). Elle reprend fidèlement la recherche magique par ingrédients, la bibliothèque avec filtres et collections, Mon Bar avec le Matching Engine V2, la fiche cocktail, le mode préparation, les favoris, la création de recettes perso et le partage visuel — voir [`web/README.md`](./web/README.md) pour le détail du portage, les différences assumées et les instructions de déploiement (Vercel, Netlify, ou tout hébergeur statique).
+
 # Sprint 0 → 12 — Intégration dans Xcode
 
 Ce dossier ne contient pas de `.xcodeproj` (généré uniquement par Xcode).

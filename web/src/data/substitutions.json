@@ -1,0 +1,32 @@
+[
+  {
+    "sourceSlug": "sirop_sucre",
+    "substituteSlug": "sucre_canne",
+    "degradationFactor": 0.85
+  },
+  {
+    "sourceSlug": "sucre_canne",
+    "substituteSlug": "sirop_sucre",
+    "degradationFactor": 0.9
+  },
+  {
+    "sourceSlug": "citron_vert",
+    "substituteSlug": "citron_jaune",
+    "degradationFactor": 0.6
+  },
+  {
+    "sourceSlug": "rhum_blanc",
+    "substituteSlug": "rhum_agricole",
+    "degradationFactor": 0.75
+  },
+  {
+    "sourceSlug": "rhum_ambre",
+    "substituteSlug": "rhum_agricole",
+    "degradationFactor": 0.65
+  },
+  {
+    "sourceSlug": "eau_gazeuse",
+    "substituteSlug": "ginger_ale",
+    "degradationFactor": 0.5
+  }
+]

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="Cocktail.ai — trouve le cocktail parfait selon les ingrédients que tu as sous la main." />
+    <meta name="theme-color" content="#0b0b0f" />
+    <title>Cocktail.ai</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      // Contrepartie de public/404.html : décode le chemin réel avant que
+      // React Router ne monte, pour que les URLs profondes (ex:
+      // /Cocktail.ai/cocktail/mojito) fonctionnent sur GitHub Pages.
+      (function () {
+        var l = window.location;
+        if (l.search[1] === "p" && l.search[2] === "=") {
+          var decoded = l.search
+            .slice(1)
+            .split("&")
+            .map(function (s) {
+              return s.replace(/~and~/g, "&");
+            });
+          window.history.replaceState(
+            null,
+            "",
+            l.pathname.slice(0, -1) + decoded[0].slice(2) + (decoded[1] ? "?" + decoded[1].slice(2) : "") + l.hash,
+          );
+        }
+      })();
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
