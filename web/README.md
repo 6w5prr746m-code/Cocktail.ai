@@ -18,9 +18,23 @@ npm run preview    # sert le build de prod localement
 
 ## Déployer
 
-Le build produit un site 100% statique (`dist/`). Trois options, toutes gratuites pour ce type de projet :
+Le build produit un site 100% statique (`dist/`). Plusieurs options, toutes gratuites pour ce type de projet :
 
-### Vercel (recommandé)
+### GitHub Pages (déjà configuré dans ce repo)
+
+Un workflow GitHub Actions (`.github/workflows/deploy-web.yml`) build et déploie automatiquement `web/` sur GitHub Pages.
+
+**Étape unique à faire une fois, côté réglages du repo** (pas de code à toucher) :
+1. Sur GitHub → onglet **Settings** du repo → **Pages** (menu de gauche)
+2. Sous "Build and deployment" → **Source** → choisir **GitHub Actions**
+
+Ensuite :
+- Chaque push sur `main` qui touche `web/**` redéploie automatiquement.
+- Pour déployer dès maintenant sans attendre un merge sur `main` : onglet **Actions** → workflow **"Deploy web app to GitHub Pages"** → **Run workflow** → choisir la branche → Run.
+
+Le site sera servi sur `https://<owner>.github.io/<nom-du-repo>/` (ex: `https://6w5prr746m-code.github.io/Cocktail.ai/`). Le build est fait avec `--base=/<nom-du-repo>/` automatiquement par le workflow, et `public/404.html` + le script de décodage dans `index.html` gèrent le routing côté client (GitHub Pages n'a pas de rewrite serveur pour une SPA) — les URLs profondes comme `/cocktail/mojito` fonctionnent normalement.
+
+### Vercel
 ```bash
 npm i -g vercel
 vercel --prod

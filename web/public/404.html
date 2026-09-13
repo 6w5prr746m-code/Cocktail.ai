@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cocktail.ai</title>
+    <script>
+      // GitHub Pages n'a pas de rewrite serveur pour une SPA : une URL
+      // profonde (ex: /Cocktail.ai/cocktail/mojito) tombe sur cette 404.
+      // On encode le chemin dans le query string et on redirige vers
+      // index.html, qui le décode avant que React ne monte (voir index.html).
+      // Technique standard : https://github.com/rafgraph/spa-github-pages
+      var segmentsToKeep = 1; // 1 segment de base path à préserver : /Cocktail.ai
+      var l = window.location;
+      var path = l.pathname.split("/").slice(0, 1 + segmentsToKeep).join("/");
+      var rest = l.pathname.split("/").slice(1 + segmentsToKeep).join("/");
+      l.replace(
+        l.protocol +
+          "//" +
+          l.hostname +
+          (l.port ? ":" + l.port : "") +
+          path +
+          "/?p=/" +
+          rest.replace(/&/g, "~and~") +
+          (l.search ? "&q=" + l.search.slice(1).replace(/&/g, "~and~") : "") +
+          l.hash,
+      );
+    </script>
+  </head>
+  <body></body>
+</html>
