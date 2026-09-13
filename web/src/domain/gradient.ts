@@ -1,3 +1,10 @@
+/** Sélection déterministe par jour de l'année — même principe que le widget "Suggestion du jour" iOS (Sprint 9), repris ici comme mise en avant d'accueil plutôt que comme widget. */
+export function dailyPick<T>(items: T[]): T | undefined {
+  if (items.length === 0) return undefined;
+  const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86_400_000);
+  return items[dayOfYear % items.length];
+}
+
 export function gradientClassFor(category: string): string {
   switch (category.toLowerCase()) {
     case "tropical":

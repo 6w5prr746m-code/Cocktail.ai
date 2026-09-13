@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { CompatibilityRing } from "../components/CompatibilityRing";
+import { GlassArt } from "../components/GlassArt";
 import { useCocktail } from "../domain/catalog";
+import { artFor } from "../domain/glassArt";
 import { gradientClassFor } from "../domain/gradient";
 import { useHistoryStore } from "../state/history";
 
@@ -57,10 +59,12 @@ export default function PreparationModePage() {
     }
   }
 
+  const art = artFor(cocktail);
+
   if (done) {
     return (
       <div className="flex flex-col items-center justify-center min-h-full p-6 text-center gap-4">
-        <span className="text-6xl">🍸</span>
+        <GlassArt art={art} size={120} fillFraction={0.82} glow />
         <h1 className="text-2xl font-bold" style={{ color: "var(--color-text-primary)" }}>
           Ton {cocktail.name} est prêt !
         </h1>
@@ -108,7 +112,9 @@ export default function PreparationModePage() {
             visualLabelOverride={`${Math.ceil(currentStep.durationSeconds - elapsedSeconds)}s`}
           />
         ) : (
-          <span className="text-6xl">🍸</span>
+          <div style={{ color: "rgba(255,255,255,0.92)" }}>
+            <GlassArt art={art} size={100} fillFraction={0.12 + progress * 0.62} strokeColor="rgba(255,255,255,0.92)" />
+          </div>
         )}
 
         <p className="text-xl font-semibold text-white leading-snug">{currentStep?.instruction}</p>

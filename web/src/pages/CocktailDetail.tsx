@@ -1,9 +1,14 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ScreenHeader } from "../components/ScreenHeader";
+import { GlassArt } from "../components/GlassArt";
+import { TasteTags } from "../components/TasteTags";
+import { DifficultyDots } from "../components/DifficultyDots";
 import { gradientClassFor } from "../domain/gradient";
-import { formatDifficulty, formatDuration, formatQuantity } from "../domain/formatting";
+import { formatDuration, formatQuantity } from "../domain/formatting";
 import { useAllIngredients, useCocktail } from "../domain/catalog";
 import { useFavoritesStore } from "../state/favorites";
+import { artFor } from "../domain/glassArt";
+import { tasteProfile } from "../domain/tasteProfile";
 import { INGREDIENT_ROLE_LABEL } from "../domain/types";
 
 export default function CocktailDetailPage() {
@@ -29,9 +34,13 @@ export default function CocktailDetailPage() {
     return ingredients.find((i) => i.id === ingredientId)?.name ?? ingredientId;
   }
 
+  const art = artFor(cocktail);
+  const tags = tasteProfile(cocktail);
+
   return (
     <div className="pb-28">
-      <div className={`relative flex items-end ${gradientClassFor(cocktail.category)}`} style={{ height: 260 }}>
+      <div className={`relative flex flex-col items-center justify-end ${gradientClassFor(cocktail.category)}`} style={{ height: 340 }}>
+        <div className="absolute inset-0 opacity-20" style={{ background: "radial-gradient(circle at 30% 20%, rgba(255,255,255,0.55), transparent 55%)" }} />
         <div className="absolute top-0 left-0 right-0">
           <ScreenHeader
             transparent
@@ -70,13 +79,25 @@ export default function CocktailDetailPage() {
             }
           />
         </div>
-        <div className="p-5 w-full" style={{ background: "linear-gradient(transparent, rgba(0,0,0,0.55))" }}>
+
+        <div className="relative z-10 pt-6" style={{ color: "rgba(255,255,255,0.92)" }}>
+          <GlassArt art={art} size={112} strokeColor="rgba(255,255,255,0.92)" glow />
+        </div>
+
+        <div className="relative z-10 p-5 pt-4 w-full text-center" style={{ background: "linear-gradient(transparent, rgba(0,0,0,0.6))" }}>
           <h1 className="text-3xl font-bold text-white leading-tight">{cocktail.name}</h1>
-          <div className="flex gap-3 mt-2 text-sm text-white/85">
+          <div className="flex items-center justify-center gap-3 mt-2 text-sm text-white/85">
             <span>⏱ {formatDuration(cocktail.preparationTimeMinutes)}</span>
-            <span>• {formatDifficulty(cocktail.difficulty)}</span>
+            <span className="flex items-center gap-1.5">
+              • <DifficultyDots level={cocktail.difficulty} />
+            </span>
             <span>• {cocktail.mainSpirit}</span>
           </div>
+          {tags.length > 0 && (
+            <div className="flex justify-center mt-3">
+              <TasteTags tags={tags} variant="onImage" />
+            </div>
+          )}
         </div>
       </div>
 

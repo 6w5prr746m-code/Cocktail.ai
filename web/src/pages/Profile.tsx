@@ -5,7 +5,7 @@ import { useThemeStore, applyThemeToDocument, type ThemePreference } from "../st
 import { useFavoritesStore } from "../state/favorites";
 import { useMyBarStore } from "../state/myBar";
 import { useUserRecipesStore } from "../state/userRecipes";
-import { gradientClassFor } from "../domain/gradient";
+import { MiniGlassBadge } from "../components/MiniGlassBadge";
 
 const THEME_OPTIONS: { value: ThemePreference; label: string }[] = [
   { value: "system", label: "Système" },
@@ -81,7 +81,7 @@ export default function ProfilePage() {
                     className="flex items-center gap-3 rounded-2xl p-3"
                     style={{ background: "var(--color-surface)" }}
                   >
-                    <div className={`rounded-xl flex-shrink-0 ${gradientClassFor(cocktail.category)}`} style={{ width: 40, height: 40 }} />
+                    <MiniGlassBadge cocktail={cocktail} size={40} />
                     <div className="flex-1 min-w-0">
                       <p className="font-medium truncate" style={{ color: "var(--color-text-primary)" }}>
                         {cocktail.name}

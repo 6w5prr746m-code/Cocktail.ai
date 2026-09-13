@@ -1,7 +1,12 @@
 import { useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CocktailCard } from "../components/CocktailCard";
+import { GlassArt } from "../components/GlassArt";
+import { TasteTags } from "../components/TasteTags";
 import { useAllCocktails } from "../domain/catalog";
+import { artFor } from "../domain/glassArt";
+import { gradientClassFor, dailyPick } from "../domain/gradient";
+import { tasteProfile } from "../domain/tasteProfile";
 import { useFavoritesStore } from "../state/favorites";
 import { useUserRecipesStore } from "../state/userRecipes";
 import type { Cocktail } from "../domain/types";
@@ -29,6 +34,29 @@ function Section({ title, cocktails, emptyHint }: { title: string; cocktails: Co
         </div>
       )}
     </section>
+  );
+}
+
+function FeaturedCocktail({ cocktail }: { cocktail: Cocktail }) {
+  const art = artFor(cocktail);
+  const tags = tasteProfile(cocktail);
+
+  return (
+    <Link
+      to={`/cocktail/${cocktail.id}`}
+      className={`relative flex items-center justify-between overflow-hidden rounded-3xl p-5 animate-fade-in transition-transform active:scale-[0.98] ${gradientClassFor(cocktail.category)}`}
+    >
+      <div className="absolute inset-0" style={{ background: "radial-gradient(circle at 15% 15%, rgba(255,255,255,0.35), transparent 55%)" }} />
+      <div className="relative z-10 max-w-[58%]">
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-white/75 mb-1.5">Le cocktail du jour</p>
+        <h2 className="text-2xl font-bold text-white leading-tight mb-2">{cocktail.name}</h2>
+        <TasteTags tags={tags} size="md" variant="onImage" />
+        <p className="text-sm text-white/85 mt-3 font-medium">Découvrir la recette →</p>
+      </div>
+      <div className="relative z-10 flex-shrink-0" style={{ color: "rgba(255,255,255,0.92)" }}>
+        <GlassArt art={art} size={92} strokeColor="rgba(255,255,255,0.92)" />
+      </div>
+    </Link>
   );
 }
 
@@ -74,6 +102,8 @@ export default function HomePage() {
     [cocktails, favoriteIds],
   );
 
+  const featured = useMemo(() => dailyPick(cocktails), [cocktails]);
+
   return (
     <div className="pb-8">
       <div className="px-4 pt-6 pb-4">
@@ -83,10 +113,13 @@ export default function HomePage() {
         <h1 className="text-3xl font-bold leading-tight mb-4" style={{ color: "var(--color-text-primary)" }}>
           Que souhaites-tu boire ce soir ?
         </h1>
+
+        {featured && <FeaturedCocktail cocktail={featured} />}
+
         <button
           type="button"
           onClick={() => navigate("/picker")}
-          className="w-full rounded-2xl py-4 font-semibold text-base"
+          className="w-full rounded-2xl py-4 font-semibold text-base mt-3"
           style={{ background: "var(--color-accent-gold)", color: "#0b0b0f" }}
         >
           ✨ Ajouter mes ingrédients
