@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------
+   Design tokens — portage fidèle de DesignSystem/Colors.swift et
+   Typography.swift de l'app iOS. Dark mode est le mode par défaut de la
+   marque (comme l'app native), le mode clair reste disponible.
+--------------------------------------------------------------------- */
+:root {
+  --color-bg: #0b0b0f;
+  --color-surface: #16161c;
+  --color-surface-raised: #1e1e26;
+  --color-text-primary: #f5f1e8;
+  --color-text-secondary: #a8a5a0;
+  --color-border: #2a2a33;
+  --color-accent-gold: #c9a227;
+  --color-accent-gold-soft: #e8d9a8;
+  --color-danger: #ef476f;
+  --color-success: #2dd4bf;
+
+  --font-display: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "SF Mono", ui-monospace, "Cascadia Code", monospace;
+
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --color-bg: #f5f1e8;
+  --color-surface: #ede7d9;
+  --color-surface-raised: #ffffff;
+  --color-text-primary: #0b0b0f;
+  --color-text-secondary: #6b6560;
+  --color-border: #ddd6c4;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --color-bg: #f5f1e8;
+    --color-surface: #ede7d9;
+    --color-surface-raised: #ffffff;
+    --color-text-primary: #0b0b0f;
+    --color-text-secondary: #6b6560;
+    --color-border: #ddd6c4;
+    color-scheme: light;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  max-width: 560px;
+  margin: 0 auto;
+  min-height: 100svh;
+  position: relative;
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input, textarea, select {
+  font-family: inherit;
+}
+
+/* Gradients par famille de cocktail — voir Design System §2 */
+.gradient-tropical { background: linear-gradient(135deg, #ff7a59, #2dd4bf); }
+.gradient-classique { background: linear-gradient(135deg, #c9a227, #5b2a2a); }
+.gradient-frais { background: linear-gradient(135deg, #2dd4bf, #0b0b0f); }
+.gradient-agrumes { background: linear-gradient(135deg, #ffd166, #ef476f); }
+.gradient-sansalcool { background: linear-gradient(135deg, #8ac6d1, #f5f1e8); }
+.gradient-hiver { background: linear-gradient(135deg, #5b2a2a, #c9a227); }
+.gradient-default { background: linear-gradient(135deg, #c9a227, #0b0b0f); }
+
+.glass-card {
+  background: color-mix(in srgb, var(--color-surface) 80%, transparent);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--color-border);
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fade-in 0.25s ease-out;
+}
