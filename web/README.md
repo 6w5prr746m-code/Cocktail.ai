@@ -95,6 +95,15 @@ Chaque cocktail est représenté par une illustration de verre générée en SVG
 
 **Générer une photo pour un nouveau cocktail** : sur la fiche de n'importe quel cocktail (seed ou recette perso), le bouton 📸 dans la barre du haut copie dans le presse-papier un prompt de génération d'image prêt à coller dans Gemini/Imagen (`src/domain/photoPrompt.ts` — même bloc de style pour tous, surface/lumière/cadrage cohérents ; les détails du verre/glace/garniture/couleur sont dérivés de l'illustration curatée du cocktail, avec un repli automatique par teinte pour les recettes perso). Il ne reste qu'à récupérer l'image générée et la déposer au bon endroit comme décrit ci-dessus.
 
+## PWA — app installable et hors ligne
+
+Le build génère une vraie Progressive Web App via `vite-plugin-pwa` (`vite.config.ts`) :
+
+- **Installable** sur Android/desktop (bouton natif via `beforeinstallprompt`, relayé par une carte dans l'onglet Profil — `src/components/InstallAppCard.tsx`) et sur iOS (instructions "Partager → Sur l'écran d'accueil", Safari n'exposant pas d'API d'installation programmatique).
+- **Fonctionne hors ligne** : un service worker (Workbox, `registerType: 'autoUpdate'`) précache le shell de l'app (JS/CSS/HTML) et met en cache les photos de cocktails au fil de la navigation (`CacheFirst`, 90 jours) — un cocktail déjà consulté reste consultable sans réseau, y compris après un rechargement complet.
+- Icônes (`public/icons/`) : un verre à cocktail doré sur fond sombre, cohérent avec le Design System.
+- Le manifest (`manifest.webmanifest`, généré au build) respecte automatiquement le `--base` passé en CI (fonctionne aussi bien en local qu'en sous-chemin GitHub Pages).
+
 ## Limites connues
 
 - Pas de tests automatisés portés (les tests Swift ne sont pas transposables tels quels) — validation faite manuellement en local (build + parcours utilisateur dans un navigateur).

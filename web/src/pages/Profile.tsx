@@ -6,6 +6,7 @@ import { useFavoritesStore } from "../state/favorites";
 import { useMyBarStore } from "../state/myBar";
 import { useUserRecipesStore } from "../state/userRecipes";
 import { MiniGlassBadge } from "../components/MiniGlassBadge";
+import { InstallAppCard } from "../components/InstallAppCard";
 
 const THEME_OPTIONS: { value: ThemePreference; label: string }[] = [
   { value: "system", label: "Système" },
@@ -35,6 +36,10 @@ export default function ProfilePage() {
       <h1 className="text-2xl font-bold px-4 pt-6 pb-4" style={{ color: "var(--color-text-primary)" }}>
         Profil
       </h1>
+
+      <div className="px-4">
+        <InstallAppCard />
+      </div>
 
       <section className="px-4 pb-6">
         <h3 className="text-base font-semibold mb-2" style={{ color: "var(--color-text-primary)" }}>
