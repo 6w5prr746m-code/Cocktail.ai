@@ -1,11 +1,10 @@
 import { useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CocktailCard } from "../components/CocktailCard";
-import { GlassArt } from "../components/GlassArt";
+import { CocktailVisual } from "../components/CocktailVisual";
 import { TasteTags } from "../components/TasteTags";
 import { useAllCocktails } from "../domain/catalog";
-import { artFor } from "../domain/glassArt";
-import { gradientClassFor, dailyPick } from "../domain/gradient";
+import { dailyPick } from "../domain/gradient";
 import { tasteProfile } from "../domain/tasteProfile";
 import { useFavoritesStore } from "../state/favorites";
 import { useUserRecipesStore } from "../state/userRecipes";
@@ -38,23 +37,23 @@ function Section({ title, cocktails, emptyHint }: { title: string; cocktails: Co
 }
 
 function FeaturedCocktail({ cocktail }: { cocktail: Cocktail }) {
-  const art = artFor(cocktail);
   const tags = tasteProfile(cocktail);
 
   return (
     <Link
       to={`/cocktail/${cocktail.id}`}
-      className={`relative flex items-center justify-between overflow-hidden rounded-3xl p-5 animate-fade-in transition-transform active:scale-[0.98] ${gradientClassFor(cocktail.category)}`}
+      className="relative block overflow-hidden rounded-3xl animate-fade-in transition-transform active:scale-[0.98]"
+      style={{ height: 220 }}
     >
-      <div className="absolute inset-0" style={{ background: "radial-gradient(circle at 15% 15%, rgba(255,255,255,0.35), transparent 55%)" }} />
-      <div className="relative z-10 max-w-[58%]">
+      <div className="absolute inset-0">
+        <CocktailVisual cocktail={cocktail} glassSize={92} variant="full" />
+      </div>
+      <div className="absolute inset-0" style={{ background: "linear-gradient(transparent 35%, rgba(0,0,0,0.78))" }} />
+      <div className="absolute bottom-0 left-0 right-0 p-5">
         <p className="text-[11px] font-semibold uppercase tracking-wide text-white/75 mb-1.5">Le cocktail du jour</p>
         <h2 className="text-2xl font-bold text-white leading-tight mb-2">{cocktail.name}</h2>
         <TasteTags tags={tags} size="md" variant="onImage" />
         <p className="text-sm text-white/85 mt-3 font-medium">Découvrir la recette →</p>
-      </div>
-      <div className="relative z-10 flex-shrink-0" style={{ color: "rgba(255,255,255,0.92)" }}>
-        <GlassArt art={art} size={92} strokeColor="rgba(255,255,255,0.92)" />
       </div>
     </Link>
   );

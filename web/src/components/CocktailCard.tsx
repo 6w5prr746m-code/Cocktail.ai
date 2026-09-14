@@ -31,6 +31,8 @@ export function CocktailCard({ cocktail, width, showTaste = true }: CocktailCard
           cocktail={cocktail}
           glassSize={width ? width * 0.5 : 56}
           className="transition-transform duration-300 group-hover:scale-105"
+          variant="thumb"
+          lazy
         />
         {isFavorite && (
           <span
