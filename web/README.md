@@ -103,9 +103,12 @@ src/
 
 Chaque cocktail est représenté par une illustration de verre générée en SVG (`src/domain/glassArt.ts` + `src/components/GlassArt.tsx`) : forme du verre, couleur du liquide, glace et garniture curatées à la main pour les 14 cocktails du seed (heuristique de repli pour les recettes perso).
 
-**Photos réalistes (optionnel, progressif)** : `src/components/CocktailVisual.tsx` tente de charger `public/images/cocktails/<id>.jpg` pour chaque cocktail ; si le fichier existe, la photo remplace l'illustration partout où `CocktailVisual` est utilisé (carte, fiche détail) ; sinon ça retombe silencieusement sur l'illustration — aucune configuration ni changement de code nécessaire. Pour ajouter une photo à un cocktail : déposer un JPEG carré (idéal : 1024×1024 ou plus) nommé exactement `<id-du-cocktail>.jpg` dans `public/images/cocktails/` (les ids sont les slugs visibles dans `src/data/cocktails.json`, ex: `mojito.jpg`, `espresso_martini.jpg`).
+**Photos réalistes (optionnel, progressif)** : `src/components/CocktailVisual.tsx` tente de charger deux variantes WebP par cocktail — `public/images/cocktails/<id>-thumb.webp` (480px, cartes/listes) et `<id>.webp` (960px, fiche détail/cocktail du jour) ; si le fichier existe, la photo remplace l'illustration partout où `CocktailVisual` est utilisé ; sinon ça retombe silencieusement sur l'illustration — aucune configuration ni changement de code nécessaire.
 
-**Générer une photo pour un nouveau cocktail** : sur la fiche de n'importe quel cocktail (seed ou recette perso), le bouton 📸 dans la barre du haut copie dans le presse-papier un prompt de génération d'image prêt à coller dans Gemini/Imagen (`src/domain/photoPrompt.ts` — même bloc de style pour tous, surface/lumière/cadrage cohérents ; les détails du verre/glace/garniture/couleur sont dérivés de l'illustration curatée du cocktail, avec un repli automatique par teinte pour les recettes perso). Il ne reste qu'à récupérer l'image générée et la déposer au bon endroit comme décrit ci-dessus.
+**Générer une photo pour un nouveau cocktail** :
+1. Sur la fiche de n'importe quel cocktail (seed ou recette perso), le bouton 📸 dans la barre du haut copie dans le presse-papier un prompt de génération d'image prêt à coller dans Gemini/Imagen (`src/domain/photoPrompt.ts` — même bloc de style pour tous, surface/lumière/cadrage cohérents ; les détails du verre/glace/garniture/couleur sont dérivés de l'illustration curatée du cocktail, avec un repli automatique par teinte pour les recettes perso).
+2. Déposer l'image générée (JPEG ou PNG, idéalement carrée, 1024×1024 ou plus) sous `public/images/cocktails/<id-du-cocktail>.jpg` (les ids sont les slugs visibles dans `src/data/cocktails.json`, ex: `mojito.jpg`).
+3. Lancer `npm run images:optimize` — génère les deux variantes WebP (via `sharp`) et supprime le fichier source. Diminue le poids d'environ 65% par rapport au JPEG d'origine, sans perte visible.
 
 ## PWA — app installable et hors ligne
 

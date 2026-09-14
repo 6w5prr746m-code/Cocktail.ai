@@ -1,20 +1,23 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { TabBar } from "./components/TabBar";
 import { applyThemeToDocument, useThemeStore } from "./state/theme";
 
+// Home reste chargée eagerly (page d'entrée quasi systématique) — le reste
+// est découpé par route : chaque écran devient son propre chunk JS, chargé
+// à la demande plutôt que tout d'un bloc au premier chargement.
 import HomePage from "./pages/Home";
-import LibraryPage from "./pages/Library";
-import CollectionDetailPage from "./pages/CollectionDetail";
-import MyBarPage from "./pages/MyBar";
-import FavoritesPage from "./pages/Favorites";
-import ProfilePage from "./pages/Profile";
-import CocktailDetailPage from "./pages/CocktailDetail";
-import PreparationModePage from "./pages/PreparationMode";
-import IngredientPickerPage from "./pages/IngredientPicker";
-import RecipeFormPage from "./pages/RecipeForm";
-import SharePage from "./pages/Share";
+const LibraryPage = lazy(() => import("./pages/Library"));
+const CollectionDetailPage = lazy(() => import("./pages/CollectionDetail"));
+const MyBarPage = lazy(() => import("./pages/MyBar"));
+const FavoritesPage = lazy(() => import("./pages/Favorites"));
+const ProfilePage = lazy(() => import("./pages/Profile"));
+const CocktailDetailPage = lazy(() => import("./pages/CocktailDetail"));
+const PreparationModePage = lazy(() => import("./pages/PreparationMode"));
+const IngredientPickerPage = lazy(() => import("./pages/IngredientPicker"));
+const RecipeFormPage = lazy(() => import("./pages/RecipeForm"));
+const SharePage = lazy(() => import("./pages/Share"));
 
 function TabLayout() {
   return (
@@ -27,6 +30,10 @@ function TabLayout() {
   );
 }
 
+function PageLoader() {
+  return <div style={{ minHeight: "100svh", background: "var(--color-bg)" }} />;
+}
+
 export default function App() {
   const preference = useThemeStore((s) => s.preference);
 
@@ -35,24 +42,26 @@ export default function App() {
   }, [preference]);
 
   return (
-    <Routes>
-      <Route element={<TabLayout />}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/library" element={<LibraryPage />} />
-        <Route path="/library/collection/:id" element={<CollectionDetailPage />} />
-        <Route path="/mybar" element={<MyBarPage />} />
-        <Route path="/favorites" element={<FavoritesPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-      </Route>
+    <Suspense fallback={<PageLoader />}>
+      <Routes>
+        <Route element={<TabLayout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/library" element={<LibraryPage />} />
+          <Route path="/library/collection/:id" element={<CollectionDetailPage />} />
+          <Route path="/mybar" element={<MyBarPage />} />
+          <Route path="/favorites" element={<FavoritesPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+        </Route>
 
-      <Route path="/cocktail/:id" element={<CocktailDetailPage />} />
-      <Route path="/cocktail/:id/prepare" element={<PreparationModePage />} />
-      <Route path="/cocktail/:id/share" element={<SharePage />} />
-      <Route path="/picker" element={<IngredientPickerPage />} />
-      <Route path="/recipe/new" element={<RecipeFormPage />} />
-      <Route path="/recipe/:id/edit" element={<RecipeFormPage />} />
+        <Route path="/cocktail/:id" element={<CocktailDetailPage />} />
+        <Route path="/cocktail/:id/prepare" element={<PreparationModePage />} />
+        <Route path="/cocktail/:id/share" element={<SharePage />} />
+        <Route path="/picker" element={<IngredientPickerPage />} />
+        <Route path="/recipe/new" element={<RecipeFormPage />} />
+        <Route path="/recipe/:id/edit" element={<RecipeFormPage />} />
 
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Suspense>
   );
 }
