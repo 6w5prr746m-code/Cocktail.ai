@@ -1,0 +1,11 @@
+{
+  "cookies": [],
+  "origins": [
+    {
+      "origin": "http://localhost:4300",
+      "localStorage": [
+        { "name": "cocktailai:onboarding", "value": "{\"state\":{\"completed\":true},\"version\":0}" }
+      ]
+    }
+  ]
+}

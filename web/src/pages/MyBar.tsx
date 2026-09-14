@@ -5,6 +5,7 @@ import { MiniGlassBadge } from "../components/MiniGlassBadge";
 import { useAllCocktails, useAllIngredients } from "../domain/catalog";
 import { computeAdvancedMatches } from "../domain/matchingEngine";
 import { SEED_SUBSTITUTIONS } from "../domain/seed";
+import { STARTER_INGREDIENTS } from "../domain/starterIngredients";
 import { evaluateBarReadiness, BAR_READINESS_TEXT, STOCK_STATUS_LABEL, STOCK_STATUS_ORDER } from "../domain/types";
 import type { StockStatus } from "../domain/types";
 import { useMyBarStore } from "../state/myBar";
@@ -100,6 +101,32 @@ export default function MyBarPage() {
           </div>
         </div>
       </div>
+
+      {Object.keys(entries).length === 0 && (
+        <section className="px-4 pb-6">
+          <div className="rounded-2xl p-4 glass-card">
+            <p className="font-semibold mb-1" style={{ color: "var(--color-text-primary)" }}>
+              Ton bar est encore vide
+            </p>
+            <p className="text-sm mb-3" style={{ color: "var(--color-text-secondary)" }}>
+              Ajoute quelques ingrédients courants pour voir tout de suite quels cocktails deviennent réalisables.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {STARTER_INGREDIENTS.map((ingredient) => (
+                <button
+                  key={ingredient.id}
+                  type="button"
+                  onClick={() => addIngredient(ingredient.id)}
+                  className="text-sm rounded-full px-3.5 py-2 font-medium"
+                  style={{ background: "var(--color-bg)", color: "var(--color-text-primary)", border: "1px solid var(--color-border)" }}
+                >
+                  ✨ {ingredient.name}
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {almostReady.length > 0 && (
         <section className="px-4 pb-6">
