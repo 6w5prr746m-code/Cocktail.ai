@@ -87,6 +87,12 @@ src/
   pages/           Un fichier par écran, routés dans App.tsx
 ```
 
+## Identité visuelle des cocktails
+
+Chaque cocktail est représenté par une illustration de verre générée en SVG (`src/domain/glassArt.ts` + `src/components/GlassArt.tsx`) : forme du verre, couleur du liquide, glace et garniture curatées à la main pour les 14 cocktails du seed (heuristique de repli pour les recettes perso).
+
+**Photos réalistes (optionnel, progressif)** : `src/components/CocktailVisual.tsx` tente de charger `public/images/cocktails/<id>.jpg` pour chaque cocktail ; si le fichier existe, la photo remplace l'illustration partout où `CocktailVisual` est utilisé (carte, fiche détail) ; sinon ça retombe silencieusement sur l'illustration — aucune configuration ni changement de code nécessaire. Pour ajouter une photo à un cocktail : déposer un JPEG carré (idéal : 1024×1024 ou plus) nommé exactement `<id-du-cocktail>.jpg` dans `public/images/cocktails/` (les ids sont les slugs visibles dans `src/data/cocktails.json`, ex: `mojito.jpg`, `espresso_martini.jpg`).
+
 ## Limites connues
 
 - Pas de tests automatisés portés (les tests Swift ne sont pas transposables tels quels) — validation faite manuellement en local (build + parcours utilisateur dans un navigateur).
