@@ -80,6 +80,8 @@ Cette version reprend fidèlement le cœur produit de l'app native décrite dans
 
 Le moteur de matching (`src/domain/matchingEngine.ts`) est un **portage ligne à ligne** de `Services/MatchingEngine.swift` : mêmes poids par rôle (alcool principal 1.0, secondaire 0.8, structurant 0.6, mixer 0.35, garniture 0.15), mêmes règles de dégradation de stock (1.0 / 0.75 / 0.4), même seuil d'exclusion (2 ingrédients manquants max), V1 et V2 strictement séparés comme dans le code Swift.
 
+**Le moteur V2 est exposé dans l'interface, pas seulement dans le calcul** : Mon Bar affiche une section "Presque prêt" (cocktails à un ou deux ingrédients près, triés par score) en plus du compteur de cocktails débloqués ; la fiche cocktail confronte la recette à Mon Bar dès qu'il contient au moins un ingrédient et annote chaque ligne (✓ disponible, ⚠ dégradé avec la raison — stock faible/presque terminé/substitution —, ✗ manquant) plutôt que de se contenter d'un score global. Une **liste de courses** (`src/state/shoppingList.ts`, persistée) se remplit en un tap depuis "Presque prêt" ou depuis une fiche cocktail, et vit dans l'onglet Mon Bar.
+
 ## Différences assumées par rapport à l'app iOS
 
 - **Pas de compte ni de synchronisation multi-appareil.** L'app iOS synchronise Mon Bar/Favoris/Historique via CloudKit ; ici tout est stocké dans le `localStorage` du navigateur (documenté à l'utilisateur dans l'écran Profil). C'est la limitation structurelle attendue d'une version web sans backend — un vrai compte nécessiterait une API et une base de données.
