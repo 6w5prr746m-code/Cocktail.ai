@@ -16,6 +16,18 @@ npm run build      # build de prod dans dist/
 npm run preview    # sert le build de prod localement
 ```
 
+## Tests
+
+```bash
+npm test           # tests unitaires (Vitest) — moteur de matching, formatage, BarReadiness
+npm run test:watch # idem, en mode watch
+npm run test:e2e   # parcours critiques bout en bout (Playwright) — lance automatiquement le serveur de dev
+```
+
+Les tests unitaires du moteur de matching (`src/domain/matchingEngine.test.ts`) portent les 21 cas de `Tests/MatchingEngineTests.swift` et `Tests/MatchingEngineV2Tests.swift` de l'app iOS (le seul cas non porté est celui des variantes, fonctionnalité pas encore implémentée côté web). Un des cas Swift portés tel quel s'est révélé faux à l'exécution — attendu, puisque l'app iOS n'a jamais réellement compilé (voir le README racine) : le test a été corrigé plutôt que reporté à l'identique, voir le commentaire dans le fichier.
+
+Une CI GitHub Actions (`.github/workflows/ci.yml`) exécute build + tests unitaires + tests e2e sur chaque pull request touchant `web/`.
+
 ## Déployer
 
 Le build produit un site 100% statique (`dist/`). Plusieurs options, toutes gratuites pour ce type de projet :
