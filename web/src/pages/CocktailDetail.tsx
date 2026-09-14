@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ScreenHeader } from "../components/ScreenHeader";
 import { CocktailVisual } from "../components/CocktailVisual";
@@ -7,6 +8,7 @@ import { formatDuration, formatQuantity } from "../domain/formatting";
 import { useAllIngredients, useCocktail } from "../domain/catalog";
 import { useFavoritesStore } from "../state/favorites";
 import { tasteProfile } from "../domain/tasteProfile";
+import { buildPhotoPrompt } from "../domain/photoPrompt";
 import { INGREDIENT_ROLE_LABEL } from "../domain/types";
 
 export default function CocktailDetailPage() {
@@ -16,6 +18,7 @@ export default function CocktailDetailPage() {
   const ingredients = useAllIngredients();
   const isFavorite = useFavoritesStore((s) => (cocktail ? s.isFavorite(cocktail.id) : false));
   const toggleFavorite = useFavoritesStore((s) => s.toggleFavorite);
+  const [promptCopied, setPromptCopied] = useState(false);
 
   if (!cocktail) {
     return (
@@ -34,6 +37,17 @@ export default function CocktailDetailPage() {
 
   const tags = tasteProfile(cocktail);
 
+  async function copyPhotoPrompt() {
+    if (!cocktail) return;
+    try {
+      await navigator.clipboard.writeText(buildPhotoPrompt(cocktail));
+      setPromptCopied(true);
+      setTimeout(() => setPromptCopied(false), 2000);
+    } catch {
+      // clipboard indisponible (permission refusée, contexte non sécurisé) — pas de fallback nécessaire ici
+    }
+  }
+
   return (
     <div className="pb-28">
       <div className="relative flex flex-col items-center justify-end overflow-hidden" style={{ height: 340 }}>
@@ -46,6 +60,16 @@ export default function CocktailDetailPage() {
             onBack={() => navigate(-1)}
             action={
               <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={copyPhotoPrompt}
+                  aria-label="Copier le prompt photo"
+                  title="Copier un prompt de génération de photo réaliste pour ce cocktail"
+                  className="flex items-center justify-center rounded-full text-sm"
+                  style={{ width: 36, height: 36, background: "rgba(0,0,0,0.35)" }}
+                >
+                  {promptCopied ? "✓" : "📸"}
+                </button>
                 <button
                   type="button"
                   onClick={() => toggleFavorite(cocktail.id)}

@@ -93,6 +93,8 @@ Chaque cocktail est représenté par une illustration de verre générée en SVG
 
 **Photos réalistes (optionnel, progressif)** : `src/components/CocktailVisual.tsx` tente de charger `public/images/cocktails/<id>.jpg` pour chaque cocktail ; si le fichier existe, la photo remplace l'illustration partout où `CocktailVisual` est utilisé (carte, fiche détail) ; sinon ça retombe silencieusement sur l'illustration — aucune configuration ni changement de code nécessaire. Pour ajouter une photo à un cocktail : déposer un JPEG carré (idéal : 1024×1024 ou plus) nommé exactement `<id-du-cocktail>.jpg` dans `public/images/cocktails/` (les ids sont les slugs visibles dans `src/data/cocktails.json`, ex: `mojito.jpg`, `espresso_martini.jpg`).
 
+**Générer une photo pour un nouveau cocktail** : sur la fiche de n'importe quel cocktail (seed ou recette perso), le bouton 📸 dans la barre du haut copie dans le presse-papier un prompt de génération d'image prêt à coller dans Gemini/Imagen (`src/domain/photoPrompt.ts` — même bloc de style pour tous, surface/lumière/cadrage cohérents ; les détails du verre/glace/garniture/couleur sont dérivés de l'illustration curatée du cocktail, avec un repli automatique par teinte pour les recettes perso). Il ne reste qu'à récupérer l'image générée et la déposer au bon endroit comme décrit ci-dessus.
+
 ## Limites connues
 
 - Pas de tests automatisés portés (les tests Swift ne sont pas transposables tels quels) — validation faite manuellement en local (build + parcours utilisateur dans un navigateur).
