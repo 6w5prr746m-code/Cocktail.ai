@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import { useAllCocktails } from "../domain/catalog";
 import { useFavoritesStore } from "../state/favorites";
-import { gradientClassFor } from "../domain/gradient";
+import { MiniGlassBadge } from "../components/MiniGlassBadge";
+import { GlassArt } from "../components/GlassArt";
+import type { CocktailArt } from "../domain/glassArt";
+
+const EMPTY_STATE_ART: CocktailArt = { shape: "coupe", liquidColor: "#e8d9a8", garnish: "none", ice: "none" };
 
 export default function FavoritesPage() {
   const favoriteIds = useFavoritesStore((s) => s.favoriteIds);
@@ -15,15 +19,18 @@ export default function FavoritesPage() {
         Favoris
       </h1>
       {favorites.length === 0 ? (
-        <p className="px-4 text-sm" style={{ color: "var(--color-text-secondary)" }}>
-          Aucun favori pour l'instant. Ajoute des cocktails en favori depuis leur fiche.
-        </p>
+        <div className="flex flex-col items-center mt-8 gap-3 text-center px-6 opacity-80">
+          <GlassArt art={EMPTY_STATE_ART} size={72} fillFraction={0} />
+          <p className="text-sm" style={{ color: "var(--color-text-secondary)" }}>
+            Aucun favori pour l'instant. Ajoute des cocktails en favori depuis leur fiche.
+          </p>
+        </div>
       ) : (
         <ul className="flex flex-col gap-2 px-4">
           {favorites.map((c) => (
             <li key={c.id} className="flex items-center gap-3 rounded-2xl p-3" style={{ background: "var(--color-surface)" }}>
               <Link to={`/cocktail/${c.id}`} className="flex items-center gap-3 flex-1 min-w-0">
-                <div className={`rounded-xl flex-shrink-0 ${gradientClassFor(c.category)}`} style={{ width: 48, height: 48 }} />
+                <MiniGlassBadge cocktail={c} />
                 <div className="min-w-0">
                   <p className="font-medium truncate" style={{ color: "var(--color-text-primary)" }}>
                     {c.name}

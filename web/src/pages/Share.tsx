@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 import QRCode from "qrcode";
 import { ScreenHeader } from "../components/ScreenHeader";
 import { useCocktail } from "../domain/catalog";
+import { artFor } from "../domain/glassArt";
+import { GLASS_GEOMETRY } from "../domain/glassShapes";
+import type { Cocktail } from "../domain/types";
 
 interface ShareFormat {
   id: string;
@@ -31,6 +34,37 @@ function gradientColors(category: string): [string, string] {
   return GRADIENTS[category.toLowerCase()] ?? ["#c9a227", "#0b0b0f"];
 }
 
+// Réutilise exactement la même géométrie que <GlassArt/> (React/SVG) en la
+// rejouant sur le canvas via Path2D — un seul système de dessin, deux
+// moteurs de rendu.
+function drawGlass(ctx: CanvasRenderingContext2D, cocktail: Cocktail, centerX: number, topY: number, targetHeight: number) {
+  const art = artFor(cocktail);
+  const geo = GLASS_GEOMETRY[art.shape];
+  const scale = targetHeight / 160;
+
+  ctx.save();
+  ctx.translate(centerX - 60 * scale, topY);
+  ctx.scale(scale, scale);
+
+  const bowl = new Path2D(geo.bowlPath);
+  const fillFraction = 0.64;
+  const fillTopY = geo.liquidBottomY - fillFraction * (geo.liquidBottomY - geo.liquidTopY);
+
+  ctx.save();
+  ctx.clip(bowl);
+  ctx.fillStyle = art.liquidColor;
+  ctx.fillRect(0, fillTopY, 120, 160 - fillTopY);
+  ctx.fillStyle = "rgba(255,255,255,0.22)";
+  ctx.fillRect(0, fillTopY - 2, 120, 4);
+  ctx.restore();
+
+  ctx.lineWidth = 2.5;
+  ctx.strokeStyle = "rgba(255,255,255,0.92)";
+  ctx.stroke(bowl);
+  for (const d of geo.extraOutline ?? []) ctx.stroke(new Path2D(d));
+  ctx.restore();
+}
+
 export default function SharePage() {
   const { id } = useParams<{ id: string }>();
   const cocktail = useCocktail(id);
@@ -54,6 +88,8 @@ export default function SharePage() {
       gradient.addColorStop(1, c2);
       ctx!.fillStyle = gradient;
       ctx!.fillRect(0, 0, format.width, format.height);
+
+      drawGlass(ctx!, cocktail!, format.width / 2, format.height * 0.1, format.height * 0.42);
 
       ctx!.fillStyle = "rgba(0,0,0,0.28)";
       ctx!.fillRect(0, format.height * 0.62, format.width, format.height * 0.38);

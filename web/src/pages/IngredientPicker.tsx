@@ -3,10 +3,14 @@ import { Link } from "react-router-dom";
 import { ScreenHeader } from "../components/ScreenHeader";
 import { IngredientChip } from "../components/IngredientChip";
 import { CompatibilityRing } from "../components/CompatibilityRing";
+import { MiniGlassBadge } from "../components/MiniGlassBadge";
+import { GlassArt } from "../components/GlassArt";
+import type { CocktailArt } from "../domain/glassArt";
 import { useAllCocktails, useAllIngredients } from "../domain/catalog";
 import { computeMatches } from "../domain/matchingEngine";
 import { useMyBarStore } from "../state/myBar";
-import { gradientClassFor } from "../domain/gradient";
+
+const EMPTY_STATE_ART: CocktailArt = { shape: "coupe", liquidColor: "#e8d9a8", garnish: "none", ice: "none" };
 
 export default function IngredientPickerPage() {
   const ingredients = useAllIngredients();
@@ -86,13 +90,19 @@ export default function IngredientPickerPage() {
 
       <div className="flex-1 px-4 pt-2 pb-8">
         {selected.size < 3 ? (
-          <p className="text-sm text-center mt-10" style={{ color: "var(--color-text-secondary)" }}>
-            Sélectionne au moins 3 ingrédients pour voir apparaître des cocktails.
-          </p>
+          <div className="flex flex-col items-center mt-8 gap-3 text-center opacity-80">
+            <GlassArt art={EMPTY_STATE_ART} size={72} fillFraction={0.18} />
+            <p className="text-sm max-w-[220px]" style={{ color: "var(--color-text-secondary)" }}>
+              Sélectionne au moins 3 ingrédients — le barman s'occupe du reste.
+            </p>
+          </div>
         ) : results.length === 0 ? (
-          <p className="text-sm text-center mt-10" style={{ color: "var(--color-text-secondary)" }}>
-            Aucun cocktail ne correspond encore à cette sélection.
-          </p>
+          <div className="flex flex-col items-center mt-8 gap-3 text-center opacity-80">
+            <GlassArt art={EMPTY_STATE_ART} size={72} fillFraction={0} />
+            <p className="text-sm max-w-[220px]" style={{ color: "var(--color-text-secondary)" }}>
+              Aucun cocktail ne correspond encore à cette sélection. Essaie d'ajouter un alcool de base.
+            </p>
+          </div>
         ) : (
           <ul className="flex flex-col gap-2">
             {results.map((r) => (
@@ -102,7 +112,7 @@ export default function IngredientPickerPage() {
                   className="flex items-center gap-3 rounded-2xl p-3"
                   style={{ background: "var(--color-surface)" }}
                 >
-                  <div className={`rounded-xl flex-shrink-0 ${gradientClassFor(r.cocktail.category)}`} style={{ width: 48, height: 48 }} />
+                  <MiniGlassBadge cocktail={r.cocktail} />
                   <div className="flex-1 min-w-0">
                     <p className="font-medium truncate" style={{ color: "var(--color-text-primary)" }}>
                       {r.cocktail.name}
