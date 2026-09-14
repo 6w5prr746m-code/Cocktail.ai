@@ -1,11 +1,16 @@
 import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { CompatibilityRing } from "../components/CompatibilityRing";
+import { MiniGlassBadge } from "../components/MiniGlassBadge";
 import { useAllCocktails, useAllIngredients } from "../domain/catalog";
 import { computeAdvancedMatches } from "../domain/matchingEngine";
 import { SEED_SUBSTITUTIONS } from "../domain/seed";
 import { evaluateBarReadiness, BAR_READINESS_TEXT, STOCK_STATUS_LABEL, STOCK_STATUS_ORDER } from "../domain/types";
 import type { StockStatus } from "../domain/types";
 import { useMyBarStore } from "../state/myBar";
+import { useShoppingListStore } from "../state/shoppingList";
+
+const ALMOST_READY_LIMIT = 6;
 
 const STOCK_OPTIONS: StockStatus[] = ["available", "low", "almostEmpty"];
 
@@ -13,6 +18,7 @@ export default function MyBarPage() {
   const ingredients = useAllIngredients();
   const cocktails = useAllCocktails();
   const { entries, addIngredient, removeIngredient, setStockStatus, setApproximateQuantity } = useMyBarStore();
+  const { items: shoppingItems, addItems, removeItem: removeShoppingItem, toggleChecked, clearChecked } = useShoppingListStore();
 
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<string | null>(null);
@@ -31,6 +37,21 @@ export default function MyBarPage() {
   const unlockedCount = advancedMatches.filter((m) => m.availability === "ready").length;
   const readiness = evaluateBarReadiness(Object.keys(entries).length, unlockedCount);
   const readinessText = BAR_READINESS_TEXT[readiness];
+
+  const almostReady = useMemo(
+    () => advancedMatches.filter((m) => m.availability === "missingFew").slice(0, ALMOST_READY_LIMIT),
+    [advancedMatches],
+  );
+
+  const shoppingRows = useMemo(
+    () =>
+      Object.values(shoppingItems)
+        .map((item) => ({ item, ingredient: ingredients.find((i) => i.id === item.ingredientId) }))
+        .filter((x) => x.ingredient)
+        .sort((a, b) => Number(a.item.checked) - Number(b.item.checked)),
+    [shoppingItems, ingredients],
+  );
+  const hasCheckedItems = shoppingRows.some((r) => r.item.checked);
 
   const ownedIngredients = useMemo(
     () =>
@@ -79,6 +100,98 @@ export default function MyBarPage() {
           </div>
         </div>
       </div>
+
+      {almostReady.length > 0 && (
+        <section className="px-4 pb-6">
+          <h3 className="text-base font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
+            Presque prêt
+          </h3>
+          <ul className="flex flex-col gap-2">
+            {almostReady.map((match) => (
+              <li key={match.cocktail.id} className="rounded-2xl p-3 flex items-center gap-3" style={{ background: "var(--color-surface)" }}>
+                <Link to={`/cocktail/${match.cocktail.id}`} className="flex items-center gap-3 flex-1 min-w-0">
+                  <MiniGlassBadge cocktail={match.cocktail} size={44} />
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium truncate" style={{ color: "var(--color-text-primary)" }}>
+                      {match.cocktail.name}
+                    </p>
+                    <p className="text-xs truncate" style={{ color: "var(--color-text-secondary)" }}>
+                      Manque : {match.missingIngredients.map((i) => i.name).join(", ")}
+                    </p>
+                  </div>
+                </Link>
+                <CompatibilityRing fraction={match.compatibilityScore} size={34} strokeWidth={4} />
+                <button
+                  type="button"
+                  onClick={() => addItems(match.missingIngredients.map((i) => i.id))}
+                  aria-label={`Ajouter les ingrédients manquants pour ${match.cocktail.name} à la liste de courses`}
+                  title="Ajouter à la liste de courses"
+                  className="flex-shrink-0 rounded-full flex items-center justify-center"
+                  style={{ width: 30, height: 30, background: "var(--color-bg)" }}
+                >
+                  🛒
+                </button>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {shoppingRows.length > 0 && (
+        <section className="px-4 pb-6">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-base font-semibold" style={{ color: "var(--color-text-primary)" }}>
+              🛒 Liste de courses
+            </h3>
+            {hasCheckedItems && (
+              <button type="button" onClick={clearChecked} className="text-xs font-medium underline" style={{ color: "var(--color-text-secondary)" }}>
+                Vider les cochés
+              </button>
+            )}
+          </div>
+          <ul className="flex flex-col gap-2">
+            {shoppingRows.map(({ item, ingredient }) => (
+              <li
+                key={item.ingredientId}
+                className="rounded-xl px-3.5 py-2.5 flex items-center gap-3"
+                style={{ background: "var(--color-surface)", opacity: item.checked ? 0.55 : 1 }}
+              >
+                <button
+                  type="button"
+                  onClick={() => toggleChecked(item.ingredientId)}
+                  aria-label={item.checked ? `Décocher ${ingredient!.name}` : `Cocher ${ingredient!.name}`}
+                  className="flex-shrink-0 rounded-full flex items-center justify-center"
+                  style={{
+                    width: 22,
+                    height: 22,
+                    border: `2px solid ${item.checked ? "var(--color-success)" : "var(--color-border)"}`,
+                    background: item.checked ? "var(--color-success)" : "transparent",
+                    color: "#0b0b0f",
+                    fontSize: 12,
+                  }}
+                >
+                  {item.checked ? "✓" : ""}
+                </button>
+                <span
+                  className="flex-1 text-sm"
+                  style={{ color: "var(--color-text-primary)", textDecoration: item.checked ? "line-through" : "none" }}
+                >
+                  {ingredient!.name}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => removeShoppingItem(item.ingredientId)}
+                  aria-label={`Retirer ${ingredient!.name} de la liste`}
+                  className="flex-shrink-0 text-xs opacity-60"
+                  style={{ color: "var(--color-text-secondary)" }}
+                >
+                  ✕
+                </button>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {ownedIngredients.length > 0 && (
         <section className="px-4 pb-6">
