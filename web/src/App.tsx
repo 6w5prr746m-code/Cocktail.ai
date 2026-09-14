@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Outlet } from "react-router-dom";
+import { OnboardingFlow } from "./components/OnboardingFlow";
 import { TabBar } from "./components/TabBar";
 import { applyThemeToDocument, useThemeStore } from "./state/theme";
 
@@ -42,26 +43,29 @@ export default function App() {
   }, [preference]);
 
   return (
-    <Suspense fallback={<PageLoader />}>
-      <Routes>
-        <Route element={<TabLayout />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/library" element={<LibraryPage />} />
-          <Route path="/library/collection/:id" element={<CollectionDetailPage />} />
-          <Route path="/mybar" element={<MyBarPage />} />
-          <Route path="/favorites" element={<FavoritesPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-        </Route>
+    <>
+      <OnboardingFlow />
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
+          <Route element={<TabLayout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/library" element={<LibraryPage />} />
+            <Route path="/library/collection/:id" element={<CollectionDetailPage />} />
+            <Route path="/mybar" element={<MyBarPage />} />
+            <Route path="/favorites" element={<FavoritesPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+          </Route>
 
-        <Route path="/cocktail/:id" element={<CocktailDetailPage />} />
-        <Route path="/cocktail/:id/prepare" element={<PreparationModePage />} />
-        <Route path="/cocktail/:id/share" element={<SharePage />} />
-        <Route path="/picker" element={<IngredientPickerPage />} />
-        <Route path="/recipe/new" element={<RecipeFormPage />} />
-        <Route path="/recipe/:id/edit" element={<RecipeFormPage />} />
+          <Route path="/cocktail/:id" element={<CocktailDetailPage />} />
+          <Route path="/cocktail/:id/prepare" element={<PreparationModePage />} />
+          <Route path="/cocktail/:id/share" element={<SharePage />} />
+          <Route path="/picker" element={<IngredientPickerPage />} />
+          <Route path="/recipe/new" element={<RecipeFormPage />} />
+          <Route path="/recipe/:id/edit" element={<RecipeFormPage />} />
 
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </Suspense>
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Suspense>
+    </>
   );
 }

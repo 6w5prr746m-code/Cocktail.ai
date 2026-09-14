@@ -17,6 +17,10 @@ export default defineConfig({
   use: {
     baseURL: "http://localhost:4300",
     trace: "on-first-retry",
+    // Onboarding pré-marqué comme terminé par défaut pour tous les tests :
+    // c'est l'écran de bienvenue plein écran (voir onboarding.spec.ts) qui
+    // désactive ce préréglage pour tester le premier lancement lui-même.
+    storageState: "e2e/storageState.json",
   },
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"], launchOptions } }],
   webServer: {

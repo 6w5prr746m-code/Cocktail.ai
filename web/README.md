@@ -121,6 +121,10 @@ Le build génère une vraie Progressive Web App via `vite-plugin-pwa` (`vite.con
 - Icônes (`public/icons/`) : un verre à cocktail doré sur fond sombre, cohérent avec le Design System.
 - Le manifest (`manifest.webmanifest`, généré au build) respecte automatiquement le `--base` passé en CI (fonctionne aussi bien en local qu'en sous-chemin GitHub Pages).
 
+## Onboarding premier lancement
+
+Au tout premier lancement (`src/components/OnboardingFlow.tsx`, état persisté dans `src/state/onboarding.ts`), un écran plein écran en 3 étapes explique l'app avant de laisser l'utilisateur entrer : présentation générale, recherche magique, puis Mon Bar — cette dernière étape propose directement les 6 ingrédients les plus utilisés du catalogue (`src/domain/starterIngredients.ts`, calculés depuis le seed plutôt que codés en dur) à ajouter en un tap. "Passer" est toujours disponible et saute l'écran sans rien ajouter. Mon Bar affiche par ailleurs son propre état vide engageant (mêmes ingrédients suggérés) tant qu'aucun ingrédient n'a été renseigné, onboarding vu ou non.
+
 ## Limites connues
 
 - Pas de tests automatisés portés (les tests Swift ne sont pas transposables tels quels) — validation faite manuellement en local (build + parcours utilisateur dans un navigateur).
