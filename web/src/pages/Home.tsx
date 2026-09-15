@@ -106,7 +106,7 @@ export default function HomePage() {
   return (
     <div className="pb-8">
       <div className="px-4 pt-6 pb-4">
-        <p className="text-sm font-medium mb-1" style={{ color: "var(--color-accent-gold)" }}>
+        <p className="text-sm font-medium mb-1" style={{ color: "var(--color-accent-gold-text)" }}>
           Cocktail.ai
         </p>
         <h1 className="text-3xl font-bold leading-tight mb-4" style={{ color: "var(--color-text-primary)" }}>

@@ -11,7 +11,7 @@ export function TasteTags({ tags, size = "sm", variant = "default" }: TasteTagsP
   const style =
     variant === "onImage"
       ? { background: "rgba(255,255,255,0.22)", color: "#ffffff" }
-      : { background: "color-mix(in srgb, var(--color-accent-gold) 16%, transparent)", color: "var(--color-accent-gold)" };
+      : { background: "color-mix(in srgb, var(--color-accent-gold) 16%, transparent)", color: "var(--color-accent-gold-text)" };
   return (
     <div className="flex flex-wrap gap-1">
       {tags.map((tag) => (

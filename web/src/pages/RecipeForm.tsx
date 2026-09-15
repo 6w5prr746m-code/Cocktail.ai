@@ -162,6 +162,7 @@ export default function RecipeFormPage() {
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
+              aria-label="Catégorie"
               className="w-full rounded-xl px-3 py-2.5 text-sm"
               style={{ background: "var(--color-surface)", color: "var(--color-text-primary)", border: "1px solid var(--color-border)" }}
             >
@@ -176,6 +177,7 @@ export default function RecipeFormPage() {
             <select
               value={difficulty}
               onChange={(e) => setDifficulty(Number(e.target.value) as 1 | 2 | 3)}
+              aria-label="Difficulté"
               className="w-full rounded-xl px-3 py-2.5 text-sm"
               style={{ background: "var(--color-surface)", color: "var(--color-text-primary)", border: "1px solid var(--color-border)" }}
             >
@@ -191,7 +193,7 @@ export default function RecipeFormPage() {
             <TextInput value={mainSpirit} onChange={setMainSpirit} placeholder="Ex: Gin" />
           </Field>
           <Field label="Temps (min)">
-            <TextInput value={prepTime} onChange={setPrepTime} type="number" />
+            <TextInput value={prepTime} onChange={setPrepTime} type="number" placeholder="Temps de préparation en minutes" />
           </Field>
         </div>
 
@@ -210,7 +212,7 @@ export default function RecipeFormPage() {
 
         <Field label="Ingrédients">
           <div className="flex flex-col gap-2">
-            {ingredientRows.map((row) => (
+            {ingredientRows.map((row, idx) => (
               <div key={row.key} className="rounded-xl p-3 flex flex-col gap-2" style={{ background: "var(--color-surface)" }}>
                 <TextInput value={row.name} onChange={(v) => updateIngredient(row.key, { name: v })} placeholder="Nom de l'ingrédient" />
                 <div className="flex gap-2">
@@ -221,6 +223,7 @@ export default function RecipeFormPage() {
                   <select
                     value={row.role}
                     onChange={(e) => updateIngredient(row.key, { role: e.target.value as IngredientRole })}
+                    aria-label={`Rôle de l'ingrédient ${row.name || idx + 1}`}
                     className="text-xs rounded-lg px-2 py-1.5"
                     style={{ background: "var(--color-bg)", color: "var(--color-text-primary)", border: "1px solid var(--color-border)" }}
                   >
@@ -242,7 +245,7 @@ export default function RecipeFormPage() {
                     type="button"
                     onClick={() => setIngredientRows((rows) => rows.filter((r) => r.key !== row.key))}
                     className="text-xs"
-                    style={{ color: "var(--color-danger)" }}
+                    style={{ color: "var(--color-danger-text)" }}
                   >
                     Supprimer
                   </button>
@@ -255,7 +258,7 @@ export default function RecipeFormPage() {
                 setIngredientRows((rows) => [...rows, { key: newKey(), name: "", quantity: "", unit: "cl", isOptional: false, role: "modifier" }])
               }
               className="text-sm rounded-xl py-2.5 font-medium"
-              style={{ background: "var(--color-surface)", color: "var(--color-accent-gold)" }}
+              style={{ background: "var(--color-surface)", color: "var(--color-accent-gold-text)" }}
             >
               + Ajouter un ingrédient
             </button>
@@ -281,7 +284,7 @@ export default function RecipeFormPage() {
                     type="button"
                     onClick={() => setStepRows((rows) => rows.filter((r) => r.key !== row.key))}
                     className="text-xs flex-shrink-0"
-                    style={{ color: "var(--color-danger)" }}
+                    style={{ color: "var(--color-danger-text)" }}
                   >
                     Supprimer
                   </button>
@@ -292,7 +295,7 @@ export default function RecipeFormPage() {
               type="button"
               onClick={() => setStepRows((rows) => [...rows, { key: newKey(), instruction: "", durationSeconds: "" }])}
               className="text-sm rounded-xl py-2.5 font-medium"
-              style={{ background: "var(--color-surface)", color: "var(--color-accent-gold)" }}
+              style={{ background: "var(--color-surface)", color: "var(--color-accent-gold-text)" }}
             >
               + Ajouter une étape
             </button>
@@ -350,6 +353,7 @@ function TextInput({
       type={type}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
+      aria-label={placeholder}
       className="w-full rounded-xl px-3 py-2.5 text-sm outline-none"
       style={{ background: "var(--color-surface)", color: "var(--color-text-primary)", border: "1px solid var(--color-border)" }}
     />

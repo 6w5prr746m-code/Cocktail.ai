@@ -159,9 +159,9 @@ export default function CocktailDetailPage() {
       <div className="px-4 pt-5 flex flex-col gap-6">
         <section>
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-lg font-semibold" style={{ color: "var(--color-text-primary)" }}>
+            <h2 className="text-lg font-semibold" style={{ color: "var(--color-text-primary)" }}>
               Ingrédients
-            </h3>
+            </h2>
             {advanced && (
               <div className="flex items-center gap-2">
                 <span className="text-xs" style={{ color: "var(--color-text-secondary)" }}>
@@ -183,17 +183,17 @@ export default function CocktailDetailPage() {
                   <div className="min-w-0">
                     <div className="flex items-center gap-1.5">
                       {status?.kind === "missing" && (
-                        <span style={{ color: "var(--color-danger)" }} aria-label="Manquant">
+                        <span style={{ color: "var(--color-danger-text)" }} aria-label="Manquant">
                           ✗
                         </span>
                       )}
                       {status?.kind === "degraded" && (
-                        <span style={{ color: "var(--color-accent-gold)" }} aria-label="Disponible partiellement">
+                        <span style={{ color: "var(--color-accent-gold-text)" }} aria-label="Disponible partiellement">
                           ⚠
                         </span>
                       )}
                       {advanced && !status && (
-                        <span style={{ color: "var(--color-success)" }} aria-label="Disponible">
+                        <span style={{ color: "var(--color-success-text)" }} aria-label="Disponible">
                           ✓
                         </span>
                       )}
@@ -203,7 +203,7 @@ export default function CocktailDetailPage() {
                           optionnel
                         </span>
                       )}
-                      <span className="text-xs opacity-60" style={{ color: "var(--color-text-secondary)" }}>
+                      <span className="text-xs" style={{ color: "var(--color-text-secondary)" }}>
                         {INGREDIENT_ROLE_LABEL[link.role]}
                       </span>
                     </div>
@@ -214,7 +214,7 @@ export default function CocktailDetailPage() {
                     )}
                   </div>
                   <div className="flex items-center gap-2 flex-shrink-0">
-                    <span className="font-mono text-sm" style={{ color: "var(--color-accent-gold)" }}>
+                    <span className="font-mono text-sm" style={{ color: "var(--color-accent-gold-text)" }}>
                       {formatQuantity(link.quantity)} {link.unit}
                     </span>
                     {status?.kind === "missing" && (
@@ -239,7 +239,7 @@ export default function CocktailDetailPage() {
               type="button"
               onClick={() => addShoppingItems(advanced.explanation.missingIngredients.map((m) => m.ingredient.id))}
               className="w-full mt-3 rounded-xl py-2.5 text-sm font-medium"
-              style={{ background: "var(--color-surface)", color: "var(--color-accent-gold)" }}
+              style={{ background: "var(--color-surface)", color: "var(--color-accent-gold-text)" }}
             >
               🛒 Ajouter les {advanced.explanation.missingIngredients.length} ingrédient
               {advanced.explanation.missingIngredients.length > 1 ? "s" : ""} manquant
@@ -249,9 +249,9 @@ export default function CocktailDetailPage() {
         </section>
 
         <section>
-          <h3 className="text-lg font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
+          <h2 className="text-lg font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
             Préparation
-          </h3>
+          </h2>
           <ol className="flex flex-col gap-3">
             {cocktail.steps.map((step) => (
               <li key={step.order} className="flex gap-3">
@@ -279,20 +279,20 @@ export default function CocktailDetailPage() {
 
         {cocktail.history && (
           <section>
-            <h3 className="text-lg font-semibold mb-2" style={{ color: "var(--color-text-primary)" }}>
+            <h2 className="text-lg font-semibold mb-2" style={{ color: "var(--color-text-primary)" }}>
               Histoire
-            </h3>
+            </h2>
             <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-              {cocktail.history} <span className="opacity-70">— {cocktail.origin}</span>
+              {cocktail.history} <span>— {cocktail.origin}</span>
             </p>
           </section>
         )}
 
         {cocktail.tips && (
           <section>
-            <h3 className="text-lg font-semibold mb-2" style={{ color: "var(--color-text-primary)" }}>
+            <h2 className="text-lg font-semibold mb-2" style={{ color: "var(--color-text-primary)" }}>
               Conseils
-            </h3>
+            </h2>
             <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
               💡 {cocktail.tips}
             </p>

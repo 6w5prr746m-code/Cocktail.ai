@@ -125,8 +125,17 @@ Le build génère une vraie Progressive Web App via `vite-plugin-pwa` (`vite.con
 
 Au tout premier lancement (`src/components/OnboardingFlow.tsx`, état persisté dans `src/state/onboarding.ts`), un écran plein écran en 3 étapes explique l'app avant de laisser l'utilisateur entrer : présentation générale, recherche magique, puis Mon Bar — cette dernière étape propose directement les 6 ingrédients les plus utilisés du catalogue (`src/domain/starterIngredients.ts`, calculés depuis le seed plutôt que codés en dur) à ajouter en un tap. "Passer" est toujours disponible et saute l'écran sans rien ajouter. Mon Bar affiche par ailleurs son propre état vide engageant (mêmes ingrédients suggérés) tant qu'aucun ingrédient n'a été renseigné, onboarding vu ou non.
 
+## Accessibilité
+
+- **Contraste** : les couleurs d'accent (or, rouge, vert) ont chacune une variante `-text` (`--color-accent-gold-text`, `--color-danger-text`, `--color-success-text` dans `src/index.css`) utilisée partout où la couleur porte du texte ou une icône porteuse de sens — la couleur de base reste réservée aux fonds de bouton. En light mode ces variantes sont volontairement assombries pour rester ≥ 4.5:1 (vérifié à l'audit Lighthouse, voir plus bas) ; en dark mode elles valent la couleur de base, déjà largement conforme. Les opacités appliquées directement sur du texte (`opacity-60`/`70`/`80` combinées à `--color-text-secondary`) ont été retirées ou déplacées sur les seuls éléments décoratifs (illustrations `GlassArt`), car elles faisaient chuter le contraste sous le seuil AA.
+- **Structure de titres** : une seule hiérarchie `h1 → h2` par écran (les titres de section qui utilisaient `h3` sans `h2` intermédiaire sont passés à `h2` ; `ScreenHeader` rend son `title` en `h1` puisqu'il est systématiquement l'unique titre de l'écran où il apparaît).
+- **Landmark `<main>`** : chaque écran est entouré d'un repère `<main id="main-content">` (le `TabLayout` pour les onglets, un wrapper `display:contents` pour les écrans plein écran routés directement — landmark sans toucher à la mise en page existante). Un lien d'évitement ("Aller au contenu", `App.tsx` + `.skip-link` dans `index.css`) apparaît au premier `Tab` et saute directement dessus.
+- **Focus clavier** : un anneau de focus cohérent (`:focus-visible`) est appliqué à tous les éléments interactifs, y compris les champs texte qui utilisaient `outline-none` pour supprimer l'anneau par défaut au clic souris.
+- **Formulaires** : tous les champs de recherche/texte ont un nom accessible explicite (`aria-label`, en plus ou à la place du `placeholder`) ; les `<select>` du formulaire de recette (catégorie, difficulté, rôle d'ingrédient) aussi.
+- Audité avec `npx lighthouse --only-categories=accessibility` sur les 8 écrans principaux (accueil, bibliothèque, Mon Bar, fiche cocktail, formulaire de recette, profil, favoris, recherche magique) : **100/100** partout.
+- `public/robots.txt` autorise l'indexation (site 100% public, aucune donnée sensible).
+
 ## Limites connues
 
-- Pas de tests automatisés portés (les tests Swift ne sont pas transposables tels quels) — validation faite manuellement en local (build + parcours utilisateur dans un navigateur).
 - Le partage visuel ne propose que 3 formats (Story/Post/Pinterest) contre 5 côté iOS (TikTok/Snapchat omis, mêmes ratios que Story/Post).
 - Comme documenté dans le README iOS pour la V1, deux noms d'ingrédients personnalisés produisant le même slug (accents) entreraient en conflit.

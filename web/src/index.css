@@ -17,6 +17,16 @@
   --color-danger: #ef476f;
   --color-success: #2dd4bf;
 
+  /* Variantes "texte" des couleurs d'accent — en dark mode ce sont les
+     couleurs de base (déjà largement conformes AA), mais en light mode
+     accent-gold/danger/success échouent au contraste 4.5:1 utilisées comme
+     texte (elles restent adaptées en fond de bouton, où c'est le texte
+     sombre dessus qui compte). Toujours utiliser ces variantes -text pour
+     une couleur/icône qui *porte du texte ou du sens*, jamais pour un fond. */
+  --color-accent-gold-text: var(--color-accent-gold);
+  --color-danger-text: var(--color-danger);
+  --color-success-text: var(--color-success);
+
   --font-display: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
   --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: "SF Mono", ui-monospace, "Cascadia Code", monospace;
@@ -31,6 +41,9 @@
   --color-text-primary: #0b0b0f;
   --color-text-secondary: #6b6560;
   --color-border: #ddd6c4;
+  --color-accent-gold-text: #796117;
+  --color-danger-text: #ba3757;
+  --color-success-text: #187267;
   color-scheme: light;
 }
 
@@ -42,6 +55,9 @@
     --color-text-primary: #0b0b0f;
     --color-text-secondary: #6b6560;
     --color-border: #ddd6c4;
+    --color-accent-gold-text: #796117;
+    --color-danger-text: #ba3757;
+    --color-success-text: #187267;
     color-scheme: light;
   }
 }
@@ -119,6 +135,20 @@ input, textarea, select {
   font-family: inherit;
 }
 
+/* Anneau de focus clavier cohérent sur toute l'app — certains champs
+   utilisent la classe Tailwind outline-none (pour ne pas garder l'anneau
+   par défaut du navigateur au clic souris) ; :focus-visible le restaure
+   uniquement pour la navigation clavier. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-accent-gold);
+  outline-offset: 2px;
+}
+
 /* Gradients par famille de cocktail — voir Design System §2 */
 .gradient-tropical { background: linear-gradient(135deg, #ff7a59, #2dd4bf); }
 .gradient-classique { background: linear-gradient(135deg, #c9a227, #5b2a2a); }
@@ -132,6 +162,23 @@ input, textarea, select {
   background: color-mix(in srgb, var(--color-surface) 80%, transparent);
   backdrop-filter: blur(16px);
   border: 1px solid var(--color-border);
+}
+
+/* Lien d'évitement : hors écran par défaut, réapparaît au focus clavier
+   (tab depuis le tout début de la page) pour sauter la TabBar/en-tête. */
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 12px;
+  z-index: 100;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: top 0.15s ease;
+}
+.skip-link:focus-visible {
+  top: 12px;
 }
 
 @keyframes fade-in {

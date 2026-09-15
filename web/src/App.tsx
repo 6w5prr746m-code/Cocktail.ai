@@ -23,9 +23,9 @@ const SharePage = lazy(() => import("./pages/Share"));
 function TabLayout() {
   return (
     <div className="flex flex-col flex-1 min-h-0">
-      <div className="flex-1 overflow-y-auto">
+      <main id="main-content" className="flex-1 overflow-y-auto">
         <Outlet />
-      </div>
+      </main>
       <TabBar />
     </div>
   );
@@ -33,6 +33,20 @@ function TabLayout() {
 
 function PageLoader() {
   return <div style={{ minHeight: "100svh", background: "var(--color-bg)" }} />;
+}
+
+// Lien d'évitement : invisible tant qu'il n'a pas le focus clavier, permet
+// de sauter directement au contenu sans traverser la TabBar à chaque page.
+function SkipLink() {
+  return (
+    <a
+      href="#main-content"
+      className="skip-link"
+      style={{ background: "var(--color-accent-gold)", color: "#0b0b0f" }}
+    >
+      Aller au contenu
+    </a>
+  );
 }
 
 export default function App() {
@@ -44,6 +58,7 @@ export default function App() {
 
   return (
     <>
+      <SkipLink />
       <OnboardingFlow />
       <Suspense fallback={<PageLoader />}>
         <Routes>
@@ -56,12 +71,15 @@ export default function App() {
             <Route path="/profile" element={<ProfilePage />} />
           </Route>
 
-          <Route path="/cocktail/:id" element={<CocktailDetailPage />} />
-          <Route path="/cocktail/:id/prepare" element={<PreparationModePage />} />
-          <Route path="/cocktail/:id/share" element={<SharePage />} />
-          <Route path="/picker" element={<IngredientPickerPage />} />
-          <Route path="/recipe/new" element={<RecipeFormPage />} />
-          <Route path="/recipe/:id/edit" element={<RecipeFormPage />} />
+          {/* display:contents sur ces <main> : landmark d'accessibilité sans
+              participer à la mise en page (chaque écran gère déjà lui-même
+              sa propre hauteur/flex en enfant direct de #root). */}
+          <Route path="/cocktail/:id" element={<main id="main-content" className="contents"><CocktailDetailPage /></main>} />
+          <Route path="/cocktail/:id/prepare" element={<main id="main-content" className="contents"><PreparationModePage /></main>} />
+          <Route path="/cocktail/:id/share" element={<main id="main-content" className="contents"><SharePage /></main>} />
+          <Route path="/picker" element={<main id="main-content" className="contents"><IngredientPickerPage /></main>} />
+          <Route path="/recipe/new" element={<main id="main-content" className="contents"><RecipeFormPage /></main>} />
+          <Route path="/recipe/:id/edit" element={<main id="main-content" className="contents"><RecipeFormPage /></main>} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

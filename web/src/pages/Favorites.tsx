@@ -19,8 +19,10 @@ export default function FavoritesPage() {
         Favoris
       </h1>
       {favorites.length === 0 ? (
-        <div className="flex flex-col items-center mt-8 gap-3 text-center px-6 opacity-80">
-          <GlassArt art={EMPTY_STATE_ART} size={72} fillFraction={0} />
+        <div className="flex flex-col items-center mt-8 gap-3 text-center px-6">
+          <div className="opacity-80">
+            <GlassArt art={EMPTY_STATE_ART} size={72} fillFraction={0} />
+          </div>
           <p className="text-sm" style={{ color: "var(--color-text-secondary)" }}>
             Aucun favori pour l'instant. Ajoute des cocktails en favori depuis leur fiche.
           </p>
