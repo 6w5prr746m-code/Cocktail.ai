@@ -7,6 +7,7 @@ import { MiniGlassBadge } from "../components/MiniGlassBadge";
 import { GlassArt } from "../components/GlassArt";
 import type { CocktailArt } from "../domain/glassArt";
 import { useAllCocktails, useAllIngredients } from "../domain/catalog";
+import { fuzzyIncludes } from "../domain/fuzzySearch";
 import { computeMatches } from "../domain/matchingEngine";
 import { useMyBarStore } from "../state/myBar";
 
@@ -22,9 +23,9 @@ export default function IngredientPickerPage() {
   const [selected, setSelected] = useState<Set<string>>(new Set());
 
   const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
+    const q = query.trim();
     if (!q) return ingredients;
-    return ingredients.filter((i) => i.name.toLowerCase().includes(q) || i.category.toLowerCase().includes(q));
+    return ingredients.filter((i) => fuzzyIncludes(q, i.name) || fuzzyIncludes(q, i.category));
   }, [ingredients, query]);
 
   const results = useMemo(() => {

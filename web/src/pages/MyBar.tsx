@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { CompatibilityRing } from "../components/CompatibilityRing";
 import { MiniGlassBadge } from "../components/MiniGlassBadge";
 import { useAllCocktails, useAllIngredients } from "../domain/catalog";
+import { fuzzyIncludes } from "../domain/fuzzySearch";
 import { computeAdvancedMatches } from "../domain/matchingEngine";
 import { SEED_SUBSTITUTIONS } from "../domain/seed";
 import { STARTER_INGREDIENTS } from "../domain/starterIngredients";
@@ -66,11 +67,11 @@ export default function MyBarPage() {
   const categories = useMemo(() => Array.from(new Set(ingredients.map((i) => i.category))).sort(), [ingredients]);
 
   const availableToAdd = useMemo(() => {
-    const q = query.trim().toLowerCase();
+    const q = query.trim();
     return ingredients.filter((i) => {
       if (entries[i.id]) return false;
       if (category && i.category !== category) return false;
-      if (q && !i.name.toLowerCase().includes(q)) return false;
+      if (q && !fuzzyIncludes(q, i.name)) return false;
       return true;
     });
   }, [ingredients, entries, query, category]);
