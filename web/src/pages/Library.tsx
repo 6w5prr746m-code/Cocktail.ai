@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CocktailCard } from "../components/CocktailCard";
 import { useAllCocktails, useCollections } from "../domain/catalog";
+import { fuzzyIncludes } from "../domain/fuzzySearch";
 import { COCKTAIL_CATEGORIES, MAIN_SPIRITS } from "../domain/seed";
 import { formatDifficulty } from "../domain/formatting";
 
@@ -26,14 +27,14 @@ export default function LibraryPage() {
   }
 
   const results = useMemo(() => {
-    const q = query.trim().toLowerCase();
+    const q = query.trim();
     return cocktails.filter((c) => {
       if (spirits.size > 0 && !spirits.has(c.mainSpirit)) return false;
       if (difficulties.size > 0 && !difficulties.has(c.difficulty)) return false;
       if (occasions.size > 0 && !occasions.has(c.category)) return false;
       if (!q) return true;
-      if (c.name.toLowerCase().includes(q)) return true;
-      return c.ingredients.some((link) => link.ingredientId.replace(/_/g, " ").includes(q));
+      if (fuzzyIncludes(q, c.name)) return true;
+      return c.ingredients.some((link) => fuzzyIncludes(q, link.ingredientId.replace(/_/g, " ")));
     });
   }, [cocktails, query, spirits, difficulties, occasions]);
 

@@ -1,24 +1,43 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CocktailCard } from "../components/CocktailCard";
 import { CocktailVisual } from "../components/CocktailVisual";
 import { TasteTags } from "../components/TasteTags";
 import { useAllCocktails } from "../domain/catalog";
 import { dailyPick } from "../domain/gradient";
+import { pickSurprise, recommendCocktails } from "../domain/recommendation";
 import { tasteProfile } from "../domain/tasteProfile";
 import { useFavoritesStore } from "../state/favorites";
+import { useHistoryStore } from "../state/history";
 import { useUserRecipesStore } from "../state/userRecipes";
 import type { Cocktail } from "../domain/types";
 
 const SECTION_LIMIT = 20;
 
-function Section({ title, cocktails, emptyHint }: { title: string; cocktails: Cocktail[]; emptyHint?: string }) {
+function Section({
+  title,
+  subtitle,
+  cocktails,
+  emptyHint,
+}: {
+  title: string;
+  subtitle?: string;
+  cocktails: Cocktail[];
+  emptyHint?: string;
+}) {
   if (cocktails.length === 0 && !emptyHint) return null;
   return (
     <section className="mt-7">
-      <h3 className="text-lg font-semibold px-4 mb-3" style={{ color: "var(--color-text-primary)" }}>
-        {title}
-      </h3>
+      <div className="px-4 mb-3">
+        <h2 className="text-lg font-semibold" style={{ color: "var(--color-text-primary)" }}>
+          {title}
+        </h2>
+        {subtitle && (
+          <p className="text-xs mt-0.5" style={{ color: "var(--color-text-secondary)" }}>
+            {subtitle}
+          </p>
+        )}
+      </div>
       {cocktails.length === 0 ? (
         <p className="px-4 text-sm" style={{ color: "var(--color-text-secondary)" }}>
           {emptyHint}
@@ -63,11 +82,12 @@ export default function HomePage() {
   const navigate = useNavigate();
   const cocktails = useAllCocktails();
   const favoriteIds = useFavoritesStore((s) => s.favoriteIds);
+  const historyEntries = useHistoryStore((s) => s.entries);
   const userRecipes = useUserRecipesStore((s) => s.recipes);
+  const [surpriseFlash, setSurpriseFlash] = useState(false);
 
-  // Heuristiques simples documentées (voir README iOS, Sprint 2 / Sprint 10) —
-  // en attendant respectivement la fonction communautaire et un vrai
-  // RecommendationEngine V2.
+  // Heuristique simple documentée (voir README iOS, Sprint 2) — en attendant
+  // la fonction communautaire réelle.
   const popular = useMemo(
     () =>
       [...cocktails]
@@ -87,13 +107,12 @@ export default function HomePage() {
     return [...newest, ...seedRecent].slice(0, SECTION_LIMIT);
   }, [cocktails, userRecipes]);
 
+  const historyCocktailIds = useMemo(() => historyEntries.map((e) => e.cocktailId), [historyEntries]);
+  const hasTasteSignal = favoriteIds.length > 0 || historyCocktailIds.length > 0;
+
   const recommended = useMemo(
-    () =>
-      [...cocktails]
-        .filter((c) => !favoriteIds.includes(c.id))
-        .sort((a, b) => a.difficulty - b.difficulty || a.name.localeCompare(b.name, "fr"))
-        .slice(0, SECTION_LIMIT),
-    [cocktails, favoriteIds],
+    () => recommendCocktails(cocktails, { favoriteIds, historyCocktailIds }, SECTION_LIMIT),
+    [cocktails, favoriteIds, historyCocktailIds],
   );
 
   const favorites = useMemo(
@@ -102,6 +121,14 @@ export default function HomePage() {
   );
 
   const featured = useMemo(() => dailyPick(cocktails), [cocktails]);
+
+  function surpriseMe() {
+    const excluded = new Set([...favoriteIds, ...historyCocktailIds]);
+    const pick = pickSurprise(cocktails, excluded);
+    if (!pick) return;
+    setSurpriseFlash(true);
+    setTimeout(() => navigate(`/cocktail/${pick.id}`), 220);
+  }
 
   return (
     <div className="pb-8">
@@ -115,19 +142,40 @@ export default function HomePage() {
 
         {featured && <FeaturedCocktail cocktail={featured} />}
 
-        <button
-          type="button"
-          onClick={() => navigate("/picker")}
-          className="w-full rounded-2xl py-4 font-semibold text-base mt-3"
-          style={{ background: "var(--color-accent-gold)", color: "#0b0b0f" }}
-        >
-          ✨ Ajouter mes ingrédients
-        </button>
+        <div className="flex gap-2 mt-3">
+          <button
+            type="button"
+            onClick={() => navigate("/picker")}
+            className="flex-1 rounded-2xl py-4 font-semibold text-base"
+            style={{ background: "var(--color-accent-gold)", color: "#0b0b0f" }}
+          >
+            ✨ Ajouter mes ingrédients
+          </button>
+          <button
+            type="button"
+            onClick={surpriseMe}
+            aria-label="Surprends-moi avec un cocktail au hasard"
+            title="Surprends-moi"
+            className="rounded-2xl px-5 font-semibold text-base transition-transform"
+            style={{
+              background: "var(--color-surface)",
+              color: "var(--color-text-primary)",
+              border: "1px solid var(--color-border)",
+              transform: surpriseFlash ? "rotate(18deg) scale(1.1)" : undefined,
+            }}
+          >
+            🎲
+          </button>
+        </div>
       </div>
 
       <Section title="Populaires" cocktails={popular} />
       <Section title="Nouveautés" cocktails={fresh} />
-      <Section title="Recommandés pour toi" cocktails={recommended} />
+      <Section
+        title="Recommandés pour toi"
+        subtitle={hasTasteSignal ? "Basé sur tes favoris et cocktails déjà préparés" : undefined}
+        cocktails={recommended}
+      />
       <Section
         title="Tes favoris"
         cocktails={favorites}

@@ -88,7 +88,13 @@ Le moteur de matching (`src/domain/matchingEngine.ts`) est un **portage ligne à
 - **Deep linking natif, pas un schéma d'URL custom.** Là où l'app iOS a dû construire tout un système `cocktailapp://` (Sprint 12), le web a l'avantage d'avoir des URLs directement partageables (`/cocktail/mojito`) — aucune configuration supplémentaire n'est nécessaire.
 - **Pas de widget d'écran d'accueil ni de notifications push** — équivalents natifs sans équivalent web direct pris en charge ici.
 - **Icônes** : emoji plutôt que SF Symbols/illustrations dédiées (aucun asset graphique livré avec le projet iOS au-delà de l'icône d'app).
-- **Recommandations "Populaires" / "Recommandés"** : mêmes heuristiques simples que l'app iOS (classiques d'abord, tri par difficulté), en attendant un vrai moteur de recommandation — assumé de la même façon que dans le README iOS.
+- **"Populaires"** reste une heuristique simple (classiques d'abord), comme l'app iOS — pas de donnée d'usage communautaire disponible côté web pour la remplacer. **"Recommandés pour toi"**, en revanche, n'est plus une heuristique statique depuis le Sprint 7 : voir la section Découverte ci-dessous.
+
+## Découverte & recherche
+
+- **"Recommandés pour toi"** (`src/domain/recommendation.ts`) pondère les cocktails non déjà favoris/préparés par affinité avec l'alcool principal et le profil de goût (`tasteProfile`) des cocktails que l'utilisateur a favorisés ou déjà préparés (historique) — un sous-titre ("Basé sur tes favoris et cocktails déjà préparés") apparaît dès qu'un signal existe. Sans aucun signal (nouvel utilisateur), retombe sur le tri par difficulté croissante utilisé auparavant : aucune régression pour un compte neuf.
+- **"Surprends-moi" (🎲, à côté du bouton de recherche magique sur l'accueil)** tire un cocktail au hasard, en évitant si possible ceux déjà favoris ou préparés — pour une vraie découverte plutôt qu'un remix des mêmes noms.
+- **Recherche floue** (`src/domain/fuzzySearch.ts`) sur la Bibliothèque, Mon Bar et la recherche magique : insensible aux accents ("cafe" retrouve "Café") et tolérante aux fautes de frappe légères sur un mot (distance de Levenshtein mot à mot, ex: "mojto" retrouve "Mojito") — sans dépendance externe, le catalogue est assez petit pour comparer en clair à chaque frappe.
 
 ## Structure du code
 
