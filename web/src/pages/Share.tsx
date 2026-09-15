@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import QRCode from "qrcode";
 import { ScreenHeader } from "../components/ScreenHeader";
-import { useCocktail } from "../domain/catalog";
+import { useAllIngredients, useCocktail } from "../domain/catalog";
 import { artFor } from "../domain/glassArt";
 import { GLASS_GEOMETRY } from "../domain/glassShapes";
+import { encodeRecipeForSharing } from "../domain/recipeShareCode";
 import type { Cocktail } from "../domain/types";
 
 interface ShareFormat {
@@ -14,10 +15,15 @@ interface ShareFormat {
   height: number;
 }
 
+// Les 5 formats du PRD iOS (Domain/Models/ShareFormat.swift) : mêmes ratios
+// — Story/TikTok/Snapchat partagent le même 9:16, Post est en 4:5 (pas
+// carré, contrairement à une simplification antérieure de ce portage).
 const FORMATS: ShareFormat[] = [
   { id: "story", label: "Story (9:16)", width: 1080, height: 1920 },
-  { id: "post", label: "Post carré (1:1)", width: 1080, height: 1080 },
+  { id: "post", label: "Post (4:5)", width: 1080, height: 1350 },
+  { id: "tiktok", label: "TikTok (9:16)", width: 1080, height: 1920 },
   { id: "pin", label: "Pinterest (2:3)", width: 1080, height: 1620 },
+  { id: "snapchat", label: "Snapchat (9:16)", width: 1080, height: 1920 },
 ];
 
 const GRADIENTS: Record<string, [string, string]> = {
@@ -68,9 +74,41 @@ function drawGlass(ctx: CanvasRenderingContext2D, cocktail: Cocktail, centerX: n
 export default function SharePage() {
   const { id } = useParams<{ id: string }>();
   const cocktail = useCocktail(id);
+  const ingredients = useAllIngredients();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [format, setFormat] = useState<ShareFormat>(FORMATS[0]);
   const [pngUrl, setPngUrl] = useState<string | null>(null);
+  const [linkCopied, setLinkCopied] = useState(false);
+
+  // Une recette perso n'existe que dans le localStorage de son créateur :
+  // un lien /cocktail/<id> serait mort pour n'importe qui d'autre. On
+  // partage donc un lien autoporteur (/shared/<recette encodée>) pour les
+  // recettes perso, et le lien classique pour les cocktails du catalogue.
+  const shareUrl = useMemo(() => {
+    if (!cocktail) return "";
+    return cocktail.isUserCreated
+      ? `${window.location.origin}/shared/${encodeRecipeForSharing(cocktail, ingredients)}`
+      : `${window.location.origin}/cocktail/${cocktail.id}`;
+  }, [cocktail, ingredients]);
+
+  async function copyRecipeLink() {
+    if (!cocktail) return;
+    if (navigator.share) {
+      try {
+        await navigator.share({ url: shareUrl, title: cocktail.name, text: `Découvre ma recette de ${cocktail.name}` });
+        return;
+      } catch {
+        // l'utilisateur a annulé — on retombe sur la copie presse-papier
+      }
+    }
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setLinkCopied(true);
+      setTimeout(() => setLinkCopied(false), 2000);
+    } catch {
+      // clipboard indisponible — pas de fallback nécessaire ici
+    }
+  }
 
   useEffect(() => {
     if (!cocktail) return;
@@ -114,7 +152,6 @@ export default function SharePage() {
       ctx!.fillStyle = "#ffffff";
       ctx!.fillText("Cocktail.ai", format.width * 0.08, format.height * 0.08);
 
-      const shareUrl = `${window.location.origin}/cocktail/${cocktail!.id}`;
       const qrDataUrl = await QRCode.toDataURL(shareUrl, { margin: 1, width: format.width * 0.18 });
       const qrImg = new Image();
       qrImg.src = qrDataUrl;
@@ -128,7 +165,7 @@ export default function SharePage() {
       setPngUrl(canvas!.toDataURL("image/png"));
     }
     draw();
-  }, [cocktail, format]);
+  }, [cocktail, format, shareUrl]);
 
   function wrapText(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, maxWidth: number, lineHeight: number) {
     const words = text.split(" ");
@@ -185,13 +222,13 @@ export default function SharePage() {
     <div className="pb-8">
       <ScreenHeader title="Partager ce cocktail" />
       <div className="px-4 pt-3 flex flex-col gap-4">
-        <div className="flex gap-2">
+        <div className="flex gap-2 overflow-x-auto pb-1">
           {FORMATS.map((f) => (
             <button
               key={f.id}
               type="button"
               onClick={() => setFormat(f)}
-              className="flex-1 text-xs font-medium rounded-xl py-2.5"
+              className="flex-shrink-0 text-xs font-medium rounded-xl px-3.5 py-2.5"
               style={{
                 background: format.id === f.id ? "var(--color-accent-gold)" : "var(--color-surface)",
                 color: format.id === f.id ? "#0b0b0f" : "var(--color-text-primary)",
@@ -225,8 +262,20 @@ export default function SharePage() {
         >
           Télécharger l'image
         </button>
+        {cocktail.isUserCreated && (
+          <button
+            type="button"
+            onClick={copyRecipeLink}
+            className="w-full rounded-2xl py-3 text-sm font-medium"
+            style={{ background: "var(--color-surface)", color: "var(--color-text-primary)" }}
+          >
+            {linkCopied ? "✓ Lien copié" : "🔗 Copier le lien de la recette"}
+          </button>
+        )}
         <p className="text-xs text-center" style={{ color: "var(--color-text-secondary)" }}>
-          Le QR code renvoie vers la fiche de ce cocktail sur Cocktail.ai Web.
+          {cocktail.isUserCreated
+            ? "Le QR code et le lien ouvrent directement cette recette perso, même sans compte ni synchronisation."
+            : "Le QR code renvoie vers la fiche de ce cocktail sur Cocktail.ai Web."}
         </p>
       </div>
     </div>

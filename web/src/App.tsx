@@ -19,6 +19,7 @@ const PreparationModePage = lazy(() => import("./pages/PreparationMode"));
 const IngredientPickerPage = lazy(() => import("./pages/IngredientPicker"));
 const RecipeFormPage = lazy(() => import("./pages/RecipeForm"));
 const SharePage = lazy(() => import("./pages/Share"));
+const SharedRecipePage = lazy(() => import("./pages/SharedRecipe"));
 
 function TabLayout() {
   return (
@@ -80,6 +81,7 @@ export default function App() {
           <Route path="/picker" element={<main id="main-content" className="contents"><IngredientPickerPage /></main>} />
           <Route path="/recipe/new" element={<main id="main-content" className="contents"><RecipeFormPage /></main>} />
           <Route path="/recipe/:id/edit" element={<main id="main-content" className="contents"><RecipeFormPage /></main>} />
+          <Route path="/shared/:code" element={<main id="main-content" className="contents"><SharedRecipePage /></main>} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
