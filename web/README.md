@@ -96,6 +96,16 @@ Le moteur de matching (`src/domain/matchingEngine.ts`) est un **portage ligne à
 - **"Surprends-moi" (🎲, à côté du bouton de recherche magique sur l'accueil)** tire un cocktail au hasard, en évitant si possible ceux déjà favoris ou préparés — pour une vraie découverte plutôt qu'un remix des mêmes noms.
 - **Recherche floue** (`src/domain/fuzzySearch.ts`) sur la Bibliothèque, Mon Bar et la recherche magique : insensible aux accents ("cafe" retrouve "Café") et tolérante aux fautes de frappe légères sur un mot (distance de Levenshtein mot à mot, ex: "mojto" retrouve "Mojito") — sans dépendance externe, le catalogue est assez petit pour comparer en clair à chaque frappe.
 
+## Historique & statistiques
+
+L'onglet Profil affiche un bloc "Statistiques" (`src/domain/historyStats.ts`, masqué tant que l'historique est vide) calculé à partir des cocktails préparés jusqu'au bout en Mode préparation :
+
+- **Total préparé** et **ce mois-ci** (compte simple).
+- **Série en cours** 🔥 — jours consécutifs avec au moins une préparation, jusqu'à aujourd'hui ; si rien n'est encore préparé aujourd'hui la série reste affichée tant qu'hier compte (elle n'est pas encore rompue). Bascule sur la **série record** une fois la série en cours retombée à 0, pour ne jamais perdre le meilleur score.
+- **Cocktail favori** — celui préparé le plus de fois, avec son nombre de préparations, lien direct vers sa fiche.
+
+Tout est calculé côté client sur le fuseau horaire local de l'utilisateur, cohérent avec le reste de l'historique (pas de synchronisation multi-appareil, voir plus bas).
+
 ## Structure du code
 
 ```
