@@ -4,6 +4,8 @@ import { useFavoritesStore } from "../state/favorites";
 import { CocktailVisual } from "./CocktailVisual";
 import { tasteProfile } from "../domain/tasteProfile";
 import { TasteTags } from "./TasteTags";
+import { useTranslation } from "../domain/i18n/useTranslation";
+import { getLocalizedCategory, getLocalizedTasteTags } from "../domain/i18n/localizedCocktail";
 
 interface CocktailCardProps {
   cocktail: Cocktail;
@@ -12,9 +14,15 @@ interface CocktailCardProps {
   showTaste?: boolean;
 }
 
+// IMPORTANT : CocktailVisual/tasteProfile tournent sur des heuristiques qui
+// pattern-matchent le texte français brut (glassware/garnish/iceType/
+// category) — on leur passe donc toujours le cocktail canonique (FR), jamais
+// une version localisée EN, sous peine de casser silencieusement l'illustration
+// et les tags de goût. Seul le texte affiché (catégorie, tags) est traduit.
 export function CocktailCard({ cocktail, width, showTaste = true }: CocktailCardProps) {
+  const { locale } = useTranslation();
   const isFavorite = useFavoritesStore((s) => s.isFavorite(cocktail.id));
-  const tags = tasteProfile(cocktail);
+  const tags = getLocalizedTasteTags(tasteProfile(cocktail), locale);
 
   return (
     <Link
@@ -48,7 +56,7 @@ export function CocktailCard({ cocktail, width, showTaste = true }: CocktailCard
           {cocktail.name}
         </p>
         <p className="text-xs truncate" style={{ color: "var(--color-text-secondary)" }}>
-          {cocktail.category}
+          {getLocalizedCategory(cocktail.category, locale)}
         </p>
         {showTaste && <TasteTags tags={tags.slice(0, 2)} />}
       </div>

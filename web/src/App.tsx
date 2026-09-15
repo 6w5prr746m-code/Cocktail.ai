@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Outlet } from "react-router-dom";
+import { LanguagePicker } from "./components/LanguagePicker";
 import { OnboardingFlow } from "./components/OnboardingFlow";
 import { TabBar } from "./components/TabBar";
 import { applyThemeToDocument, useThemeStore } from "./state/theme";
@@ -60,6 +61,7 @@ export default function App() {
   return (
     <>
       <SkipLink />
+      <LanguagePicker />
       <OnboardingFlow />
       <Suspense fallback={<PageLoader />}>
         <Routes>

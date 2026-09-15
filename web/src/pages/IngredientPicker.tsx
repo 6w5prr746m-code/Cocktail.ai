@@ -10,11 +10,14 @@ import { useAllCocktails, useAllIngredients } from "../domain/catalog";
 import { fuzzyIncludes } from "../domain/fuzzySearch";
 import { computeMatches } from "../domain/matchingEngine";
 import { useMyBarStore } from "../state/myBar";
+import { useTranslation } from "../domain/i18n/useTranslation";
+import { useLocalizedIngredients } from "../domain/i18n/useLocalizedCocktail";
 
 const EMPTY_STATE_ART: CocktailArt = { shape: "coupe", liquidColor: "#e8d9a8", garnish: "none", ice: "none" };
 
 export default function IngredientPickerPage() {
-  const ingredients = useAllIngredients();
+  const { t } = useTranslation();
+  const ingredients = useLocalizedIngredients(useAllIngredients());
   const cocktails = useAllCocktails();
   const myBarEntries = useMyBarStore((s) => s.entries);
   const myBarIds = useMemo(() => Object.keys(myBarEntries), [myBarEntries]);
@@ -33,6 +36,8 @@ export default function IngredientPickerPage() {
     return computeMatches(selected, cocktails);
   }, [selected, cocktails]);
 
+  const ingredientNameById = useMemo(() => new Map(ingredients.map((i) => [i.id, i.name])), [ingredients]);
+
   function toggle(id: string) {
     setSelected((prev) => {
       const next = new Set(prev);
@@ -45,7 +50,7 @@ export default function IngredientPickerPage() {
   return (
     <div className="flex flex-col min-h-full">
       <ScreenHeader
-        title="Recherche magique"
+        title={t("ingredientPicker.title")}
         action={
           myBarIds.length > 0 ? (
             <button
@@ -54,7 +59,7 @@ export default function IngredientPickerPage() {
               className="text-xs font-semibold px-2 py-1.5 rounded-full"
               style={{ background: "var(--color-surface)", color: "var(--color-accent-gold-text)" }}
             >
-              Mon Bar
+              {t("ingredientPicker.myBarButton")}
             </button>
           ) : null
         }
@@ -64,8 +69,8 @@ export default function IngredientPickerPage() {
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Chercher un ingrédient…"
-          aria-label="Chercher un ingrédient"
+          placeholder={t("ingredientPicker.searchPlaceholder")}
+          aria-label={t("ingredientPicker.searchAria")}
           className="w-full rounded-xl px-4 py-3 text-sm outline-none"
           style={{ background: "var(--color-surface)", color: "var(--color-text-primary)", border: "1px solid var(--color-border)" }}
         />
@@ -86,7 +91,7 @@ export default function IngredientPickerPage() {
       <div className="px-4 pb-2 flex items-center gap-3">
         <CompatibilityRing fraction={Math.min(selected.size / 6, 1)} size={56} strokeWidth={6} visualLabelOverride={String(selected.size)} />
         <p className="text-sm" style={{ color: "var(--color-text-secondary)" }}>
-          {selected.size} ingrédient{selected.size > 1 ? "s" : ""} sélectionné{selected.size > 1 ? "s" : ""}
+          {t("ingredientPicker.selectedCount", { count: selected.size })}
         </p>
       </div>
 
@@ -97,7 +102,7 @@ export default function IngredientPickerPage() {
               <GlassArt art={EMPTY_STATE_ART} size={72} fillFraction={0.18} />
             </div>
             <p className="text-sm max-w-[220px]" style={{ color: "var(--color-text-secondary)" }}>
-              Sélectionne au moins 3 ingrédients — le barman s'occupe du reste.
+              {t("ingredientPicker.emptyMin3")}
             </p>
           </div>
         ) : results.length === 0 ? (
@@ -106,7 +111,7 @@ export default function IngredientPickerPage() {
               <GlassArt art={EMPTY_STATE_ART} size={72} fillFraction={0} />
             </div>
             <p className="text-sm max-w-[220px]" style={{ color: "var(--color-text-secondary)" }}>
-              Aucun cocktail ne correspond encore à cette sélection. Essaie d'ajouter un alcool de base.
+              {t("ingredientPicker.emptyNoResults")}
             </p>
           </div>
         ) : (
@@ -125,8 +130,8 @@ export default function IngredientPickerPage() {
                     </p>
                     <p className="text-xs truncate" style={{ color: "var(--color-text-secondary)" }}>
                       {r.isFullyAvailable
-                        ? "Tout est disponible"
-                        : `Manque : ${r.missingIngredients.map((i) => i.name).join(", ")}`}
+                        ? t("ingredientPicker.fullyAvailable")
+                        : t("myBar.missingPrefix", { items: r.missingIngredients.map((i) => ingredientNameById.get(i.id) ?? i.name).join(", ") })}
                     </p>
                   </div>
                   <CompatibilityRing fraction={r.compatibilityScore} size={40} strokeWidth={4} />

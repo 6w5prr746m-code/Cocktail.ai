@@ -5,11 +5,16 @@ import { useAllCocktails, useCollections } from "../domain/catalog";
 import { fuzzyIncludes } from "../domain/fuzzySearch";
 import { COCKTAIL_CATEGORIES, MAIN_SPIRITS } from "../domain/seed";
 import { formatDifficulty } from "../domain/formatting";
+import { useTranslation } from "../domain/i18n/useTranslation";
+import { getLocalizedCategory, getLocalizedMainSpirit } from "../domain/i18n/localizedCocktail";
+import type { TranslationKey } from "../domain/i18n/useTranslation";
 
 const DIFFICULTIES: (1 | 2 | 3)[] = [1, 2, 3];
+const DIFFICULTY_LABEL_KEYS: TranslationKey[] = ["recipeForm.difficultyEasy", "recipeForm.difficultyMedium", "recipeForm.difficultyHard"];
 
 export default function LibraryPage() {
   const navigate = useNavigate();
+  const { t, locale } = useTranslation();
   const cocktails = useAllCocktails();
   const collections = useCollections();
 
@@ -44,14 +49,14 @@ export default function LibraryPage() {
     <div className="pb-8">
       <div className="px-4 pt-6 pb-3 flex items-center justify-between">
         <h1 className="text-2xl font-bold" style={{ color: "var(--color-text-primary)" }}>
-          Bibliothèque
+          {t("library.title")}
         </h1>
         <button
           type="button"
           onClick={() => navigate("/recipe/new")}
           className="rounded-full flex items-center justify-center font-semibold"
           style={{ width: 36, height: 36, background: "var(--color-accent-gold)", color: "#0b0b0f" }}
-          aria-label="Créer une recette"
+          aria-label={t("library.createRecipeAria")}
         >
           +
         </button>
@@ -61,8 +66,8 @@ export default function LibraryPage() {
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Nom ou ingrédient (ex: citron)…"
-          aria-label="Chercher par nom ou ingrédient"
+          placeholder={t("library.searchPlaceholder")}
+          aria-label={t("library.searchAria")}
           className="flex-1 rounded-xl px-4 py-3 text-sm outline-none"
           style={{ background: "var(--color-surface)", color: "var(--color-text-primary)", border: "1px solid var(--color-border)" }}
         />
@@ -72,7 +77,7 @@ export default function LibraryPage() {
           className="rounded-xl px-3 text-sm font-medium relative"
           style={{ background: "var(--color-surface)", color: "var(--color-text-primary)", border: "1px solid var(--color-border)" }}
         >
-          ⚙︎ Filtres
+          {t("library.filtersButton")}
           {activeFilterCount > 0 && (
             <span
               className="absolute -top-1.5 -right-1.5 rounded-full text-[10px] flex items-center justify-center"
@@ -87,21 +92,23 @@ export default function LibraryPage() {
       {showFilters && (
         <div className="mx-4 mt-3 p-3 rounded-2xl glass-card flex flex-col gap-3">
           <FilterGroup
-            title="Alcool principal"
+            title={t("library.mainSpiritFilter")}
             options={MAIN_SPIRITS}
+            renderLabel={(v) => getLocalizedMainSpirit(v, locale)}
             selected={spirits}
             onToggle={(v) => toggle(spirits, v, setSpirits)}
           />
           <FilterGroup
-            title="Difficulté"
+            title={t("library.difficultyFilter")}
             options={DIFFICULTIES.map(String)}
-            renderLabel={(v) => formatDifficulty(Number(v) as 1 | 2 | 3)}
+            renderLabel={(v) => DIFFICULTY_LABEL_KEYS[Number(v) - 1] ? t(DIFFICULTY_LABEL_KEYS[Number(v) - 1]) : formatDifficulty(Number(v) as 1 | 2 | 3)}
             selected={new Set([...difficulties].map(String))}
             onToggle={(v) => toggle(difficulties, Number(v), setDifficulties)}
           />
           <FilterGroup
-            title="Occasion"
+            title={t("library.occasionFilter")}
             options={COCKTAIL_CATEGORIES}
+            renderLabel={(v) => getLocalizedCategory(v, locale)}
             selected={occasions}
             onToggle={(v) => toggle(occasions, v, setOccasions)}
           />
@@ -111,7 +118,7 @@ export default function LibraryPage() {
       {collections.length > 0 && !query && activeFilterCount === 0 && (
         <section className="mt-6">
           <h2 className="text-lg font-semibold px-4 mb-3" style={{ color: "var(--color-text-primary)" }}>
-            Collections
+            {t("library.collectionsTitle")}
           </h2>
           <div className="flex gap-3 overflow-x-auto px-4 pb-1">
             {collections.map((col) => (
@@ -126,7 +133,7 @@ export default function LibraryPage() {
                   {col.name}
                 </span>
                 <span className="text-xs" style={{ color: "var(--color-text-secondary)" }}>
-                  {col.cocktailIds.length} cocktails
+                  {t("library.collectionCount", { count: col.cocktailIds.length })}
                 </span>
               </Link>
             ))}
@@ -136,7 +143,7 @@ export default function LibraryPage() {
 
       <section className="mt-6">
         <h2 className="text-lg font-semibold px-4 mb-3" style={{ color: "var(--color-text-primary)" }}>
-          Tous les cocktails ({results.length})
+          {t("library.allCocktailsTitle", { count: results.length })}
         </h2>
         <div className="grid grid-cols-2 gap-4 px-4">
           {results.map((c) => (
@@ -145,7 +152,7 @@ export default function LibraryPage() {
         </div>
         {results.length === 0 && (
           <p className="px-4 text-sm" style={{ color: "var(--color-text-secondary)" }}>
-            Aucun résultat pour cette recherche.
+            {t("library.noResults")}
           </p>
         )}
       </section>

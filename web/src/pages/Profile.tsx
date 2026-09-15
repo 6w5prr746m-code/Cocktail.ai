@@ -9,14 +9,24 @@ import { useMyBarStore } from "../state/myBar";
 import { useUserRecipesStore } from "../state/userRecipes";
 import { MiniGlassBadge } from "../components/MiniGlassBadge";
 import { InstallAppCard } from "../components/InstallAppCard";
+import { useTranslation } from "../domain/i18n/useTranslation";
+import { useLocaleStore, type Locale } from "../state/locale";
+import type { TranslationKey } from "../domain/i18n/useTranslation";
 
-const THEME_OPTIONS: { value: ThemePreference; label: string }[] = [
-  { value: "system", label: "Système" },
-  { value: "light", label: "Clair" },
-  { value: "dark", label: "Sombre" },
+const THEME_OPTIONS: { value: ThemePreference; labelKey: TranslationKey }[] = [
+  { value: "system", labelKey: "profile.themeSystem" },
+  { value: "light", labelKey: "profile.themeLight" },
+  { value: "dark", labelKey: "profile.themeDark" },
+];
+
+const LANGUAGE_OPTIONS: { value: Locale; labelKey: TranslationKey }[] = [
+  { value: "fr", labelKey: "profile.languageFr" },
+  { value: "en", labelKey: "profile.languageEn" },
 ];
 
 export default function ProfilePage() {
+  const { t, locale } = useTranslation();
+  const setLocale = useLocaleStore((s) => s.setLocale);
   const cocktails = useAllCocktails();
   const history = useHistoryStore((s) => s.entries);
   const clearHistory = useHistoryStore((s) => s.clear);
@@ -26,7 +36,7 @@ export default function ProfilePage() {
   const stats = useMemo(() => computeHistoryStats(history, cocktails), [history, cocktails]);
 
   function resetAllData() {
-    if (!confirm("Réinitialiser toutes tes données locales (favoris, Mon Bar, historique, recettes) ?")) return;
+    if (!confirm(t("profile.resetConfirm"))) return;
     clearHistory();
     useFavoritesStore.persist.clearStorage();
     useMyBarStore.persist.clearStorage();
@@ -37,7 +47,7 @@ export default function ProfilePage() {
   return (
     <div className="pb-8">
       <h1 className="text-2xl font-bold px-4 pt-6 pb-4" style={{ color: "var(--color-text-primary)" }}>
-        Profil
+        {t("profile.title")}
       </h1>
 
       <div className="px-4">
@@ -46,7 +56,7 @@ export default function ProfilePage() {
 
       <section className="px-4 pb-6">
         <h2 className="text-base font-semibold mb-2" style={{ color: "var(--color-text-primary)" }}>
-          Apparence
+          {t("profile.appearanceTitle")}
         </h2>
         <div className="flex gap-2">
           {THEME_OPTIONS.map((opt) => (
@@ -63,7 +73,29 @@ export default function ProfilePage() {
                 color: preference === opt.value ? "#0b0b0f" : "var(--color-text-primary)",
               }}
             >
-              {opt.label}
+              {t(opt.labelKey)}
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <section className="px-4 pb-6">
+        <h2 className="text-base font-semibold mb-2" style={{ color: "var(--color-text-primary)" }}>
+          {t("profile.languageTitle")}
+        </h2>
+        <div className="flex gap-2">
+          {LANGUAGE_OPTIONS.map((opt) => (
+            <button
+              key={opt.value}
+              type="button"
+              onClick={() => setLocale(opt.value)}
+              className="flex-1 rounded-xl py-2.5 text-sm font-medium"
+              style={{
+                background: locale === opt.value ? "var(--color-accent-gold)" : "var(--color-surface)",
+                color: locale === opt.value ? "#0b0b0f" : "var(--color-text-primary)",
+              }}
+            >
+              {t(opt.labelKey)}
             </button>
           ))}
         </div>
@@ -72,14 +104,14 @@ export default function ProfilePage() {
       {stats.totalCount > 0 && (
         <section className="px-4 pb-6">
           <h2 className="text-base font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
-            Statistiques
+            {t("profile.statisticsTitle")}
           </h2>
           <div className="grid grid-cols-3 gap-2 mb-2">
-            <StatTile label="Préparés" value={String(stats.totalCount)} />
-            <StatTile label="Ce mois-ci" value={String(stats.monthlyCount)} />
+            <StatTile label={t("profile.prepared")} value={String(stats.totalCount)} />
+            <StatTile label={t("profile.thisMonth")} value={String(stats.monthlyCount)} />
             <StatTile
-              label={stats.currentStreakDays > 0 ? "Série en cours" : "Série record"}
-              value={`${stats.currentStreakDays > 0 ? stats.currentStreakDays : stats.longestStreakDays} j`}
+              label={stats.currentStreakDays > 0 ? t("profile.currentStreak") : t("profile.bestStreak")}
+              value={t("profile.daysUnit", { count: stats.currentStreakDays > 0 ? stats.currentStreakDays : stats.longestStreakDays })}
               emphasis={stats.currentStreakDays > 0}
             />
           </div>
@@ -95,7 +127,7 @@ export default function ProfilePage() {
                   {stats.mostPrepared.cocktail.name}
                 </p>
                 <p className="text-xs" style={{ color: "var(--color-text-secondary)" }}>
-                  Ton cocktail favori — préparé {stats.mostPrepared.count} fois
+                  {t("profile.favoriteCocktailSubtitle", { count: stats.mostPrepared.count })}
                 </p>
               </div>
             </Link>
@@ -105,11 +137,11 @@ export default function ProfilePage() {
 
       <section className="px-4 pb-6">
         <h2 className="text-base font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
-          Historique
+          {t("profile.historyTitle")}
         </h2>
         {sortedHistory.length === 0 ? (
           <p className="text-sm" style={{ color: "var(--color-text-secondary)" }}>
-            Prépare un cocktail jusqu'au bout pour le voir apparaître ici.
+            {t("profile.historyEmpty")}
           </p>
         ) : (
           <ul className="flex flex-col gap-2">
@@ -129,7 +161,7 @@ export default function ProfilePage() {
                         {cocktail.name}
                       </p>
                       <p className="text-xs" style={{ color: "var(--color-text-secondary)" }}>
-                        {new Date(entry.completedAt).toLocaleString("fr-FR", { dateStyle: "medium", timeStyle: "short" })}
+                        {new Date(entry.completedAt).toLocaleString(locale === "en" ? "en-US" : "fr-FR", { dateStyle: "medium", timeStyle: "short" })}
                       </p>
                     </div>
                   </Link>
@@ -147,11 +179,10 @@ export default function ProfilePage() {
           className="w-full rounded-xl py-3 text-sm font-medium"
           style={{ background: "var(--color-surface)", color: "var(--color-danger-text)" }}
         >
-          Réinitialiser mes données locales
+          {t("profile.resetButton")}
         </button>
         <p className="text-xs mt-3 leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-          Cocktail.ai Web stocke tes favoris, ton bar, ton historique et tes recettes uniquement dans ce navigateur
-          (localStorage) — il n'y a pas de compte ni de synchronisation entre appareils dans cette version.
+          {t("profile.storageNote")}
         </p>
       </section>
     </div>

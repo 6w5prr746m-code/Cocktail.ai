@@ -11,6 +11,8 @@ import { useFavoritesStore } from "../state/favorites";
 import { useHistoryStore } from "../state/history";
 import { useUserRecipesStore } from "../state/userRecipes";
 import type { Cocktail } from "../domain/types";
+import { useTranslation } from "../domain/i18n/useTranslation";
+import { getLocalizedTasteTags } from "../domain/i18n/localizedCocktail";
 
 const SECTION_LIMIT = 20;
 
@@ -56,7 +58,8 @@ function Section({
 }
 
 function FeaturedCocktail({ cocktail }: { cocktail: Cocktail }) {
-  const tags = tasteProfile(cocktail);
+  const { t, locale } = useTranslation();
+  const tags = getLocalizedTasteTags(tasteProfile(cocktail), locale);
 
   return (
     <Link
@@ -69,10 +72,10 @@ function FeaturedCocktail({ cocktail }: { cocktail: Cocktail }) {
       </div>
       <div className="absolute inset-0" style={{ background: "linear-gradient(transparent 35%, rgba(0,0,0,0.78))" }} />
       <div className="absolute bottom-0 left-0 right-0 p-5">
-        <p className="text-[11px] font-semibold uppercase tracking-wide text-white/75 mb-1.5">Le cocktail du jour</p>
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-white/75 mb-1.5">{t("home.featuredLabel")}</p>
         <h2 className="text-2xl font-bold text-white leading-tight mb-2">{cocktail.name}</h2>
         <TasteTags tags={tags} size="md" variant="onImage" />
-        <p className="text-sm text-white/85 mt-3 font-medium">Découvrir la recette →</p>
+        <p className="text-sm text-white/85 mt-3 font-medium">{t("home.discoverRecipe")}</p>
       </div>
     </Link>
   );
@@ -80,6 +83,7 @@ function FeaturedCocktail({ cocktail }: { cocktail: Cocktail }) {
 
 export default function HomePage() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const cocktails = useAllCocktails();
   const favoriteIds = useFavoritesStore((s) => s.favoriteIds);
   const historyEntries = useHistoryStore((s) => s.entries);
@@ -134,10 +138,10 @@ export default function HomePage() {
     <div className="pb-8">
       <div className="px-4 pt-6 pb-4">
         <p className="text-sm font-medium mb-1" style={{ color: "var(--color-accent-gold-text)" }}>
-          Cocktail.ai
+          {t("home.brand")}
         </p>
         <h1 className="text-3xl font-bold leading-tight mb-4" style={{ color: "var(--color-text-primary)" }}>
-          Que souhaites-tu boire ce soir ?
+          {t("home.heroTitle")}
         </h1>
 
         {featured && <FeaturedCocktail cocktail={featured} />}
@@ -149,13 +153,13 @@ export default function HomePage() {
             className="flex-1 rounded-2xl py-4 font-semibold text-base"
             style={{ background: "var(--color-accent-gold)", color: "#0b0b0f" }}
           >
-            ✨ Ajouter mes ingrédients
+            {t("home.addIngredientsButton")}
           </button>
           <button
             type="button"
             onClick={surpriseMe}
-            aria-label="Surprends-moi avec un cocktail au hasard"
-            title="Surprends-moi"
+            aria-label={t("home.surpriseAria")}
+            title={t("home.surpriseTitle")}
             className="rounded-2xl px-5 font-semibold text-base transition-transform"
             style={{
               background: "var(--color-surface)",
@@ -169,17 +173,17 @@ export default function HomePage() {
         </div>
       </div>
 
-      <Section title="Populaires" cocktails={popular} />
-      <Section title="Nouveautés" cocktails={fresh} />
+      <Section title={t("home.popularTitle")} cocktails={popular} />
+      <Section title={t("home.freshTitle")} cocktails={fresh} />
       <Section
-        title="Recommandés pour toi"
-        subtitle={hasTasteSignal ? "Basé sur tes favoris et cocktails déjà préparés" : undefined}
+        title={t("home.recommendedTitle")}
+        subtitle={hasTasteSignal ? t("home.recommendedSubtitle") : undefined}
         cocktails={recommended}
       />
       <Section
-        title="Tes favoris"
+        title={t("home.favoritesTitle")}
         cocktails={favorites}
-        emptyHint="Ajoute des cocktails en favori depuis leur fiche pour les retrouver ici."
+        emptyHint={t("home.favoritesEmptyHint")}
       />
     </div>
   );

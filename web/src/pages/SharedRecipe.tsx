@@ -9,10 +9,11 @@ import { decodeSharedRecipe } from "../domain/recipeShareCode";
 import { slugify } from "../domain/slug";
 import { tasteProfile } from "../domain/tasteProfile";
 import { useAllCocktails } from "../domain/catalog";
-import { INGREDIENT_ROLE_LABEL } from "../domain/types";
 import type { Cocktail, CocktailIngredientLink } from "../domain/types";
 import { useCustomIngredientsStore } from "../state/customIngredients";
 import { useUserRecipesStore } from "../state/userRecipes";
+import { useTranslation } from "../domain/i18n/useTranslation";
+import { getLocalizedTasteTags, getLocalizedUnit } from "../domain/i18n/localizedCocktail";
 
 /** Reconstruit un `Cocktail` complet (mais avec un id provisoire, non enregistré) à partir du payload partagé — permet de réutiliser tel quel CocktailVisual/tasteProfile/DifficultyDots plutôt que de dupliquer leur logique d'affichage. */
 function toPreviewCocktail(payload: NonNullable<ReturnType<typeof decodeSharedRecipe>>): Cocktail {
@@ -47,6 +48,7 @@ function toPreviewCocktail(payload: NonNullable<ReturnType<typeof decodeSharedRe
 export default function SharedRecipePage() {
   const { code } = useParams<{ code: string }>();
   const navigate = useNavigate();
+  const { t, locale } = useTranslation();
   const findOrCreateIngredient = useCustomIngredientsStore().findOrCreate;
   const upsert = useUserRecipesStore((s) => s.upsert);
   const allCocktails = useAllCocktails();
@@ -57,16 +59,16 @@ export default function SharedRecipePage() {
   if (!payload || !preview) {
     return (
       <div>
-        <ScreenHeader title="Recette partagée" />
+        <ScreenHeader title={t("sharedRecipe.title")} />
         <p className="px-4 pt-6 text-sm" style={{ color: "var(--color-text-secondary)" }}>
-          Ce lien de recette est invalide ou corrompu.
+          {t("sharedRecipe.invalidLink")}
         </p>
       </div>
     );
   }
 
   const ingredientNames = new Map(payload.ingredients.map((i) => [i.id, i.name]));
-  const tags = tasteProfile(preview);
+  const tags = getLocalizedTasteTags(tasteProfile(preview), locale);
 
   function saveToMyRecipes() {
     const resolvedIngredients: CocktailIngredientLink[] = payload!.ingredients.map((i) => {
@@ -97,7 +99,7 @@ export default function SharedRecipePage() {
           <ScreenHeader transparent onBack={() => navigate(-1)} />
         </div>
         <div className="relative z-10 p-5 pt-4 w-full text-center" style={{ background: "linear-gradient(transparent, rgba(0,0,0,0.6))" }}>
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-white/75 mb-1.5">Recette partagée</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-white/75 mb-1.5">{t("sharedRecipe.title")}</p>
           <h1 className="text-3xl font-bold text-white leading-tight">{preview.name}</h1>
           <div className="flex items-center justify-center gap-3 mt-2 text-sm text-white/85">
             <span>⏱ {formatDuration(preview.preparationTimeMinutes)}</span>
@@ -117,7 +119,7 @@ export default function SharedRecipePage() {
       <div className="px-4 pt-5 flex flex-col gap-6">
         <section>
           <h2 className="text-lg font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
-            Ingrédients
+            {t("cocktailDetail.ingredientsHeading")}
           </h2>
           <ul className="flex flex-col gap-2">
             {payload.ingredients.map((i) => (
@@ -130,15 +132,15 @@ export default function SharedRecipePage() {
                   <span style={{ color: "var(--color-text-primary)" }}>{ingredientNames.get(i.id) ?? i.name}</span>
                   {i.isOptional && (
                     <span className="text-xs" style={{ color: "var(--color-text-secondary)" }}>
-                      optionnel
+                      {t("cocktailDetail.optional")}
                     </span>
                   )}
                   <span className="text-xs" style={{ color: "var(--color-text-secondary)" }}>
-                    {INGREDIENT_ROLE_LABEL[i.role]}
+                    {t(`ingredientRole.${i.role}`)}
                   </span>
                 </div>
                 <span className="font-mono text-sm flex-shrink-0" style={{ color: "var(--color-accent-gold-text)" }}>
-                  {formatQuantity(i.quantity)} {i.unit}
+                  {formatQuantity(i.quantity)} {getLocalizedUnit(i.unit, locale)}
                 </span>
               </li>
             ))}
@@ -147,7 +149,7 @@ export default function SharedRecipePage() {
 
         <section>
           <h2 className="text-lg font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
-            Préparation
+            {t("cocktailDetail.preparationHeading")}
           </h2>
           <ol className="flex flex-col gap-3">
             {payload.steps.map((step) => (
@@ -170,14 +172,14 @@ export default function SharedRecipePage() {
             ))}
           </ol>
           <p className="text-xs mt-3" style={{ color: "var(--color-text-secondary)" }}>
-            {preview.glassware} • {preview.iceType} • Garniture : {preview.garnish}
+            {t("cocktailDetail.glassIceGarnish", { glassware: preview.glassware, iceType: preview.iceType, garnish: preview.garnish })}
           </p>
         </section>
 
         {preview.tips && (
           <section>
             <h2 className="text-lg font-semibold mb-2" style={{ color: "var(--color-text-primary)" }}>
-              Conseils
+              {t("cocktailDetail.tipsHeading")}
             </h2>
             <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
               💡 {preview.tips}
@@ -186,8 +188,7 @@ export default function SharedRecipePage() {
         )}
 
         <p className="text-xs leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-          Quelqu'un t'a envoyé cette recette perso — enregistre-la dans tes recettes pour la retrouver, la préparer en mode
-          guidé ou la modifier.
+          {t("sharedRecipe.saveNote")}
         </p>
       </div>
 
@@ -201,7 +202,7 @@ export default function SharedRecipePage() {
           className="w-full rounded-2xl py-4 font-semibold text-base"
           style={{ background: "var(--color-accent-gold)", color: "#0b0b0f" }}
         >
-          Enregistrer dans mes recettes
+          {t("sharedRecipe.saveButton")}
         </button>
       </div>
     </div>

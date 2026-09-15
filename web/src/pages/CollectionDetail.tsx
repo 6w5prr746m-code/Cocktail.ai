@@ -2,16 +2,18 @@ import { useParams } from "react-router-dom";
 import { ScreenHeader } from "../components/ScreenHeader";
 import { CocktailCard } from "../components/CocktailCard";
 import { useAllCocktails, useCollection } from "../domain/catalog";
+import { useTranslation } from "../domain/i18n/useTranslation";
 
 export default function CollectionDetailPage() {
   const { id } = useParams<{ id: string }>();
   const collection = useCollection(id);
   const allCocktails = useAllCocktails();
+  const { t } = useTranslation();
 
   if (!collection) {
     return (
       <div>
-        <ScreenHeader title="Collection introuvable" />
+        <ScreenHeader title={t("collectionDetail.notFound")} />
       </div>
     );
   }

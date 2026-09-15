@@ -35,6 +35,7 @@ test("sharing a custom recipe produces a self-contained link a fresh browser can
           origin: BASE_URL,
           localStorage: [
             { name: "cocktailai:onboarding", value: '{"state":{"completed":true},"version":0}' },
+            { name: "cocktailai:locale", value: '{"state":{"locale":"fr"},"version":0}' },
             { name: "cocktailai:user-recipes", value: JSON.stringify({ state: { recipes: [RECIPE] }, version: 0 }) },
             {
               name: "cocktailai:custom-ingredients",
@@ -64,7 +65,15 @@ test("sharing a custom recipe produces a self-contained link a fresh browser can
     baseURL: BASE_URL,
     storageState: {
       cookies: [],
-      origins: [{ origin: BASE_URL, localStorage: [{ name: "cocktailai:onboarding", value: '{"state":{"completed":true},"version":0}' }] }],
+      origins: [
+        {
+          origin: BASE_URL,
+          localStorage: [
+            { name: "cocktailai:onboarding", value: '{"state":{"completed":true},"version":0}' },
+            { name: "cocktailai:locale", value: '{"state":{"locale":"fr"},"version":0}' },
+          ],
+        },
+      ],
     },
   });
   const recipientPage = await recipient.newPage();

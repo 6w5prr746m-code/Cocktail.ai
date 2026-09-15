@@ -7,6 +7,7 @@ import { artFor } from "../domain/glassArt";
 import { GLASS_GEOMETRY } from "../domain/glassShapes";
 import { encodeRecipeForSharing } from "../domain/recipeShareCode";
 import type { Cocktail } from "../domain/types";
+import { useTranslation } from "../domain/i18n/useTranslation";
 
 interface ShareFormat {
   id: string;
@@ -73,6 +74,7 @@ function drawGlass(ctx: CanvasRenderingContext2D, cocktail: Cocktail, centerX: n
 
 export default function SharePage() {
   const { id } = useParams<{ id: string }>();
+  const { t } = useTranslation();
   const cocktail = useCocktail(id);
   const ingredients = useAllIngredients();
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -95,7 +97,7 @@ export default function SharePage() {
     if (!cocktail) return;
     if (navigator.share) {
       try {
-        await navigator.share({ url: shareUrl, title: cocktail.name, text: `Découvre ma recette de ${cocktail.name}` });
+        await navigator.share({ url: shareUrl, title: cocktail.name, text: t("share.shareText", { name: cocktail.name }) });
         return;
       } catch {
         // l'utilisateur a annulé — on retombe sur la copie presse-papier
@@ -190,7 +192,7 @@ export default function SharePage() {
     const file = new File([blob], `${cocktail.id}.png`, { type: "image/png" });
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
       try {
-        await navigator.share({ files: [file], title: cocktail.name, text: `Découvre le ${cocktail.name} sur Cocktail.ai` });
+        await navigator.share({ files: [file], title: cocktail.name, text: t("share.shareTextVisual", { name: cocktail.name }) });
         return;
       } catch {
         // l'utilisateur a annulé — on retombe sur le téléchargement
@@ -210,9 +212,9 @@ export default function SharePage() {
   if (!cocktail) {
     return (
       <div>
-        <ScreenHeader title="Partager" />
+        <ScreenHeader title={t("share.title")} />
         <p className="px-4 pt-4 text-sm" style={{ color: "var(--color-text-secondary)" }}>
-          Cocktail introuvable.
+          {t("share.notFound")}
         </p>
       </div>
     );
@@ -220,7 +222,7 @@ export default function SharePage() {
 
   return (
     <div className="pb-8">
-      <ScreenHeader title="Partager ce cocktail" />
+      <ScreenHeader title={t("share.pageTitle")} />
       <div className="px-4 pt-3 flex flex-col gap-4">
         <div className="flex gap-2 overflow-x-auto pb-1">
           {FORMATS.map((f) => (
@@ -252,7 +254,7 @@ export default function SharePage() {
           className="w-full rounded-2xl py-4 font-semibold text-base"
           style={{ background: "var(--color-accent-gold)", color: "#0b0b0f" }}
         >
-          Partager ce visuel
+          {t("share.shareVisual")}
         </button>
         <button
           type="button"
@@ -260,7 +262,7 @@ export default function SharePage() {
           className="w-full rounded-2xl py-3 text-sm font-medium"
           style={{ background: "var(--color-surface)", color: "var(--color-text-primary)" }}
         >
-          Télécharger l'image
+          {t("share.downloadImage")}
         </button>
         {cocktail.isUserCreated && (
           <button
@@ -269,13 +271,11 @@ export default function SharePage() {
             className="w-full rounded-2xl py-3 text-sm font-medium"
             style={{ background: "var(--color-surface)", color: "var(--color-text-primary)" }}
           >
-            {linkCopied ? "✓ Lien copié" : "🔗 Copier le lien de la recette"}
+            {linkCopied ? t("share.linkCopied") : t("share.copyRecipeLink")}
           </button>
         )}
         <p className="text-xs text-center" style={{ color: "var(--color-text-secondary)" }}>
-          {cocktail.isUserCreated
-            ? "Le QR code et le lien ouvrent directement cette recette perso, même sans compte ni synchronisation."
-            : "Le QR code renvoie vers la fiche de ce cocktail sur Cocktail.ai Web."}
+          {cocktail.isUserCreated ? t("share.noteUserRecipe") : t("share.noteCatalog")}
         </p>
       </div>
     </div>
