@@ -68,7 +68,7 @@ export default function CocktailDetailPage() {
 
   if (!cocktail) {
     return (
-      <div>
+      <div className="max-w-[640px] mx-auto">
         <ScreenHeader title={t("cocktailDetail.notFoundTitle")} />
         <p className="px-4 pt-6 text-sm" style={{ color: "var(--color-text-secondary)" }}>
           {t("cocktailDetail.notFoundBody")}
@@ -95,7 +95,7 @@ export default function CocktailDetailPage() {
   }
 
   return (
-    <div className="pb-28">
+    <div className="pb-28 max-w-[640px] mx-auto w-full">
       <div className="relative flex flex-col items-center justify-end overflow-hidden" style={{ height: 340 }}>
         <div className="absolute inset-0">
           <CocktailVisual cocktail={rawCocktail!} glassSize={112} />
@@ -311,8 +311,8 @@ export default function CocktailDetailPage() {
       </div>
 
       <div
-        className="fixed bottom-0 left-0 right-0 p-4"
-        style={{ maxWidth: 560, margin: "0 auto", background: "linear-gradient(transparent, var(--color-bg) 40%)" }}
+        className="sticky bottom-0 p-4 max-w-[640px] mx-auto w-full"
+        style={{ background: "linear-gradient(transparent, var(--color-bg) 40%)" }}
       >
         <Link
           to={`/cocktail/${cocktail.id}/prepare`}

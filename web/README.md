@@ -178,6 +178,18 @@ L'interface et le catalogue de cocktails sont disponibles en français et en ang
 - **Point d'attention pour tout nouveau code** : plusieurs fonctions du domaine (`artFor`, `gradientClassFor`, `tasteProfile`, `buildPhotoPrompt`) déterminent l'illustration/les tags/le prompt photo d'un cocktail en filtrant sur le texte français brut de `category`/`glassware`/`iceType`/`garnish` (ex: `glassware.toLowerCase().includes("chaud")`). Elles doivent donc **toujours** recevoir le cocktail canonique (non localisé), jamais le résultat de `useLocalizedCocktail()` — sans quoi l'heuristique se casse silencieusement en anglais. Seul le texte réellement affiché à l'écran doit passer par la version localisée.
 - Les noms de collections (`src/data/collections.json`) et les noms de cocktails eux-mêmes ne sont pas traduits (noms propres, identiques dans les deux langues pour l'écrasante majorité du catalogue).
 
+## Affichage responsive (Web / Tablette / Téléphone)
+
+Jusqu'au Sprint 10, `#root` imposait `max-width: 560px` à toute l'app : un confort "mobile-first" qui devenait une colonne étroite perdue au milieu de l'écran sur tablette ou desktop. Sprint 11 introduit une vraie coquille responsive plutôt qu'un simple élargissement de ce plafond :
+
+- **`AppShell`** (`src/App.tsx`) : sous le seuil desktop (`lg`, 1024px), comportement mobile inchangé — `TabBar` fixée en bas (`src/components/TabBar.tsx`). À partir de `lg`, une **sidebar verticale** (`src/components/SideNav.tsx`, 232px, mêmes 5 destinations que `TabBar` — liste partagée dans `src/components/navTabs.ts`) remplace la barre du bas et reste affichée en permanence, y compris sur les écrans "poussés" (fiche cocktail, formulaire de recette, partage...) qui n'ont plus de coquille propre. Seul le mode Préparation (`PreparationMode.tsx`, plein écran immersif volontairement sans navigation) reste en dehors de `AppShell`.
+- **Largeur de contenu par type de page**, choisie par chaque page elle-même plutôt qu'imposée par la coquille :
+  - Écrans de navigation/liste (Accueil, Bibliothèque, détail de collection, Mon Bar) : largeur progressive `560px → 720px (md) → 1100px (lg) → 1300px (xl)`, avec des grilles de `CocktailCard` qui gagnent des colonnes à chaque palier (`grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5`).
+  - Écrans de lecture/formulaire (fiche cocktail, recette partagée, partage, formulaire de recette, recherche magique, favoris, profil) : colonne de lecture fixe à `640px`, centrée — élargir ces écrans n'aide pas la lisibilité, contrairement aux grilles.
+- **Bouton d'action flottant** (ex: "Préparer" en bas de la fiche cocktail) : passé de `position: fixed` (qui débordait sur la sidebar desktop et se superposait à la `TabBar` sur mobile/tablette) à `position: sticky` en fin de page — reste visible pendant le défilement tout en respectant naturellement les bornes de son conteneur scrollable (`<main>`), donc sans jamais chevaucher la `TabBar`, qui est un frère du `<main>` et non un enfant.
+- `src/components/CocktailCard.tsx` utilisé sans prop `width` dans un carrousel `flex` (accueil) recevait une largeur incohérente d'une carte à l'autre selon le contenu voisin (artefact `flex-shrink` implicite) — corrigé en fixant `width={152}`, plus visible qu'avant maintenant que davantage de cartes tiennent à l'écran.
+- Tests dédiés : `e2e/responsive.spec.ts` (sidebar visible/masquée selon le seuil, navigation persistante, non-chevauchement du bouton d'action avec la `TabBar`) + vérification visuelle manuelle à 390px/820px/1440px.
+
 ## Limites connues
 
 - Comme documenté dans le README iOS pour la V1, deux noms d'ingrédients personnalisés produisant le même slug (accents) entreraient en conflit.

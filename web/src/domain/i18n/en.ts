@@ -17,6 +17,8 @@ export const en: TranslationSchema = {
     myBar: "My Bar",
     favorites: "Favorites",
     profile: "Profile",
+    mobileNavLabel: "Main navigation (mobile)",
+    desktopNavLabel: "Main navigation (desktop)",
   },
   installCard: {
     installed: "App installed — thanks!",

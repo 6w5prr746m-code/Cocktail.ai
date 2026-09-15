@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import { LanguagePicker } from "./components/LanguagePicker";
 import { OnboardingFlow } from "./components/OnboardingFlow";
 import { TabBar } from "./components/TabBar";
+import { SideNav } from "./components/SideNav";
 import { applyThemeToDocument, useThemeStore } from "./state/theme";
 
 // Home reste chargée eagerly (page d'entrée quasi systématique) — le reste
@@ -22,13 +23,23 @@ const RecipeFormPage = lazy(() => import("./pages/RecipeForm"));
 const SharePage = lazy(() => import("./pages/Share"));
 const SharedRecipePage = lazy(() => import("./pages/SharedRecipe"));
 
-function TabLayout() {
+// Coquille commune à (quasiment) toutes les routes : sidebar desktop (≥ lg,
+// SideNav) + zone de contenu qui s'étend pour remplir l'écran, TabBar en
+// bas sur mobile/tablette. Chaque page choisit elle-même sa propre largeur
+// de contenu (colonne de lecture étroite pour les fiches/formulaires,
+// largeur large pour les écrans de navigation) — voir le commentaire dans
+// index.css. Seul le mode Préparation (immersif, sans navigation) reste en
+// dehors de cette coquille.
+function AppShell() {
   return (
-    <div className="flex flex-col flex-1 min-h-0">
-      <main id="main-content" className="flex-1 overflow-y-auto">
-        <Outlet />
-      </main>
-      <TabBar />
+    <div className="flex flex-1 min-h-0 w-full lg:max-w-[1400px] lg:mx-auto">
+      <SideNav />
+      <div className="flex flex-col flex-1 min-h-0 min-w-0">
+        <main id="main-content" className="flex-1 overflow-y-auto">
+          <Outlet />
+        </main>
+        <TabBar />
+      </div>
     </div>
   );
 }
@@ -65,25 +76,26 @@ export default function App() {
       <OnboardingFlow />
       <Suspense fallback={<PageLoader />}>
         <Routes>
-          <Route element={<TabLayout />}>
+          <Route element={<AppShell />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/library" element={<LibraryPage />} />
             <Route path="/library/collection/:id" element={<CollectionDetailPage />} />
             <Route path="/mybar" element={<MyBarPage />} />
             <Route path="/favorites" element={<FavoritesPage />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/cocktail/:id" element={<CocktailDetailPage />} />
+            <Route path="/cocktail/:id/share" element={<SharePage />} />
+            <Route path="/picker" element={<IngredientPickerPage />} />
+            <Route path="/recipe/new" element={<RecipeFormPage />} />
+            <Route path="/recipe/:id/edit" element={<RecipeFormPage />} />
+            <Route path="/shared/:code" element={<SharedRecipePage />} />
           </Route>
 
-          {/* display:contents sur ces <main> : landmark d'accessibilité sans
-              participer à la mise en page (chaque écran gère déjà lui-même
-              sa propre hauteur/flex en enfant direct de #root). */}
-          <Route path="/cocktail/:id" element={<main id="main-content" className="contents"><CocktailDetailPage /></main>} />
+          {/* Seule route hors AppShell : le mode Préparation est un plein
+              écran immersif volontairement sans sidebar ni TabBar (voir
+              PreparationMode.tsx). display:contents sur ce <main> : landmark
+              d'accessibilité sans participer à la mise en page. */}
           <Route path="/cocktail/:id/prepare" element={<main id="main-content" className="contents"><PreparationModePage /></main>} />
-          <Route path="/cocktail/:id/share" element={<main id="main-content" className="contents"><SharePage /></main>} />
-          <Route path="/picker" element={<main id="main-content" className="contents"><IngredientPickerPage /></main>} />
-          <Route path="/recipe/new" element={<main id="main-content" className="contents"><RecipeFormPage /></main>} />
-          <Route path="/recipe/:id/edit" element={<main id="main-content" className="contents"><RecipeFormPage /></main>} />
-          <Route path="/shared/:code" element={<main id="main-content" className="contents"><SharedRecipePage /></main>} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

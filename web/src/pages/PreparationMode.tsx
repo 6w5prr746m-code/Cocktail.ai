@@ -103,7 +103,7 @@ export default function PreparationModePage() {
         </button>
       </div>
 
-      <div className="flex-1 flex flex-col items-center justify-center px-8 text-center gap-6">
+      <div className="flex-1 flex flex-col items-center justify-center px-8 text-center gap-6 max-w-[480px] mx-auto w-full">
         <p className="text-white/70 text-sm font-medium">
           {t("preparationMode.stepCounter", { current: stepIndex + 1, total: cocktail.steps.length })}
         </p>
@@ -124,7 +124,7 @@ export default function PreparationModePage() {
         <p className="text-xl font-semibold text-white leading-snug">{currentStep?.instruction}</p>
       </div>
 
-      <div className="p-5 flex flex-col gap-3">
+      <div className="p-5 flex flex-col gap-3 max-w-[480px] mx-auto w-full">
         <div className="h-1.5 rounded-full bg-white/20 overflow-hidden">
           <div className="h-full bg-white" style={{ width: `${progress * 100}%`, transition: "width 0.3s" }} />
         </div>

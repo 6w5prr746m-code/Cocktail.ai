@@ -45,7 +45,7 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="pb-8">
+    <div className="pb-8 max-w-[640px] mx-auto">
       <h1 className="text-2xl font-bold px-4 pt-6 pb-4" style={{ color: "var(--color-text-primary)" }}>
         {t("profile.title")}
       </h1>

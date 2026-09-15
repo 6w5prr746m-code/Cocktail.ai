@@ -48,7 +48,7 @@ function Section({
         <div className="flex gap-3 overflow-x-auto px-4 pb-1" style={{ scrollSnapType: "x proximity" }}>
           {cocktails.map((c) => (
             <div key={c.id} style={{ scrollSnapAlign: "start" }}>
-              <CocktailCard cocktail={c} />
+              <CocktailCard cocktail={c} width={152} />
             </div>
           ))}
         </div>
@@ -135,7 +135,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="pb-8">
+    <div className="pb-8 max-w-[560px] md:max-w-[720px] lg:max-w-[1100px] xl:max-w-[1300px] mx-auto">
       <div className="px-4 pt-6 pb-4">
         <p className="text-sm font-medium mb-1" style={{ color: "var(--color-accent-gold-text)" }}>
           {t("home.brand")}

@@ -17,6 +17,8 @@ export const fr = {
     myBar: "Mon Bar",
     favorites: "Favoris",
     profile: "Profil",
+    mobileNavLabel: "Navigation principale (mobile)",
+    desktopNavLabel: "Navigation principale (bureau)",
   },
   installCard: {
     installed: "App installée — merci !",

@@ -211,7 +211,7 @@ export default function SharePage() {
 
   if (!cocktail) {
     return (
-      <div>
+      <div className="max-w-[640px] mx-auto">
         <ScreenHeader title={t("share.title")} />
         <p className="px-4 pt-4 text-sm" style={{ color: "var(--color-text-secondary)" }}>
           {t("share.notFound")}
@@ -221,7 +221,7 @@ export default function SharePage() {
   }
 
   return (
-    <div className="pb-8">
+    <div className="pb-8 max-w-[640px] mx-auto">
       <ScreenHeader title={t("share.pageTitle")} />
       <div className="px-4 pt-3 flex flex-col gap-4">
         <div className="flex gap-2 overflow-x-auto pb-1">

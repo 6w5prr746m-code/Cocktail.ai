@@ -83,7 +83,7 @@ export default function MyBarPage() {
   }, [ingredients, entries, query, category]);
 
   return (
-    <div className="pb-8">
+    <div className="pb-8 max-w-[560px] md:max-w-[720px] lg:max-w-[1100px] xl:max-w-[1300px] mx-auto">
       <div className="px-4 pt-6 pb-4">
         <h1 className="text-2xl font-bold mb-4" style={{ color: "var(--color-text-primary)" }}>
           {t("myBar.title")}

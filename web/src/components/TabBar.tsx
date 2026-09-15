@@ -1,22 +1,17 @@
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "../domain/i18n/useTranslation";
+import { NAV_TABS } from "./navTabs";
 
-const TABS = [
-  { to: "/", key: "tabBar.home", icon: "🏠", end: true },
-  { to: "/library", key: "tabBar.library", icon: "📚", end: false },
-  { to: "/mybar", key: "tabBar.myBar", icon: "🥃", end: false },
-  { to: "/favorites", key: "tabBar.favorites", icon: "❤️", end: false },
-  { to: "/profile", key: "tabBar.profile", icon: "👤", end: false },
-] as const;
-
+// Visible en dessous du breakpoint desktop (lg) — au-delà, SideNav prend le relais.
 export function TabBar() {
   const { t } = useTranslation();
   return (
     <nav
-      className="sticky bottom-0 left-0 right-0 flex justify-around items-stretch border-t"
+      aria-label={t("tabBar.mobileNavLabel")}
+      className="lg:hidden sticky bottom-0 left-0 right-0 flex justify-around items-stretch border-t"
       style={{ background: "var(--color-surface)", borderColor: "var(--color-border)", paddingBottom: "env(safe-area-inset-bottom)" }}
     >
-      {TABS.map((tab) => (
+      {NAV_TABS.map((tab) => (
         <NavLink
           key={tab.to}
           to={tab.to}

@@ -46,7 +46,7 @@ export default function LibraryPage() {
   const activeFilterCount = spirits.size + difficulties.size + occasions.size;
 
   return (
-    <div className="pb-8">
+    <div className="pb-8 max-w-[560px] md:max-w-[720px] lg:max-w-[1100px] xl:max-w-[1300px] mx-auto">
       <div className="px-4 pt-6 pb-3 flex items-center justify-between">
         <h1 className="text-2xl font-bold" style={{ color: "var(--color-text-primary)" }}>
           {t("library.title")}
@@ -145,7 +145,7 @@ export default function LibraryPage() {
         <h2 className="text-lg font-semibold px-4 mb-3" style={{ color: "var(--color-text-primary)" }}>
           {t("library.allCocktailsTitle", { count: results.length })}
         </h2>
-        <div className="grid grid-cols-2 gap-4 px-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 px-4">
           {results.map((c) => (
             <CocktailCard key={c.id} cocktail={c} />
           ))}

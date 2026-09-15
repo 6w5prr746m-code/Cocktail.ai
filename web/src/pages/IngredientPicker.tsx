@@ -48,7 +48,7 @@ export default function IngredientPickerPage() {
   }
 
   return (
-    <div className="flex flex-col min-h-full">
+    <div className="flex flex-col min-h-full max-w-[640px] mx-auto w-full">
       <ScreenHeader
         title={t("ingredientPicker.title")}
         action={

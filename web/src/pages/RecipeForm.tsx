@@ -144,7 +144,7 @@ export default function RecipeFormPage() {
   }
 
   return (
-    <div className="pb-10">
+    <div className="pb-10 max-w-[640px] mx-auto">
       <ScreenHeader title={isEditing ? t("recipeForm.titleEdit") : t("recipeForm.titleNew")} />
 
       <div className="px-4 pt-3 flex flex-col gap-4">
