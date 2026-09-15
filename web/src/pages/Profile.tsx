@@ -1,5 +1,7 @@
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useAllCocktails } from "../domain/catalog";
+import { computeHistoryStats } from "../domain/historyStats";
 import { useHistoryStore } from "../state/history";
 import { useThemeStore, applyThemeToDocument, type ThemePreference } from "../state/theme";
 import { useFavoritesStore } from "../state/favorites";
@@ -21,6 +23,7 @@ export default function ProfilePage() {
   const { preference, setPreference } = useThemeStore();
 
   const sortedHistory = [...history].sort((a, b) => b.completedAt.localeCompare(a.completedAt));
+  const stats = useMemo(() => computeHistoryStats(history, cocktails), [history, cocktails]);
 
   function resetAllData() {
     if (!confirm("Réinitialiser toutes tes données locales (favoris, Mon Bar, historique, recettes) ?")) return;
@@ -65,6 +68,40 @@ export default function ProfilePage() {
           ))}
         </div>
       </section>
+
+      {stats.totalCount > 0 && (
+        <section className="px-4 pb-6">
+          <h2 className="text-base font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
+            Statistiques
+          </h2>
+          <div className="grid grid-cols-3 gap-2 mb-2">
+            <StatTile label="Préparés" value={String(stats.totalCount)} />
+            <StatTile label="Ce mois-ci" value={String(stats.monthlyCount)} />
+            <StatTile
+              label={stats.currentStreakDays > 0 ? "Série en cours" : "Série record"}
+              value={`${stats.currentStreakDays > 0 ? stats.currentStreakDays : stats.longestStreakDays} j`}
+              emphasis={stats.currentStreakDays > 0}
+            />
+          </div>
+          {stats.mostPrepared && (
+            <Link
+              to={`/cocktail/${stats.mostPrepared.cocktail.id}`}
+              className="flex items-center gap-3 rounded-2xl p-3"
+              style={{ background: "var(--color-surface)" }}
+            >
+              <MiniGlassBadge cocktail={stats.mostPrepared.cocktail} size={40} />
+              <div className="flex-1 min-w-0">
+                <p className="font-medium truncate" style={{ color: "var(--color-text-primary)" }}>
+                  {stats.mostPrepared.cocktail.name}
+                </p>
+                <p className="text-xs" style={{ color: "var(--color-text-secondary)" }}>
+                  Ton cocktail favori — préparé {stats.mostPrepared.count} fois
+                </p>
+              </div>
+            </Link>
+          )}
+        </section>
+      )}
 
       <section className="px-4 pb-6">
         <h2 className="text-base font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
@@ -117,6 +154,22 @@ export default function ProfilePage() {
           (localStorage) — il n'y a pas de compte ni de synchronisation entre appareils dans cette version.
         </p>
       </section>
+    </div>
+  );
+}
+
+function StatTile({ label, value, emphasis = false }: { label: string; value: string; emphasis?: boolean }) {
+  return (
+    <div className="rounded-2xl p-3 text-center" style={{ background: "var(--color-surface)" }}>
+      <p
+        className="text-xl font-bold"
+        style={{ color: emphasis ? "var(--color-accent-gold-text)" : "var(--color-text-primary)" }}
+      >
+        {emphasis ? `🔥 ${value}` : value}
+      </p>
+      <p className="text-[11px] mt-0.5" style={{ color: "var(--color-text-secondary)" }}>
+        {label}
+      </p>
     </div>
   );
 }
