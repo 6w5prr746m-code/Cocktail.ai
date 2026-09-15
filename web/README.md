@@ -151,7 +151,12 @@ Au tout premier lancement (`src/components/OnboardingFlow.tsx`, état persisté 
 - Audité avec `npx lighthouse --only-categories=accessibility` sur les 8 écrans principaux (accueil, bibliothèque, Mon Bar, fiche cocktail, formulaire de recette, profil, favoris, recherche magique) : **100/100** partout.
 - `public/robots.txt` autorise l'indexation (site 100% public, aucune donnée sensible).
 
+## Partage enrichi
+
+- **5 formats de partage visuel** (`src/pages/Share.tsx`), désormais à parité avec le PRD iOS (`Domain/Models/ShareFormat.swift`) : Story, Post, TikTok, Pinterest, Snapchat — mêmes ratios (Story/TikTok/Snapchat en 9:16, Post en 4:5, Pinterest en 2:3). Le ratio du format Post a aussi été corrigé au passage : ce portage utilisait un carré 1:1 plutôt que le 4:5 de l'app native.
+- **Lien de recette perso autoporteur** (`src/domain/recipeShareCode.ts`) : une recette créée par l'utilisateur n'existe que dans son `localStorage` — un lien `/cocktail/<id>` classique serait mort pour n'importe qui d'autre. Le bouton "🔗 Copier le lien de la recette" sur l'écran de partage (visible uniquement pour les recettes perso) encode un instantané complet de la recette — ingrédients *dénormalisés* avec leur nom, pas seulement leur id, pour rester lisible même si le destinataire n'a jamais vu cet ingrédient perso — directement dans l'URL (`/shared/<recette encodée en base64url>`), sans backend. Le QR code du visuel de partage pointe aussi vers ce lien pour les recettes perso (vers la fiche classique pour les cocktails du catalogue, universellement partageable).
+- **`src/pages/SharedRecipe.tsx`** affiche cette recette en lecture seule (aucune dépendance au référentiel d'ingrédients local) avec un bouton "Enregistrer dans mes recettes" : les ingrédients perso inconnus du destinataire sont alors créés localement via le même `findOrCreate` que le formulaire de recette, pour que la fiche complète (Mon Bar, mode préparation...) fonctionne normalement une fois enregistrée.
+
 ## Limites connues
 
-- Le partage visuel ne propose que 3 formats (Story/Post/Pinterest) contre 5 côté iOS (TikTok/Snapchat omis, mêmes ratios que Story/Post).
 - Comme documenté dans le README iOS pour la V1, deux noms d'ingrédients personnalisés produisant le même slug (accents) entreraient en conflit.
