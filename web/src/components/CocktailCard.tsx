@@ -12,6 +12,8 @@ interface CocktailCardProps {
   /** Largeur fixe en px pour un usage en carrousel horizontal ; omise pour un usage en grille (100% du conteneur). */
   width?: number;
   showTaste?: boolean;
+  /** Légende optionnelle affichée à la place des tags de goût (ex: raison d'une recommandation) — évite de surcharger la carte avec les deux. */
+  caption?: string;
 }
 
 // IMPORTANT : CocktailVisual/tasteProfile tournent sur des heuristiques qui
@@ -19,7 +21,7 @@ interface CocktailCardProps {
 // category) — on leur passe donc toujours le cocktail canonique (FR), jamais
 // une version localisée EN, sous peine de casser silencieusement l'illustration
 // et les tags de goût. Seul le texte affiché (catégorie, tags) est traduit.
-export function CocktailCard({ cocktail, width, showTaste = true }: CocktailCardProps) {
+export function CocktailCard({ cocktail, width, showTaste = true, caption }: CocktailCardProps) {
   const { locale } = useTranslation();
   const isFavorite = useFavoritesStore((s) => s.isFavorite(cocktail.id));
   const tags = getLocalizedTasteTags(tasteProfile(cocktail), locale);
@@ -58,7 +60,13 @@ export function CocktailCard({ cocktail, width, showTaste = true }: CocktailCard
         <p className="text-xs truncate" style={{ color: "var(--color-text-secondary)" }}>
           {getLocalizedCategory(cocktail.category, locale)}
         </p>
-        {showTaste && <TasteTags tags={tags.slice(0, 2)} />}
+        {caption ? (
+          <p className="text-[11px] truncate" style={{ color: "var(--color-accent-gold-text)" }}>
+            {caption}
+          </p>
+        ) : (
+          showTaste && <TasteTags tags={tags.slice(0, 2)} />
+        )}
       </div>
     </Link>
   );

@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Outlet } from "react-router-dom";
+import { AchievementToast } from "./components/AchievementToast";
 import { LanguagePicker } from "./components/LanguagePicker";
 import { OnboardingFlow } from "./components/OnboardingFlow";
 import { TabBar } from "./components/TabBar";
@@ -74,6 +75,7 @@ export default function App() {
       <SkipLink />
       <LanguagePicker />
       <OnboardingFlow />
+      <AchievementToast />
       <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route element={<AppShell />}>

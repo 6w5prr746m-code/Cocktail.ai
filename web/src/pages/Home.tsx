@@ -1,18 +1,21 @@
 import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { AlmostReadyBanner } from "../components/AlmostReadyBanner";
 import { CocktailCard } from "../components/CocktailCard";
 import { CocktailVisual } from "../components/CocktailVisual";
 import { TasteTags } from "../components/TasteTags";
+import { WeeklyChallengeCard } from "../components/WeeklyChallengeCard";
 import { useAllCocktails } from "../domain/catalog";
 import { dailyPick } from "../domain/gradient";
-import { pickSurprise, recommendCocktails } from "../domain/recommendation";
+import { explainRecommendation, pickSurprise, recommendCocktails } from "../domain/recommendation";
 import { tasteProfile } from "../domain/tasteProfile";
+import { isChallengeCompletedThisWeek, weeklyChallengePick } from "../domain/weeklyChallenge";
 import { useFavoritesStore } from "../state/favorites";
 import { useHistoryStore } from "../state/history";
 import { useUserRecipesStore } from "../state/userRecipes";
 import type { Cocktail } from "../domain/types";
 import { useTranslation } from "../domain/i18n/useTranslation";
-import { getLocalizedTasteTags } from "../domain/i18n/localizedCocktail";
+import { getLocalizedMainSpirit, getLocalizedTasteTags } from "../domain/i18n/localizedCocktail";
 
 const SECTION_LIMIT = 20;
 
@@ -21,11 +24,13 @@ function Section({
   subtitle,
   cocktails,
   emptyHint,
+  captions,
 }: {
   title: string;
   subtitle?: string;
   cocktails: Cocktail[];
   emptyHint?: string;
+  captions?: Map<string, string>;
 }) {
   if (cocktails.length === 0 && !emptyHint) return null;
   return (
@@ -48,7 +53,7 @@ function Section({
         <div className="flex gap-3 overflow-x-auto px-4 pb-1" style={{ scrollSnapType: "x proximity" }}>
           {cocktails.map((c) => (
             <div key={c.id} style={{ scrollSnapAlign: "start" }}>
-              <CocktailCard cocktail={c} width={152} />
+              <CocktailCard cocktail={c} width={152} caption={captions?.get(c.id)} />
             </div>
           ))}
         </div>
@@ -83,7 +88,7 @@ function FeaturedCocktail({ cocktail }: { cocktail: Cocktail }) {
 
 export default function HomePage() {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const cocktails = useAllCocktails();
   const favoriteIds = useFavoritesStore((s) => s.favoriteIds);
   const historyEntries = useHistoryStore((s) => s.entries);
@@ -119,12 +124,29 @@ export default function HomePage() {
     [cocktails, favoriteIds, historyCocktailIds],
   );
 
+  const likedCocktails = useMemo(
+    () =>
+      [...new Set([...favoriteIds, ...historyCocktailIds])]
+        .map((id) => cocktails.find((c) => c.id === id))
+        .filter((c): c is Cocktail => Boolean(c)),
+    [cocktails, favoriteIds, historyCocktailIds],
+  );
+  const recommendedCaptions = new Map<string, string>();
+  for (const c of recommended) {
+    const reason = explainRecommendation(c, likedCocktails);
+    if (!reason) continue;
+    const value = reason.kind === "spirit" ? getLocalizedMainSpirit(reason.value, locale) : getLocalizedTasteTags([reason.value], locale)[0];
+    recommendedCaptions.set(c.id, t("home.recommendationReason", { value }));
+  }
+
   const favorites = useMemo(
     () => favoriteIds.map((id) => cocktails.find((c) => c.id === id)).filter((c): c is Cocktail => Boolean(c)),
     [cocktails, favoriteIds],
   );
 
   const featured = useMemo(() => dailyPick(cocktails), [cocktails]);
+  const weeklyChallenge = useMemo(() => weeklyChallengePick(cocktails), [cocktails]);
+  const weeklyChallengeCompleted = weeklyChallenge ? isChallengeCompletedThisWeek(historyEntries, weeklyChallenge.id) : false;
 
   function surpriseMe() {
     const excluded = new Set([...favoriteIds, ...historyCocktailIds]);
@@ -173,12 +195,20 @@ export default function HomePage() {
         </div>
       </div>
 
+      {weeklyChallenge && (
+        <div className="px-4 mt-4">
+          <WeeklyChallengeCard cocktail={weeklyChallenge} completed={weeklyChallengeCompleted} />
+        </div>
+      )}
+      <AlmostReadyBanner />
+
       <Section title={t("home.popularTitle")} cocktails={popular} />
       <Section title={t("home.freshTitle")} cocktails={fresh} />
       <Section
         title={t("home.recommendedTitle")}
         subtitle={hasTasteSignal ? t("home.recommendedSubtitle") : undefined}
         cocktails={recommended}
+        captions={recommendedCaptions}
       />
       <Section
         title={t("home.favoritesTitle")}

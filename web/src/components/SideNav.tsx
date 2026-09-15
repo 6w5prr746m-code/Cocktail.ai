@@ -1,6 +1,8 @@
 import { Link, NavLink } from "react-router-dom";
 import { useTranslation } from "../domain/i18n/useTranslation";
+import { useAlmostReadyMatches } from "../hooks/useAlmostReadyMatches";
 import { NAV_TABS } from "./navTabs";
+import { NavBadgeDot } from "./NavBadgeDot";
 
 export const SIDE_NAV_WIDTH = 232;
 
@@ -8,6 +10,7 @@ export const SIDE_NAV_WIDTH = 232;
 // dessous de ce seuil. Même 5 destinations, présentation verticale.
 export function SideNav() {
   const { t } = useTranslation();
+  const almostReadyCount = useAlmostReadyMatches().length;
   return (
     <nav
       aria-label={t("tabBar.desktopNavLabel")}
@@ -32,8 +35,9 @@ export function SideNav() {
             color: isActive ? "#0b0b0f" : "var(--color-text-primary)",
           })}
         >
-          <span style={{ fontSize: 18 }} aria-hidden>
+          <span className="relative" style={{ fontSize: 18 }} aria-hidden>
             {tab.icon}
+            {tab.to === "/mybar" && almostReadyCount > 0 && <NavBadgeDot />}
           </span>
           {t(tab.key)}
         </NavLink>

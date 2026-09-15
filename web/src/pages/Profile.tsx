@@ -9,6 +9,7 @@ import { useMyBarStore } from "../state/myBar";
 import { useUserRecipesStore } from "../state/userRecipes";
 import { MiniGlassBadge } from "../components/MiniGlassBadge";
 import { InstallAppCard } from "../components/InstallAppCard";
+import { useAchievements } from "../hooks/useAchievements";
 import { useTranslation } from "../domain/i18n/useTranslation";
 import { useLocaleStore, type Locale } from "../state/locale";
 import type { TranslationKey } from "../domain/i18n/useTranslation";
@@ -31,6 +32,7 @@ export default function ProfilePage() {
   const history = useHistoryStore((s) => s.entries);
   const clearHistory = useHistoryStore((s) => s.clear);
   const { preference, setPreference } = useThemeStore();
+  const { all: allAchievements, unlockedIds } = useAchievements();
 
   const sortedHistory = [...history].sort((a, b) => b.completedAt.localeCompare(a.completedAt));
   const stats = useMemo(() => computeHistoryStats(history, cocktails), [history, cocktails]);
@@ -134,6 +136,33 @@ export default function ProfilePage() {
           )}
         </section>
       )}
+
+      <section className="px-4 pb-6">
+        <h2 className="text-base font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
+          {t("achievements.title")}
+        </h2>
+        <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+          {allAchievements.map((achievement) => {
+            const unlocked = unlockedIds.has(achievement.id);
+            return (
+              <div
+                key={achievement.id}
+                title={`${t(achievement.titleKey)} — ${t(achievement.descKey)}`}
+                className="rounded-2xl p-3 flex flex-col items-center text-center gap-1"
+                style={{ background: "var(--color-surface)", opacity: unlocked ? 1 : 0.4 }}
+              >
+                <span style={{ fontSize: 26, filter: unlocked ? undefined : "grayscale(1)" }} aria-hidden>
+                  {achievement.icon}
+                </span>
+                <p className="text-[11px] font-medium leading-tight" style={{ color: "var(--color-text-primary)" }}>
+                  {t(achievement.titleKey)}
+                </p>
+                <span className="sr-only">{unlocked ? t(achievement.descKey) : t("achievements.lockedAria")}</span>
+              </div>
+            );
+          })}
+        </div>
+      </section>
 
       <section className="px-4 pb-6">
         <h2 className="text-base font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>

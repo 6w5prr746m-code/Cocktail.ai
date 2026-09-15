@@ -10,6 +10,21 @@ export interface RecommendationSignal {
   historyCocktailIds: string[];
 }
 
+interface Affinity {
+  spiritCounts: Map<string, number>;
+  tasteCounts: Map<string, number>;
+}
+
+function buildAffinity(liked: Cocktail[]): Affinity {
+  const spiritCounts = new Map<string, number>();
+  const tasteCounts = new Map<string, number>();
+  for (const c of liked) {
+    spiritCounts.set(c.mainSpirit, (spiritCounts.get(c.mainSpirit) ?? 0) + 1);
+    for (const tag of tasteProfile(c)) tasteCounts.set(tag, (tasteCounts.get(tag) ?? 0) + 1);
+  }
+  return { spiritCounts, tasteCounts };
+}
+
 /**
  * "Recommandés pour toi" — pondère les cocktails non déjà favoris/préparés
  * par affinité avec l'alcool principal et le profil de goût (`tasteProfile`)
@@ -26,12 +41,7 @@ export function recommendCocktails(cocktails: Cocktail[], signal: Recommendation
     return [...candidates].sort((a, b) => a.difficulty - b.difficulty || a.name.localeCompare(b.name, "fr")).slice(0, limit);
   }
 
-  const spiritCounts = new Map<string, number>();
-  const tasteCounts = new Map<string, number>();
-  for (const c of liked) {
-    spiritCounts.set(c.mainSpirit, (spiritCounts.get(c.mainSpirit) ?? 0) + 1);
-    for (const tag of tasteProfile(c)) tasteCounts.set(tag, (tasteCounts.get(tag) ?? 0) + 1);
-  }
+  const { spiritCounts, tasteCounts } = buildAffinity(liked);
 
   return candidates
     .map((cocktail) => {
@@ -43,6 +53,32 @@ export function recommendCocktails(cocktails: Cocktail[], signal: Recommendation
     .sort((a, b) => b.score - a.score || a.cocktail.name.localeCompare(b.cocktail.name, "fr"))
     .slice(0, limit)
     .map((s) => s.cocktail);
+}
+
+export type RecommendationReason = { kind: "spirit" | "taste"; value: string };
+
+/**
+ * Justification affichable d'une recommandation ("D'après tes goûts : Rhum")
+ * — dérivée de la même affinité que recommendCocktails, calculée
+ * séparément pour ne pas alourdir le tri principal avec une valeur inutilisée
+ * la plupart du temps. Priorité à l'alcool principal (signal le plus fort et
+ * le plus concret pour l'utilisateur), puis au tag de goût le mieux représenté.
+ */
+export function explainRecommendation(cocktail: Cocktail, liked: Cocktail[]): RecommendationReason | null {
+  if (liked.length === 0) return null;
+  const { spiritCounts, tasteCounts } = buildAffinity(liked);
+
+  if ((spiritCounts.get(cocktail.mainSpirit) ?? 0) > 0) {
+    return { kind: "spirit", value: cocktail.mainSpirit };
+  }
+
+  const matchingTags = tasteProfile(cocktail).filter((tag) => tasteCounts.has(tag));
+  if (matchingTags.length > 0) {
+    const best = matchingTags.reduce((a, b) => (tasteCounts.get(a)! >= tasteCounts.get(b)! ? a : b));
+    return { kind: "taste", value: best };
+  }
+
+  return null;
 }
 
 /** Cocktail au hasard pour le bouton "Surprends-moi" — évite si possible ceux déjà favoris/préparés, pour une vraie découverte. */
