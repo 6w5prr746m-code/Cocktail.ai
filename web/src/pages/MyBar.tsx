@@ -130,9 +130,9 @@ export default function MyBarPage() {
 
       {almostReady.length > 0 && (
         <section className="px-4 pb-6">
-          <h3 className="text-base font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
+          <h2 className="text-base font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
             Presque prêt
-          </h3>
+          </h2>
           <ul className="flex flex-col gap-2">
             {almostReady.map((match) => (
               <li key={match.cocktail.id} className="rounded-2xl p-3 flex items-center gap-3" style={{ background: "var(--color-surface)" }}>
@@ -167,9 +167,9 @@ export default function MyBarPage() {
       {shoppingRows.length > 0 && (
         <section className="px-4 pb-6">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-base font-semibold" style={{ color: "var(--color-text-primary)" }}>
+            <h2 className="text-base font-semibold" style={{ color: "var(--color-text-primary)" }}>
               🛒 Liste de courses
-            </h3>
+            </h2>
             {hasCheckedItems && (
               <button type="button" onClick={clearChecked} className="text-xs font-medium underline" style={{ color: "var(--color-text-secondary)" }}>
                 Vider les cochés
@@ -209,7 +209,7 @@ export default function MyBarPage() {
                   type="button"
                   onClick={() => removeShoppingItem(item.ingredientId)}
                   aria-label={`Retirer ${ingredient!.name} de la liste`}
-                  className="flex-shrink-0 text-xs opacity-60"
+                  className="flex-shrink-0 text-xs"
                   style={{ color: "var(--color-text-secondary)" }}
                 >
                   ✕
@@ -222,9 +222,9 @@ export default function MyBarPage() {
 
       {ownedIngredients.length > 0 && (
         <section className="px-4 pb-6">
-          <h3 className="text-base font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
+          <h2 className="text-base font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
             Déjà dans ton bar ({ownedIngredients.length})
-          </h3>
+          </h2>
           <ul className="flex flex-col gap-2">
             {ownedIngredients.map(({ entry, ingredient }) => (
               <li
@@ -261,6 +261,7 @@ export default function MyBarPage() {
                         setEditingQtyFor(null);
                       }}
                       placeholder="Quantité approximative (ex: 1 bouteille)"
+                      aria-label={`Quantité approximative pour ${ingredient!.name}`}
                       className="mt-2 w-full text-xs rounded-lg px-2 py-1.5 outline-none"
                       style={{ background: "var(--color-bg)", color: "var(--color-text-primary)", border: "1px solid var(--color-border)" }}
                     />
@@ -280,7 +281,7 @@ export default function MyBarPage() {
                   onClick={() => removeIngredient(entry.ingredientId)}
                   aria-label={`Retirer ${ingredient!.name}`}
                   className="flex-shrink-0 rounded-full flex items-center justify-center"
-                  style={{ width: 30, height: 30, background: "var(--color-bg)", color: "var(--color-danger)" }}
+                  style={{ width: 30, height: 30, background: "var(--color-bg)", color: "var(--color-danger-text)" }}
                 >
                   ✕
                 </button>
@@ -291,13 +292,14 @@ export default function MyBarPage() {
       )}
 
       <section className="px-4">
-        <h3 className="text-base font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
+        <h2 className="text-base font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
           Ajouter un ingrédient
-        </h3>
+        </h2>
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Chercher…"
+          aria-label="Chercher un ingrédient à ajouter"
           className="w-full rounded-xl px-4 py-3 text-sm outline-none mb-3"
           style={{ background: "var(--color-surface)", color: "var(--color-text-primary)", border: "1px solid var(--color-border)" }}
         />

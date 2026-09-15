@@ -28,9 +28,9 @@ export function ScreenHeader({ title, onBack, action, transparent = false }: Scr
         ←
       </button>
       {title && (
-        <h2 className="text-base font-semibold truncate px-2" style={{ color: "var(--color-text-primary)" }}>
+        <h1 className="text-base font-semibold truncate px-2" style={{ color: "var(--color-text-primary)" }}>
           {title}
-        </h2>
+        </h1>
       )}
       <div className="flex items-center justify-end" style={{ minWidth: 36 }}>
         {action}

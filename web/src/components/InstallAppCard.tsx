@@ -66,7 +66,7 @@ export function InstallAppCard() {
           type="button"
           onClick={() => setDismissed(true)}
           aria-label="Masquer"
-          className="flex-shrink-0 text-sm opacity-60"
+          className="flex-shrink-0 text-sm"
           style={{ color: "var(--color-text-secondary)" }}
         >
           ✕

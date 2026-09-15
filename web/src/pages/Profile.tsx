@@ -42,9 +42,9 @@ export default function ProfilePage() {
       </div>
 
       <section className="px-4 pb-6">
-        <h3 className="text-base font-semibold mb-2" style={{ color: "var(--color-text-primary)" }}>
+        <h2 className="text-base font-semibold mb-2" style={{ color: "var(--color-text-primary)" }}>
           Apparence
-        </h3>
+        </h2>
         <div className="flex gap-2">
           {THEME_OPTIONS.map((opt) => (
             <button
@@ -67,9 +67,9 @@ export default function ProfilePage() {
       </section>
 
       <section className="px-4 pb-6">
-        <h3 className="text-base font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
+        <h2 className="text-base font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
           Historique
-        </h3>
+        </h2>
         {sortedHistory.length === 0 ? (
           <p className="text-sm" style={{ color: "var(--color-text-secondary)" }}>
             Prépare un cocktail jusqu'au bout pour le voir apparaître ici.
@@ -108,7 +108,7 @@ export default function ProfilePage() {
           type="button"
           onClick={resetAllData}
           className="w-full rounded-xl py-3 text-sm font-medium"
-          style={{ background: "var(--color-surface)", color: "var(--color-danger)" }}
+          style={{ background: "var(--color-surface)", color: "var(--color-danger-text)" }}
         >
           Réinitialiser mes données locales
         </button>

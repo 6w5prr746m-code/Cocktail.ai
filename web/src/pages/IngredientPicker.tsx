@@ -51,7 +51,7 @@ export default function IngredientPickerPage() {
               type="button"
               onClick={() => setSelected(new Set(myBarIds))}
               className="text-xs font-semibold px-2 py-1.5 rounded-full"
-              style={{ background: "var(--color-surface)", color: "var(--color-accent-gold)" }}
+              style={{ background: "var(--color-surface)", color: "var(--color-accent-gold-text)" }}
             >
               Mon Bar
             </button>
@@ -64,6 +64,7 @@ export default function IngredientPickerPage() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Chercher un ingrédient…"
+          aria-label="Chercher un ingrédient"
           className="w-full rounded-xl px-4 py-3 text-sm outline-none"
           style={{ background: "var(--color-surface)", color: "var(--color-text-primary)", border: "1px solid var(--color-border)" }}
         />
@@ -90,15 +91,19 @@ export default function IngredientPickerPage() {
 
       <div className="flex-1 px-4 pt-2 pb-8">
         {selected.size < 3 ? (
-          <div className="flex flex-col items-center mt-8 gap-3 text-center opacity-80">
-            <GlassArt art={EMPTY_STATE_ART} size={72} fillFraction={0.18} />
+          <div className="flex flex-col items-center mt-8 gap-3 text-center">
+            <div className="opacity-80">
+              <GlassArt art={EMPTY_STATE_ART} size={72} fillFraction={0.18} />
+            </div>
             <p className="text-sm max-w-[220px]" style={{ color: "var(--color-text-secondary)" }}>
               Sélectionne au moins 3 ingrédients — le barman s'occupe du reste.
             </p>
           </div>
         ) : results.length === 0 ? (
-          <div className="flex flex-col items-center mt-8 gap-3 text-center opacity-80">
-            <GlassArt art={EMPTY_STATE_ART} size={72} fillFraction={0} />
+          <div className="flex flex-col items-center mt-8 gap-3 text-center">
+            <div className="opacity-80">
+              <GlassArt art={EMPTY_STATE_ART} size={72} fillFraction={0} />
+            </div>
             <p className="text-sm max-w-[220px]" style={{ color: "var(--color-text-secondary)" }}>
               Aucun cocktail ne correspond encore à cette sélection. Essaie d'ajouter un alcool de base.
             </p>

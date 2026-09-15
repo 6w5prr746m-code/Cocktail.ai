@@ -21,7 +21,6 @@ export function CocktailCard({ cocktail, width, showTaste = true }: CocktailCard
       to={`/cocktail/${cocktail.id}`}
       className={`group rounded-2xl overflow-hidden flex flex-col animate-fade-in transition-transform active:scale-[0.97] ${width ? "flex-shrink-0" : "w-full"}`}
       style={width ? { width } : undefined}
-      aria-label={cocktail.name}
     >
       <div
         className="relative flex items-center justify-center aspect-square overflow-hidden"

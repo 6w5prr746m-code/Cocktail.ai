@@ -61,6 +61,7 @@ export default function LibraryPage() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Nom ou ingrédient (ex: citron)…"
+          aria-label="Chercher par nom ou ingrédient"
           className="flex-1 rounded-xl px-4 py-3 text-sm outline-none"
           style={{ background: "var(--color-surface)", color: "var(--color-text-primary)", border: "1px solid var(--color-border)" }}
         />
@@ -108,9 +109,9 @@ export default function LibraryPage() {
 
       {collections.length > 0 && !query && activeFilterCount === 0 && (
         <section className="mt-6">
-          <h3 className="text-lg font-semibold px-4 mb-3" style={{ color: "var(--color-text-primary)" }}>
+          <h2 className="text-lg font-semibold px-4 mb-3" style={{ color: "var(--color-text-primary)" }}>
             Collections
-          </h3>
+          </h2>
           <div className="flex gap-3 overflow-x-auto px-4 pb-1">
             {collections.map((col) => (
               <Link
@@ -133,9 +134,9 @@ export default function LibraryPage() {
       )}
 
       <section className="mt-6">
-        <h3 className="text-lg font-semibold px-4 mb-3" style={{ color: "var(--color-text-primary)" }}>
+        <h2 className="text-lg font-semibold px-4 mb-3" style={{ color: "var(--color-text-primary)" }}>
           Tous les cocktails ({results.length})
-        </h3>
+        </h2>
         <div className="grid grid-cols-2 gap-4 px-4">
           {results.map((c) => (
             <CocktailCard key={c.id} cocktail={c} />
