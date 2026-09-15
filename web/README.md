@@ -76,7 +76,7 @@ Cette version reprend fidèlement le cœur produit de l'app native décrite dans
 - **Création / modification de recettes perso** (`/recipe/new`, `/recipe/:id/edit`) — formulaire complet ingrédients + étapes, réutilise le référentiel d'ingrédients existant (recherche insensible à la casse) comme sur iOS.
 - **Partage visuel** (`/cocktail/:id/share`) — carte générée en `<canvas>` (dégradé de famille, nom, ingrédients, QR code pointant vers la fiche), export PNG + Web Share API sur mobile.
 - **Dark/Light mode**, palette et typographie fidèles au Design System iOS (`DesignSystem/Colors.swift`, `Typography.swift`).
-- Les **14 cocktails, 7 collections et 6 substitutions** du seed iOS sont repris tels quels (`src/data/*.json`, copiés depuis `Resources/SeedData/`).
+- Les **14 cocktails curatés à la main, 7 collections et 6 substitutions** du seed iOS sont repris tels quels (`src/data/*.json`, copiés depuis `Resources/SeedData/`) — voir aussi "Catalogue étendu" ci-dessous pour les 430 cocktails/mocktails ajoutés au Sprint 10.
 
 Le moteur de matching (`src/domain/matchingEngine.ts`) est un **portage ligne à ligne** de `Services/MatchingEngine.swift` : mêmes poids par rôle (alcool principal 1.0, secondaire 0.8, structurant 0.6, mixer 0.35, garniture 0.15), mêmes règles de dégradation de stock (1.0 / 0.75 / 0.4), même seuil d'exclusion (2 ingrédients manquants max), V1 et V2 strictement séparés comme dans le code Swift.
 
@@ -119,7 +119,7 @@ src/
 
 ## Identité visuelle des cocktails
 
-Chaque cocktail est représenté par une illustration de verre générée en SVG (`src/domain/glassArt.ts` + `src/components/GlassArt.tsx`) : forme du verre, couleur du liquide, glace et garniture curatées à la main pour les 14 cocktails du seed (heuristique de repli pour les recettes perso).
+Chaque cocktail est représenté par une illustration de verre générée en SVG (`src/domain/glassArt.ts` + `src/components/GlassArt.tsx`) : forme du verre, couleur du liquide, glace et garniture curatées à la main pour les 14 cocktails d'origine du seed (heuristique de repli, basée sur la catégorie et les ingrédients, pour les recettes perso et les 430 cocktails importés du Sprint 10).
 
 **Photos réalistes (optionnel, progressif)** : `src/components/CocktailVisual.tsx` tente de charger deux variantes WebP par cocktail — `public/images/cocktails/<id>-thumb.webp` (480px, cartes/listes) et `<id>.webp` (960px, fiche détail/cocktail du jour) ; si le fichier existe, la photo remplace l'illustration partout où `CocktailVisual` est utilisé ; sinon ça retombe silencieusement sur l'illustration — aucune configuration ni changement de code nécessaire.
 
@@ -157,6 +157,18 @@ Au tout premier lancement (`src/components/OnboardingFlow.tsx`, état persisté 
 - **Lien de recette perso autoporteur** (`src/domain/recipeShareCode.ts`) : une recette créée par l'utilisateur n'existe que dans son `localStorage` — un lien `/cocktail/<id>` classique serait mort pour n'importe qui d'autre. Le bouton "🔗 Copier le lien de la recette" sur l'écran de partage (visible uniquement pour les recettes perso) encode un instantané complet de la recette — ingrédients *dénormalisés* avec leur nom, pas seulement leur id, pour rester lisible même si le destinataire n'a jamais vu cet ingrédient perso — directement dans l'URL (`/shared/<recette encodée en base64url>`), sans backend. Le QR code du visuel de partage pointe aussi vers ce lien pour les recettes perso (vers la fiche classique pour les cocktails du catalogue, universellement partageable).
 - **`src/pages/SharedRecipe.tsx`** affiche cette recette en lecture seule (aucune dépendance au référentiel d'ingrédients local) avec un bouton "Enregistrer dans mes recettes" : les ingrédients perso inconnus du destinataire sont alors créés localement via le même `findOrCreate` que le formulaire de recette, pour que la fiche complète (Mon Bar, mode préparation...) fonctionne normalement une fois enregistrée.
 
+## Catalogue étendu
+
+Le catalogue est passé de 14 à **444 cocktails/mocktails** au Sprint 10, via un pipeline d'import réutilisable plutôt qu'une saisie manuelle :
+
+- **Source** : [TheCocktailDB](https://www.thecocktaildb.com) (clé de test gratuite "1"), une base crowd-sourcée gratuite dont les conditions d'utilisation autorisent explicitement à *"scraper, copier et modifier tout contenu retourné par l'API via les endpoints officiels"*, pour un usage de développement — y compris une app web tant qu'elle n'est pas publiée sur un app store. 441 cocktails uniques y sont accessibles gratuitement (recherche exhaustive par première lettre, a-z + 0-9), dont 40 sans alcool (mocktails) — c'est le plafond du niveau gratuit ; la base "complète" est réservée aux abonnés Premium (10$, usage personnel).
+- **`npm run import:cocktaildb`** (`scripts/import-cocktaildb.mjs`) : récupère le catalogue, le transforme vers le schéma interne et fusionne le résultat dans `src/data/cocktails.json`, en gardant la version curatée à la main pour les 11 cocktails déjà présents dans les deux catalogues (dédoublonnage par nom). Réutilisable pour une future mise à jour du catalogue ou une nouvelle source.
+- **Traduction** : les ingrédients (nom + catégorie) sont traduits en français via un dictionnaire couvrant 300 des 304 ingrédients distincts du catalogue source (99,5% des occurrences) ; les slugs sont recalés sur ceux déjà utilisés par les 14 recettes curatées quand le nom correspond exactement (ex: "Menthe fraîche" → `menthe`, pas un doublon `menthe_fraiche`), pour éviter deux entrées différentes pour le même ingrédient. Les noms de verre sont traduits de la même façon.
+- **Heuristiques pour les champs absents de la source** : difficulté (déduite du nombre d'ingrédients), type de glace (déduit des instructions), garniture (déduite d'ingrédients repérés comme décoratifs), rôle de chaque ingrédient pour le moteur de matching (alcool principal/secondaire, mixer, garniture, structurant). Contrairement aux 14 recettes curatées, les 430 recettes importées n'ont ni histoire, ni conseils (`history`/`tips` à `null`), une origine générique ("International", TheCocktailDB ne fournit pas de pays d'origine — contrairement à sa base sœur TheMealDB), et des **étapes de préparation en anglais** (traduire fidèlement 430 paragraphes libres dépasse ce qu'un dictionnaire de traduction peut faire sans risquer un contresens ; documenté plutôt que deviné).
+- **Filtre par pays** : pas encore implémenté, faute de donnée source fiable — prochaine étape si une source avec origine géographique est intégrée plus tard.
+- Impact mesuré : build de prod OK (le chunk de données catalogue grossit mais reste un fichier séparé, mis en cache par le service worker) ; audit Lighthouse performance sur l'accueil toujours à **97/100** (250 Kio de poids total) malgré le catalogue ×31.
+
 ## Limites connues
 
 - Comme documenté dans le README iOS pour la V1, deux noms d'ingrédients personnalisés produisant le même slug (accents) entreraient en conflit.
+- Les 430 cocktails importés du Sprint 10 ont des étapes de préparation en anglais (voir "Catalogue étendu" ci-dessus) et une origine générique plutôt qu'un pays précis.

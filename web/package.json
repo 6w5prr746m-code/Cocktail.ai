@@ -11,7 +11,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "images:optimize": "node scripts/optimize-images.mjs"
+    "images:optimize": "node scripts/optimize-images.mjs",
+    "import:cocktaildb": "node scripts/import-cocktaildb.mjs"
   },
   "dependencies": {
     "qrcode": "^1.5.4",
