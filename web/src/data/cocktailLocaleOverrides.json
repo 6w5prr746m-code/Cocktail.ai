@@ -1,0 +1,3871 @@
+{
+  "252": {
+    "fr": {
+      "steps": [
+        "Verser les deux ingrédients dans un verre à shot, avaler cul sec."
+      ]
+    }
+  },
+  "747": {
+    "fr": {
+      "steps": [
+        "Verser le Kahlúa, puis le Baileys, puis le Frangelico, sans glace et sans chercher à les superposer — servir !"
+      ]
+    }
+  },
+  "mojito": {
+    "en": {
+      "history": "Born in Havana, popularized during the 20th century, a symbol of Cuban refreshment.",
+      "tips": "Press the mint gently without crushing it, to avoid bitterness.",
+      "steps": [
+        "Squeeze the lime half into the glass.",
+        "Add the cane sugar and mint, muddle gently.",
+        "Add the white rum and stir well.",
+        "Fill with crushed ice and top up with soda water.",
+        "Garnish with a mint sprig."
+      ]
+    }
+  },
+  "cuba_libre": {
+    "en": {
+      "history": "Created in the early 20th century in Cuba, a blend of rum and cola.",
+      "tips": null,
+      "steps": [
+        "Fill the glass with ice cubes.",
+        "Add the white rum, then the cola.",
+        "Squeeze a lime wedge and stir."
+      ]
+    }
+  },
+  "daiquiri": {
+    "en": {
+      "history": "Invented near Santiago de Cuba in the late 19th century.",
+      "tips": "Shake well to get a frothy texture.",
+      "steps": [
+        "Pour all ingredients into a shaker filled with ice cubes.",
+        "Shake vigorously.",
+        "Strain into a chilled cocktail glass."
+      ]
+    }
+  },
+  "old_cuban": {
+    "en": {
+      "history": "Created in the 2000s, a Mojito dressed up for the evening with champagne.",
+      "tips": null,
+      "steps": [
+        "Pour the rum, lime, syrup and Angostura into a shaker with ice.",
+        "Shake.",
+        "Strain into a cocktail glass.",
+        "Top up with champagne."
+      ]
+    }
+  },
+  "virgin_mojito": {
+    "en": {
+      "history": "Alcohol-free version of the Mojito, designed for every guest.",
+      "tips": null,
+      "steps": [
+        "Squeeze the lime half into the glass.",
+        "Add the sugar and mint, muddle gently.",
+        "Fill with crushed ice and top up with soda water."
+      ]
+    }
+  },
+  "pina_colada": {
+    "en": {
+      "history": "Created in San Juan in the 1950s, it became the archetypal beach cocktail.",
+      "tips": "Using freshly blended pineapple gives a far better result than bottled juice.",
+      "steps": [
+        "Blend all ingredients with crushed ice.",
+        "Pour into a Hurricane glass.",
+        "Garnish with a pineapple slice."
+      ]
+    }
+  },
+  "mai_tai": {
+    "en": {
+      "history": "Created in 1944 by Victor Bergeron, a founding figure of the Tiki movement.",
+      "tips": null,
+      "steps": [
+        "Pour all ingredients into a shaker with ice.",
+        "Shake.",
+        "Pour unstrained into the glass filled with crushed ice."
+      ]
+    }
+  },
+  "whiskey_sour": {
+    "en": {
+      "history": "One of the oldest documented cocktails, popularized from the mid-19th century onward.",
+      "tips": "The egg white is optional but gives a signature frothy texture.",
+      "steps": [
+        "Pour all ingredients into a shaker without ice, dry shake.",
+        "Add ice and shake again.",
+        "Strain into the glass filled with ice cubes."
+      ]
+    }
+  },
+  "aperol_spritz": {
+    "en": {
+      "history": "Born in early 20th-century Veneto, now a staple of the summer aperitivo.",
+      "tips": null,
+      "steps": [
+        "Fill the glass with ice cubes.",
+        "Pour in the Aperol, then the Prosecco.",
+        "Top up with a splash of soda water and garnish."
+      ]
+    }
+  },
+  "espresso_martini": {
+    "en": {
+      "history": "Created in London in the late 1980s by bartender Dick Bradsell.",
+      "tips": "Use a freshly pulled, still-hot espresso for a more generous foam.",
+      "steps": [
+        "Pour all ingredients into a shaker with ice.",
+        "Shake vigorously to build a foam.",
+        "Strain into a chilled cocktail glass."
+      ]
+    }
+  },
+  "hot_toddy": {
+    "en": {
+      "history": "A traditional hot drink, often associated with winter remedies for the common cold.",
+      "tips": null,
+      "steps": [
+        "Pour the whisky, honey and lemon into the glass.",
+        "Top up with hot water and stir until the honey dissolves.",
+        "Garnish with a cinnamon stick."
+      ]
+    }
+  },
+  "margarita": {
+    "en": {
+      "history": "The exact origins are debated, but it established itself in the 1940s as tequila's signature cocktail.",
+      "tips": "Rim the glass with salt before serving, dipping it in lime then coarse salt.",
+      "steps": [
+        "Rim the glass with salt.",
+        "Pour all ingredients into a shaker with ice.",
+        "Shake and strain into the glass filled with ice cubes."
+      ]
+    }
+  },
+  "bramble": {
+    "en": {
+      "history": "Created in London in the 1980s by Dick Bradsell, inspired by the wild blackberries of his childhood.",
+      "tips": null,
+      "steps": [
+        "Pour the gin, lemon and syrup over crushed ice.",
+        "Stir.",
+        "Slowly drizzle crème de mûre on top for a fade effect."
+      ]
+    }
+  },
+  "shirley_temple": {
+    "en": {
+      "history": "Created in the 1930s, named in honor of the young actress of the same name.",
+      "tips": null,
+      "steps": [
+        "Fill the glass with ice cubes.",
+        "Pour in the ginger ale, then the grenadine.",
+        "Garnish with a maraschino cherry."
+      ]
+    }
+  },
+  "a1": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans un shaker, mélanger et servir sur glace dans un verre glacé."
+      ]
+    }
+  },
+  "abc": {
+    "fr": {
+      "steps": [
+        "Superposer dans un verre à shot."
+      ]
+    }
+  },
+  "ace": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients avec de la glace puis filtrer dans un verre glacé."
+      ]
+    }
+  },
+  "acid": {
+    "fr": {
+      "steps": [
+        "Verser d'abord le rhum à 151°, puis celui à 101°, à servir avec un Coca ou un Dr Pepper en accompagnement."
+      ]
+    }
+  },
+  "at_t": {
+    "fr": {
+      "steps": [
+        "Verser la vodka et le gin sur glace, ajouter le tonic et mélanger."
+      ]
+    }
+  },
+  "adam": {
+    "fr": {
+      "steps": [
+        "Dans un shaker à moitié rempli de glaçons, mélanger tous les ingrédients.",
+        "Bien shaker.",
+        "Filtrer dans un verre à cocktail."
+      ]
+    }
+  },
+  "a_j": {
+    "fr": {
+      "steps": [
+        "Shaker les ingrédients avec de la glace, filtrer dans un verre à cocktail et servir."
+      ]
+    }
+  },
+  "affair": {
+    "fr": {
+      "steps": [
+        "Verser le schnaps, le jus d'orange et le jus de cranberry sur glace dans un verre Highball.",
+        "Compléter avec de l'eau gazeuse et servir."
+      ]
+    }
+  },
+  "avalon": {
+    "fr": {
+      "steps": [
+        "Remplir un grand verre de glaçons.",
+        "Superposer la vodka Finlandia, les jus de citron et de pomme, le Pisang Ambon, puis compléter avec de la limonade.",
+        "Mélanger légèrement et décorer d'une spirale de peau de concombre et d'une cerise rouge.",
+        "Le concombre apporte du pep et un bel effet visuel.",
+        "Cette création de Timo Haimi a remporté le premier prix du concours Finlandia Vodka Long Drink de 1991."
+      ]
+    }
+  },
+  "apello": {
+    "fr": {
+      "steps": [
+        "Mélanger.",
+        "Décorer d'une cerise confite."
+      ]
+    }
+  },
+  "almeria": {
+    "fr": {
+      "steps": [
+        "Dans un shaker à moitié rempli de glaçons, mélanger tous les ingrédients.",
+        "Bien shaker.",
+        "Filtrer dans un verre à cocktail."
+      ]
+    }
+  },
+  "abilene": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans un verre Highball presque rempli de glaçons.",
+        "Bien mélanger."
+      ]
+    }
+  },
+  "addison": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients ensemble et filtrer dans un verre glacé."
+      ]
+    }
+  },
+  "aviation": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans un shaker rempli de glace.",
+        "Bien shaker et filtrer dans un verre à cocktail.",
+        "Décorer d'une cerise."
+      ]
+    }
+  },
+  "applecar": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients avec de la glace, filtrer dans un verre à cocktail et servir."
+      ]
+    }
+  },
+  "affinity": {
+    "fr": {
+      "steps": [
+        "Dans un verre à mélange à moitié rempli de glaçons, mélanger tous les ingrédients.",
+        "Bien mélanger.",
+        "Filtrer dans un verre à cocktail."
+      ]
+    }
+  },
+  "acapulco": {
+    "fr": {
+      "steps": [
+        "Mélanger et shaker tous les ingrédients (sauf la menthe) avec de la glace, puis filtrer dans un verre Old Fashioned rempli de glaçons.",
+        "Ajouter le brin de menthe et servir."
+      ]
+    }
+  },
+  "alexander": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients avec de la glace et filtrer dans un verre à cocktail.",
+        "Saupoudrer de muscade et servir."
+      ]
+    }
+  },
+  "avalanche": {
+    "fr": {
+      "steps": [
+        "Mélanger dans un verre Highball sur glace, bien shaker."
+      ]
+    }
+  },
+  "allegheny": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients (sauf le zeste de citron) avec de la glace et filtrer dans un verre à cocktail.",
+        "Ajouter le zeste de citron sur le dessus et servir."
+      ]
+    }
+  },
+  "americano": {
+    "fr": {
+      "steps": [
+        "Verser le Campari et le vermouth sur glace dans le verre, ajouter un trait d'eau gazeuse et décorer d'une demi-rondelle d'orange."
+      ]
+    }
+  },
+  "algonquin": {
+    "fr": {
+      "steps": [
+        "Mélanger et shaker tous les ingrédients avec de la glace, filtrer dans un verre à cocktail et servir."
+      ]
+    }
+  },
+  "artillery": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients avec de la glace, filtrer dans un verre à cocktail et servir."
+      ]
+    }
+  },
+  "afterglow": {
+    "fr": {
+      "steps": [
+        "Mélanger.",
+        "Servir sur glace."
+      ]
+    }
+  },
+  "addington": {
+    "fr": {
+      "steps": [
+        "Mélanger les deux vermouths dans un shaker et filtrer dans un verre glacé.",
+        "Compléter avec un trait d'eau gazeuse."
+      ]
+    }
+  },
+  "b_52": {
+    "fr": {
+      "steps": [
+        "Superposer les ingrédients dans un verre à shot.",
+        "Servir avec un agitateur."
+      ]
+    }
+  },
+  "b_53": {
+    "fr": {
+      "steps": [
+        "Superposer le Kahlúa, la Sambuca et le Grand Marnier dans un verre à shot, dans cet ordre.",
+        "Meilleur que le B-52."
+      ]
+    }
+  },
+  "bijou": {
+    "fr": {
+      "steps": [
+        "Mélanger dans un verre à mélange avec de la glace et filtrer."
+      ]
+    }
+  },
+  "boxcar": {
+    "fr": {
+      "steps": [
+        "Dans un shaker à moitié rempli de glaçons, mélanger tous les ingrédients.",
+        "Bien shaker.",
+        "Filtrer dans un verre à whisky sour."
+      ]
+    }
+  },
+  "big_red": {
+    "fr": {
+      "steps": [
+        "Verser les ingrédients dans un verre à shot de 3 cl."
+      ]
+    }
+  },
+  "bellini": {
+    "fr": {
+      "steps": [
+        "Verser la purée de pêche dans une flûte glacée, ajouter le vin effervescent.",
+        "Mélanger délicatement."
+      ]
+    }
+  },
+  "balmoral": {
+    "fr": {
+      "steps": [
+        "Dans un verre à mélange à moitié rempli de glaçons, mélanger tous les ingrédients.",
+        "Bien mélanger.",
+        "Filtrer dans un verre à cocktail."
+      ]
+    }
+  },
+  "bluebird": {
+    "fr": {
+      "steps": [
+        "Dans un verre à mélange à moitié rempli de glace pilée, mélanger le gin, le triple sec, le curaçao et le bitter.",
+        "Bien mélanger.",
+        "Filtrer dans un verre à cocktail et décorer d'un zeste de citron et d'une cerise."
+      ]
+    }
+  },
+  "brooklyn": {
+    "fr": {
+      "steps": [
+        "Mélanger les ingrédients avec de la glace et remuer jusqu'à ce que le mélange soit bien frais.",
+        "Filtrer dans un verre à cocktail glacé."
+      ]
+    }
+  },
+  "bora_bora": {
+    "fr": {
+      "steps": [
+        "Préparer au blender ou au shaker, servir dans un verre Highball sur glaçons.",
+        "Décorer d'une tranche d'ananas et d'une cerise."
+      ]
+    }
+  },
+  "boomerang": {
+    "fr": {
+      "steps": [
+        "Dans un verre à mélange à moitié rempli de glaçons, mélanger le gin, le vermouth, le bitter et la liqueur de marasquin.",
+        "Bien mélanger.",
+        "Filtrer dans un verre à cocktail et décorer d'une cerise."
+      ]
+    }
+  },
+  "barracuda": {
+    "fr": {
+      "steps": [
+        "Shaker les ingrédients avec de la glace.",
+        "Filtrer dans le verre, compléter avec du vin effervescent."
+      ]
+    }
+  },
+  "brigadier": {
+    "fr": {
+      "steps": [
+        "Mélanger les ingrédients dans une tasse chauffée et remuer."
+      ]
+    }
+  },
+  "broadside": {
+    "fr": {
+      "steps": [
+        "Remplir le verre à moitié de glaçons.",
+        "Écraser l'absinthe (plante) et l'ajouter à la glace.",
+        "Verser le rhum, le scotch et le bitter, puis servir !"
+      ]
+    }
+  },
+  "buccaneer": {
+    "fr": {
+      "steps": [
+        "Verser la Corona dans un verre à bière de 50 cl, ajouter le Bacardi citron dans la bière et mélanger très délicatement."
+      ]
+    }
+  },
+  "brain_fart": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients.",
+        "Lentement et délicatement.",
+        "Fonctionne mieux si la glace est ajoutée au bol à punch et si les sodas sont bien froids."
+      ]
+    }
+  },
+  "blackthorn": {
+    "fr": {
+      "steps": [
+        "Mélanger le sloe gin et le vermouth avec de la glace et filtrer dans un verre à cocktail.",
+        "Ajouter le zeste de citron et servir."
+      ]
+    }
+  },
+  "bob_marley": {
+    "fr": {
+      "steps": [
+        "Superposer dans un verre à shot de 6 cl."
+      ]
+    }
+  },
+  "bible_belt": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients et verser sur glace."
+      ]
+    }
+  },
+  "bubble_gum": {
+    "fr": {
+      "steps": [
+        "Superposer dans l'ordre dans un verre à shot."
+      ]
+    }
+  },
+  "bumble_bee": {
+    "fr": {
+      "steps": [
+        "Ceci est un shot en couches.",
+        "Verser d'abord le Baileys dans le verre à shot.",
+        "Prendre ensuite une cuillère retournée et la poser contre la paroi intérieure du verre.",
+        "Ajouter délicatement le Kahlúa.",
+        "Répéter l'opération avec la Sambuca.",
+        "Bien réalisé, l'alcool restera séparé et rappellera un bourdon.",
+        "Déguster !"
+      ]
+    }
+  },
+  "baby_eskimo": {
+    "fr": {
+      "steps": [
+        "Laisser la glace ramollir environ 10 minutes.",
+        "Ajouter les ingrédients dans l'ordre, remuer avec une baguette (un couteau ou une cuillère conviennent aussi).",
+        "À déguster immédiatement, et souvent.",
+        "Léger et rafraîchissant, idéal après un cocktail costaud."
+      ]
+    }
+  },
+  "boston_sour": {
+    "fr": {
+      "steps": [
+        "Shaker le jus de citron, le sucre glace, le whisky et le blanc d'œuf avec de la glace concassée, puis filtrer dans un verre à whisky sour.",
+        "Ajouter la rondelle de citron, surmonter d'une cerise et servir."
+      ]
+    }
+  },
+  "bahama_mama": {
+    "fr": {
+      "steps": [
+        "Ajouter deux parts d'eau gazeuse, ou plus ou moins selon le goût.",
+        "Mélanger le tout et verser sur une bonne quantité de glace.",
+        "Déguster avec une paille."
+      ]
+    }
+  },
+  "casino": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans un shaker avec des glaçons.",
+        "Bien shaker.",
+        "Filtrer dans un verre à cocktail glacé.",
+        "Décorer d'un zeste de citron et d'une cerise confite.",
+        "Servir sans paille."
+      ]
+    }
+  },
+  "cafe_savoy": {
+    "fr": {
+      "steps": [
+        "Remplir la tasse de café presque à ras bord. Ajouter le lait, le triple sec et le brandy.",
+        "Mélanger."
+      ]
+    }
+  },
+  "caipirinha": {
+    "fr": {
+      "steps": [
+        "Placer le citron vert et le sucre dans un verre Old Fashioned et piler (écraser les deux ingrédients ensemble à l'aide d'un pilon ou d'une cuillère en bois).",
+        "Remplir le verre de glace et ajouter la cachaça."
+      ]
+    }
+  },
+  "cream_soda": {
+    "fr": {
+      "steps": [
+        "Verser 3 cl de rhum épicé dans un verre Highball avec de la glace.",
+        "Compléter avec du ginger ale."
+      ]
+    }
+  },
+  "cuba_libra": {
+    "fr": {
+      "steps": [
+        "Remplir un grand verre de glaçons.",
+        "Ajouter le rhum.",
+        "Frotter le bord du verre avec un quartier de citron vert coupé puis presser le jus dans le verre.",
+        "Compléter avec du Coca-Cola.",
+        "Décorer d'une rondelle de citron vert.",
+        "Déguster !"
+      ]
+    }
+  },
+  "cherry_rum": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients avec de la glace, filtrer dans un verre à cocktail et servir."
+      ]
+    }
+  },
+  "corn_n_oil": {
+    "fr": {
+      "steps": [
+        "Recouper le demi-citron vert en deux.",
+        "Ajouter le citron vert, le falernum et le bitter dans un verre Old Fashioned.",
+        "Piler.",
+        "Ajouter le rhum (un rhum vieilli de la Barbade comme le Plantation 5 ans est recommandé).",
+        "Ajouter de la glace et mélanger.",
+        "Faire flotter le rhum brun sur le dessus.",
+        "Servir avec une paille."
+      ]
+    }
+  },
+  "citrus_coke": {
+    "fr": {
+      "steps": [
+        "Verser la moitié du Coca dans un verre.",
+        "Ajouter ensuite le Bacardi et compléter avec le reste du Coca.",
+        "Mélanger et déguster !"
+      ]
+    }
+  },
+  "casa_blanca": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients avec de la glace, filtrer dans un verre à cocktail et servir."
+      ]
+    }
+  },
+  "clover_club": {
+    "fr": {
+      "steps": [
+        "Shaker à sec les ingrédients pour les émulsionner, ajouter de la glace, shaker à nouveau et servir sans glace."
+      ]
+    }
+  },
+  "caipirissima": {
+    "fr": {
+      "steps": [
+        "Identique à la Caipirinha, mais avec du rhum blanc à la place de la cachaça.",
+        "C'est excellent !"
+      ]
+    }
+  },
+  "city_slicker": {
+    "fr": {
+      "steps": [
+        "Dans un shaker à moitié rempli de glaçons, mélanger tous les ingrédients.",
+        "Bien shaker.",
+        "Filtrer dans un verre à cocktail."
+      ]
+    }
+  },
+  "campari_beer": {
+    "fr": {
+      "steps": [
+        "Utiliser un verre de 45 cl.",
+        "Verser le Campari en premier.",
+        "Compléter avec de la bière."
+      ]
+    }
+  },
+  "chicago_fizz": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients (sauf l'eau gazeuse) avec de la glace et filtrer dans un verre Highball sur deux glaçons.",
+        "Compléter avec de l'eau gazeuse, mélanger et servir."
+      ]
+    }
+  },
+  "cosmopolitan": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans un shaker rempli de glace.",
+        "Bien shaker et filtrer deux fois dans un grand verre à cocktail.",
+        "Décorer d'une rondelle de citron vert."
+      ]
+    }
+  },
+  "coffee_vodka": {
+    "fr": {
+      "steps": [
+        "Faire bouillir l'eau et le sucre jusqu'à dissolution complète.",
+        "Retirer du feu.",
+        "Ajouter progressivement le café instantané en continuant de mélanger.",
+        "Ajouter une gousse de vanille hachée à la vodka, puis mélanger le sirop de sucre refroidi et la solution de café avec la vodka.",
+        "Fermer hermétiquement et secouer vigoureusement chaque jour pendant 3 semaines.",
+        "Filtrer.",
+        "Il est préférable de laisser le mélange sucré refroidir complètement pour éviter que la vodka ne s'évapore lors de l'ajout.",
+        "Pour une texture plus douce, ajouter environ une cuillère à café de glycérine au produit fini."
+      ]
+    }
+  },
+  "casino_royale": {
+    "fr": {
+      "steps": [
+        "Dans un shaker à moitié rempli de glaçons, mélanger tous les ingrédients.",
+        "Bien shaker.",
+        "Filtrer dans un verre à whisky sour."
+      ]
+    }
+  },
+  "corpse_reviver": {
+    "fr": {
+      "steps": [
+        "Shaker, filtrer, servir sans glace dans un verre à cocktail rincé à l'absinthe."
+      ]
+    }
+  },
+  "chocolate_milk": {
+    "fr": {
+      "steps": [
+        "Verser le lait au fond, ajouter la liqueur par-dessus puis un trait d'amaretto.",
+        "Ne pas mélanger.",
+        "Cul sec !"
+      ]
+    }
+  },
+  "clove_cocktail": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients avec de la glace, filtrer dans un verre à cocktail et servir."
+      ]
+    }
+  },
+  "coffee_liqueur": {
+    "fr": {
+      "steps": [
+        "Mélanger le café, le sucre et l'eau.",
+        "Laisser mijoter 1 heure puis refroidir.",
+        "Ajouter la vanille et la vodka.",
+        "Laisser vieillir dans un bocal hermétique pendant 2 à 3 semaines."
+      ]
+    }
+  },
+  "coke_and_drops": {
+    "fr": {
+      "steps": [
+        "Prendre un verre, y verser le Coca, puis ajouter 7 gouttes de jus de citron.",
+        "Décorer d'une rondelle de citron sur le bord du verre."
+      ]
+    }
+  },
+  "chocolate_drink": {
+    "fr": {
+      "steps": [
+        "Faire fondre la tablette dans un peu d'eau bouillante.",
+        "Ajouter le lait.",
+        "Cuire à feu doux en fouettant délicatement jusqu'à ce que le mélange soit bien chaud.",
+        "Ne pas laisser bouillir !",
+        "Servir dans une tasse."
+      ]
+    }
+  },
+  "cranberry_punch": {
+    "fr": {
+      "steps": [
+        "Mélanger les quatre premiers ingrédients.",
+        "Mélanger jusqu'à dissolution du sucre, puis réfrigérer.",
+        "Ajouter le ginger ale juste avant de servir.",
+        "Ajouter une couronne de glace pour garder le punch bien frais."
+      ]
+    }
+  },
+  "derby": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans un verre à mélange avec de la glace.",
+        "Mélanger.",
+        "Filtrer dans un verre à cocktail.",
+        "Décorer d'un brin de menthe fraîche dans le verre."
+      ]
+    }
+  },
+  "diesel": {
+    "fr": {
+      "steps": [
+        "Verser d'abord la bière blonde puis ajouter le sirop de cassis.",
+        "Compléter avec le cidre.",
+        "La couleur doit être très sombre, proche de celle d'une Guinness."
+      ]
+    }
+  },
+  "danbooka": {
+    "fr": {
+      "steps": [
+        "Verser et mélanger."
+      ]
+    }
+  },
+  "downshift": {
+    "fr": {
+      "steps": [
+        "Commencer par la limonade pétillante.",
+        "Ajouter ensuite la tequila.",
+        "Ajouter ensuite le punch aux fruits, puis faire flotter le rhum overproof sur le dessus.",
+        "Glaçons facultatifs."
+      ]
+    }
+  },
+  "dragonfly": {
+    "fr": {
+      "steps": [
+        "Dans un verre Highball presque rempli de glaçons, verser le gin et le ginger ale.",
+        "Bien mélanger.",
+        "Décorer d'un quartier de citron vert."
+      ]
+    }
+  },
+  "dry_martini": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans un verre à mélange avec des glaçons.",
+        "Bien mélanger.",
+        "Filtrer dans un verre à Martini glacé.",
+        "Presser l'huile du zeste de citron sur le cocktail, ou décorer d'une olive."
+      ]
+    }
+  },
+  "dry_rob_roy": {
+    "fr": {
+      "steps": [
+        "Dans un verre à mélange à moitié rempli de glaçons, mélanger le scotch et le vermouth.",
+        "Bien mélanger.",
+        "Filtrer dans un verre à cocktail.",
+        "Décorer d'un zeste de citron."
+      ]
+    }
+  },
+  "dirty_nipple": {
+    "fr": {
+      "steps": [
+        "C'est un shot en couches - le Baileys doit être sur le dessus."
+      ]
+    }
+  },
+  "dirty_martini": {
+    "fr": {
+      "steps": [
+        "Verser la vodka, le vermouth sec et la saumure d'olive dans un shaker avec une poignée de glace, et bien shaker.",
+        "Frotter le bord d'un verre à Martini avec un quartier de citron.",
+        "Filtrer le contenu du shaker dans le verre et ajouter l'olive.",
+        "Un Dirty Martini contient un trait de saumure ou de jus d'olive et se décore généralement d'une olive."
+      ]
+    }
+  },
+  "darkwood_sling": {
+    "fr": {
+      "steps": [
+        "Il existe de nombreuses bonnes liqueurs de cerise, mais je préfère la Heering.",
+        "Ajouter une part de liqueur.",
+        "Ajouter ensuite une part d'eau gazeuse.",
+        "Pour une version plus acidulée, utiliser du tonic (la plupart préfèrent le cocktail sans tonic).",
+        "Compléter ensuite le verre avec du jus d'orange et des glaçons."
+      ]
+    }
+  },
+  "dark_and_stormy": {
+    "fr": {
+      "steps": [
+        "Dans un verre Highball rempli de glace, ajouter 6 cl de rhum brun et compléter avec du ginger beer.",
+        "Décorer d'un quartier de citron vert."
+      ]
+    }
+  },
+  "dark_caipirinha": {
+    "fr": {
+      "steps": [
+        "Piler le sucre avec les quartiers de citron vert dans un verre Old Fashioned.",
+        "Remplir le verre de glaçons.",
+        "Verser la cachaça dans le verre.",
+        "Bien mélanger."
+      ]
+    }
+  },
+  "duchamp_s_punch": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients.",
+        "Filtrer deux fois dans un verre Old Fashioned glacé avec un gros glaçon.",
+        "Décorer de quelques brins de lavande."
+      ]
+    }
+  },
+  "damned_if_you_do": {
+    "fr": {
+      "steps": [
+        "Verser dans un verre à shot.",
+        "Porter à la bouche.",
+        "Répéter autant que nécessaire."
+      ]
+    }
+  },
+  "dubonnet_cocktail": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients (sauf le zeste de citron) avec de la glace et filtrer dans un verre à cocktail.",
+        "Ajouter le zeste de citron et servir."
+      ]
+    }
+  },
+  "drinking_chocolate": {
+    "fr": {
+      "steps": [
+        "Chauffer très doucement la crème et le lait avec la cannelle et la gousse de vanille pendant 15 à 20 minutes (à défaut de gousse, ajouter 1 à 2 cuillères à café de vanille après cuisson).",
+        "Retirer la gousse et le bâton de cannelle.",
+        "Ajouter le chocolat.",
+        "Mélanger jusqu'à fonte complète.",
+        "Servir surmonté d'une généreuse couche de crème fouettée bien ferme.",
+        "Pour 1 à 2 personnes, selon votre gourmandise.",
+        "Pour un chocolat plus riche, utiliser 12 cl de lait, 12 cl de crème et 12 cl de chocolat.",
+        "Servir dans une tasse."
+      ]
+    }
+  },
+  "death_in_the_afternoon": {
+    "fr": {
+      "steps": [
+        "Tout simplement : verser l'absinthe dans un verre glacé et compléter avec le champagne.",
+        "À déguster en milieu d'après-midi pour un effet optimal."
+      ]
+    }
+  },
+  "egg_cream": {
+    "fr": {
+      "steps": [
+        "Mélanger le sirop et le lait dans un verre.",
+        "Ajouter l'eau gazeuse et servir avec une paille."
+      ]
+    }
+  },
+  "egg_nog_4": {
+    "fr": {
+      "steps": [
+        "Dans un petit saladier, battre les jaunes d'œufs jusqu'à ce qu'ils soient homogènes.",
+        "Ajouter progressivement 60 g de sucre en battant à grande vitesse jusqu'à obtenir un mélange épais et jaune pâle.",
+        "Incorporer le lait, puis le rhum, le bourbon, la vanille et le sel.",
+        "Réfrigérer complètement.",
+        "Fouetter la crème.",
+        "Bien laver les fouets.",
+        "Dans un grand saladier, battre les blancs d'œufs jusqu'à formation de pics mous.",
+        "Ajouter progressivement les 60 g de sucre restants en battant jusqu'à obtenir des pics fermes.",
+        "Incorporer délicatement le mélange de jaunes et la crème fouettée aux blancs en neige.",
+        "Servir immédiatement.",
+        "Saupoudrer chaque verre de muscade.",
+        "Servir dans un bol à punch ou un grand saladier.",
+        "NOTE : pour une version sans alcool, préparer de la même façon en omettant le bourbon et le rhum, et en portant le lait à 70 cl."
+      ]
+    }
+  },
+  "english_highball": {
+    "fr": {
+      "steps": [
+        "Verser le brandy, le gin et le vermouth rouge dans un verre Highball sur des glaçons.",
+        "Compléter avec de l'eau gazeuse.",
+        "Ajouter le zeste de citron, mélanger et servir (le ginger ale peut remplacer l'eau gazeuse si préféré)."
+      ]
+    }
+  },
+  "espresso_rumtini": {
+    "fr": {
+      "steps": [
+        "Mélanger dans un verre à cocktail.",
+        "Décorer d'un peu de cacao en poudre et de grains de café."
+      ]
+    }
+  },
+  "egg_nog_healthy": {
+    "fr": {
+      "steps": [
+        "Fouetter le substitut d'œuf avec le sucre, puis mélanger avec les deux laits, la vanille et le rhum.",
+        "Bien mélanger.",
+        "Réfrigérer toute la nuit.",
+        "Saupoudrer de muscade.",
+        "Pour 6 personnes."
+      ]
+    }
+  },
+  "english_rose_cocktail": {
+    "fr": {
+      "steps": [
+        "Frotter le bord du verre à cocktail avec du jus de citron puis le tremper dans le sucre glace.",
+        "Shaker tous les ingrédients (sauf la cerise) avec de la glace et filtrer dans le verre givré au sucre.",
+        "Surmonter d'une cerise et servir."
+      ]
+    }
+  },
+  "elderflower_caipirinha": {
+    "fr": {
+      "steps": [
+        "Prendre le verre et y piler le citron vert.",
+        "Remplir le verre de glace pilée et ajouter la cachaça.",
+        "Bien mélanger et compléter avec un peu plus de glace pilée.",
+        "Décorer de citron vert et déguster !"
+      ]
+    }
+  },
+  "egg_nog_classic_cooked": {
+    "fr": {
+      "steps": [
+        "Dans une grande casserole, battre les œufs, le sucre et éventuellement le sel.",
+        "Incorporer 47 cl de lait.",
+        "Cuire à feu doux en remuant constamment, jusqu'à ce que le mélange nappe une cuillère métallique et atteigne 71 °C.",
+        "Retirer du feu.",
+        "Incorporer les 47 cl de lait restants et la vanille.",
+        "Couvrir et réfrigérer jusqu'à ce que le mélange soit bien froid, plusieurs heures ou toute une nuit.",
+        "Juste avant de servir, verser dans un bol ou une carafe.",
+        "Décorer ou ajouter des compléments, selon l'envie.",
+        "Choisir un ou plusieurs éléments parmi : copeaux de chocolat, bâtons de cannelle, arômes, brandy ou liqueur aromatisés, jus ou nectar de fruits, muscade moulue, cerises confites, rondelles d'orange, bâtons de menthe poivrée, brandy nature, rhum ou whisky, sorbet ou glace, crème fouettée.",
+        "Servir immédiatement."
+      ]
+    }
+  },
+  "empellon_cocina_s_fat_washed_mezcal": {
+    "fr": {
+      "steps": [
+        "Pour que votre graisse de porc soit tout aussi savoureuse, voici leur marinade adobo et comment l'utiliser (il vous faudra aussi un travers de porc) : 4 piments ancho, 8 piments guajillo et 4 piments chipotle, plus 4 gousses d'ail rôties, 12 cl de vinaigre de cidre, un quart de cuillère à café d'origan mexicain, une cuillère à café de poivre noir moulu, un clou de girofle entier, un quart de cuillère à café de cannelle moulue et une demi-cuillère à café de cumin moulu.",
+        "Torréfier les piments séchés et les laisser tremper dans l'eau au moins une heure pour les réhydrater.",
+        "Égoutter et jeter l'eau de trempage.",
+        "Mélanger les piments réhydratés avec le reste des ingrédients et mixer jusqu'à obtenir une texture lisse.",
+        "Fumer à froid un travers de porc en utilisant un grand bac avec des copeaux de bois d'un côté et du charbon de l'autre.",
+        "Placer un autre bac, plus petit, contenant le travers de porc, au-dessus du bac charbon/copeaux.",
+        "Allumer le charbon en veillant à ne pas enflammer les copeaux de bois.",
+        "Couvrir les deux bacs de papier aluminium et laisser fumer 10 à 15 minutes jusqu'au niveau de fumée souhaité, puis enrober de marinade adobo et envelopper dans du papier aluminium avant de cuire au four à 150 °C pendant 7 heures.",
+        "Une fois le travers refroidi, récupérer la graisse filtrée pour l'infusion.",
+        "S'il manque de la graisse, compléter avec du saindoux acheté chez un boucher.",
+        "Pour retrouver la même profondeur de goût sans le travers, chauffer la graisse dans une casserole avec quelques cuillères de marinade.",
+        "Une fois la graisse de porc assaisonnée refroidie et liquide, verser des quantités égales de mezcal Ilegal Joven et de graisse dans un contenant hermétique.",
+        "Fermer le contenant, bien secouer, puis placer au congélateur toute la nuit.",
+        "Une fois le mélange séparé et figé, le verser à travers un chinois à mailles fines.",
+        "À défaut de chinois, utiliser une passoire à mailles fines, ou retirer la majeure partie de la graisse à la cuillère.",
+        "Il restera quelques gouttelettes de graisse orangée dans le mezcal filtré : le repasser à travers plusieurs couches d'étamine (ou des filtres à café à défaut) pour les éliminer.",
+        "Le mezcal est maintenant prêt à être dégusté, sec ou en cocktail.",
+        "Teinture d'habanero : émincer des piments habanero et ajouter 6 cl de mezcal Ilegal Joven.",
+        "Laisser infuser toute la nuit, ou jusqu'au niveau de piquant souhaité.",
+        "Cocktail : mélanger le mezcal et la liqueur de chocolat dans un verre à mélange avec de la glace, remuer 45 secondes.",
+        "Filtrer dans une coupe glacée.",
+        "Faire couler délicatement la liqueur de café le long de la paroi intérieure de la coupe, à l'aide d'une cuillère.",
+        "Décorer de 5 gouttes de teinture d'habanero."
+      ]
+    }
+  },
+  "frose": {
+    "fr": {
+      "steps": [
+        "Étape 1 : verser le rosé dans un plat et congeler jusqu'à ce qu'il soit presque solide (il ne se solidifiera pas complètement à cause de l'alcool), pendant 6 heures minimum.",
+        "Étape 2 : pendant ce temps, porter à ébullition le sucre et 12 cl d'eau dans une casserole moyenne ; cuire en remuant constamment jusqu'à dissolution du sucre, environ 3 minutes.",
+        "Ajouter les fraises, retirer du feu et laisser infuser 30 minutes pour parfumer le sirop.",
+        "Filtrer à travers une passoire fine dans un petit bol (sans presser les fruits) ; couvrir et réfrigérer environ 30 minutes.",
+        "Étape 3 : gratter le rosé congelé et le transférer dans un blender.",
+        "Ajouter le jus de citron, 10 cl de sirop de fraise et 24 cl de glace pilée, puis mixer jusqu'à obtenir une texture lisse.",
+        "Transférer le bol du blender au congélateur et laisser prendre jusqu'à obtenir une texture épaisse type milkshake, 25 à 35 minutes.",
+        "Étape 4 : mixer à nouveau jusqu'à obtenir une texture granitée.",
+        "Répartir dans les verres.",
+        "Étape 5 : à l'avance, le rosé peut être congelé jusqu'à une semaine."
+      ]
+    }
+  },
+  "frappe": {
+    "fr": {
+      "steps": [
+        "Mélanger le tout.",
+        "Mixer à vitesse maximale pendant environ 1 minute.",
+        "Verser dans un verre et déguster avec une paille.",
+        "Remarque : fonctionne mieux si tout est bien froid (si le café est fraîchement préparé, le mélanger au lait et le laisser reposer 30 minutes au réfrigérateur).",
+        "Si le mélange ne mousse pas assez, ajouter un peu plus de lait, voire de lait en poudre.",
+        "La mousse se transforme peu à peu en liquide au fond du verre : on peut ainsi le déguster tranquillement pendant une trentaine de minutes, du café glacé continuant d'apparaître au fond.",
+        "Très rafraîchissant."
+      ]
+    }
+  },
+  "foxy_lady": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients avec de la glace, filtrer dans un verre à cocktail glacé et servir."
+      ]
+    }
+  },
+  "french_75": {
+    "fr": {
+      "steps": [
+        "Mélanger le gin, le sucre et le jus de citron dans un shaker rempli de glace.",
+        "Shaker vigoureusement et filtrer dans une flûte à champagne glacée.",
+        "Compléter avec le champagne.",
+        "Mélanger délicatement."
+      ]
+    }
+  },
+  "figgy_thyme": {
+    "fr": {
+      "steps": [
+        "Dans un sac à glace pilée, concasser de la glace énergiquement (@glacioice).",
+        "Verser cette glace pilée dans un verre Collins.",
+        "Dans un shaker, piler ensemble les figues et le thym.",
+        "Ajouter la vodka au miel, le jus de citron et un gros glaçon (@glacioice).",
+        "Shaker jusqu'à ce que le mélange soit bien frais, puis filtrer dans le verre.",
+        "Ajouter le tonic puis 2 traits d'Angostura.",
+        "Décorer de tranches de figues et de thym."
+      ]
+    }
+  },
+  "frisco_sour": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients (sauf les rondelles de citron et de citron vert) avec de la glace et filtrer dans un verre à whisky sour.",
+        "Décorer de rondelles de citron et de citron vert et servir."
+      ]
+    }
+  },
+  "fruit_shake": {
+    "fr": {
+      "steps": [
+        "Mixer jusqu'à obtenir une texture lisse."
+      ]
+    }
+  },
+  "fruit_cooler": {
+    "fr": {
+      "steps": [
+        "Mélanger les fraises avec le sucre et laisser reposer toute une nuit au réfrigérateur.",
+        "Couper le citron, réserver deux rondelles.",
+        "Presser le reste.",
+        "Mélanger le jus de citron, les fraises, le jus de pomme et l'eau gazeuse.",
+        "Ajouter les rondelles de citron réservées, pour la déco.",
+        "Dans les verres, ajouter des glaçons et une rondelle de pomme.",
+        "Verser la préparation et servir."
+      ]
+    }
+  },
+  "freddy_kruger": {
+    "fr": {
+      "steps": [
+        "Servir en shot généreux !"
+      ]
+    }
+  },
+  "funk_and_soul": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients et filtrer dans un verre Collins.",
+        "Utiliser si possible du rhum jamaïcain pour un goût plus authentique."
+      ]
+    }
+  },
+  "fuzzy_asshole": {
+    "fr": {
+      "steps": [
+        "Remplir une tasse de café à moitié.",
+        "Compléter l'autre moitié avec du schnaps à la pêche.",
+        "Mélanger et déguster bien chaud."
+      ]
+    }
+  },
+  "french_martini": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans un shaker avec des glaçons.",
+        "Bien shaker et filtrer dans un verre à cocktail glacé.",
+        "Presser l'huile du zeste de citron sur le cocktail."
+      ]
+    }
+  },
+  "french_negroni": {
+    "fr": {
+      "steps": [
+        "Ajouter de la glace dans un shaker et y verser tous les ingrédients.",
+        "À l'aide d'une cuillère à mélange, remuer 40 à 45 tours, jusqu'à ce que le mélange soit bien frais.",
+        "Filtrer dans un verre à Martini, ou sur glace dans un verre Old Fashioned.",
+        "Décorer d'un zeste d'orange."
+      ]
+    }
+  },
+  "fahrenheit_5000": {
+    "fr": {
+      "steps": [
+        "Couvrir le fond du verre à shot de Tabasco, puis compléter moitié Firewater, moitié Absolut Peppar."
+      ]
+    }
+  },
+  "flying_dutchman": {
+    "fr": {
+      "steps": [
+        "Dans un verre Old Fashioned presque rempli de glaçons, verser le gin et le triple sec.",
+        "Bien mélanger."
+      ]
+    }
+  },
+  "frozen_daiquiri": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients (sauf la cerise) dans un blender, mixer à faible vitesse pendant cinq secondes puis à grande vitesse jusqu'à obtenir une texture ferme.",
+        "Verser dans une flûte à champagne, surmonter d'une cerise et servir."
+      ]
+    }
+  },
+  "fruit_flip_flop": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans le bol du blender, couvrir et mixer à vitesse moyenne jusqu'à obtenir un mélange homogène.",
+        "Verser dans un grand verre, deux moyens ou trois petits, et déguster."
+      ]
+    }
+  },
+  "flying_scotchman": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients avec de la glace, filtrer dans un verre à cocktail et servir."
+      ]
+    }
+  },
+  "french_connection": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients directement dans un verre Old Fashioned rempli de glaçons.",
+        "Mélanger délicatement."
+      ]
+    }
+  },
+  "flaming_dr_pepper": {
+    "fr": {
+      "steps": [
+        "Ajouter l'amaretto, le Bacardi et la vodka.",
+        "Mélanger avec le Dr.",
+        "Pepper et la bière."
+      ]
+    }
+  },
+  "flaming_lamborghini": {
+    "fr": {
+      "steps": [
+        "Verser la Sambuca et le Kahlúa dans le verre à cocktail et donner une paille au buveur.",
+        "Verser le Baileys et le curaçao bleu dans deux verres à shot séparés, de part et d'autre du verre à cocktail.",
+        "Enflammer le mélange dans le verre à cocktail et commencer à boire avec la paille (ce cocktail se boit d'une traite) ; en approchant du fond du verre, éteindre le feu en versant le Baileys et le curaçao bleu dans le verre à cocktail, puis continuer à boire jusqu'à la dernière goutte !"
+      ]
+    }
+  },
+  "flander_s_flake_out": {
+    "fr": {
+      "steps": [
+        "Verser les deux d'un coup."
+      ]
+    }
+  },
+  "frozen_mint_daiquiri": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients avec 24 cl de glace pilée dans un blender.",
+        "Mixer à faible vitesse pendant un court instant.",
+        "Verser dans un verre Old Fashioned et servir."
+      ]
+    }
+  },
+  "frozen_pineapple_daiquiri": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients avec 24 cl de glace pilée dans un blender.",
+        "Mixer à faible vitesse pendant un court instant.",
+        "Verser dans un verre à cocktail et servir."
+      ]
+    }
+  },
+  "gg": {
+    "fr": {
+      "steps": [
+        "Verser le Galliano sur glace.",
+        "Compléter le verre avec du ginger ale, et voilà.",
+        "Votre GG maison est prêt."
+      ]
+    }
+  },
+  "gimlet": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans un shaker et remplir de glace.",
+        "Shaker et filtrer dans un verre à cocktail glacé, ou dans un verre Old Fashioned rempli de glace fraîche.",
+        "Décorer d'une rondelle de citron vert."
+      ]
+    }
+  },
+  "godchild": {
+    "fr": {
+      "steps": [
+        "Bien shaker tous les ingrédients avec de la glace concassée, filtrer dans une flûte à champagne et servir."
+      ]
+    }
+  },
+  "gin_fizz": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients avec des glaçons, sauf l'eau gazeuse.",
+        "Verser dans le verre.",
+        "Compléter avec de l'eau gazeuse."
+      ]
+    }
+  },
+  "gin_sour": {
+    "fr": {
+      "steps": [
+        "Dans un shaker à moitié rempli de glaçons, mélanger le gin, le jus de citron et le sucre.",
+        "Bien shaker.",
+        "Filtrer dans un verre à whisky sour et décorer d'une rondelle d'orange et d'une cerise."
+      ]
+    }
+  },
+  "gagliardo": {
+    "fr": {
+      "steps": [
+        "Bien shaker et servir dans un verre à cocktail.",
+        "Un cocktail maison de l'American/Internet Bar del Pozzo, à Pavie, en Italie."
+      ]
+    }
+  },
+  "godmother": {
+    "fr": {
+      "steps": [
+        "Verser la vodka et l'amaretto dans un verre Old Fashioned sur glace et servir."
+      ]
+    }
+  },
+  "godfather": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients directement dans un verre Old Fashioned rempli de glaçons.",
+        "Mélanger délicatement."
+      ]
+    }
+  },
+  "gluehwein": {
+    "fr": {
+      "steps": [
+        "Faire bouillir le sucre et les épices dans l'eau, laisser infuser 30 minutes.",
+        "Filtrer l'eau épicée et la mélanger au vin.",
+        "Chauffer doucement sans atteindre l'ébullition (pour retirer l'alcool, laisser bouillir un moment). Ajouter du jus de citron ou d'orange selon le goût.",
+        "Servir dans une tasse à Irish coffee."
+      ]
+    }
+  },
+  "gin_tonic": {
+    "fr": {
+      "steps": [
+        "Remplir un verre Highball de glace, verser le gin, compléter avec le tonic, presser un quartier de citron et décorer d'un quartier de citron."
+      ]
+    }
+  },
+  "gin_toddy": {
+    "fr": {
+      "steps": [
+        "Mélanger le sucre glace et l'eau dans un verre Old Fashioned.",
+        "Ajouter le gin et un glaçon.",
+        "Mélanger, ajouter le zeste de citron et servir."
+      ]
+    }
+  },
+  "gin_smash": {
+    "fr": {
+      "steps": [
+        "Piler le sucre avec l'eau gazeuse et des brins de menthe dans un verre Old Fashioned.",
+        "Ajouter le gin et un glaçon.",
+        "Mélanger, ajouter la rondelle d'orange et la cerise, et servir."
+      ]
+    }
+  },
+  "gin_daisy": {
+    "fr": {
+      "steps": [
+        "Dans un shaker à moitié rempli de glaçons, mélanger le gin, le jus de citron, le sucre et la grenadine.",
+        "Bien shaker.",
+        "Verser dans un verre Old Fashioned et décorer d'une cerise et d'une rondelle d'orange."
+      ]
+    }
+  },
+  "gin_lemon": {
+    "fr": {
+      "steps": [
+        "Pour préparer ce gin lemon, pas besoin de shaker.",
+        "Remplir le verre de glace, puis verser le gin et la limonade.",
+        "Mélanger délicatement et décorer d'une rondelle de citron.",
+        "Pour les amateurs, quelques feuilles de menthe peuvent être ajoutées.",
+        "Votre gin lemon est prêt à être servi."
+      ]
+    }
+  },
+  "gin_sling": {
+    "fr": {
+      "steps": [
+        "Dissoudre le sucre glace dans un mélange d'eau et de jus de citron.",
+        "Ajouter le gin.",
+        "Verser dans un verre Old Fashioned sur des glaçons et mélanger.",
+        "Ajouter le zeste d'orange et servir."
+      ]
+    }
+  },
+  "greyhound": {
+    "fr": {
+      "steps": [
+        "Verser la vodka dans un verre Collins rempli de glace.",
+        "Compléter avec le jus de pamplemousse et mélanger."
+      ]
+    }
+  },
+  "gin_rickey": {
+    "fr": {
+      "steps": [
+        "Remplir un grand verre à moitié de glace.",
+        "Mélanger le gin et la grenadine puis verser sur la glace.",
+        "Ajouter le jus de citron vert ou de citron et compléter avec de l'eau gazeuse.",
+        "Décorer le verre de rondelles de citron vert et/ou de citron."
+      ]
+    }
+  },
+  "gin_squirt": {
+    "fr": {
+      "steps": [
+        "Mélanger le gin, la grenadine et le sucre glace avec de la glace, puis filtrer dans un verre Highball sur glaçons.",
+        "Compléter avec de l'eau gazeuse et mélanger.",
+        "Décorer de morceaux d'ananas et de fraises et servir."
+      ]
+    }
+  },
+  "grand_blue": {
+    "fr": {
+      "steps": [
+        "Servir dans un verre Old Fashioned."
+      ]
+    }
+  },
+  "gin_cooler": {
+    "fr": {
+      "steps": [
+        "Mélanger le sucre glace et 6 cl d'eau gazeuse dans un verre Collins.",
+        "Remplir le verre de glace et ajouter le gin.",
+        "Compléter avec de l'eau gazeuse et mélanger.",
+        "Ajouter le zeste de citron et la spirale d'orange de façon à ce qu'elle retombe sur le bord du verre."
+      ]
+    }
+  },
+  "gin_swizzle": {
+    "fr": {
+      "steps": [
+        "Dans un shaker à moitié rempli de glaçons, mélanger le jus de citron vert, le sucre, le gin et le bitter.",
+        "Bien shaker.",
+        "Remplir un verre Collins presque entièrement de glaçons.",
+        "Mélanger jusqu'à ce que le verre soit givré.",
+        "Filtrer le mélange du shaker dans le verre et ajouter l'eau gazeuse."
+      ]
+    }
+  },
+  "grass_skirt": {
+    "fr": {
+      "steps": [
+        "Dans un shaker à moitié rempli de glaçons, mélanger le gin, le triple sec, le jus d'ananas et la grenadine.",
+        "Bien shaker.",
+        "Verser dans un verre Old Fashioned et décorer d'une tranche d'ananas."
+      ]
+    }
+  },
+  "grasshopper": {
+    "fr": {
+      "steps": [
+        "Verser les ingrédients dans un shaker avec de la glace.",
+        "Shaker vivement puis filtrer dans un verre à cocktail glacé."
+      ]
+    }
+  },
+  "grim_reaper": {
+    "fr": {
+      "steps": [
+        "Mélanger le Kahlúa et le rhum overproof dans le verre.",
+        "Ajouter rapidement de la glace et verser la grenadine dessus pour lui donner une teinte rouge."
+      ]
+    }
+  },
+  "gin_and_soda": {
+    "fr": {
+      "steps": [
+        "Verser le gin et l'eau gazeuse dans un verre Highball presque rempli de glaçons.",
+        "Bien mélanger.",
+        "Décorer d'un quartier de citron vert."
+      ]
+    }
+  },
+  "h_d": {
+    "fr": {
+      "steps": [
+        "Mélanger le whisky et le Baileys dans un verre à bière (50 cl minimum).",
+        "Compléter le verre avec du café."
+      ]
+    }
+  },
+  "honey_bee": {
+    "fr": {
+      "steps": [
+        "Shaker les ingrédients avec de la glace pilée."
+      ]
+    }
+  },
+  "herbal_flame": {
+    "fr": {
+      "steps": [
+        "Verser le schnaps à la cannelle au fond d'un bocal ou d'un verre.",
+        "Compléter le verre avec du thé sucré.",
+        "Mélanger avec une cuillère, une paille, ou mieux, un bâton de cannelle laissé dans le verre."
+      ]
+    }
+  },
+  "horse_s_neck": {
+    "fr": {
+      "steps": [
+        "Verser le brandy et le ginger ale directement dans un verre Highball avec des glaçons.",
+        "Mélanger délicatement.",
+        "Décorer d'un zeste de citron.",
+        "Ajouter quelques traits d'Angostura si désiré."
+      ]
+    }
+  },
+  "happy_skipper": {
+    "fr": {
+      "steps": [
+        "Verser le rhum épicé Captain Morgan sur glace, compléter le verre avec du ginger ale.",
+        "Décorer de citron vert.",
+        "Un goût proche d'un soda à la crème.",
+        "Nommé en référence à la série L'Île aux naufragés (« le Capitaine » dans « Ginger », c'est un Happy Skipper !)"
+      ]
+    }
+  },
+  "hunter_s_moon": {
+    "fr": {
+      "steps": [
+        "Verser le Bombay Sapphire, le Martini Bianco, le sirop de sucre et les mûres dans un shaker avec beaucoup de glace, shaker vigoureusement, puis verser dans un verre Ballon, compléter avec de la limonade et décorer d'un quartier d'orange."
+      ]
+    }
+  },
+  "halloween_punch": {
+    "fr": {
+      "steps": [
+        "Verser le jus de cerise, le zeste d'orange, le piment, les bâtons de cannelle, les clous de girofle et le gingembre dans une grande casserole.",
+        "Laisser mijoter 5 minutes puis retirer du feu.",
+        "Laisser refroidir puis réfrigérer au moins 4 heures, jusqu'à 2 jours — plus l'attente est longue, plus les saveurs seront intenses.",
+        "Pour servir aux jeunes enfants, retirer le piment après quelques heures.",
+        "Au moment de servir, verser le mélange dans une carafe.",
+        "Servir dans des bouteilles ou des verres, avec une paille dans chacun.",
+        "Si vous ajoutez de la vodka, c'est le moment.",
+        "Accrocher un bonbon en forme de crocs à chaque verre."
+      ]
+    }
+  },
+  "havana_cocktail": {
+    "fr": {
+      "steps": [
+        "Dans un shaker à moitié rempli de glaçons, mélanger tous les ingrédients.",
+        "Bien shaker.",
+        "Filtrer dans un verre à cocktail."
+      ]
+    }
+  },
+  "holloween_punch": {
+    "fr": {
+      "steps": [
+        "Prendre une bonne quantité de jus de raisin et de boissons pétillantes (eau gazeuse, ginger ale, soda citron-citron vert, au choix).",
+        "Mélanger le tout dans un bol à punch.",
+        "Prendre du sorbet à l'orange et du sorbet au citron vert.",
+        "Prélever des boules et les faire flotter dans le punch, les laisser fondre légèrement pour qu'un film se forme à la surface tout en gardant des « bulles » sous forme de boules de sorbet.",
+        "L'aspect est peu engageant, mais le goût est très correct."
+      ]
+    }
+  },
+  "homemade_kahlua": {
+    "fr": {
+      "steps": [
+        "Dissoudre le sucre dans 47 cl d'eau bouillante et ajouter le sirop de maïs.",
+        "Dissoudre le café instantané dans le reste de l'eau.",
+        "Verser le sirop et le café dans un bocal de 4 litres.",
+        "Laisser refroidir.",
+        "Ajouter la vodka et la vanille une fois froid.",
+        "Pour un meilleur résultat, laisser le mélange « mûrir » 4 à 5 semaines."
+      ]
+    }
+  },
+  "hot_creamy_bush": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients dans le verre."
+      ]
+    }
+  },
+  "harvey_wallbanger": {
+    "fr": {
+      "steps": [
+        "Mélanger la vodka et le jus d'orange avec de la glace dans le verre, puis faire flotter le Galliano sur le dessus.",
+        "Décorer et servir."
+      ]
+    }
+  },
+  "hawaiian_cocktail": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients avec de la glace, filtrer dans un verre à cocktail et servir."
+      ]
+    }
+  },
+  "hemingway_special": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans un shaker avec de la glace.",
+        "Shaker."
+      ]
+    }
+  },
+  "highland_fling_cocktail": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients (sauf l'olive) avec de la glace et filtrer dans un verre à cocktail.",
+        "Ajouter l'olive et servir."
+      ]
+    }
+  },
+  "hot_chocolate_to_die_for": {
+    "fr": {
+      "steps": [
+        "Faire fondre le chocolat, le beurre et la vanille au bain-marie.",
+        "Une fois la texture lisse, incorporer la crème."
+      ]
+    }
+  },
+  "ipamena": {
+    "fr": {
+      "steps": [
+        "Couper un demi-citron vert en morceaux, les placer dans un shaker, ajouter le sucre et piler.",
+        "Mesurer le jus de fruit de la passion, l'ajouter au shaker et remplir de glaçons.",
+        "Fermer le shaker et shaker vigoureusement.",
+        "Verser le liquide dans un verre, compléter avec du ginger ale, mélanger à la petite cuillère puis décorer le bord du verre d'une rondelle de citron vert."
+      ]
+    }
+  },
+  "ice_pick": {
+    "fr": {
+      "steps": [
+        "Verser la vodka dans le verre et compléter avec du thé glacé.",
+        "Ajouter du citron selon le goût et mélanger."
+      ]
+    }
+  },
+  "iced_coffee": {
+    "fr": {
+      "steps": [
+        "Mélanger jusqu'à dissolution complète du café et du sucre.",
+        "Ajouter le lait.",
+        "Bien shaker.",
+        "L'utilisation d'un blender ou d'un mixeur à milkshake donne une boisson bien mousseuse.",
+        "Servir dans une tasse."
+      ]
+    }
+  },
+  "irish_cream": {
+    "fr": {
+      "steps": [
+        "Mélanger le scotch et le lait.",
+        "Ajouter le mélange lait-crème.",
+        "Ajouter le reste."
+      ]
+    }
+  },
+  "irish_coffee": {
+    "fr": {
+      "steps": [
+        "Chauffer le café, le whisky et le sucre sans porter à ébullition.",
+        "Verser dans le verre et couvrir de crème ; servir bien chaud."
+      ]
+    }
+  },
+  "irish_spring": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients (sauf la rondelle d'orange et la cerise) dans un verre Collins sur glaçons.",
+        "Décorer d'une rondelle d'orange, ajouter la cerise sur le dessus et servir."
+      ]
+    }
+  },
+  "imperial_fizz": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients (sauf l'eau gazeuse) avec de la glace et filtrer dans un verre Highball sur deux glaçons.",
+        "Compléter avec de l'eau gazeuse, mélanger et servir."
+      ]
+    }
+  },
+  "irish_russian": {
+    "fr": {
+      "steps": [
+        "Ajouter les ingrédients dans l'ordre indiqué dans la recette.",
+        "Verser la Guinness avec précaution pour éviter un excès de mousse.",
+        "Ne pas ajouter de glace."
+      ]
+    }
+  },
+  "imperial_cocktail": {
+    "fr": {
+      "steps": [
+        "Shaker avec de la glace et filtrer dans un verre à cocktail."
+      ]
+    }
+  },
+  "iced_coffee_fillip": {
+    "fr": {
+      "steps": [
+        "Mélanger dans une tasse et réfrigérer avant de servir."
+      ]
+    }
+  },
+  "irish_curdling_cow": {
+    "fr": {
+      "steps": [
+        "Verser la crème irlandaise, la vodka et le bourbon dans un verre.",
+        "Ajouter de la glace et incorporer le jus d'orange."
+      ]
+    }
+  },
+  "jam_donut": {
+    "fr": {
+      "steps": [
+        "Enrober le bord d'un verre à shot de sucre à l'aide de sirop de sucre pour le faire adhérer.",
+        "Verser la liqueur de framboise Chambord dans le verre à shot, puis superposer délicatement le Baileys par-dessus.",
+        "Servir."
+      ]
+    }
+  },
+  "jitterbug": {
+    "fr": {
+      "steps": [
+        "Mouiller le verre et tremper le bord dans le sucre.",
+        "Ajouter ensuite de la glace.",
+        "Ajouter ensuite tout le reste.",
+        "C'est aussi simple que ça !"
+      ]
+    }
+  },
+  "jackhammer": {
+    "fr": {
+      "steps": [
+        "Servir sur glace — Attention, redoutable !"
+      ]
+    }
+  },
+  "jelly_bean": {
+    "fr": {
+      "steps": [
+        "Mélanger à parts égales dans un petit verre — le goût exact d'un bonbon Jelly Bean !"
+      ]
+    }
+  },
+  "jello_shots": {
+    "fr": {
+      "steps": [
+        "Faire bouillir 70 cl d'eau puis ajouter la gelée aromatisée.",
+        "Mélanger jusqu'à dissolution complète de la gelée.",
+        "Ajouter 47 cl de vodka et mélanger.",
+        "Verser le mélange dans des verres à shot en plastique et réfrigérer jusqu'à ce qu'il soit pris.",
+        "Puis déguster à la cuillère..."
+      ]
+    }
+  },
+  "jamaica_kiss": {
+    "fr": {
+      "steps": [
+        "Remplir un verre de glaçons.",
+        "Ajouter un shot de Tia Maria et un shot de rhum blanc jamaïcain.",
+        "Compléter le verre avec du lait.",
+        "Mixer jusqu'à obtenir une texture lisse et servir immédiatement."
+      ]
+    }
+  },
+  "john_collins": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients directement dans un verre Highball rempli de glace.",
+        "Mélanger délicatement.",
+        "Décorer.",
+        "Ajouter un trait d'Angostura."
+      ]
+    }
+  },
+  "japanese_fizz": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients (sauf l'eau gazeuse) avec de la glace et filtrer dans un verre Highball sur deux glaçons.",
+        "Compléter avec de l'eau gazeuse, mélanger et servir."
+      ]
+    }
+  },
+  "jamaican_coffee": {
+    "fr": {
+      "steps": [
+        "Mélanger le rhum, le café et l'eau.",
+        "Ajouter la crème fouettée sur le dessus.",
+        "Saupoudrer d'une pincée de café finement moulu et déguster avec une paille."
+      ]
+    }
+  },
+  "just_a_moonmint": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans le bol du blender, couvrir et mixer à vitesse moyenne jusqu'à obtenir un mélange homogène.",
+        "Verser dans un grand verre, deux moyens ou trois petits, et déguster."
+      ]
+    }
+  },
+  "jewel_of_the_nile": {
+    "fr": {
+      "steps": [
+        "Dans un verre à mélange à moitié rempli de glaçons, mélanger tous les ingrédients.",
+        "Bien mélanger.",
+        "Filtrer dans un verre à cocktail."
+      ]
+    }
+  },
+  "jack_rose_cocktail": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients avec de la glace, filtrer dans un verre à cocktail et servir."
+      ]
+    }
+  },
+  "jack_s_vanilla_coke": {
+    "fr": {
+      "steps": [
+        "Après avoir versé les ingrédients, ajouter 3 à 5 glaçons selon le goût.",
+        "Mélanger avec un agitateur pour détacher la vanille du fond."
+      ]
+    }
+  },
+  "kir": {
+    "fr": {
+      "steps": [
+        "Verser la crème de cassis au fond du verre, puis compléter avec le vin."
+      ]
+    }
+  },
+  "karsk": {
+    "fr": {
+      "steps": [
+        "Placer une pièce en cuivre au fond d'une tasse et remplir de café jusqu'à ce qu'elle disparaisse, puis ajouter de l'alcool jusqu'à ce qu'elle réapparaisse.",
+        "Une spécialité norvégienne."
+      ]
+    }
+  },
+  "kamikaze": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients ensemble avec de la glace.",
+        "Filtrer dans le verre, décorer et servir."
+      ]
+    }
+  },
+  "kir_royale": {
+    "fr": {
+      "steps": [
+        "Verser la crème de cassis dans le verre, puis ajouter délicatement le champagne par-dessus."
+      ]
+    }
+  },
+  "kiwi_lemon": {
+    "fr": {
+      "steps": [
+        "Mélanger dans un verre Highball.",
+        "Mélanger.",
+        "Décorer d'une rondelle de kiwi."
+      ]
+    }
+  },
+  "kurant_tea": {
+    "fr": {
+      "steps": [
+        "Verser l'Absolut Kurant dans une grande tasse à thé.",
+        "Ajouter le thé à la pomme pas trop chaud (!) et, si vous le souhaitez, un peu de sucre.",
+        "Déguster !"
+      ]
+    }
+  },
+  "kioki_coffee": {
+    "fr": {
+      "steps": [
+        "Mélanger.",
+        "Ajouter de la crème fouettée sur le dessus."
+      ]
+    }
+  },
+  "kiwi_martini": {
+    "fr": {
+      "steps": [
+        "Le Kiwi Martini est un cocktail à la vodka très ludique, l'un des meilleurs pour mettre en valeur un fruit frais.",
+        "Il existe plusieurs versions de cette recette, mais celle-ci est l'une des plus simples, pour un délicieux martini vert.",
+        "Il suffit de piler des rondelles de kiwi avec du sirop de sucre, puis de shaker le tout avec de la vodka.",
+        "Un cocktail que tout le monde peut préparer en quelques minutes, idéal pour mettre en valeur sa vodka préférée."
+      ]
+    }
+  },
+  "kiss_me_quick": {
+    "fr": {
+      "steps": [
+        "Mélanger dans le verre."
+      ]
+    }
+  },
+  "kool_aid_shot": {
+    "fr": {
+      "steps": [
+        "Verser dans un grand verre avec de la glace et mélanger.",
+        "Ajouter un peu de jus de cranberry selon le goût."
+      ]
+    }
+  },
+  "kool_first_aid": {
+    "fr": {
+      "steps": [
+        "Verser la boisson en poudre aromatisée dans un double verre à shot, puis compléter avec le rhum.",
+        "Cul sec."
+      ]
+    }
+  },
+  "kentucky_b_and_b": {
+    "fr": {
+      "steps": [
+        "Verser le bourbon et la Bénédictine dans un verre Ballon."
+      ]
+    }
+  },
+  "kentucky_colonel": {
+    "fr": {
+      "steps": [
+        "Dans un shaker à moitié rempli de glaçons, mélanger le bourbon et la Bénédictine.",
+        "Shaker et filtrer dans un verre à cocktail.",
+        "Décorer d'un zeste de citron."
+      ]
+    }
+  },
+  "kool_aid_slammer": {
+    "fr": {
+      "steps": [
+        "Remplir d'abord le verre à shot à moitié avec la boisson en poudre aromatisée.",
+        "Poser ensuite un essuie-tout sur le dessus du verre et verser doucement la vodka.",
+        "Bien réalisé, les deux liquides restent séparés, la vodka au-dessus.",
+        "Cul sec !",
+        "Le dernier goût en bouche sera celui de la boisson aromatisée."
+      ]
+    }
+  },
+  "kiwi_papaya_smoothie": {
+    "fr": {
+      "steps": [
+        "Verser le tout dans un blender et mixer."
+      ]
+    }
+  },
+  "kill_the_cold_smoothie": {
+    "fr": {
+      "steps": [
+        "Presser le gingembre et le citron, puis ajouter à de l'eau chaude.",
+        "Ajouter éventuellement de la cardamome."
+      ]
+    }
+  },
+  "limeade": {
+    "fr": {
+      "steps": [
+        "Dans un grand verre, verser le jus de citron vert et le sucre, bien mélanger.",
+        "Compléter avec de l'eau gazeuse bien fraîche.",
+        "Ajouter les zestes de citron vert dans le verre.",
+        "Déguster.",
+        "Répéter jusqu'à épuisement des citrons verts ou du soda."
+      ]
+    }
+  },
+  "lunch_box": {
+    "fr": {
+      "steps": [
+        "Remplir un verre à pinte presque entièrement de bière.",
+        "Compléter avec du jus d'orange (attention à ne pas remplir jusqu'en haut).",
+        "Laisser tomber le shot d'amaretto dedans."
+      ]
+    }
+  },
+  "lemon_drop": {
+    "fr": {
+      "steps": [
+        "Shaker et filtrer dans un verre à cocktail glacé au bord givré de sucre."
+      ]
+    }
+  },
+  "lemon_shot": {
+    "fr": {
+      "steps": [
+        "Mélanger le Galliano et l'Absolut Citron dans un verre à shot, poser un quartier de citron saupoudré de sucre sur le verre et verser un peu de rhum blanc sur le quartier et le verre. Enflammer avec un briquet et laisser brûler un instant.",
+        "Boire le shot rapidement puis sucer le quartier de citron.",
+        "Bien réalisé, le goût rappellera une limonade sucrée."
+      ]
+    }
+  },
+  "long_vodka": {
+    "fr": {
+      "steps": [
+        "Faire tourner des glaçons et de l'Angostura dans un grand verre pour en enrober l'intérieur.",
+        "Verser la vodka par-dessus, ajouter une rondelle de citron vert et presser le jus du reste, ajouter le tonic, mélanger, et voilà votre Long Vodka."
+      ]
+    }
+  },
+  "lassi_khara": {
+    "fr": {
+      "steps": [
+        "Mixer au blender jusqu'à obtenir une texture mousseuse.",
+        "Ajouter des feuilles de curry déchirées et servir bien frais."
+      ]
+    }
+  },
+  "lassi_raita": {
+    "fr": {
+      "steps": [
+        "Mixer le yaourt avec des glaçons jusqu'à obtenir une texture plus liquide.",
+        "Ajouter du sucre selon le goût.",
+        "Le citron ou citron vert est facultatif mais apporte une touche acidulée.",
+        "Une pincée de sel.",
+        "Le raita est aussi parfait pour l'été.",
+        "Il peut remplacer une salade traditionnelle."
+      ]
+    }
+  },
+  "lemouroudji": {
+    "fr": {
+      "steps": [
+        "Presser les citrons.",
+        "Éplucher et râper le gingembre.",
+        "Placer le gingembre râpé et une bonne pincée de poivre de Cayenne dans un morceau d'étamine et nouer.",
+        "Laisser infuser dans l'eau.",
+        "Après environ 15 minutes, ajouter le sucre et le jus de citron.",
+        "Réfrigérer et servir."
+      ]
+    }
+  },
+  "loch_lomond": {
+    "fr": {
+      "steps": [
+        "Dans un verre à mélange à moitié rempli de glaçons, mélanger le scotch, le Drambuie et le vermouth.",
+        "Bien mélanger.",
+        "Filtrer dans un verre à cocktail.",
+        "Décorer d'un zeste de citron."
+      ]
+    }
+  },
+  "london_town": {
+    "fr": {
+      "steps": [
+        "Dans un verre à mélange à moitié rempli de glaçons, mélanger tous les ingrédients.",
+        "Bien mélanger.",
+        "Filtrer dans un verre à cocktail."
+      ]
+    }
+  },
+  "lassi_mango": {
+    "fr": {
+      "steps": [
+        "Verser le tout dans un blender puis servir sur glace pilée.",
+        "D'autres fruits comme les fraises ou les bananes peuvent aussi être utilisés."
+      ]
+    }
+  },
+  "lassi_sweet": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans un blender et mixer jusqu'à obtenir une belle mousse.",
+        "Servir bien frais."
+      ]
+    }
+  },
+  "limona_corona": {
+    "fr": {
+      "steps": [
+        "Ouvrir la Corona.",
+        "Remplir l'espace vide dans le goulot avec le rhum.",
+        "La bouteille doit être remplie jusqu'en haut.",
+        "Boucher la bouteille avec le pouce ou la paume de la main.",
+        "Retourner la bouteille pour mélanger le rhum et la bière.",
+        "Remettre la bouteille à l'endroit, retirer la main et déguster."
+      ]
+    }
+  },
+  "lord_and_lady": {
+    "fr": {
+      "steps": [
+        "Verser le rhum et le Tia Maria dans un verre Old Fashioned presque rempli de glaçons.",
+        "Bien mélanger."
+      ]
+    }
+  },
+  "lady_love_fizz": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients (sauf l'eau gazeuse) avec de la glace et filtrer dans un verre à cocktail sur deux glaçons.",
+        "Compléter avec de l'eau gazeuse, mélanger et servir."
+      ]
+    }
+  },
+  "long_island_tea": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients (sauf le cola) et verser sur glace dans un verre Highball.",
+        "Ajouter un trait de cola pour la couleur.",
+        "Décorer d'une rondelle de citron et servir."
+      ]
+    }
+  },
+  "lone_tree_cooler": {
+    "fr": {
+      "steps": [
+        "Mélanger le sucre glace et 6 cl d'eau gazeuse dans un verre Collins.",
+        "Remplir le verre de glace, ajouter le gin et le vermouth, et mélanger.",
+        "Compléter avec de l'eau gazeuse et mélanger à nouveau.",
+        "Ajouter le zeste de citron et la spirale d'orange de façon à ce qu'elle retombe sur le bord du verre."
+      ]
+    }
+  },
+  "lone_tree_cocktail": {
+    "fr": {
+      "steps": [
+        "Mélanger les ingrédients avec de la glace, filtrer dans un verre à cocktail et servir."
+      ]
+    }
+  },
+  "lazy_coconut_paloma": {
+    "fr": {
+      "steps": [
+        "Mélanger la liqueur de coco (ou de préférence la tequila) avec le jus de pamplemousse et compléter avec de l'eau gazeuse.",
+        "Décorer d'une grande tranche de pamplemousse plaquée contre la paroi intérieure du verre."
+      ]
+    }
+  },
+  "long_island_iced_tea": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients dans un verre Highball et remuer délicatement.",
+        "Ajouter un trait de Coca-Cola pour la couleur et décorer d'un zeste de citron ou de citron vert."
+      ]
+    }
+  },
+  "lemon_elderflower_spritzer": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients sur glace, mélanger et déguster !"
+      ]
+    }
+  },
+  "lassi_a_south_indian_drink": {
+    "fr": {
+      "steps": [
+        "Mixer au blender pendant 3 secondes.",
+        "Le lassi est l'une des boissons les plus simples à préparer, et il existe de nombreuses façons de le faire.",
+        "Il s'agit essentiellement de babeurre (yaourt fouetté avec de l'eau), et la consistance peut être ajustée à volonté, de la plus liquide à la plus épaisse.",
+        "Servir bien frais."
+      ]
+    }
+  },
+  "melya": {
+    "fr": {
+      "steps": [
+        "Préparer un espresso.",
+        "Dans une tasse, placer une cuillère à café de cacao en poudre non sucré, puis napper une cuillère de miel et la faire couler dans la tasse.",
+        "Mélanger pendant que le café infuse — c'est la partie amusante.",
+        "Le cacao semble enrober le miel sans se mélanger, formant une masse poudreuse et collante qui semble ne jamais vouloir se lier.",
+        "Puis, d'un coup, comme par magie !",
+        "Le mélange ressemble à une sauce au chocolat noir.",
+        "Verser l'espresso chaud sur le miel en remuant pour bien dissoudre.",
+        "Servir avec de la crème."
+      ]
+    }
+  },
+  "mimosa": {
+    "fr": {
+      "steps": [
+        "S'assurer que les deux ingrédients sont bien frais, puis les mélanger dans le verre.",
+        "Servir bien frais."
+      ]
+    }
+  },
+  "martini": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans un verre à mélange avec des glaçons.",
+        "Bien mélanger.",
+        "Filtrer dans un verre à Martini glacé.",
+        "Presser l'huile du zeste de citron sur le cocktail, ou décorer d'une olive."
+      ]
+    }
+  },
+  "michelada": {
+    "fr": {
+      "steps": [
+        "Mélanger la bière avec le jus de tomate, le jus de citron vert fraîchement pressé, et de la sauce Worcestershire, sauce teriyaki, sauce soja ou sauce piquante.",
+        "Servir dans un verre glacé au bord givré de sel."
+      ]
+    }
+  },
+  "manhattan": {
+    "fr": {
+      "steps": [
+        "Mélanger sur glace, filtrer dans un verre glacé, décorer et servir sans glace."
+      ]
+    }
+  },
+  "mauresque": {
+    "fr": {
+      "steps": [
+        "1 - Verser le Ricard (ou pastis) 2 - Verser le sirop d'orgeat 3 - Enfin, verser l'eau et ajouter des glaçons selon vos préférences.",
+        "Ajouter les glaçons en dernier, sinon le sirop et le pastis se mélangent mal."
+      ]
+    }
+  },
+  "mint_julep": {
+    "fr": {
+      "steps": [
+        "Dans un verre Highball, piler délicatement la menthe, le sucre et l'eau.",
+        "Remplir le verre de glace concassée, ajouter le bourbon et bien mélanger jusqu'à ce que le verre soit bien givré.",
+        "Décorer d'un brin de menthe."
+      ]
+    }
+  },
+  "mudslinger": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans une grande carafe ou un bol à punch.",
+        "Bien mélanger !"
+      ]
+    }
+  },
+  "martinez_2": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans un verre à mélange et remplir de glace.",
+        "Mélanger jusqu'à ce que le mélange soit bien frais, puis filtrer dans une coupe glacée."
+      ]
+    }
+  },
+  "moranguito": {
+    "fr": {
+      "steps": [
+        "Verser d'abord l'absinthe, puis la tequila, puis le sirop de grenadine."
+      ]
+    }
+  },
+  "miami_vice": {
+    "fr": {
+      "steps": [
+        "D'abord : préparer une piña colada avec 7,5 cl de rhum et de la glace (réserver).",
+        "Ensuite : préparer un daiquiri avec 7,5 cl de rhum et de la glace.",
+        "Enfin : encore bien glacés, verser le mélange piña colada puis le mélange daiquiri dans le verre, en veillant à ne pas les mélanger."
+      ]
+    }
+  },
+  "moscow_mule": {
+    "fr": {
+      "steps": [
+        "Mélanger la vodka et le ginger beer dans un verre Highball rempli de glace.",
+        "Ajouter le jus de citron vert.",
+        "Mélanger délicatement.",
+        "Décorer."
+      ]
+    }
+  },
+  "mulled_wine": {
+    "fr": {
+      "steps": [
+        "Faire mijoter 70 cl d'eau avec le sucre, les clous de girofle, les bâtons de cannelle et le zeste de citron dans une casserole inox pendant 10 minutes.",
+        "Ajouter le vin, chauffer à « température du café » (SANS FAIRE BOUILLIR) puis ajouter le brandy."
+      ]
+    }
+  },
+  "masala_chai": {
+    "fr": {
+      "steps": [
+        "Porter 47 cl d'eau à ébullition.",
+        "Ajouter tous les ingrédients et laisser rebouillir environ 15 secondes.",
+        "Laisser reposer une minute.",
+        "Chauffer le lait dans une casserole.",
+        "Filtrer le thé dans les tasses.",
+        "Ajouter le lait et le sucre.",
+        "Et voilà."
+      ]
+    }
+  },
+  "munich_mule": {
+    "fr": {
+      "steps": [
+        "Remplir le verre de glace, verser le gin et le jus de citron vert, compléter avec le ginger beer, décorer d'une rondelle de concombre et de citron vert."
+      ]
+    }
+  },
+  "mocha_berry": {
+    "fr": {
+      "steps": [
+        "Verser 18 cl de café dans une tasse ou une tasse à Irish coffee. Ajouter le mélange cacaoté et le Chambord, bien mélanger et couvrir de crème fouettée."
+      ]
+    }
+  },
+  "mango_mojito": {
+    "fr": {
+      "steps": [
+        "Presser le jus d'un citron vert et demi et le mixer avec la mangue pour obtenir une purée lisse.",
+        "Couper le reste des citrons verts en quartiers, puis recouper chaque quartier en deux.",
+        "Placer 2 morceaux de citron vert dans un verre Highball par personne, ajouter une cuillère à café de sucre en poudre et 5 à 6 feuilles de menthe par verre.",
+        "Piler le tout à l'aide d'un pilon ou de l'extrémité d'un rouleau à pâtisserie pour libérer tous les arômes du citron vert et de la menthe.",
+        "Répartir la purée de mangue dans les verres, ajouter 3 cl de rhum blanc et une poignée de glace pilée dans chacun, puis bien mélanger.",
+        "Compléter avec de l'eau gazeuse au moment de servir et décorer d'un peu de menthe supplémentaire si désiré."
+      ]
+    }
+  },
+  "mojito_extra": {
+    "fr": {
+      "steps": [
+        "Placer la menthe et le jus de citron dans un verre, piler la menthe à la cuillère, ajouter la glace, le rhum et compléter avec de l'eau gazeuse.",
+        "Ajouter un trait d'Angostura sur le dessus."
+      ]
+    }
+  },
+  "monkey_gland": {
+    "fr": {
+      "steps": [
+        "Bien shaker sur des glaçons dans un shaker, filtrer dans un verre à cocktail glacé."
+      ]
+    }
+  },
+  "midnight_mint": {
+    "fr": {
+      "steps": [
+        "Si possible, givrer le bord du verre à cocktail (Martini) avec du sirop de sucre puis le tremper dans des pépites ou de la poudre de chocolat.",
+        "Verser les ingrédients dans un shaker avec de la glace.",
+        "Bien shaker puis filtrer dans le verre à cocktail."
+      ]
+    }
+  },
+  "mary_pickford": {
+    "fr": {
+      "steps": [
+        "Shaker et filtrer dans un grand verre à cocktail glacé."
+      ]
+    }
+  },
+  "monkey_wrench": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans un verre Old Fashioned presque rempli de glaçons.",
+        "Bien mélanger."
+      ]
+    }
+  },
+  "negroni": {
+    "fr": {
+      "steps": [
+        "Mélanger dans le verre sur glace, décorer et servir."
+      ]
+    }
+  },
+  "new_york_sour": {
+    "fr": {
+      "steps": [
+        "Shaker le whisky, le jus de citron et le sucre glace avec de la glace, puis filtrer dans un verre à whisky sour.",
+        "Faire flotter le vin rouge sur le dessus.",
+        "Décorer d'une demi-rondelle de citron et d'une cerise et servir."
+      ]
+    }
+  },
+  "nutty_irishman": {
+    "fr": {
+      "steps": [
+        "Servir sur glace."
+      ]
+    }
+  },
+  "national_aquarium": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans un shaker rempli de glace.",
+        "Bien shaker.",
+        "Servir sur glace."
+      ]
+    }
+  },
+  "new_york_lemonade": {
+    "fr": {
+      "steps": [
+        "Servir dans un verre à cocktail glacé.",
+        "Givrer le bord au citron et au sucre.",
+        "Mélanger et filtrer."
+      ]
+    }
+  },
+  "nuked_hot_chocolate": {
+    "fr": {
+      "steps": [
+        "Mélanger avec un peu de lait (environ 3 cl) dans une tasse.",
+        "Passer la tasse au micro-ondes 30 à 50 secondes.",
+        "Mélanger jusqu'à dissolution complète du cacao chaud.",
+        "Compléter la tasse avec du lait.",
+        "Repasser au micro-ondes 1 à 2 minutes, selon la puissance et le goût pour les boissons très chaudes."
+      ]
+    }
+  },
+  "orgasm": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients avec de la glace, filtrer dans un verre à cocktail glacé et servir."
+      ]
+    }
+  },
+  "old_pal": {
+    "fr": {
+      "steps": [
+        "Glacer le verre à cocktail.",
+        "Verser les ingrédients dans un verre à mélange et le remplir aux deux tiers de glace.",
+        "Mélanger environ 20 secondes.",
+        "Vider le verre à cocktail et y filtrer le mélange.",
+        "Décorer d'un zeste de citron."
+      ]
+    }
+  },
+  "orangeade": {
+    "fr": {
+      "steps": [
+        "Placer des glaçons dans un grand verre ou un verre Highball, ajouter le jus de citron, le jus d'orange, le sirop de sucre, et bien mélanger.",
+        "Compléter avec de l'eau gazeuse bien fraîche et servir avec une paille."
+      ]
+    }
+  },
+  "orange_whip": {
+    "fr": {
+      "steps": [
+        "Verser les ingrédients sur glace et mélanger."
+      ]
+    }
+  },
+  "orange_crush": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans un verre — à boire en shot."
+      ]
+    }
+  },
+  "orange_oasis": {
+    "fr": {
+      "steps": [
+        "Shaker le brandy, le gin et le jus d'orange avec de la glace, puis filtrer dans un verre Highball sur glaçons.",
+        "Compléter avec du ginger ale, mélanger et servir."
+      ]
+    }
+  },
+  "old_fashioned": {
+    "fr": {
+      "steps": [
+        "Placer un morceau de sucre dans un verre Old Fashioned et l'imbiber de bitter, ajouter un trait d'eau plate.",
+        "Piler jusqu'à dissolution.",
+        "Remplir le verre de glaçons et ajouter le whisky.",
+        "Décorer d'un zeste d'orange et d'une cerise confite."
+      ]
+    }
+  },
+  "oreo_mudslide": {
+    "fr": {
+      "steps": [
+        "Bien mixer la vodka, le Kahlúa, le Baileys, la glace et le biscuit Oreo dans un blender.",
+        "Verser dans un grand verre givré.",
+        "Décorer de crème fouettée et d'une cerise."
+      ]
+    }
+  },
+  "oatmeal_cookie": {
+    "fr": {
+      "steps": [
+        "Mélanger simplement le tout.",
+        "À l'origine un shot, ce cocktail fonctionne tout aussi bien servi en version longue, sur beaucoup de glace.",
+        "Un goût de cookie à l'avoine."
+      ]
+    }
+  },
+  "orange_push_up": {
+    "fr": {
+      "steps": [
+        "Mélanger les alcools dans un blender.",
+        "Ajouter une demi-mesure de glace et mixer.",
+        "Décorer d'un fanion orange et cerise.",
+        "Tellement bon qu'il fond en bouche !"
+      ]
+    }
+  },
+  "orange_rosemary_collins": {
+    "fr": {
+      "steps": [
+        "Verser les alcools au fond du verre puis compléter à parts égales avec les mixers.",
+        "Décorer de rondelles d'orange à l'intérieur du verre et d'un peu de romarin sur le dessus."
+      ]
+    }
+  },
+  "orange_scented_hot_chocolate": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients dans une casserole moyenne à fond épais.",
+        "Mélanger à feu doux jusqu'à ce que le chocolat fonde.",
+        "Augmenter le feu et porter presque à ébullition, en remuant souvent.",
+        "Retirer du feu et fouetter jusqu'à obtenir une mousse.",
+        "Remettre sur le feu et porter de nouveau à ébullition.",
+        "Retirer du feu, fouetter jusqu'à obtenir une mousse.",
+        "Répéter une fois le cycle chauffage/fouettage.",
+        "Retirer le zeste d'orange (peut être préparé 2 heures à l'avance.",
+        "Laisser reposer à température ambiante.",
+        "Avant de servir, porter presque à ébullition, retirer du feu et fouetter jusqu'à obtenir une mousse.) Verser le chocolat chaud dans des tasses.",
+        "Pour 2 personnes."
+      ]
+    }
+  },
+  "owen_s_grandmother_s_revenge": {
+    "fr": {
+      "steps": [
+        "Ajouter les ingrédients et mixer au blender."
+      ]
+    }
+  },
+  "paloma": {
+    "fr": {
+      "steps": [
+        "Mélanger et servir sur glace."
+      ]
+    }
+  },
+  "paradise": {
+    "fr": {
+      "steps": [
+        "Shaker ensemble sur glace.",
+        "Filtrer dans un verre à cocktail et servir bien frais."
+      ]
+    }
+  },
+  "pink_gin": {
+    "fr": {
+      "steps": [
+        "Verser le bitter dans un verre à vin.",
+        "Faire tourner le verre pour en enrober l'intérieur de bitter, puis vider l'excédent.",
+        "Verser le gin dans le verre.",
+        "Ne pas ajouter de glace."
+      ]
+    }
+  },
+  "pegu_club": {
+    "fr": {
+      "steps": [
+        "Shaker, filtrer, servir sans glace dans un verre à cocktail."
+      ]
+    }
+  },
+  "pink_lady": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients avec de la glace, filtrer dans un verre à cocktail et servir."
+      ]
+    }
+  },
+  "pink_moon": {
+    "fr": {
+      "steps": [
+        "Shaker doucement dans un shaker avec de la glace, filtrer dans un verre à whisky carré.",
+        "Compléter de glace fraîche.",
+        "Ajouter les mûres en décoration.",
+        "Ajouter des fleurs et une feuille verte pour un rendu original !"
+      ]
+    }
+  },
+  "penicillin": {
+    "fr": {
+      "steps": [
+        "Shaker le scotch, le jus de citron, le sirop de miel et le sirop de gingembre avec de la glace.",
+        "Filtrer sur un gros glaçon dans un verre Old Fashioned glacé.",
+        "Faire flotter un scotch tourbé sur le dessus (utiliser de préférence un single malt tourbé type Islay).",
+        "Décorer de gingembre confit."
+      ]
+    }
+  },
+  "pisco_sour": {
+    "fr": {
+      "steps": [
+        "Shaker vigoureusement le contenu dans un shaker avec des glaçons, filtrer, puis verser dans le verre et décorer de quelques traits de bitter."
+      ]
+    }
+  },
+  "porto_flip": {
+    "fr": {
+      "steps": [
+        "Shaker les ingrédients ensemble dans un shaker avec de la glace.",
+        "Filtrer dans le verre, décorer et servir."
+      ]
+    }
+  },
+  "pink_penocha": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients dans un bol, garder au frais et remuer fréquemment."
+      ]
+    }
+  },
+  "pure_passion": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients avec un agitateur et servir sur glace pilée avec de la menthe et une fleur comestible si possible."
+      ]
+    }
+  },
+  "popped_cherry": {
+    "fr": {
+      "steps": [
+        "Servir sur glace dans un grand verre avec une cerise éclatée (à volonté selon l'envie) !"
+      ]
+    }
+  },
+  "poppy_cocktail": {
+    "fr": {
+      "steps": [
+        "Shaker les ingrédients avec de la glace, filtrer dans un verre à cocktail et servir."
+      ]
+    }
+  },
+  "port_wine_flip": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients (sauf la muscade) avec de la glace et filtrer dans un verre à whisky sour.",
+        "Saupoudrer de muscade et servir."
+      ]
+    }
+  },
+  "planter_s_punch": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients, sauf le bitter, dans un shaker rempli de glace.",
+        "Bien shaker.",
+        "Verser dans un grand verre rempli de glace.",
+        "Ajouter l'Angostura « sur le dessus ».",
+        "Décorer d'une cerise confite et d'ananas."
+      ]
+    }
+  },
+  "pineapple_paloma": {
+    "fr": {
+      "steps": [
+        "Frotter le bord de chaque verre avec une rondelle de citron vert puis le tremper dans le sel.",
+        "Ajouter la glace, la tequila, le jus de pamplemousse, le jus de citron vert et compléter avec du soda à l'ananas.",
+        "Mélanger rapidement.",
+        "Décorer d'ananas frais ou de citron vert."
+      ]
+    }
+  },
+  "pornstar_martini": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans un verre à mélange avec des glaçons.",
+        "Bien shaker.",
+        "Filtrer dans un verre à Martini glacé.",
+        "Couper un fruit de la passion en deux et l'utiliser en décoration.",
+        "Verser le Prosecco dans un verre à shot glacé et le servir à côté du martini."
+      ]
+    }
+  },
+  "planter_s_punch_2": {
+    "fr": {
+      "steps": [
+        "Presser une orange et filtrer le jus.",
+        "Verser tous les ingrédients dans un shaker rempli de glace et shaker au moins 12 secondes.",
+        "Filtrer dans un verre Highball et décorer d'un quartier d'ananas ou du fruit de votre choix."
+      ]
+    }
+  },
+  "port_and_starboard": {
+    "fr": {
+      "steps": [
+        "Verser délicatement dans un verre à pousse-café de façon à ce que la crème de menthe flotte sur la grenadine.",
+        "Servir sans mélanger."
+      ]
+    }
+  },
+  "port_wine_cocktail": {
+    "fr": {
+      "steps": [
+        "Mélanger les ingrédients avec de la glace, filtrer dans un verre à cocktail et servir."
+      ]
+    }
+  },
+  "pysch_vitamin_light": {
+    "fr": {
+      "steps": [
+        "Shaker avec de la glace."
+      ]
+    }
+  },
+  "pink_panty_pulldowns": {
+    "fr": {
+      "steps": [
+        "Bien shaker."
+      ]
+    }
+  },
+  "passion_fruit_martini": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans un verre et mélanger.",
+        "Décorer d'une demi-fruit de la passion."
+      ]
+    }
+  },
+  "pineapple_gingerale_smoothie": {
+    "fr": {
+      "steps": [
+        "Verser le tout dans un blender et mixer."
+      ]
+    }
+  },
+  "quentin": {
+    "fr": {
+      "steps": [
+        "Dans un shaker à moitié rempli de glaçons, mélanger le rhum, le Kahlúa et la crème.",
+        "Bien shaker.",
+        "Filtrer dans un verre à cocktail et décorer de muscade."
+      ]
+    }
+  },
+  "queen_bee": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients avec de la glace, filtrer dans un verre à cocktail et servir."
+      ]
+    }
+  },
+  "quick_f_k": {
+    "fr": {
+      "steps": [
+        "Dans un verre à shot, verser d'abord un tiers de Kahlúa.",
+        "Puis un tiers de Midori, et compléter avec un tiers de Baileys."
+      ]
+    }
+  },
+  "quick_sand": {
+    "fr": {
+      "steps": [
+        "Ajouter simplement le jus d'orange, en versant assez vite pour bien le mélanger avec la sambuca.",
+        "Le jus DOIT contenir de la pulpe !"
+      ]
+    }
+  },
+  "queen_charlotte": {
+    "fr": {
+      "steps": [
+        "Verser le vin rouge et la grenadine dans un verre Collins sur des glaçons.",
+        "Compléter avec du soda citron-citron vert, mélanger et servir."
+      ]
+    }
+  },
+  "queen_elizabeth": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients avec de la glace, filtrer dans un verre à cocktail et servir."
+      ]
+    }
+  },
+  "quaker_s_cocktail": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients avec de la glace, filtrer dans un verre à cocktail et servir."
+      ]
+    }
+  },
+  "quarter_deck_cocktail": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients avec de la glace, filtrer dans un verre à cocktail et servir."
+      ]
+    }
+  },
+  "rose": {
+    "fr": {
+      "steps": [
+        "Shaker ensemble dans un shaker, puis filtrer dans un verre glacé.",
+        "Décorer et servir."
+      ]
+    }
+  },
+  "radler": {
+    "fr": {
+      "steps": [
+        "Verser la bière dans une grande chope, ajouter doucement la limonade pétillante (type 7-Up ou Sprite)."
+      ]
+    }
+  },
+  "rum_sour": {
+    "fr": {
+      "steps": [
+        "Dans un shaker à moitié rempli de glaçons, mélanger le rhum, le jus de citron et le sucre.",
+        "Bien shaker.",
+        "Filtrer dans un verre à whisky sour et décorer d'une rondelle d'orange et d'une cerise."
+      ]
+    }
+  },
+  "rum_punch": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients dans un bol à punch et servir."
+      ]
+    }
+  },
+  "rum_toddy": {
+    "fr": {
+      "steps": [
+        "Dissoudre le sucre glace dans l'eau dans un verre Old Fashioned.",
+        "Ajouter le rhum et un glaçon, mélanger.",
+        "Ajouter le zeste de citron et servir."
+      ]
+    }
+  },
+  "royal_fizz": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients (sauf le cola) avec de la glace et filtrer dans un verre Collins glacé.",
+        "Compléter avec du cola et servir."
+      ]
+    }
+  },
+  "rum_cooler": {
+    "fr": {
+      "steps": [
+        "Verser le rhum et le soda dans un verre Collins presque rempli de glaçons.",
+        "Bien mélanger et décorer d'un quartier de citron."
+      ]
+    }
+  },
+  "rum_runner": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients dans le verre et ajouter la glace."
+      ]
+    }
+  },
+  "rusty_nail": {
+    "fr": {
+      "steps": [
+        "Verser le scotch et le Drambuie dans un verre Old Fashioned presque rempli de glaçons.",
+        "Bien mélanger.",
+        "Décorer d'un zeste de citron."
+      ]
+    }
+  },
+  "red_snapper": {
+    "fr": {
+      "steps": [
+        "Un shot chacun, shaker et cul sec."
+      ]
+    }
+  },
+  "royal_bitch": {
+    "fr": {
+      "steps": [
+        "Superposer le Crown Royal sur le Frangelico dans un verre à shot."
+      ]
+    }
+  },
+  "royal_flush": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans un verre sur glace.",
+        "Filtrer dans le verre."
+      ]
+    }
+  },
+  "rum_cobbler": {
+    "fr": {
+      "steps": [
+        "Dans un verre Old Fashioned, dissoudre le sucre dans l'eau gazeuse.",
+        "Ajouter de la glace pilée jusqu'à ce que le verre soit presque plein.",
+        "Ajouter le rhum.",
+        "Bien mélanger.",
+        "Décorer d'une cerise et de rondelles d'orange et de citron."
+      ]
+    }
+  },
+  "ruby_tuesday": {
+    "fr": {
+      "steps": [
+        "Verser le gin et le jus de cranberry dans un verre Highball rempli de glaçons.",
+        "Ajouter la grenadine et mélanger."
+      ]
+    }
+  },
+  "rail_splitter": {
+    "fr": {
+      "steps": [
+        "Mélanger le sirop de sucre et le jus de citron dans un grand verre.",
+        "Compléter avec du ginger ale."
+      ]
+    }
+  },
+  "rosemary_blue": {
+    "fr": {
+      "steps": [
+        "1) Verser le Bombay Sapphire, le curaçao bleu, un brin de romarin et un quartier de citron légèrement pressé dans un verre Ballon.",
+        "Bien mélanger en tournant. 2) Remplir de glaçons et compléter avec le tonic léger Fever-Tree. 3) Mélanger délicatement à la cuillère à mélange."
+      ]
+    }
+  },
+  "ramos_gin_fizz": {
+    "fr": {
+      "steps": [
+        "Préparer tous les ingrédients sur le plan de travail pour pouvoir travailler bien et rapidement, en particulier la crème et le blanc d'œuf.",
+        "Verser tous les ingrédients dans un shaker.",
+        "Shaker vigoureusement pendant 1 minute : la crème et le blanc d'œuf doivent être parfaitement mélangés, ne pas se précipiter.",
+        "Ouvrir ensuite le shaker, ajouter de la glace et shaker encore 1 à 2 minutes.",
+        "Tout dépend de votre endurance !",
+        "Verser dans un verre Highball, ajouter un trait d'eau gazeuse et décorer selon l'envie.",
+        "Le Ramos Gin Fizz se buvait autrefois comme boisson tonique, voire au petit-déjeuner ; essayez-le en apéritif ou en digestif pour redécouvrir ce petit trésor oublié."
+      ]
+    }
+  },
+  "royal_gin_fizz": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients (sauf l'eau gazeuse) avec de la glace et filtrer dans un verre Highball sur deux glaçons.",
+        "Compléter avec de l'eau gazeuse, mélanger et servir."
+      ]
+    }
+  },
+  "rum_milk_punch": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients (sauf la muscade) avec de la glace et filtrer dans un verre Collins.",
+        "Saupoudrer de muscade et servir."
+      ]
+    }
+  },
+  "raspberry_julep": {
+    "fr": {
+      "steps": [
+        "Piler délicatement les feuilles de menthe et le sirop de framboise au fond du verre.",
+        "Ajouter la glace pilée et le bourbon, puis mélanger.",
+        "Compléter de glace pilée et décorer d'un brin de menthe."
+      ]
+    }
+  },
+  "rum_screwdriver": {
+    "fr": {
+      "steps": [
+        "Verser le rhum dans un verre Highball sur des glaçons.",
+        "Ajouter le jus d'orange, mélanger et servir."
+      ]
+    }
+  },
+  "raspberry_cooler": {
+    "fr": {
+      "steps": [
+        "Verser la vodka framboise et le soda dans un verre Highball presque rempli de glaçons.",
+        "Bien mélanger."
+      ]
+    }
+  },
+  "rum_old_fashioned": {
+    "fr": {
+      "steps": [
+        "Mélanger le sucre glace, l'eau et le bitter dans un verre Old Fashioned.",
+        "Une fois le sucre dissous, ajouter des glaçons et le rhum blanc.",
+        "Ajouter le zeste de citron vert, faire flotter le rhum overproof sur le dessus et servir."
+      ]
+    }
+  },
+  "russian_spring_punch": {
+    "fr": {
+      "steps": [
+        "Verser les ingrédients dans un verre Highball, compléter avec le vin effervescent."
+      ]
+    }
+  },
+  "radioactive_long_island_iced_tea": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients sur glace dans un très grand verre.",
+        "À déguster avec prudence."
+      ]
+    }
+  },
+  "smut": {
+    "fr": {
+      "steps": [
+        "Mélanger le tout et servir bien frais."
+      ]
+    }
+  },
+  "spritz": {
+    "fr": {
+      "steps": [
+        "Verser directement dans le verre sur glace, décorer et servir."
+      ]
+    }
+  },
+  "scooter": {
+    "fr": {
+      "steps": [
+        "Bien shaker tous les ingrédients avec de la glace concassée, filtrer dans un verre à cocktail et servir."
+      ]
+    }
+  },
+  "sangria": {
+    "fr": {
+      "steps": [
+        "Mélanger le tout dans une carafe et réfrigérer.",
+        "Ajouter des clous de girofle et des bâtons de cannelle selon le goût.",
+        "Servir dans des verres à vin."
+      ]
+    }
+  },
+  "stinger": {
+    "fr": {
+      "steps": [
+        "Verser dans un verre à mélange avec de la glace, mélanger et filtrer dans un verre à cocktail.",
+        "Peut aussi être servi sur glace dans un verre Old Fashioned."
+      ]
+    }
+  },
+  "sazerac": {
+    "fr": {
+      "steps": [
+        "Rincer un verre Old Fashioned glacé à l'absinthe, ajouter de la glace pilée et réserver.",
+        "Mélanger le reste des ingrédients sur glace et réserver.",
+        "Vider la glace et l'excédent d'absinthe du verre préparé, puis y filtrer le cocktail.",
+        "Décorer d'un zeste de citron."
+      ]
+    }
+  },
+  "sidecar": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans un shaker rempli de glace.",
+        "Bien shaker et filtrer dans un verre à cocktail."
+      ]
+    }
+  },
+  "snowday": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients avec de la glace.",
+        "Filtrer dans un verre Old Fashioned glacé sur glace fraîche.",
+        "Presser un zeste d'orange au-dessus du cocktail et décorer."
+      ]
+    }
+  },
+  "spice_75": {
+    "fr": {
+      "steps": [
+        "Chauffer doucement 60 g de sucre roux avec 3 cl d'eau et une cuillère à soupe de quatre-épices dans une casserole.",
+        "Cuire doucement jusqu'à dissolution du sucre, puis laisser refroidir le mélange.",
+        "Filtrer à travers une passoire tapissée d'un filtre à café (ou d'une double épaisseur de papier absorbant).",
+        "Verser 6 cl de ce sirop épicé dans un shaker avec 20 cl de rhum et 9 cl de jus de citron vert.",
+        "Shaker avec de la glace et répartir en filtrant dans six flûtes.",
+        "Compléter avec 60 cl de champagne et décorer chaque verre d'un zeste d'orange."
+      ]
+    }
+  },
+  "snowball": {
+    "fr": {
+      "steps": [
+        "Placer un glaçon dans le verre et ajouter 4,5 cl d'Advocaat.",
+        "Compléter le verre avec de la limonade et décorer d'une rondelle de citron.",
+        "Servir immédiatement."
+      ]
+    }
+  },
+  "shot_gun": {
+    "fr": {
+      "steps": [
+        "Verser une part de Jack Daniel's et une part de Jim Beam dans un verre à shot, puis faire flotter le Wild Turkey sur le dessus."
+      ]
+    }
+  },
+  "salty_dog": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients sur des glaçons dans un verre Highball.",
+        "Bien mélanger et servir (la vodka peut remplacer le gin si préféré)."
+      ]
+    }
+  },
+  "stone_sour": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients avec de la glace, filtrer dans un verre à whisky sour glacé et servir."
+      ]
+    }
+  },
+  "sea_breeze": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients directement dans un verre Highball rempli de glace.",
+        "Décorer d'un quartier de citron vert."
+      ]
+    }
+  },
+  "scotch_sour": {
+    "fr": {
+      "steps": [
+        "Shaker le scotch, le jus de citron vert et le sucre glace avec de la glace, puis filtrer dans un verre à whisky sour.",
+        "Décorer d'une demi-rondelle de citron, surmonter d'une cerise et servir."
+      ]
+    }
+  },
+  "sweet_tooth": {
+    "fr": {
+      "steps": [
+        "Verser deux shots de liqueur de chocolat Godiva dans un verre, ajouter du lait selon le goût."
+      ]
+    }
+  },
+  "screwdriver": {
+    "fr": {
+      "steps": [
+        "Mélanger dans un verre Highball avec de la glace.",
+        "Décorer et servir."
+      ]
+    }
+  },
+  "sherry_flip": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients (sauf la muscade) avec de la glace et filtrer dans un verre à whisky sour.",
+        "Saupoudrer de muscade et servir."
+      ]
+    }
+  },
+  "sol_y_sombra": {
+    "fr": {
+      "steps": [
+        "Shaker les ingrédients avec de la glace, filtrer dans un verre Ballon et servir (le nom signifie « Soleil et Ombre » — après l'avoir dégusté, vous comprendrez pourquoi.",
+        "Merci, Kirby.)"
+      ]
+    }
+  },
+  "shark_attack": {
+    "fr": {
+      "steps": [
+        "Mélanger la limonade et l'eau selon les instructions au dos de la canette.",
+        "Si les instructions indiquent d'ajouter 4 canettes et un tiers d'eau, procéder ainsi.",
+        "Mélanger dans une carafe.",
+        "Ajouter 35 cl de vodka (Absolut).",
+        "Bien mélanger.",
+        "Verser dans un verre rempli de glace pilée.",
+        "Excellent !"
+      ]
+    }
+  },
+  "san_francisco": {
+    "fr": {
+      "steps": [
+        "Prendre un grand verre, y placer quelques glaçons, verser la vodka par-dessus puis compléter avec le jus, puis la « crème », et enfin ajouter la grenadine très délicatement sur le bord du verre pour qu'elle se dépose au fond. Décorer d'orange et de fraise."
+      ]
+    }
+  },
+  "space_odyssey": {
+    "fr": {
+      "steps": [
+        "Remplir le verre de glace et ajouter des shots de Bacardi et de Malibu.",
+        "Ajouter un trait de jus d'ananas et compléter avec du jus d'orange.",
+        "Ajouter la grenadine pour la couleur et décorer de cerises."
+      ]
+    }
+  },
+  "sherry_eggnog": {
+    "fr": {
+      "steps": [
+        "Shaker le xérès, le sucre glace et l'œuf avec de la glace, puis filtrer dans un verre Collins.",
+        "Compléter avec le lait et mélanger.",
+        "Saupoudrer de muscade et servir."
+      ]
+    }
+  },
+  "sweet_bananas": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans le bol du blender, couvrir et mixer à vitesse moyenne jusqu'à obtenir un mélange homogène.",
+        "Verser dans un grand verre, deux moyens ou trois petits, et déguster."
+      ]
+    }
+  },
+  "sweet_sangria": {
+    "fr": {
+      "steps": [
+        "Dissoudre le sucre dans l'eau chaude et laisser refroidir.",
+        "Éplucher les agrumes et les séparer en quartiers.",
+        "Mélanger le vin, le sirop de sucre, les fruits et le soda pamplemousse dans une carafe, réfrigérer quelques heures.",
+        "Servir dans de grands verres avec une paille."
+      ]
+    }
+  },
+  "thriller": {
+    "fr": {
+      "steps": [
+        "Dans un shaker à moitié rempli de glaçons, mélanger tous les ingrédients.",
+        "Bien shaker.",
+        "Filtrer dans un verre à cocktail."
+      ]
+    }
+  },
+  "the_galah": {
+    "fr": {
+      "steps": [
+        "Mélanger les alcools puis compléter avec le jus d'ananas et de citron vert."
+      ]
+    }
+  },
+  "tia_maria": {
+    "fr": {
+      "steps": [
+        "Faire bouillir l'eau, le sucre et le café pendant 10 minutes puis laisser refroidir.",
+        "Ajouter le rhum et la vanille.",
+        "Mettre en bouteille(s) propre(s) et laisser reposer une semaine avant utilisation."
+      ]
+    }
+  },
+  "tipperary": {
+    "fr": {
+      "steps": [
+        "Mélanger sur glace.",
+        "Filtrer dans un verre glacé.",
+        "Découper une large bande de zeste d'orange et en presser les huiles au-dessus du cocktail.",
+        "Jeter le zeste."
+      ]
+    }
+  },
+  "turkeyball": {
+    "fr": {
+      "steps": [
+        "Shaker avec de la glace et filtrer dans un verre à shot."
+      ]
+    }
+  },
+  "texas_sling": {
+    "fr": {
+      "steps": [
+        "Mixer avec de la glace jusqu'à obtenir une texture lisse.",
+        "Servir dans un verre tulipe, couvrir de crème fouettée."
+      ]
+    }
+  },
+  "thai_coffee": {
+    "fr": {
+      "steps": [
+        "Placer le café et les épices dans le filtre de la cafetière.",
+        "Préparer le café normalement, laisser refroidir.",
+        "Dans un grand verre, dissoudre 1 à 2 cuillères à café de sucre dans 3 cl de café (plus facile à dissoudre que directement sur glace).",
+        "Ajouter 5 à 6 glaçons et compléter avec le café jusqu'à environ 2,5 cm du bord du verre.",
+        "Poser une cuillère au-dessus du café et y verser doucement la crème à fouetter.",
+        "La crème flottera ainsi à la surface du café au lieu de s'y disperser immédiatement."
+      ]
+    }
+  },
+  "tom_collins": {
+    "fr": {
+      "steps": [
+        "Dans un shaker à moitié rempli de glaçons, mélanger le gin, le jus de citron et le sucre.",
+        "Bien shaker.",
+        "Filtrer dans un verre Collins presque rempli de glaçons.",
+        "Ajouter l'eau gazeuse.",
+        "Mélanger et décorer d'une cerise et d'une rondelle d'orange."
+      ]
+    }
+  },
+  "tomato_tang": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans le bol du blender, couvrir et mixer à vitesse moyenne jusqu'à obtenir un mélange homogène.",
+        "Verser dans un grand verre, deux moyens ou trois petits, et déguster."
+      ]
+    }
+  },
+  "talos_coffee": {
+    "fr": {
+      "steps": [
+        "Ajouter le Grand Marnier puis le café."
+      ]
+    }
+  },
+  "tennesee_mud": {
+    "fr": {
+      "steps": [
+        "Mélanger le café, le Jack Daniel's et l'amaretto.",
+        "Ajouter la crème sur le dessus."
+      ]
+    }
+  },
+  "tequila_fizz": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients (sauf le ginger ale) avec de la glace et filtrer dans un verre Collins sur glaçons.",
+        "Compléter avec du ginger ale, mélanger et servir."
+      ]
+    }
+  },
+  "tequila_sour": {
+    "fr": {
+      "steps": [
+        "Shaker la tequila, le jus de citron et le sucre glace avec de la glace, puis filtrer dans un verre à whisky sour.",
+        "Ajouter la demi-rondelle de citron, surmonter d'une cerise et servir."
+      ]
+    }
+  },
+  "thai_iced_tea": {
+    "fr": {
+      "steps": [
+        "Mélanger le thé thaï (en poudre), l'eau bouillante et le lait concentré sucré, remuer jusqu'à homogénéité.",
+        "Verser dans 2 grands verres remplis de glaçons.",
+        "Décorer de feuilles de menthe.",
+        "Pour 2 personnes."
+      ]
+    }
+  },
+  "the_last_word": {
+    "fr": {
+      "steps": [
+        "Shaker avec de la glace et filtrer dans un verre à cocktail."
+      ]
+    }
+  },
+  "turf_cocktail": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients (sauf le zeste d'orange) avec de la glace et filtrer dans un verre à cocktail.",
+        "Ajouter le zeste d'orange et servir."
+      ]
+    }
+  },
+  "the_laverstoke": {
+    "fr": {
+      "steps": [
+        "1) Presser deux quartiers de citron vert dans un verre Ballon, puis ajouter le cordial, le Bombay Sapphire et le Martini Rosso, mélanger en tournant. 2) Remplir entièrement le verre de glaçons et mélanger pour bien refroidir. 3) Compléter avec le Fever-Tree Ginger Ale et mélanger à nouveau délicatement. 4) Décorer d'une tranche de gingembre cassée et d'un brin de menthe froissé."
+      ]
+    }
+  },
+  "tequila_slammer": {
+    "fr": {
+      "steps": [
+        "Mélanger avec précaution pour ne pas libérer le CO2 dissous."
+      ]
+    }
+  },
+  "tequila_sunrise": {
+    "fr": {
+      "steps": [
+        "Verser la tequila et le jus d'orange dans le verre sur glace.",
+        "Ajouter la grenadine, qui va descendre au fond.",
+        "Mélanger délicatement pour créer l'effet dégradé.",
+        "Décorer et servir."
+      ]
+    }
+  },
+  "the_philosopher": {
+    "fr": {
+      "steps": [
+        "Verser tous les alcools dans un shaker (de préférence du gin Hendrick's), ainsi que le bitter à l'orange et le jus de citron.",
+        "Filtrer dans un verre à Margarita, compléter avec le Prosecco."
+      ]
+    }
+  },
+  "tuxedo_cocktail": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients avec de la glace et filtrer dans un verre à cocktail.",
+        "Décorer d'une cerise et d'un zeste de citron."
+      ]
+    }
+  },
+  "tequila_surprise": {
+    "fr": {
+      "steps": [
+        "Remplir un verre à shot de tequila.",
+        "Ajouter quelques gouttes de Tabasco."
+      ]
+    }
+  },
+  "thai_iced_coffee": {
+    "fr": {
+      "steps": [
+        "Préparer une cafetière de café bien corsé, à l'européenne.",
+        "Ajouter 2 à 3 gousses de cardamome fraîchement moulues au café moulu.",
+        "Sucrer à chaud, puis refroidir rapidement.",
+        "Servir dans un verre Highball sur glace, avec de la crème.",
+        "Pour obtenir un effet en couches, poser une cuillère au-dessus du café et y verser délicatement le lait afin qu'il flotte à la surface."
+      ]
+    }
+  },
+  "the_jimmy_conway": {
+    "fr": {
+      "steps": [
+        "Remplir le verre de glace, verser The Irishman et le Disaronno, compléter avec du jus de cranberry, décorer d'une rondelle de citron... et déguster !"
+      ]
+    }
+  },
+  "texas_rattlesnake": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients et bien shaker.",
+        "Doux au premier abord, avec une vraie morsure en fin de bouche..."
+      ]
+    }
+  },
+  "vesper": {
+    "fr": {
+      "steps": [
+        "Shaker sur glace jusqu'à ce que le mélange soit bien frais, puis filtrer dans une large coupe et décorer d'une fine lamelle de zeste de citron."
+      ]
+    }
+  },
+  "victor": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients avec de la glace, filtrer dans un verre à cocktail et servir."
+      ]
+    }
+  },
+  "vampiro": {
+    "fr": {
+      "steps": [
+        "Le Vampiro peut être préparé dans un grand verre ou un verre Old Fashioned.",
+        "Le barman peut d'abord givrer le bord du verre au gros sel : étaler une couche de gros sel sur une planche, humidifier le bord du verre avec du jus de citron vert ou de l'eau, puis retourner le verre sur le sel pour qu'il adhère au bord humidifié.",
+        "Remplir ensuite le verre à moitié de glace et ajouter un ou deux shots de tequila de bonne qualité.",
+        "Ajouter ensuite les éléments aromatiques.",
+        "Presser un citron vert frais dans le verre, ajouter quelques grains de sel, compléter avec un soda aux agrumes jusqu'aux quatre cinquièmes du verre, puis ajouter la sauce piquante Viuda de Sanchez (ou du jus d'orange, du jus de citron vert et du pico de gallo).",
+        "Terminer en mélangeant les ingrédients pour bien lier les saveurs."
+      ]
+    }
+  },
+  "vesuvio": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients avec de la glace, filtrer dans un verre Old Fashioned sur glaçons et servir."
+      ]
+    }
+  },
+  "veteran": {
+    "fr": {
+      "steps": [
+        "Verser le rhum et le brandy de cerise dans un verre Old Fashioned presque rempli de glaçons.",
+        "Bien mélanger."
+      ]
+    }
+  },
+  "van_vleet": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients avec de la glace, filtrer dans un verre Old Fashioned sur glaçons et servir."
+      ]
+    }
+  },
+  "vodka_fizz": {
+    "fr": {
+      "steps": [
+        "Mixer tous les ingrédients, sauf la muscade.",
+        "Verser dans un grand verre à vin blanc et saupoudrer de muscade."
+      ]
+    }
+  },
+  "vodka_lemon": {
+    "fr": {
+      "steps": [
+        "Le vodka lemon se prépare directement dans un verre Highball ou un grand verre : placer 6 à 7 glaçons dans le verre, verser la vodka, la limonade et mélanger à la cuillère à mélange.",
+        "Décorer enfin d'une rondelle de citron et, si désiré, de quelques feuilles de menthe.",
+        "Votre vodka lemon est prêt à être servi."
+      ]
+    }
+  },
+  "vodka_slime": {
+    "fr": {
+      "steps": [
+        "Remplir le verre de glace.",
+        "Ajouter la vodka, la limonade pétillante puis terminer avec le jus de citron vert."
+      ]
+    }
+  },
+  "vodka_tonic": {
+    "fr": {
+      "steps": [
+        "Laver et couper un quartier et une rondelle de citron vert ou de citron.",
+        "Remplir un verre de glace fraîche.",
+        "Verser la dose de vodka souhaitée et compléter avec le tonic.",
+        "Presser le quartier de citron vert dans le verre et décorer avec la rondelle.",
+        "Et voilà, tout simplement : la recette du bonheur !"
+      ]
+    }
+  },
+  "vodka_martini": {
+    "fr": {
+      "steps": [
+        "Shaker la vodka et le vermouth ensemble avec quelques glaçons, filtrer dans un verre à cocktail, ajouter l'olive et servir."
+      ]
+    }
+  },
+  "vodka_russian": {
+    "fr": {
+      "steps": [
+        "Préparer comme un cocktail classique."
+      ]
+    }
+  },
+  "vermouth_cassis": {
+    "fr": {
+      "steps": [
+        "Mélanger le vermouth et la crème de cassis dans un verre Highball avec des glaçons.",
+        "Compléter avec de l'eau gazeuse, mélanger à nouveau et servir."
+      ]
+    }
+  },
+  "victory_collins": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients (sauf la rondelle d'orange) avec de la glace et filtrer dans un verre Collins sur glaçons.",
+        "Ajouter la rondelle d'orange et servir."
+      ]
+    }
+  },
+  "vodka_and_tonic": {
+    "fr": {
+      "steps": [
+        "Verser la vodka dans un verre Highball sur des glaçons.",
+        "Compléter avec le tonic, mélanger et servir."
+      ]
+    }
+  },
+  "valencia_cocktail": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients avec de la glace, filtrer dans un verre à cocktail et servir."
+      ]
+    }
+  },
+  "whisky_mac": {
+    "fr": {
+      "steps": [
+        "Verser les deux ingrédients dans un verre à vin, sans glace."
+      ]
+    }
+  },
+  "white_lady": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans un shaker rempli de glace.",
+        "Bien shaker et filtrer dans un grand verre à cocktail."
+      ]
+    }
+  },
+  "wine_punch": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients et verser sur un gros bloc de glace."
+      ]
+    }
+  },
+  "wine_cooler": {
+    "fr": {
+      "steps": [
+        "Mélanger le vin et la boisson gazeuse.",
+        "Verser dans le verre.",
+        "Ajouter la glace."
+      ]
+    }
+  },
+  "winter_rita": {
+    "fr": {
+      "steps": [
+        "Givrer le bord du verre au sel.",
+        "Mélanger tous les ingrédients, shaker avec de la glace, et filtrer sur de la glace fraîche."
+      ]
+    }
+  },
+  "white_russian": {
+    "fr": {
+      "steps": [
+        "Verser la vodka et la liqueur de café sur des glaçons dans un verre Old Fashioned.",
+        "Compléter avec de la crème légère et servir."
+      ]
+    }
+  },
+  "winter_paloma": {
+    "fr": {
+      "steps": [
+        "La Paloma préférée de tous se pare ici d'une délicieuse touche indienne.",
+        "Tequila reposado infusée au « poivre Timur », aux notes d'agrumes et de pamplemousse, cultivé au pied de l'Himalaya.",
+        "Il procure également une légère sensation d'engourdissement et de picotement sur les lèvres.",
+        "Le jus de pamplemousse frais a lui aussi été relevé d'un mélange d'épices chaudes venu de l'Himalaya.",
+        "La combinaison de tous ces éléments permet de sublimer la dégustation de cette Paloma."
+      ]
+    }
+  },
+  "white_wine_sangria": {
+    "fr": {
+      "steps": [
+        "Couper le citron, le citron vert et les autres fruits en gros morceaux.",
+        "Remplir la carafe de vin blanc et y mélanger le brandy de pomme.",
+        "Compléter avec de l'eau gazeuse selon le goût."
+      ]
+    }
+  },
+  "whitecap_margarita": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans un blender et mixer jusqu'à obtenir une texture lisse.",
+        "Pour un verre."
+      ]
+    }
+  },
+  "waikiki_beachcomber": {
+    "fr": {
+      "steps": [
+        "Shaker tous les ingrédients avec de la glace, filtrer dans un verre à cocktail et servir."
+      ]
+    }
+  },
+  "yellow_bird": {
+    "fr": {
+      "steps": [
+        "Shaker et filtrer dans un verre à cocktail glacé."
+      ]
+    }
+  },
+  "yoghurt_cooler": {
+    "fr": {
+      "steps": [
+        "Verser tous les ingrédients dans le bol du blender, couvrir et mixer à vitesse moyenne jusqu'à obtenir un mélange homogène.",
+        "Verser dans un grand verre, deux moyens ou trois petits, et déguster.",
+        "Remarque : utiliser beaucoup de glace — idéal les jours de forte chaleur !",
+        "Pour ajouter de la glace : retirer le centre du couvercle pendant que le blender tourne, y glisser 3 ou 4 glaçons et mixer jusqu'à ce qu'ils soient complètement broyés."
+      ]
+    }
+  },
+  "zorro": {
+    "fr": {
+      "steps": [
+        "Mélanger le tout, verser le café noir puis ajouter la crème fouettée sur le dessus."
+      ]
+    }
+  },
+  "zinger": {
+    "fr": {
+      "steps": [
+        "Prendre un verre à shot et y verser trois shots de schnaps.",
+        "Faire de même avec le soda cola.",
+        "Puis le boire cul sec, comme il se doit."
+      ]
+    }
+  },
+  "zoksel": {
+    "fr": {
+      "steps": [
+        "Pas d'instructions particulières : verser simplement tous les ingrédients dans un seul verre.",
+        "Le citron accompagne le tout."
+      ]
+    }
+  },
+  "zombie": {
+    "fr": {
+      "steps": [
+        "Mixer à grande vitesse pendant 5 secondes maximum.",
+        "Verser dans un verre, compléter de glaçons, puis ajouter la décoration. *Mix de Donn : porter à ébullition 3 bâtons de cannelle concassés, 235 ml de sucre et 235 ml d'eau, en remuant jusqu'à dissolution du sucre.",
+        "Laisser mijoter 2 minutes, puis retirer du feu et laisser reposer au moins 2 heures avant de filtrer dans une bouteille en verre propre.",
+        "Mélanger ensuite une part de ce sirop avec deux parts de jus de pamplemousse frais."
+      ]
+    }
+  },
+  "zambeer": {
+    "fr": {
+      "steps": [
+        "Mélanger la sambuca avec le root beer et remuer.",
+        "Ajouter la glace."
+      ]
+    }
+  },
+  "zorbatini": {
+    "fr": {
+      "steps": [
+        "Préparer comme un Martini.",
+        "Décorer d'une olive verte."
+      ]
+    }
+  },
+  "zenmeister": {
+    "fr": {
+      "steps": [
+        "Mélanger et déguster."
+      ]
+    }
+  },
+  "zipperhead": {
+    "fr": {
+      "steps": [
+        "Remplir le verre de glaçons, ajouter une paille avant de verser l'alcool.",
+        "Ajouter ensuite les ingrédients dans l'ordre, en essayant de les superposer autant que possible (à savoir",
+        "le Chambord au fond, puis la vodka, puis le soda sur le dessus)."
+      ]
+    }
+  },
+  "zima_blaster": {
+    "fr": {
+      "steps": [
+        "Remplir le verre de glace.",
+        "Verser le Chambord, puis compléter avec le Zima.",
+        "Mélanger et déguster."
+      ]
+    }
+  },
+  "zizi_coin_coin": {
+    "fr": {
+      "steps": [
+        "Verser 5 cl de Cointreau sur glace, ajouter 2 cl de jus de citron (ou citron vert) frais, mélanger délicatement, puis ajouter des rondelles de citron ou de citron vert dans le verre."
+      ]
+    }
+  },
+  "zimadori_zinger": {
+    "fr": {
+      "steps": [
+        "Verser le Zima dans un verre Collins sur glace, puis ajouter le shot de Midori.",
+        "Ne pas mélanger.",
+        "Décorer d'une cerise."
+      ]
+    }
+  },
+  "zippy_s_revenge": {
+    "fr": {
+      "steps": [
+        "Préparer la boisson en poudre aromatisée selon le goût, puis ajouter le rhum et l'amaretto. Bien shaker pour dissoudre le sucre... servir bien frais."
+      ]
+    }
+  },
+  "ziemes_martini_apfelsaft": {
+    "fr": {
+      "steps": [
+        "Servir sans glace.",
+        "Le jus doit au moins être à température ambiante."
+      ]
+    }
+  },
+  "155_belmont": {
+    "fr": {
+      "steps": [
+        "Mixer avec de la glace.",
+        "Servir dans un verre à vin.",
+        "Décorer d'une carotte."
+      ]
+    }
+  },
+  "110_in_the_shade": {
+    "fr": {
+      "steps": [
+        "Laisser tomber le shot dans le verre.",
+        "Compléter avec de la bière."
+      ]
+    }
+  },
+  "151_florida_bushwacker": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients.",
+        "Mixer jusqu'à obtenir une texture lisse.",
+        "Décorer de copeaux de chocolat si désiré."
+      ]
+    }
+  },
+  "24k_nightmare": {
+    "fr": {
+      "steps": [
+        "Verser sur glace, shaker et servir."
+      ]
+    }
+  },
+  "3_wise_men": {
+    "fr": {
+      "steps": [
+        "Verser le tout dans un verre... et cul sec."
+      ]
+    }
+  },
+  "3_mile_long_island_iced_tea": {
+    "fr": {
+      "steps": [
+        "Remplir un verre de 40 cl de glace et d'alcool.",
+        "Compléter les deux tiers avec du cola et le reste avec du mix sweet & sour.",
+        "Ajouter un trait de bitter et un quartier de citron."
+      ]
+    }
+  },
+  "410_gone": {
+    "fr": {
+      "steps": [
+        "Mélanger le tout et déguster !"
+      ]
+    }
+  },
+  "50_50": {
+    "fr": {
+      "steps": [
+        "Remplir le verre de glace pilée.",
+        "Ajouter la vodka.",
+        "Ajouter un trait de Grand Marnier.",
+        "Compléter avec du jus d'orange."
+      ]
+    }
+  },
+  "501_blue": {
+    "fr": {
+      "steps": [
+        "Mélanger des quantités égales dans un verre avec de la glace."
+      ]
+    }
+  },
+  "57_chevy_with_a_white_license_plate": {
+    "fr": {
+      "steps": [
+        "1.",
+        "Remplir un verre Old Fashioned de glace 2. Ajouter la crème de cacao blanche et la vodka 3. Mélanger"
+      ]
+    }
+  },
+  "69_special": {
+    "fr": {
+      "steps": [
+        "Verser 6 cl de gin.",
+        "Ajouter 12 cl de limonade pétillante.",
+        "Ajouter du jus de citron pour relever le goût.",
+        "Pour une version plus légère, compléter le verre avec plus de limonade pétillante."
+      ]
+    }
+  },
+  "747_drink": {
+    "fr": {
+      "steps": [
+        "Remplir un verre Collins de glace.",
+        "Verser la vodka, le cordial au citron vert et le jus de cranberry.",
+        "Compléter avec de la limonade pétillante.",
+        "Décorer d'une rondelle de citron vert ou de quelques cranberries."
+      ]
+    }
+  },
+  "9_1_2_weeks": {
+    "fr": {
+      "steps": [
+        "Mélanger tous les ingrédients dans un verre à mélange.",
+        "Bien refroidir et filtrer dans un verre à cocktail.",
+        "Décorer d'une tranche de fraise."
+      ]
+    }
+  }
+}

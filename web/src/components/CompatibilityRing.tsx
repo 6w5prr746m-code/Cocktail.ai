@@ -1,3 +1,5 @@
+import { useTranslation } from "../domain/i18n/useTranslation";
+
 interface CompatibilityRingProps {
   fraction: number; // 0..1
   size?: number;
@@ -13,6 +15,7 @@ export function CompatibilityRing({
   label,
   visualLabelOverride,
 }: CompatibilityRingProps) {
+  const { t } = useTranslation();
   const clamped = Math.max(0, Math.min(1, fraction));
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
@@ -25,7 +28,7 @@ export function CompatibilityRing({
       className="relative inline-flex items-center justify-center"
       style={{ width: size, height: size }}
       role="img"
-      aria-label={label ?? `Compatibilité ${Math.round(clamped * 100)} pour cent`}
+      aria-label={label ?? t("compatibility.aria", { percent: Math.round(clamped * 100) })}
     >
       <svg width={size} height={size} className="-rotate-90">
         <circle cx={center} cy={center} r={radius} fill="none" stroke="var(--color-border)" strokeWidth={strokeWidth} />

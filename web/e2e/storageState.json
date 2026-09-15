@@ -4,7 +4,8 @@
     {
       "origin": "http://localhost:4300",
       "localStorage": [
-        { "name": "cocktailai:onboarding", "value": "{\"state\":{\"completed\":true},\"version\":0}" }
+        { "name": "cocktailai:onboarding", "value": "{\"state\":{\"completed\":true},\"version\":0}" },
+        { "name": "cocktailai:locale", "value": "{\"state\":{\"locale\":\"fr\"},\"version\":0}" }
       ]
     }
   ]

@@ -1,16 +1,21 @@
 import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { AlmostReadyBanner } from "../components/AlmostReadyBanner";
 import { CocktailCard } from "../components/CocktailCard";
 import { CocktailVisual } from "../components/CocktailVisual";
 import { TasteTags } from "../components/TasteTags";
+import { WeeklyChallengeCard } from "../components/WeeklyChallengeCard";
 import { useAllCocktails } from "../domain/catalog";
 import { dailyPick } from "../domain/gradient";
-import { pickSurprise, recommendCocktails } from "../domain/recommendation";
+import { explainRecommendation, pickSurprise, recommendCocktails } from "../domain/recommendation";
 import { tasteProfile } from "../domain/tasteProfile";
+import { isChallengeCompletedThisWeek, weeklyChallengePick } from "../domain/weeklyChallenge";
 import { useFavoritesStore } from "../state/favorites";
 import { useHistoryStore } from "../state/history";
 import { useUserRecipesStore } from "../state/userRecipes";
 import type { Cocktail } from "../domain/types";
+import { useTranslation } from "../domain/i18n/useTranslation";
+import { getLocalizedMainSpirit, getLocalizedTasteTags } from "../domain/i18n/localizedCocktail";
 
 const SECTION_LIMIT = 20;
 
@@ -19,11 +24,13 @@ function Section({
   subtitle,
   cocktails,
   emptyHint,
+  captions,
 }: {
   title: string;
   subtitle?: string;
   cocktails: Cocktail[];
   emptyHint?: string;
+  captions?: Map<string, string>;
 }) {
   if (cocktails.length === 0 && !emptyHint) return null;
   return (
@@ -46,7 +53,7 @@ function Section({
         <div className="flex gap-3 overflow-x-auto px-4 pb-1" style={{ scrollSnapType: "x proximity" }}>
           {cocktails.map((c) => (
             <div key={c.id} style={{ scrollSnapAlign: "start" }}>
-              <CocktailCard cocktail={c} />
+              <CocktailCard cocktail={c} width={152} caption={captions?.get(c.id)} />
             </div>
           ))}
         </div>
@@ -56,7 +63,8 @@ function Section({
 }
 
 function FeaturedCocktail({ cocktail }: { cocktail: Cocktail }) {
-  const tags = tasteProfile(cocktail);
+  const { t, locale } = useTranslation();
+  const tags = getLocalizedTasteTags(tasteProfile(cocktail), locale);
 
   return (
     <Link
@@ -69,10 +77,10 @@ function FeaturedCocktail({ cocktail }: { cocktail: Cocktail }) {
       </div>
       <div className="absolute inset-0" style={{ background: "linear-gradient(transparent 35%, rgba(0,0,0,0.78))" }} />
       <div className="absolute bottom-0 left-0 right-0 p-5">
-        <p className="text-[11px] font-semibold uppercase tracking-wide text-white/75 mb-1.5">Le cocktail du jour</p>
+        <p className="text-[11px] font-semibold uppercase tracking-wide text-white/75 mb-1.5">{t("home.featuredLabel")}</p>
         <h2 className="text-2xl font-bold text-white leading-tight mb-2">{cocktail.name}</h2>
         <TasteTags tags={tags} size="md" variant="onImage" />
-        <p className="text-sm text-white/85 mt-3 font-medium">Découvrir la recette →</p>
+        <p className="text-sm text-white/85 mt-3 font-medium">{t("home.discoverRecipe")}</p>
       </div>
     </Link>
   );
@@ -80,6 +88,7 @@ function FeaturedCocktail({ cocktail }: { cocktail: Cocktail }) {
 
 export default function HomePage() {
   const navigate = useNavigate();
+  const { t, locale } = useTranslation();
   const cocktails = useAllCocktails();
   const favoriteIds = useFavoritesStore((s) => s.favoriteIds);
   const historyEntries = useHistoryStore((s) => s.entries);
@@ -115,12 +124,29 @@ export default function HomePage() {
     [cocktails, favoriteIds, historyCocktailIds],
   );
 
+  const likedCocktails = useMemo(
+    () =>
+      [...new Set([...favoriteIds, ...historyCocktailIds])]
+        .map((id) => cocktails.find((c) => c.id === id))
+        .filter((c): c is Cocktail => Boolean(c)),
+    [cocktails, favoriteIds, historyCocktailIds],
+  );
+  const recommendedCaptions = new Map<string, string>();
+  for (const c of recommended) {
+    const reason = explainRecommendation(c, likedCocktails);
+    if (!reason) continue;
+    const value = reason.kind === "spirit" ? getLocalizedMainSpirit(reason.value, locale) : getLocalizedTasteTags([reason.value], locale)[0];
+    recommendedCaptions.set(c.id, t("home.recommendationReason", { value }));
+  }
+
   const favorites = useMemo(
     () => favoriteIds.map((id) => cocktails.find((c) => c.id === id)).filter((c): c is Cocktail => Boolean(c)),
     [cocktails, favoriteIds],
   );
 
   const featured = useMemo(() => dailyPick(cocktails), [cocktails]);
+  const weeklyChallenge = useMemo(() => weeklyChallengePick(cocktails), [cocktails]);
+  const weeklyChallengeCompleted = weeklyChallenge ? isChallengeCompletedThisWeek(historyEntries, weeklyChallenge.id) : false;
 
   function surpriseMe() {
     const excluded = new Set([...favoriteIds, ...historyCocktailIds]);
@@ -131,13 +157,13 @@ export default function HomePage() {
   }
 
   return (
-    <div className="pb-8">
+    <div className="pb-8 max-w-[560px] md:max-w-[720px] lg:max-w-[1100px] xl:max-w-[1300px] mx-auto">
       <div className="px-4 pt-6 pb-4">
         <p className="text-sm font-medium mb-1" style={{ color: "var(--color-accent-gold-text)" }}>
-          Cocktail.ai
+          {t("home.brand")}
         </p>
         <h1 className="text-3xl font-bold leading-tight mb-4" style={{ color: "var(--color-text-primary)" }}>
-          Que souhaites-tu boire ce soir ?
+          {t("home.heroTitle")}
         </h1>
 
         {featured && <FeaturedCocktail cocktail={featured} />}
@@ -149,13 +175,13 @@ export default function HomePage() {
             className="flex-1 rounded-2xl py-4 font-semibold text-base"
             style={{ background: "var(--color-accent-gold)", color: "#0b0b0f" }}
           >
-            ✨ Ajouter mes ingrédients
+            {t("home.addIngredientsButton")}
           </button>
           <button
             type="button"
             onClick={surpriseMe}
-            aria-label="Surprends-moi avec un cocktail au hasard"
-            title="Surprends-moi"
+            aria-label={t("home.surpriseAria")}
+            title={t("home.surpriseTitle")}
             className="rounded-2xl px-5 font-semibold text-base transition-transform"
             style={{
               background: "var(--color-surface)",
@@ -169,17 +195,25 @@ export default function HomePage() {
         </div>
       </div>
 
-      <Section title="Populaires" cocktails={popular} />
-      <Section title="Nouveautés" cocktails={fresh} />
+      {weeklyChallenge && (
+        <div className="px-4 mt-4">
+          <WeeklyChallengeCard cocktail={weeklyChallenge} completed={weeklyChallengeCompleted} />
+        </div>
+      )}
+      <AlmostReadyBanner />
+
+      <Section title={t("home.popularTitle")} cocktails={popular} />
+      <Section title={t("home.freshTitle")} cocktails={fresh} />
       <Section
-        title="Recommandés pour toi"
-        subtitle={hasTasteSignal ? "Basé sur tes favoris et cocktails déjà préparés" : undefined}
+        title={t("home.recommendedTitle")}
+        subtitle={hasTasteSignal ? t("home.recommendedSubtitle") : undefined}
         cocktails={recommended}
+        captions={recommendedCaptions}
       />
       <Section
-        title="Tes favoris"
+        title={t("home.favoritesTitle")}
         cocktails={favorites}
-        emptyHint="Ajoute des cocktails en favori depuis leur fiche pour les retrouver ici."
+        emptyHint={t("home.favoritesEmptyHint")}
       />
     </div>
   );

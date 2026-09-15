@@ -14,19 +14,29 @@ import { useMyBarStore } from "../state/myBar";
 import { useShoppingListStore } from "../state/shoppingList";
 import { tasteProfile } from "../domain/tasteProfile";
 import { buildPhotoPrompt } from "../domain/photoPrompt";
-import { INGREDIENT_ROLE_LABEL, type StockStatus } from "../domain/types";
+import { type StockStatus } from "../domain/types";
+import { useTranslation } from "../domain/i18n/useTranslation";
+import { useLocalizedCocktail, useLocalizedIngredients } from "../domain/i18n/useLocalizedCocktail";
+import { getLocalizedTasteTags, getLocalizedUnit } from "../domain/i18n/localizedCocktail";
 
-const DEGRADATION_LABEL: Record<string, string> = {
-  lowStock: "stock faible dans Mon Bar",
-  almostEmptyStock: "presque terminé dans Mon Bar",
-  substitution: "remplacé par un ingrédient de Mon Bar",
-};
-
+// IMPORTANT : CocktailVisual/tasteProfile/buildPhotoPrompt tournent sur des
+// heuristiques qui pattern-matchent le texte français brut (glassware/
+// garnish/iceType/category) — on leur passe donc toujours `rawCocktail`
+// (canonique FR), jamais `cocktail` (localisé), sous peine de casser
+// silencieusement l'illustration, les tags de goût et le prompt photo.
 export default function CocktailDetailPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const cocktail = useCocktail(id);
-  const ingredients = useAllIngredients();
+  const rawCocktail = useCocktail(id);
+  const { t, locale } = useTranslation();
+  const cocktail = useLocalizedCocktail(rawCocktail);
+  const ingredients = useLocalizedIngredients(useAllIngredients());
+
+  const DEGRADATION_LABEL: Record<string, string> = {
+    lowStock: t("cocktailDetail.degradationLowStock"),
+    almostEmptyStock: t("cocktailDetail.degradationAlmostEmpty"),
+    substitution: t("cocktailDetail.degradationSubstitution"),
+  };
   const isFavorite = useFavoritesStore((s) => (cocktail ? s.isFavorite(cocktail.id) : false));
   const toggleFavorite = useFavoritesStore((s) => s.toggleFavorite);
   const [promptCopied, setPromptCopied] = useState(false);
@@ -58,10 +68,10 @@ export default function CocktailDetailPage() {
 
   if (!cocktail) {
     return (
-      <div>
-        <ScreenHeader title="Cocktail introuvable" />
+      <div className="max-w-[640px] mx-auto">
+        <ScreenHeader title={t("cocktailDetail.notFoundTitle")} />
         <p className="px-4 pt-6 text-sm" style={{ color: "var(--color-text-secondary)" }}>
-          Ce cocktail n'existe pas ou a été supprimé.
+          {t("cocktailDetail.notFoundBody")}
         </p>
       </div>
     );
@@ -71,12 +81,12 @@ export default function CocktailDetailPage() {
     return ingredients.find((i) => i.id === ingredientId)?.name ?? ingredientId;
   }
 
-  const tags = tasteProfile(cocktail);
+  const tags = getLocalizedTasteTags(tasteProfile(rawCocktail!), locale);
 
   async function copyPhotoPrompt() {
-    if (!cocktail) return;
+    if (!rawCocktail) return;
     try {
-      await navigator.clipboard.writeText(buildPhotoPrompt(cocktail));
+      await navigator.clipboard.writeText(buildPhotoPrompt(rawCocktail));
       setPromptCopied(true);
       setTimeout(() => setPromptCopied(false), 2000);
     } catch {
@@ -85,10 +95,10 @@ export default function CocktailDetailPage() {
   }
 
   return (
-    <div className="pb-28">
+    <div className="pb-28 max-w-[640px] mx-auto w-full">
       <div className="relative flex flex-col items-center justify-end overflow-hidden" style={{ height: 340 }}>
         <div className="absolute inset-0">
-          <CocktailVisual cocktail={cocktail} glassSize={112} />
+          <CocktailVisual cocktail={rawCocktail!} glassSize={112} />
         </div>
         <div className="absolute top-0 left-0 right-0">
           <ScreenHeader
@@ -99,8 +109,8 @@ export default function CocktailDetailPage() {
                 <button
                   type="button"
                   onClick={copyPhotoPrompt}
-                  aria-label="Copier le prompt photo"
-                  title="Copier un prompt de génération de photo réaliste pour ce cocktail"
+                  aria-label={t("cocktailDetail.copyPhotoPromptAria")}
+                  title={t("cocktailDetail.copyPhotoPromptTitle")}
                   className="flex items-center justify-center rounded-full text-sm"
                   style={{ width: 36, height: 36, background: "rgba(0,0,0,0.35)" }}
                 >
@@ -109,7 +119,7 @@ export default function CocktailDetailPage() {
                 <button
                   type="button"
                   onClick={() => toggleFavorite(cocktail.id)}
-                  aria-label="Favori"
+                  aria-label={t("cocktailDetail.favoriteAria")}
                   data-testid="favorite-button"
                   className="flex items-center justify-center rounded-full"
                   style={{ width: 36, height: 36, background: "rgba(0,0,0,0.35)" }}
@@ -118,7 +128,7 @@ export default function CocktailDetailPage() {
                 </button>
                 <Link
                   to={`/cocktail/${cocktail.id}/share`}
-                  aria-label="Partager"
+                  aria-label={t("cocktailDetail.shareAria")}
                   className="flex items-center justify-center rounded-full"
                   style={{ width: 36, height: 36, background: "rgba(0,0,0,0.35)" }}
                 >
@@ -127,7 +137,7 @@ export default function CocktailDetailPage() {
                 {cocktail.isUserCreated && (
                   <Link
                     to={`/recipe/${cocktail.id}/edit`}
-                    aria-label="Modifier"
+                    aria-label={t("cocktailDetail.editAria")}
                     className="flex items-center justify-center rounded-full"
                     style={{ width: 36, height: 36, background: "rgba(0,0,0,0.35)" }}
                   >
@@ -160,12 +170,12 @@ export default function CocktailDetailPage() {
         <section>
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-lg font-semibold" style={{ color: "var(--color-text-primary)" }}>
-              Ingrédients
+              {t("cocktailDetail.ingredientsHeading")}
             </h2>
             {advanced && (
               <div className="flex items-center gap-2">
                 <span className="text-xs" style={{ color: "var(--color-text-secondary)" }}>
-                  avec Mon Bar
+                  {t("cocktailDetail.withMyBar")}
                 </span>
                 <CompatibilityRing fraction={advanced.compatibilityScore} size={32} strokeWidth={4} />
               </div>
@@ -183,28 +193,28 @@ export default function CocktailDetailPage() {
                   <div className="min-w-0">
                     <div className="flex items-center gap-1.5">
                       {status?.kind === "missing" && (
-                        <span style={{ color: "var(--color-danger-text)" }} aria-label="Manquant">
+                        <span style={{ color: "var(--color-danger-text)" }} aria-label={t("cocktailDetail.missingAria")}>
                           ✗
                         </span>
                       )}
                       {status?.kind === "degraded" && (
-                        <span style={{ color: "var(--color-accent-gold-text)" }} aria-label="Disponible partiellement">
+                        <span style={{ color: "var(--color-accent-gold-text)" }} aria-label={t("cocktailDetail.degradedAria")}>
                           ⚠
                         </span>
                       )}
                       {advanced && !status && (
-                        <span style={{ color: "var(--color-success-text)" }} aria-label="Disponible">
+                        <span style={{ color: "var(--color-success-text)" }} aria-label={t("cocktailDetail.availableAria")}>
                           ✓
                         </span>
                       )}
                       <span style={{ color: "var(--color-text-primary)" }}>{ingredientName(link.ingredientId)}</span>
                       {link.isOptional && (
                         <span className="text-xs" style={{ color: "var(--color-text-secondary)" }}>
-                          optionnel
+                          {t("cocktailDetail.optional")}
                         </span>
                       )}
                       <span className="text-xs" style={{ color: "var(--color-text-secondary)" }}>
-                        {INGREDIENT_ROLE_LABEL[link.role]}
+                        {t(`ingredientRole.${link.role}`)}
                       </span>
                     </div>
                     {status?.kind === "degraded" && (
@@ -215,14 +225,14 @@ export default function CocktailDetailPage() {
                   </div>
                   <div className="flex items-center gap-2 flex-shrink-0">
                     <span className="font-mono text-sm" style={{ color: "var(--color-accent-gold-text)" }}>
-                      {formatQuantity(link.quantity)} {link.unit}
+                      {formatQuantity(link.quantity)} {getLocalizedUnit(link.unit, locale)}
                     </span>
                     {status?.kind === "missing" && (
                       <button
                         type="button"
                         onClick={() => addShoppingItems([link.ingredientId])}
-                        aria-label={`Ajouter ${ingredientName(link.ingredientId)} à la liste de courses`}
-                        title="Ajouter à la liste de courses"
+                        aria-label={t("cocktailDetail.addToShoppingAria", { name: ingredientName(link.ingredientId) })}
+                        title={t("myBar.addToShoppingTitle")}
                         className="rounded-full flex items-center justify-center"
                         style={{ width: 26, height: 26, background: "var(--color-bg)" }}
                       >
@@ -241,16 +251,16 @@ export default function CocktailDetailPage() {
               className="w-full mt-3 rounded-xl py-2.5 text-sm font-medium"
               style={{ background: "var(--color-surface)", color: "var(--color-accent-gold-text)" }}
             >
-              🛒 Ajouter les {advanced.explanation.missingIngredients.length} ingrédient
-              {advanced.explanation.missingIngredients.length > 1 ? "s" : ""} manquant
-              {advanced.explanation.missingIngredients.length > 1 ? "s" : ""} à ma liste de courses
+              {advanced.explanation.missingIngredients.length > 1
+                ? t("cocktailDetail.addMissingMany", { count: advanced.explanation.missingIngredients.length })
+                : t("cocktailDetail.addMissingOne")}
             </button>
           )}
         </section>
 
         <section>
           <h2 className="text-lg font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
-            Préparation
+            {t("cocktailDetail.preparationHeading")}
           </h2>
           <ol className="flex flex-col gap-3">
             {cocktail.steps.map((step) => (
@@ -273,14 +283,14 @@ export default function CocktailDetailPage() {
             ))}
           </ol>
           <p className="text-xs mt-3" style={{ color: "var(--color-text-secondary)" }}>
-            {cocktail.glassware} • {cocktail.iceType} • Garniture : {cocktail.garnish}
+            {t("cocktailDetail.glassIceGarnish", { glassware: cocktail.glassware, iceType: cocktail.iceType, garnish: cocktail.garnish })}
           </p>
         </section>
 
         {cocktail.history && (
           <section>
             <h2 className="text-lg font-semibold mb-2" style={{ color: "var(--color-text-primary)" }}>
-              Histoire
+              {t("cocktailDetail.historyHeading")}
             </h2>
             <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
               {cocktail.history} <span>— {cocktail.origin}</span>
@@ -291,7 +301,7 @@ export default function CocktailDetailPage() {
         {cocktail.tips && (
           <section>
             <h2 className="text-lg font-semibold mb-2" style={{ color: "var(--color-text-primary)" }}>
-              Conseils
+              {t("cocktailDetail.tipsHeading")}
             </h2>
             <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
               💡 {cocktail.tips}
@@ -301,15 +311,15 @@ export default function CocktailDetailPage() {
       </div>
 
       <div
-        className="fixed bottom-0 left-0 right-0 p-4"
-        style={{ maxWidth: 560, margin: "0 auto", background: "linear-gradient(transparent, var(--color-bg) 40%)" }}
+        className="sticky bottom-0 p-4 max-w-[640px] mx-auto w-full"
+        style={{ background: "linear-gradient(transparent, var(--color-bg) 40%)" }}
       >
         <Link
           to={`/cocktail/${cocktail.id}/prepare`}
           className="block text-center w-full rounded-2xl py-4 font-semibold text-base"
           style={{ background: "var(--color-accent-gold)", color: "#0b0b0f" }}
         >
-          Préparer
+          {t("cocktailDetail.prepareButton")}
         </Link>
       </div>
     </div>

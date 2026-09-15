@@ -7,6 +7,9 @@ test.use({ storageState: { cookies: [], origins: [] } });
 test("first-launch onboarding walks through the steps and seeds My Bar with a starter ingredient", async ({ page }) => {
   await page.goto("/");
 
+  await expect(page.getByText("Choisis ta langue")).toBeVisible();
+  await page.getByRole("button", { name: /Français/ }).click();
+
   await expect(page.getByText("Bienvenue sur Cocktail.ai")).toBeVisible();
   await page.getByRole("button", { name: "Suivant" }).click();
 
@@ -33,6 +36,9 @@ test("first-launch onboarding walks through the steps and seeds My Bar with a st
 
 test("Passer skips onboarding immediately without adding any ingredient", async ({ page }) => {
   await page.goto("/");
+
+  await expect(page.getByText("Choisis ta langue")).toBeVisible();
+  await page.getByRole("button", { name: /Français/ }).click();
 
   await expect(page.getByText("Bienvenue sur Cocktail.ai")).toBeVisible();
   await page.getByRole("button", { name: "Passer" }).click();

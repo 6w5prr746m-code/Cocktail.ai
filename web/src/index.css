@@ -79,11 +79,16 @@ body {
   overscroll-behavior-y: none;
 }
 
+/* Jusqu'à Sprint 11, #root imposait max-width:560px à toute l'app — un
+   confort "mobile-first" qui devenait une colonne étroite perdue au milieu
+   de l'écran sur tablette/desktop. La largeur plein écran est maintenant
+   gérée par AppShell (src/components/AppShell.tsx) : sidebar desktop +
+   zone de contenu qui s'étend, chaque page choisissant elle-même une
+   colonne de lecture étroite (fiche cocktail, formulaires) ou une largeur
+   large (accueil, bibliothèque) via ses propres classes Tailwind. */
 #root {
   display: flex;
   flex-direction: column;
-  max-width: 560px;
-  margin: 0 auto;
   min-height: 100svh;
   position: relative;
   background: var(--color-bg);
@@ -96,8 +101,7 @@ body {
   position: fixed;
   top: 0;
   left: 50%;
-  width: 560px;
-  max-width: 100%;
+  width: min(900px, 100%);
   height: 320px;
   transform: translateX(-50%);
   background: radial-gradient(ellipse at top, color-mix(in srgb, var(--color-accent-gold) 14%, transparent), transparent 70%);
