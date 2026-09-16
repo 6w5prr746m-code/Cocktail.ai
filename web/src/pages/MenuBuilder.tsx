@@ -1,14 +1,25 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import QRCode from "qrcode";
 import { ScreenHeader } from "../components/ScreenHeader";
 import { useAllCocktails } from "../domain/catalog";
 import { fuzzyIncludes } from "../domain/fuzzySearch";
-import { encodeMenu, type MenuItem, type MenuLayout } from "../domain/menuShareCode";
+import { encodeMenu, type MenuItem, type MenuLayout, type MenuPayload } from "../domain/menuShareCode";
+import { MENU_THEMES, MENU_THEME_IDS, type MenuTheme } from "../domain/menuThemes";
+import { compressImageFile } from "../domain/imageCompression";
 import { buildAppUrl } from "../domain/appUrl";
 import { useTranslation } from "../domain/i18n/useTranslation";
 import type { TranslationKey } from "../domain/i18n/useTranslation";
 
 const DEFAULT_ITEMS_PER_PAGE = 4;
+const LOGO_MAX_DIMENSION = 100;
+const LOGO_QUALITY = 0.55;
+const STORY_IMAGE_MAX_DIMENSION = 220;
+const STORY_IMAGE_QUALITY = 0.5;
+// Mesuré empiriquement (voir historique) : un QR code cesse de s'encoder
+// au-delà d'environ 2280 caractères de code base64url réaliste pour l'URL
+// complète. On se garde une marge en dessous pour rester scannable de
+// façon fiable (pas juste "techniquement encodable").
+const QR_SAFE_CODE_LENGTH = 2000;
 
 const LAYOUT_OPTIONS: { value: MenuLayout; labelKey: TranslationKey; descKey: TranslationKey }[] = [
   { value: "list", labelKey: "menuBuilder.layoutList", descKey: "menuBuilder.layoutListDesc" },
@@ -17,6 +28,12 @@ const LAYOUT_OPTIONS: { value: MenuLayout; labelKey: TranslationKey; descKey: Tr
   { value: "pages", labelKey: "menuBuilder.layoutPages", descKey: "menuBuilder.layoutPagesDesc" },
   { value: "featured", labelKey: "menuBuilder.layoutFeatured", descKey: "menuBuilder.layoutFeaturedDesc" },
 ];
+
+const THEME_LABEL_KEYS: Record<MenuTheme, TranslationKey> = {
+  classic: "menuBuilder.themeClassic",
+  instagram: "menuBuilder.themeInstagram",
+  apple: "menuBuilder.themeApple",
+};
 
 export default function MenuBuilderPage() {
   const { t } = useTranslation();
@@ -28,6 +45,10 @@ export default function MenuBuilderPage() {
   const catalogCocktails = useMemo(() => cocktails.filter((c) => !c.isUserCreated), [cocktails]);
 
   const [barName, setBarName] = useState("");
+  const [theme, setTheme] = useState<MenuTheme>("classic");
+  const [logo, setLogo] = useState<string | null>(null);
+  const [storyText, setStoryText] = useState("");
+  const [storyImage, setStoryImage] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const [items, setItems] = useState<MenuItem[]>([]);
   const [layout, setLayout] = useState<MenuLayout>("list");
@@ -35,6 +56,10 @@ export default function MenuBuilderPage() {
   const [menuUrl, setMenuUrl] = useState<string | null>(null);
   const [qrDataUrl, setQrDataUrl] = useState<string | null>(null);
   const [linkCopied, setLinkCopied] = useState(false);
+
+  const logoInputRef = useRef<HTMLInputElement>(null);
+  const storyTextFileInputRef = useRef<HTMLInputElement>(null);
+  const storyImageInputRef = useRef<HTMLInputElement>(null);
 
   // Les cocktails déjà sélectionnés restent affichés (et en tête de liste)
   // même quand la recherche filtre sur autre chose — sinon changer de
@@ -76,17 +101,87 @@ export default function MenuBuilderPage() {
     invalidateGenerated();
   }
 
-  async function generate() {
-    if (!barName.trim() || items.length === 0) return;
-    const code = encodeMenu({
-      barName: barName.trim(),
+  function changeTheme(next: MenuTheme) {
+    setTheme(next);
+    invalidateGenerated();
+  }
+
+  async function handleLogoUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    try {
+      setLogo(await compressImageFile(file, LOGO_MAX_DIMENSION, LOGO_QUALITY));
+    } catch {
+      // fichier illisible (format non supporté, etc.) — on ignore plutôt que de casser le formulaire
+    }
+    invalidateGenerated();
+  }
+
+  function removeLogo() {
+    setLogo(null);
+    invalidateGenerated();
+  }
+
+  async function handleStoryTextFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    try {
+      setStoryText((await file.text()).slice(0, 2000));
+    } catch {
+      // fichier illisible — on ignore
+    }
+    invalidateGenerated();
+  }
+
+  async function handleStoryImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    try {
+      setStoryImage(await compressImageFile(file, STORY_IMAGE_MAX_DIMENSION, STORY_IMAGE_QUALITY));
+    } catch {
+      // fichier illisible — on ignore
+    }
+    invalidateGenerated();
+  }
+
+  function removeStoryImage() {
+    setStoryImage(null);
+    invalidateGenerated();
+  }
+
+  const currentPayload = useMemo<MenuPayload>(
+    () => ({
+      barName: barName.trim() || "…",
       layout,
       itemsPerPage: layout === "pages" ? itemsPerPage : undefined,
+      theme,
+      logo: logo ?? undefined,
+      story: storyText.trim() || storyImage ? { text: storyText.trim() || undefined, image: storyImage ?? undefined } : undefined,
       items,
-    });
+    }),
+    [barName, layout, itemsPerPage, theme, logo, storyText, storyImage, items],
+  );
+
+  const codeLength = useMemo(() => (items.length > 0 ? encodeMenu(currentPayload).length : 0), [currentPayload, items.length]);
+  const qrLikelyToWork = codeLength <= QR_SAFE_CODE_LENGTH;
+
+  async function generate() {
+    if (!barName.trim() || items.length === 0) return;
+    const code = encodeMenu({ ...currentPayload, barName: barName.trim() });
     const url = buildAppUrl(`/menu/${code}`);
     setMenuUrl(url);
-    setQrDataUrl(await QRCode.toDataURL(url, { margin: 1, width: 240 }));
+    if (code.length <= QR_SAFE_CODE_LENGTH) {
+      try {
+        setQrDataUrl(await QRCode.toDataURL(url, { margin: 1, width: 240 }));
+      } catch {
+        setQrDataUrl(null);
+      }
+    } else {
+      setQrDataUrl(null);
+    }
   }
 
   async function copyLink() {
@@ -123,6 +218,127 @@ export default function MenuBuilderPage() {
             className="w-full rounded-xl px-4 py-3 text-sm outline-none"
             style={{ background: "var(--color-surface)", color: "var(--color-text-primary)", border: "1px solid var(--color-border)" }}
           />
+        </div>
+
+        <div>
+          <h2 className="text-base font-semibold mb-2" style={{ color: "var(--color-text-primary)" }}>
+            {t("menuBuilder.themeTitle")}
+          </h2>
+          <div className="flex gap-2">
+            {MENU_THEME_IDS.map((id) => (
+              <button
+                key={id}
+                type="button"
+                onClick={() => changeTheme(id)}
+                aria-pressed={theme === id}
+                className="flex-1 rounded-xl overflow-hidden"
+                style={{ border: theme === id ? "2px solid var(--color-accent-gold)" : "2px solid transparent" }}
+              >
+                <div style={{ height: 36, background: MENU_THEMES[id].coverBackground }} />
+                <p
+                  className="text-xs font-medium py-1.5"
+                  style={{ background: "var(--color-surface)", color: "var(--color-text-primary)" }}
+                >
+                  {t(THEME_LABEL_KEYS[id])}
+                </p>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h2 className="text-base font-semibold mb-1" style={{ color: "var(--color-text-primary)" }}>
+            {t("menuBuilder.logoTitle")}
+          </h2>
+          <p className="text-xs mb-2" style={{ color: "var(--color-text-secondary)" }}>
+            {t("menuBuilder.logoHint")}
+          </p>
+          <div className="flex items-center gap-3">
+            {logo && (
+              <div className="rounded-xl overflow-hidden flex-shrink-0" style={{ width: 56, height: 56, background: "#ffffff" }}>
+                <img src={logo} alt={t("menuBuilder.logoAlt")} className="w-full h-full object-contain" />
+              </div>
+            )}
+            <input ref={logoInputRef} type="file" accept="image/*" className="hidden" onChange={handleLogoUpload} />
+            <button
+              type="button"
+              onClick={() => logoInputRef.current?.click()}
+              className="rounded-xl px-3.5 py-2.5 text-sm font-medium"
+              style={{ background: "var(--color-surface)", color: "var(--color-text-primary)" }}
+            >
+              {logo ? t("menuBuilder.logoChangeButton") : t("menuBuilder.logoUploadButton")}
+            </button>
+            {logo && (
+              <button
+                type="button"
+                onClick={removeLogo}
+                className="rounded-xl px-3.5 py-2.5 text-sm font-medium"
+                style={{ color: "var(--color-danger-text)" }}
+              >
+                {t("menuBuilder.logoRemoveButton")}
+              </button>
+            )}
+          </div>
+        </div>
+
+        <div>
+          <h2 className="text-base font-semibold mb-1" style={{ color: "var(--color-text-primary)" }}>
+            {t("menuBuilder.storyTitle")}
+          </h2>
+          {!logo ? (
+            <p className="text-xs" style={{ color: "var(--color-text-secondary)" }}>
+              {t("menuBuilder.storyLockedHint")}
+            </p>
+          ) : (
+            <div className="flex flex-col gap-3">
+              <textarea
+                value={storyText}
+                onChange={(e) => {
+                  setStoryText(e.target.value);
+                  invalidateGenerated();
+                }}
+                placeholder={t("menuBuilder.storyTextPlaceholder")}
+                rows={4}
+                className="w-full rounded-xl px-4 py-3 text-sm outline-none resize-none"
+                style={{ background: "var(--color-surface)", color: "var(--color-text-primary)", border: "1px solid var(--color-border)" }}
+              />
+              <div className="flex flex-wrap items-center gap-2">
+                <input ref={storyTextFileInputRef} type="file" accept=".txt,text/plain" className="hidden" onChange={handleStoryTextFileUpload} />
+                <button
+                  type="button"
+                  onClick={() => storyTextFileInputRef.current?.click()}
+                  className="rounded-xl px-3.5 py-2.5 text-xs font-medium"
+                  style={{ background: "var(--color-surface)", color: "var(--color-text-primary)" }}
+                >
+                  {t("menuBuilder.storyTextFileButton")}
+                </button>
+                <input ref={storyImageInputRef} type="file" accept="image/*" className="hidden" onChange={handleStoryImageUpload} />
+                <button
+                  type="button"
+                  onClick={() => storyImageInputRef.current?.click()}
+                  className="rounded-xl px-3.5 py-2.5 text-xs font-medium"
+                  style={{ background: "var(--color-surface)", color: "var(--color-text-primary)" }}
+                >
+                  {t("menuBuilder.storyImageUploadButton")}
+                </button>
+                {storyImage && (
+                  <>
+                    <div className="rounded-lg overflow-hidden" style={{ width: 36, height: 36 }}>
+                      <img src={storyImage} alt={t("menuBuilder.storyImageAlt")} className="w-full h-full object-cover" />
+                    </div>
+                    <button
+                      type="button"
+                      onClick={removeStoryImage}
+                      className="rounded-xl px-3.5 py-2.5 text-xs font-medium"
+                      style={{ color: "var(--color-danger-text)" }}
+                    >
+                      {t("menuBuilder.storyImageRemoveButton")}
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+          )}
         </div>
 
         <div>
@@ -252,6 +468,12 @@ export default function MenuBuilderPage() {
           </ul>
         </div>
 
+        {items.length > 0 && (
+          <p className="text-xs text-center" style={{ color: qrLikelyToWork ? "var(--color-success-text)" : "var(--color-danger-text)" }}>
+            {t(qrLikelyToWork ? "menuBuilder.sizeIndicatorOk" : "menuBuilder.sizeIndicatorTooLarge", { count: codeLength })}
+          </p>
+        )}
+
         <button
           type="button"
           onClick={generate}
@@ -262,9 +484,9 @@ export default function MenuBuilderPage() {
           {t("menuBuilder.generateButton")}
         </button>
 
-        {menuUrl && qrDataUrl && (
+        {menuUrl && (
           <div className="rounded-2xl p-4 glass-card flex flex-col items-center gap-3">
-            <img src={qrDataUrl} alt={t("menuBuilder.qrAlt")} width={200} height={200} />
+            {qrDataUrl && <img src={qrDataUrl} alt={t("menuBuilder.qrAlt")} width={200} height={200} />}
             <p className="text-xs break-all text-center" style={{ color: "var(--color-text-secondary)" }}>
               {menuUrl}
             </p>

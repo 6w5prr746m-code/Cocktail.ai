@@ -7,6 +7,7 @@ describe("encodeMenu / decodeMenu", () => {
       barName: "Le Bar à Claude",
       layout: "grid2",
       itemsPerPage: undefined,
+      theme: "classic",
       items: [
         { cocktailId: "mojito", price: 12, featured: false },
         { cocktailId: "old_fashioned", price: null, featured: false },
@@ -21,10 +22,39 @@ describe("encodeMenu / decodeMenu", () => {
       barName: "Le Bar à Claude",
       layout: "pages",
       itemsPerPage: 1,
+      theme: "instagram",
       items: [{ cocktailId: "mojito", price: 12, featured: true }],
     };
     const code = encodeMenu(payload);
     expect(decodeMenu(code)).toEqual(payload);
+  });
+
+  it("round-trips a logo and a story with text and image", () => {
+    const payload: MenuPayload = {
+      barName: "Le Bar à Claude",
+      layout: "list",
+      theme: "apple",
+      logo: "data:image/jpeg;base64,AAAA",
+      story: { text: "Fondé en 2020…", image: "data:image/jpeg;base64,BBBB" },
+      items: [{ cocktailId: "mojito", price: 9, featured: false }],
+    };
+    const code = encodeMenu(payload);
+    expect(decodeMenu(code)).toEqual(payload);
+  });
+
+  it("drops a logo that isn't a valid image data URI (forged payload)", () => {
+    const code = btoa(
+      JSON.stringify({ barName: "X", layout: "list", logo: "not-an-image", items: [{ cocktailId: "mojito", price: null }] }),
+    )
+      .replace(/\+/g, "-")
+      .replace(/\//g, "_")
+      .replace(/=+$/, "");
+    expect(decodeMenu(code)?.logo).toBeUndefined();
+  });
+
+  it("drops an unknown theme value and falls back to 'classic'", () => {
+    const code = encodeMenu({ barName: "X", layout: "list", theme: "neon" as MenuPayload["theme"], items: [{ cocktailId: "mojito", price: null }] });
+    expect(decodeMenu(code)?.theme).toBe("classic");
   });
 
   it("returns null for a corrupted code", () => {
@@ -50,6 +80,7 @@ describe("encodeMenu / decodeMenu", () => {
       barName: "Ancien lien",
       layout: "list",
       itemsPerPage: undefined,
+      theme: "classic",
       items: [{ cocktailId: "mojito", price: 9, featured: false }],
     });
   });
