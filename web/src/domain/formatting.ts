@@ -15,3 +15,7 @@ export function formatDuration(minutes: number): string {
 export function formatPercent(fraction: number): string {
   return `${Math.round(fraction * 100)}%`;
 }
+
+export function formatCurrency(value: number): string {
+  return `${value.toFixed(2)} €`;
+}

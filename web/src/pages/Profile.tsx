@@ -118,6 +118,46 @@ export default function ProfilePage() {
         </div>
       </section>
 
+      <section className="px-4 pb-6">
+        <h2 className="text-base font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
+          {t("profile.proToolsTitle")}
+        </h2>
+        <div className="flex flex-col gap-2">
+          <Link to="/costing" className="flex items-center gap-3 rounded-2xl p-3 glass-card transition-transform active:scale-[0.98]">
+            <span style={{ fontSize: 24 }} aria-hidden>
+              💰
+            </span>
+            <div className="flex-1 min-w-0">
+              <p className="font-semibold" style={{ color: "var(--color-text-primary)" }}>
+                {t("profile.proToolsCostingTitle")}
+              </p>
+              <p className="text-xs" style={{ color: "var(--color-text-secondary)" }}>
+                {t("profile.proToolsCostingSubtitle")}
+              </p>
+            </div>
+            <span className="flex-shrink-0 text-xl" aria-hidden>
+              →
+            </span>
+          </Link>
+          <Link to="/menu-builder" className="flex items-center gap-3 rounded-2xl p-3 glass-card transition-transform active:scale-[0.98]">
+            <span style={{ fontSize: 24 }} aria-hidden>
+              📋
+            </span>
+            <div className="flex-1 min-w-0">
+              <p className="font-semibold" style={{ color: "var(--color-text-primary)" }}>
+                {t("profile.proToolsMenuTitle")}
+              </p>
+              <p className="text-xs" style={{ color: "var(--color-text-secondary)" }}>
+                {t("profile.proToolsMenuSubtitle")}
+              </p>
+            </div>
+            <span className="flex-shrink-0 text-xl" aria-hidden>
+              →
+            </span>
+          </Link>
+        </div>
+      </section>
+
       {stats.totalCount > 0 && (
         <section className="px-4 pb-6">
           <h2 className="text-base font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>

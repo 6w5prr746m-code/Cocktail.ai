@@ -1,4 +1,5 @@
 import type { Cocktail, Ingredient, IngredientRole } from "./types";
+import { base64UrlDecode, base64UrlEncode } from "./base64Url";
 
 // Une recette perso ne vit que dans le localStorage de son créateur — un
 // lien `/cocktail/<id>` partagé à quelqu'un d'autre pointerait dans le
@@ -36,19 +37,6 @@ export interface SharedRecipePayload {
 
 const MAX_LIST_LENGTH = 40;
 const MAX_STRING_LENGTH = 1000;
-
-function base64UrlEncode(bytes: Uint8Array): string {
-  let binary = "";
-  for (const b of bytes) binary += String.fromCharCode(b);
-  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
-}
-
-function base64UrlDecode(value: string): Uint8Array {
-  const base64 = value.replace(/-/g, "+").replace(/_/g, "/");
-  const padded = base64.padEnd(base64.length + ((4 - (base64.length % 4)) % 4), "=");
-  const binary = atob(padded);
-  return Uint8Array.from(binary, (c) => c.charCodeAt(0));
-}
 
 export function encodeRecipeForSharing(cocktail: Cocktail, ingredientRepo: Ingredient[]): string {
   const payload: SharedRecipePayload = {

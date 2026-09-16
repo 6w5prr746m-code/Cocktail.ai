@@ -17,6 +17,9 @@ const LibraryPage = lazy(() => import("./pages/Library"));
 const CollectionDetailPage = lazy(() => import("./pages/CollectionDetail"));
 const MyBarPage = lazy(() => import("./pages/MyBar"));
 const PartyPlannerPage = lazy(() => import("./pages/PartyPlanner"));
+const CostingPage = lazy(() => import("./pages/Costing"));
+const MenuBuilderPage = lazy(() => import("./pages/MenuBuilder"));
+const MenuViewPage = lazy(() => import("./pages/MenuView"));
 const FavoritesPage = lazy(() => import("./pages/Favorites"));
 const ProfilePage = lazy(() => import("./pages/Profile"));
 const CocktailDetailPage = lazy(() => import("./pages/CocktailDetail"));
@@ -91,6 +94,9 @@ export default function App() {
             <Route path="/library/collection/:id" element={<CollectionDetailPage />} />
             <Route path="/mybar" element={<MyBarPage />} />
             <Route path="/party" element={<PartyPlannerPage />} />
+            <Route path="/costing" element={<CostingPage />} />
+            <Route path="/menu-builder" element={<MenuBuilderPage />} />
+            <Route path="/menu/:code" element={<MenuViewPage />} />
             <Route path="/favorites" element={<FavoritesPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/cocktail/:id" element={<CocktailDetailPage />} />

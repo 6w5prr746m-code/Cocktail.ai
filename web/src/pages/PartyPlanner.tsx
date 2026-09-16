@@ -23,10 +23,18 @@ export default function PartyPlannerPage() {
   const [guestCount, setGuestCount] = useState(4);
   const [added, setAdded] = useState(false);
 
+  // Les cocktails déjà sélectionnés restent affichés (et en tête de liste)
+  // même quand la recherche filtre sur autre chose — sinon changer de
+  // recherche les fait disparaître de la liste, donnant l'impression
+  // trompeuse qu'ils ont été désélectionnés.
   const filtered = useMemo(() => {
     const q = query.trim();
-    return cocktails.filter((c) => !q || fuzzyIncludes(q, c.name)).slice(0, 40);
-  }, [cocktails, query]);
+    const selectedSet = new Set(selectedIds);
+    return cocktails
+      .filter((c) => selectedSet.has(c.id) || !q || fuzzyIncludes(q, c.name))
+      .sort((a, b) => Number(selectedSet.has(b.id)) - Number(selectedSet.has(a.id)))
+      .slice(0, 40);
+  }, [cocktails, query, selectedIds]);
 
   const selectedCocktails = useMemo(
     () => selectedIds.map((id) => cocktails.find((c) => c.id === id)).filter((c): c is NonNullable<typeof c> => Boolean(c)),

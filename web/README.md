@@ -233,12 +233,19 @@ Monétisation :
 - **Sponsoring de collection** (`CollectionDef.sponsor` optionnel, affichage "Présenté par" sur `CollectionDetail.tsx`) : mécanisme inactif par défaut, prêt à s'activer en renseignant `sponsor` dans `collections.json` le jour où un partenariat éditorial existe.
 - **Soutenir Cocktail.ai** (`src/domain/supportLink.ts`, section Profil) : écran de soutien masqué tant que `SUPPORT_URL` vaut `null` — s'active en y renseignant un vrai lien de paiement (Stripe Payment Link), sans autre changement de code.
 
+## Outils Pro pour les bars (B2B, sans backend)
+
+Deux outils professionnels, accessibles depuis Profil > 🧑‍💼 Outils Pro. Les fiches techniques (recettes perso) existaient déjà (RecipeForm) — la nouveauté est le calcul de coût et la diffusion publique d'une sélection.
+
+- **Calcul de rentabilité** (`src/domain/costing.ts`, `src/state/ingredientCosts.ts`, `src/pages/Costing.tsx`, route `/costing`) : coût matière par cocktail à partir du prix d'achat de chaque bouteille (saisi localement, persistant), et prix de vente suggéré à plusieurs marges cibles (20/25/30%). Seuls les ingrédients dosés dans une unité volumique non ambiguë sont costés — cl, ml, oz (once fluide US), cc/cs (cuillère à café/soupe) ; oz est même l'unité la plus fréquente du catalogue (583 lignes contre 151 pour cl), sans cette conversion l'outil aurait été inutilisable sur la majorité des recettes. "mesure"/"shot"/"trait" restent volontairement non costés (contenance réelle trop variable pour un chiffre honnête).
+- **Créateur de carte + QR code** (`src/domain/menuShareCode.ts`, `src/pages/MenuBuilder.tsx` route `/menu-builder`, `src/pages/MenuView.tsx` route `/menu/:code`) : sélection de cocktails du catalogue + prix optionnel, encodés dans un lien auto-porteur (même principe que `recipeShareCode.ts`, base64 extrait dans `src/domain/base64Url.ts` pour être partagé entre les deux) et un QR code. Uniquement des cocktails du catalogue (jamais une recette perso) : c'est ce qui rend le lien résoluble sur n'importe quel appareil qui scanne le QR code, sans backend. La carte publique (`MenuView.tsx`) a un bouton impression (`window.print()`, pas d'export PDF dédié).
+
 ### Todo "avec backend" (mise de côté pour plus tard)
 
 - **Sprint 4 — vrai fil communautaire** : comptes, publications, likes/commentaires. Demande une infra serveur complète (auth, base de données, modération), hors de portée de l'architecture 100% locale actuelle.
 - **Génération de recette par IA** ("invente-moi un cocktail avec ce que j'ai") : nécessite un appel serveur (une clé API ne peut pas être exposée côté client en toute sécurité).
-- **Abonnement freemium** (comptes + Stripe Subscriptions, sync multi-appareils, contenu exclusif) : le modèle de monétisation à plus fort revenu récurrent, mais suppose le chantier compte/backend ci-dessus déjà construit.
-- **B2B / marque blanche** : licencier le moteur de matching + l'UI à des bars/restaurants pour leur carte interactive — chantier commercial à part, pas seulement technique.
+- **Abonnement freemium** (comptes + Stripe Subscriptions, sync multi-appareils, contenu exclusif) : le modèle de monétisation à plus fort revenu récurrent, mais suppose le chantier compte/backend ci-dessus déjà construit. C'est aussi la seule façon honnête de faire payer les fonctionnalités déjà gratuites (Mon Bar, Mode Soirée…) : sans compte, un paywall client-only se contourne en vidant le cache.
+- **Espace pro multi-employés** (fiches techniques partagées entre plusieurs comptes d'un même établissement, formation des nouveaux employés) : demande un vrai espace partagé (plusieurs personnes, un seul bar), donc un compte — les fiches perso actuelles (RecipeForm) restent mono-appareil.
 
 ## Limites connues
 
