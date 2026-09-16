@@ -210,6 +210,13 @@ Quatre mécaniques additives, toutes dérivées des données déjà stockées lo
 
 - **Ma note** (`src/state/cocktailNotes.ts`, section dédiée sur `CocktailDetail.tsx`) : un champ libre par cocktail, privé à l'appareil (`cocktailai:cocktail-notes` en localStorage, aucune synchronisation ni partage — cohérent avec le reste de l'app, voir § Limites connues). Sauvegarde au blur (comme la quantité approximative dans Mon Bar) ; une note vidée est supprimée du store plutôt que stockée vide.
 
+## Partage social boosté (Sprint 5 croissance)
+
+- **`ShareCardModal`** (`src/components/ShareCardModal.tsx`) : carte de partage générique (canvas → PNG, Web Share API avec fallback téléchargement, même principe que la carte cocktail de `Share.tsx` — `wrapText` a été extrait dans `src/domain/canvasText.ts` pour être partagé entre les deux) pour du contenu qui n'est pas un cocktail précis : emoji, titre, sous-titre, branding Cocktail.ai.
+- Trois nouveaux points d'entrée de partage, tous sans backend (le contenu du visuel suffit à raconter l'accomplissement, pas besoin de lien vers une page vivante) :
+  - **Badge débloqué** : bouton 📤 sur le toast de déblocage (`AchievementToast.tsx`) et sur chaque badge débloqué dans la grille du Profil (`Profile.tsx`) — partage à l'instant du déblocage ou rétroactivement depuis le Profil.
+  - **Défi de la semaine / du mois relevé** : bouton 📤 à côté du badge "Réussi ✓" sur `WeeklyChallengeCard.tsx`/`MonthlyChallengeCard.tsx` une fois le défi complété.
+
 ## Limites connues
 
 - Comme documenté dans le README iOS pour la V1, deux noms d'ingrédients personnalisés produisant le même slug (accents) entreraient en conflit.

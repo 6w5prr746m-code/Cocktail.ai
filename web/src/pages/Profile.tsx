@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAllCocktails } from "../domain/catalog";
 import { computeHistoryStats } from "../domain/historyStats";
@@ -9,6 +9,7 @@ import { useMyBarStore } from "../state/myBar";
 import { useUserRecipesStore } from "../state/userRecipes";
 import { MiniGlassBadge } from "../components/MiniGlassBadge";
 import { InstallAppCard } from "../components/InstallAppCard";
+import { ShareCardModal } from "../components/ShareCardModal";
 import { useAchievements } from "../hooks/useAchievements";
 import { useTranslation } from "../domain/i18n/useTranslation";
 import { useLocaleStore, type Locale } from "../state/locale";
@@ -33,6 +34,7 @@ export default function ProfilePage() {
   const clearHistory = useHistoryStore((s) => s.clear);
   const { preference, setPreference } = useThemeStore();
   const { all: allAchievements, unlockedIds } = useAchievements();
+  const [shareAchievement, setShareAchievement] = useState<(typeof allAchievements)[number] | null>(null);
 
   const sortedHistory = [...history].sort((a, b) => b.completedAt.localeCompare(a.completedAt));
   const stats = useMemo(() => computeHistoryStats(history, cocktails), [history, cocktails]);
@@ -48,6 +50,14 @@ export default function ProfilePage() {
 
   return (
     <div className="pb-8 max-w-[640px] mx-auto">
+      {shareAchievement && (
+        <ShareCardModal
+          emoji={shareAchievement.icon}
+          title={t(shareAchievement.titleKey)}
+          subtitle={t("shareCard.achievementSubtitle")}
+          onClose={() => setShareAchievement(null)}
+        />
+      )}
       <h1 className="text-2xl font-bold px-4 pt-6 pb-4" style={{ color: "var(--color-text-primary)" }}>
         {t("profile.title")}
       </h1>
@@ -145,20 +155,30 @@ export default function ProfilePage() {
           {allAchievements.map((achievement) => {
             const unlocked = unlockedIds.has(achievement.id);
             return (
-              <div
+              <button
                 key={achievement.id}
+                type="button"
+                disabled={!unlocked}
+                onClick={() => setShareAchievement(achievement)}
                 title={`${t(achievement.titleKey)} — ${t(achievement.descKey)}`}
-                className="rounded-2xl p-3 flex flex-col items-center text-center gap-1"
+                className="relative rounded-2xl p-3 flex flex-col items-center text-center gap-1"
                 style={{ background: "var(--color-surface)", opacity: unlocked ? 1 : 0.4 }}
               >
+                {unlocked && (
+                  <span className="absolute top-1.5 right-1.5 text-xs" aria-hidden>
+                    📤
+                  </span>
+                )}
                 <span style={{ fontSize: 26, filter: unlocked ? undefined : "grayscale(1)" }} aria-hidden>
                   {achievement.icon}
                 </span>
                 <p className="text-[11px] font-medium leading-tight" style={{ color: "var(--color-text-primary)" }}>
                   {t(achievement.titleKey)}
                 </p>
-                <span className="sr-only">{unlocked ? t(achievement.descKey) : t("achievements.lockedAria")}</span>
-              </div>
+                <span className="sr-only">
+                  {unlocked ? `${t(achievement.descKey)} — ${t("shareCard.shareAria")}` : t("achievements.lockedAria")}
+                </span>
+              </button>
             );
           })}
         </div>

@@ -268,6 +268,17 @@ export const en: TranslationSchema = {
     themeCorse: { title: "Bold spirit-forward", desc: "Strong cocktails for connoisseurs" },
     themeFruite: { title: "Fruity cocktails", desc: "Round, generous, fruit-forward" },
   },
+  shareCard: {
+    shareButton: "Share",
+    downloadButton: "Download",
+    closeAria: "Close",
+    shareAria: "Share this achievement",
+    tagline: "Find your next cocktail on Cocktail.ai",
+    shareText: "{{title}} — via Cocktail.ai",
+    achievementSubtitle: "Badge unlocked on Cocktail.ai",
+    weeklyTitle: "Weekly challenge completed!",
+    monthlyTitle: "Monthly challenge completed!",
+  },
   ingredientRole: {
     primarySpirit: "Main spirit",
     secondarySpirit: "Secondary spirit",

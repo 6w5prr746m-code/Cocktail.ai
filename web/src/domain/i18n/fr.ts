@@ -269,6 +269,17 @@ export const fr = {
     themeCorse: { title: "Spiritueux corsés", desc: "Cocktails forts en caractère, pour les amateurs" },
     themeFruite: { title: "Cocktails fruités", desc: "Généreux, ronds, pleins de fruits" },
   },
+  shareCard: {
+    shareButton: "Partager",
+    downloadButton: "Télécharger",
+    closeAria: "Fermer",
+    shareAria: "Partager ce succès",
+    tagline: "Trouve ton prochain cocktail sur Cocktail.ai",
+    shareText: "{{title}} — via Cocktail.ai",
+    achievementSubtitle: "Badge débloqué sur Cocktail.ai",
+    weeklyTitle: "Défi de la semaine relevé !",
+    monthlyTitle: "Défi du mois relevé !",
+  },
   ingredientRole: {
     primarySpirit: "Alcool principal",
     secondarySpirit: "Alcool secondaire",

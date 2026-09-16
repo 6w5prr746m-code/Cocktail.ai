@@ -6,6 +6,7 @@ import { useAllIngredients, useCocktail } from "../domain/catalog";
 import { artFor } from "../domain/glassArt";
 import { GLASS_GEOMETRY } from "../domain/glassShapes";
 import { encodeRecipeForSharing } from "../domain/recipeShareCode";
+import { wrapText } from "../domain/canvasText";
 import type { Cocktail } from "../domain/types";
 import { useTranslation } from "../domain/i18n/useTranslation";
 
@@ -168,23 +169,6 @@ export default function SharePage() {
     }
     draw();
   }, [cocktail, format, shareUrl]);
-
-  function wrapText(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, maxWidth: number, lineHeight: number) {
-    const words = text.split(" ");
-    let line = "";
-    let currentY = y;
-    for (const word of words) {
-      const testLine = line ? `${line} ${word}` : word;
-      if (ctx.measureText(testLine).width > maxWidth && line) {
-        ctx.fillText(line, x, currentY);
-        line = word;
-        currentY += lineHeight;
-      } else {
-        line = testLine;
-      }
-    }
-    ctx.fillText(line, x, currentY);
-  }
 
   async function handleShare() {
     if (!pngUrl || !cocktail) return;
