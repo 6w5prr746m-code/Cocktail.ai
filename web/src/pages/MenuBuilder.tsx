@@ -4,6 +4,7 @@ import { ScreenHeader } from "../components/ScreenHeader";
 import { useAllCocktails } from "../domain/catalog";
 import { fuzzyIncludes } from "../domain/fuzzySearch";
 import { encodeMenu, type MenuItem } from "../domain/menuShareCode";
+import { buildAppUrl } from "../domain/appUrl";
 import { useTranslation } from "../domain/i18n/useTranslation";
 
 export default function MenuBuilderPage() {
@@ -55,7 +56,7 @@ export default function MenuBuilderPage() {
   async function generate() {
     if (!barName.trim() || items.length === 0) return;
     const code = encodeMenu({ barName: barName.trim(), items });
-    const url = `${window.location.origin}/menu/${code}`;
+    const url = buildAppUrl(`/menu/${code}`);
     setMenuUrl(url);
     setQrDataUrl(await QRCode.toDataURL(url, { margin: 1, width: 240 }));
   }

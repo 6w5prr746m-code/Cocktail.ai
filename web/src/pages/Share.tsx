@@ -7,6 +7,7 @@ import { artFor } from "../domain/glassArt";
 import { GLASS_GEOMETRY } from "../domain/glassShapes";
 import { encodeRecipeForSharing } from "../domain/recipeShareCode";
 import { wrapText } from "../domain/canvasText";
+import { buildAppUrl } from "../domain/appUrl";
 import type { Cocktail } from "../domain/types";
 import { useTranslation } from "../domain/i18n/useTranslation";
 
@@ -90,8 +91,8 @@ export default function SharePage() {
   const shareUrl = useMemo(() => {
     if (!cocktail) return "";
     return cocktail.isUserCreated
-      ? `${window.location.origin}/shared/${encodeRecipeForSharing(cocktail, ingredients)}`
-      : `${window.location.origin}/cocktail/${cocktail.id}`;
+      ? buildAppUrl(`/shared/${encodeRecipeForSharing(cocktail, ingredients)}`)
+      : buildAppUrl(`/cocktail/${cocktail.id}`);
   }, [cocktail, ingredients]);
 
   async function copyRecipeLink() {
