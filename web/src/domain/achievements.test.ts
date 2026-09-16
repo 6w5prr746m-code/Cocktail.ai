@@ -10,6 +10,9 @@ function context(overrides: Partial<AchievementContext> = {}): AchievementContex
     myBarIngredientCount: 0,
     userRecipesCount: 0,
     weeklyChallengeEverCompleted: false,
+    monthlyChallengeEverCompleted: false,
+    notableCocktailsPreparedCount: 0,
+    hasSignatureRecipe: false,
     ...overrides,
   };
 }
@@ -43,5 +46,20 @@ describe("computeUnlockedAchievements", () => {
 
   it("unlocks creator as soon as a single user recipe exists", () => {
     expect(computeUnlockedAchievements(context({ userRecipesCount: 1 })).map((a) => a.id)).toContain("creator");
+  });
+
+  it("unlocks monthlyChallenger only once a monthly challenge has ever been completed", () => {
+    expect(computeUnlockedAchievements(context({ monthlyChallengeEverCompleted: false })).map((a) => a.id)).not.toContain("monthlyChallenger");
+    expect(computeUnlockedAchievements(context({ monthlyChallengeEverCompleted: true })).map((a) => a.id)).toContain("monthlyChallenger");
+  });
+
+  it("unlocks connoisseur at 3 notable cocktails prepared, not before", () => {
+    expect(computeUnlockedAchievements(context({ notableCocktailsPreparedCount: 2 })).map((a) => a.id)).not.toContain("connoisseur");
+    expect(computeUnlockedAchievements(context({ notableCocktailsPreparedCount: 3 })).map((a) => a.id)).toContain("connoisseur");
+  });
+
+  it("unlocks signatureCreator only once a signature recipe exists", () => {
+    expect(computeUnlockedAchievements(context({ hasSignatureRecipe: false })).map((a) => a.id)).not.toContain("signatureCreator");
+    expect(computeUnlockedAchievements(context({ hasSignatureRecipe: true })).map((a) => a.id)).toContain("signatureCreator");
   });
 });

@@ -1,6 +1,9 @@
 import { useMemo } from "react";
 import { ACHIEVEMENTS, type Achievement, type AchievementContext, type AchievementId } from "../domain/achievements";
 import { computeHistoryStats } from "../domain/historyStats";
+import { hasCompletedAnyMonthlyChallenge } from "../domain/monthlyChallenge";
+import { hasNotableCreator } from "../domain/notableCreators";
+import { isSignatureRecipe } from "../domain/signatureRecipe";
 import { hasCompletedAnyWeeklyChallenge } from "../domain/weeklyChallenge";
 import { useAllCocktails } from "../domain/catalog";
 import { useFavoritesStore } from "../state/favorites";
@@ -33,6 +36,7 @@ export function useAchievements(): UseAchievementsResult {
         .map((e) => cocktails.find((c) => c.id === e.cocktailId)?.mainSpirit)
         .filter((spirit): spirit is string => Boolean(spirit)),
     ).size;
+    const notableCocktailsPreparedCount = new Set(history.map((e) => e.cocktailId).filter(hasNotableCreator)).size;
     return {
       totalPrepared: stats.totalCount,
       longestStreakDays: stats.longestStreakDays,
@@ -41,6 +45,9 @@ export function useAchievements(): UseAchievementsResult {
       myBarIngredientCount: Object.keys(myBarEntries).length,
       userRecipesCount: userRecipes.length,
       weeklyChallengeEverCompleted: hasCompletedAnyWeeklyChallenge(history, cocktails),
+      monthlyChallengeEverCompleted: hasCompletedAnyMonthlyChallenge(history, cocktails),
+      notableCocktailsPreparedCount,
+      hasSignatureRecipe: userRecipes.some((recipe) => isSignatureRecipe(recipe, history)),
     };
   }, [history, cocktails, favoriteIds, myBarEntries, userRecipes]);
 

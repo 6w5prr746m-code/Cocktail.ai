@@ -10,7 +10,10 @@ export type AchievementId =
   | "curator"
   | "wellStocked"
   | "creator"
-  | "challenger";
+  | "challenger"
+  | "monthlyChallenger"
+  | "connoisseur"
+  | "signatureCreator";
 
 export interface AchievementContext {
   totalPrepared: number;
@@ -21,6 +24,11 @@ export interface AchievementContext {
   myBarIngredientCount: number;
   userRecipesCount: number;
   weeklyChallengeEverCompleted: boolean;
+  monthlyChallengeEverCompleted: boolean;
+  /** Nombre de cocktails distincts préparés parmi ceux créés par un bartender reconnu (voir notableCreators.ts). */
+  notableCocktailsPreparedCount: number;
+  /** Au moins une recette perso a atteint le statut "signature" (voir signatureRecipe.ts). */
+  hasSignatureRecipe: boolean;
 }
 
 export interface Achievement {
@@ -42,6 +50,9 @@ export const ACHIEVEMENTS: Achievement[] = [
   { id: "wellStocked", icon: "🗄️", titleKey: "achievements.wellStocked.title", descKey: "achievements.wellStocked.desc", isUnlocked: (c) => c.myBarIngredientCount >= 15 },
   { id: "creator", icon: "✍️", titleKey: "achievements.creator.title", descKey: "achievements.creator.desc", isUnlocked: (c) => c.userRecipesCount >= 1 },
   { id: "challenger", icon: "🎯", titleKey: "achievements.challenger.title", descKey: "achievements.challenger.desc", isUnlocked: (c) => c.weeklyChallengeEverCompleted },
+  { id: "monthlyChallenger", icon: "🏅", titleKey: "achievements.monthlyChallenger.title", descKey: "achievements.monthlyChallenger.desc", isUnlocked: (c) => c.monthlyChallengeEverCompleted },
+  { id: "connoisseur", icon: "🏆", titleKey: "achievements.connoisseur.title", descKey: "achievements.connoisseur.desc", isUnlocked: (c) => c.notableCocktailsPreparedCount >= 3 },
+  { id: "signatureCreator", icon: "✨", titleKey: "achievements.signatureCreator.title", descKey: "achievements.signatureCreator.desc", isUnlocked: (c) => c.hasSignatureRecipe },
 ];
 
 export function computeUnlockedAchievements(context: AchievementContext): Achievement[] {

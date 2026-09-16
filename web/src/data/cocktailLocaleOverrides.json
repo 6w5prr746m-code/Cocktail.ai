@@ -279,6 +279,9 @@
         "Bien shaker et filtrer dans un verre à cocktail.",
         "Décorer d'une cerise."
       ]
+    },
+    "en": {
+      "history": "Published in 1916 by bartender Hugo Ensslin at New York's Hotel Wallick, before falling into obscurity and being rediscovered decades later."
     }
   },
   "applecar": {
@@ -725,6 +728,9 @@
       "steps": [
         "Shaker, filtrer, servir sans glace dans un verre à cocktail rincé à l'absinthe."
       ]
+    },
+    "en": {
+      "history": "Popularized by Harry Craddock in his 1930 Savoy Cocktail Book, 'to be taken before 11 a.m., or whenever steam is required,' as the book puts it."
     }
   },
   "chocolate_milk": {
@@ -1104,6 +1110,9 @@
         "Compléter avec le champagne.",
         "Mélanger délicatement."
       ]
+    },
+    "en": {
+      "history": "Attributed to Harry MacElhone in Paris around 1915, named after the French field gun of the same caliber for its equally forceful kick."
     }
   },
   "figgy_thyme": {
@@ -2359,6 +2368,9 @@
       "steps": [
         "Shaker et filtrer dans un grand verre à cocktail glacé."
       ]
+    },
+    "en": {
+      "history": "Created in the 1920s at Havana's Hotel Nacional by bartender Fred Kaufman, named after the silent-film star herself."
     }
   },
   "monkey_wrench": {
@@ -2596,6 +2608,9 @@
         "Faire flotter un scotch tourbé sur le dessus (utiliser de préférence un single malt tourbé type Islay).",
         "Décorer de gingembre confit."
       ]
+    },
+    "en": {
+      "history": "Invented in 2005 by Australian bartender Sam Ross at New York's Milk & Honey, and within a few years a modern classic in its own right."
     }
   },
   "pisco_sour": {
@@ -3048,6 +3063,9 @@
         "Vider la glace et l'excédent d'absinthe du verre préparé, puis y filtrer le cocktail.",
         "Décorer d'un zeste de citron."
       ]
+    },
+    "en": {
+      "history": "Born in New Orleans in the 1830s around the bitters of apothecary Antoine Amédée Peychaud, before becoming the city's official cocktail."
     }
   },
   "sidecar": {
@@ -3566,6 +3584,9 @@
         "Verser tous les ingrédients dans un shaker rempli de glace.",
         "Bien shaker et filtrer dans un grand verre à cocktail."
       ]
+    },
+    "en": {
+      "history": "Created by Harry MacElhone in Paris in 1919, then refined by Harry Craddock at London's Savoy in 1930."
     }
   },
   "wine_punch": {
@@ -3684,6 +3705,9 @@
         "Laisser mijoter 2 minutes, puis retirer du feu et laisser reposer au moins 2 heures avant de filtrer dans une bouteille en verre propre.",
         "Mélanger ensuite une part de ce sirop avec deux parts de jus de pamplemousse frais."
       ]
+    },
+    "en": {
+      "history": "Invented in 1934 by Donn Beach, founder of tiki culture, in Hollywood — under a strict house rule of two drinks per customer."
     }
   },
   "zambeer": {

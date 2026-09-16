@@ -73,6 +73,8 @@ export const fr = {
     historyHeading: "Histoire",
     tipsHeading: "Conseils",
     prepareButton: "Préparer",
+    signatureLine: "✨ Recette signature · préparée {{count}} fois",
+    signatureBadgeAria: "Recette signature",
     degradationLowStock: "stock faible dans Mon Bar",
     degradationAlmostEmpty: "presque terminé dans Mon Bar",
     degradationSubstitution: "remplacé par un ingrédient de Mon Bar",
@@ -247,6 +249,18 @@ export const fr = {
   collectionDetail: {
     notFound: "Collection introuvable",
   },
+  notableCreator: {
+    cardCaption: "{{name}} · {{year}}",
+    detailLine: "Créé par {{name}} · {{year}} · {{place}}",
+  },
+  monthlyChallenge: {
+    label: "Défi du mois",
+    done: "Réussi ✓",
+    themeTiki: { title: "Escale Tiki", desc: "Cocktails tropicaux et exotiques" },
+    themeSansAlcool: { title: "Mois sans alcool", desc: "Uniquement des mocktails, pour changer de rythme" },
+    themeCorse: { title: "Spiritueux corsés", desc: "Cocktails forts en caractère, pour les amateurs" },
+    themeFruite: { title: "Cocktails fruités", desc: "Généreux, ronds, pleins de fruits" },
+  },
   ingredientRole: {
     primarySpirit: "Alcool principal",
     secondarySpirit: "Alcool secondaire",
@@ -281,6 +295,9 @@ export const fr = {
     wellStocked: { title: "Bar bien garni", desc: "Ajoute 15 ingrédients à Mon Bar." },
     creator: { title: "Créateur", desc: "Crée ta première recette perso." },
     challenger: { title: "Relève le défi", desc: "Complète le défi de la semaine." },
+    monthlyChallenger: { title: "Fidèle au poste", desc: "Complète le défi thématique du mois." },
+    connoisseur: { title: "Connaisseur", desc: "Prépare 3 cocktails de la collection Cocktails d'exception." },
+    signatureCreator: { title: "Créateur reconnu", desc: "Une de tes recettes perso devient une recette signature." },
   },
 };
 

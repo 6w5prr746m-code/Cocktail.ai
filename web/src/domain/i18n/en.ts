@@ -73,6 +73,8 @@ export const en: TranslationSchema = {
     historyHeading: "History",
     tipsHeading: "Tips",
     prepareButton: "Prepare",
+    signatureLine: "✨ Signature recipe · prepared {{count}} times",
+    signatureBadgeAria: "Signature recipe",
     degradationLowStock: "low stock in My Bar",
     degradationAlmostEmpty: "almost empty in My Bar",
     degradationSubstitution: "replaced with an ingredient from My Bar",
@@ -246,6 +248,18 @@ export const en: TranslationSchema = {
   collectionDetail: {
     notFound: "Collection not found",
   },
+  notableCreator: {
+    cardCaption: "{{name}} · {{year}}",
+    detailLine: "Created by {{name}} · {{year}} · {{place}}",
+  },
+  monthlyChallenge: {
+    label: "Monthly challenge",
+    done: "Done ✓",
+    themeTiki: { title: "Tiki getaway", desc: "Tropical, exotic cocktails" },
+    themeSansAlcool: { title: "Alcohol-free month", desc: "Mocktails only, for a change of pace" },
+    themeCorse: { title: "Bold spirit-forward", desc: "Strong cocktails for connoisseurs" },
+    themeFruite: { title: "Fruity cocktails", desc: "Round, generous, fruit-forward" },
+  },
   ingredientRole: {
     primarySpirit: "Main spirit",
     secondarySpirit: "Secondary spirit",
@@ -280,5 +294,8 @@ export const en: TranslationSchema = {
     wellStocked: { title: "Well stocked", desc: "Add 15 ingredients to My Bar." },
     creator: { title: "Creator", desc: "Create your first personal recipe." },
     challenger: { title: "Challenge accepted", desc: "Complete the weekly challenge." },
+    monthlyChallenger: { title: "Creature of habit", desc: "Complete the monthly themed challenge." },
+    connoisseur: { title: "Connoisseur", desc: "Prepare 3 cocktails from the Cocktails d'exception collection." },
+    signatureCreator: { title: "Recognized creator", desc: "One of your personal recipes becomes a signature recipe." },
   },
 };

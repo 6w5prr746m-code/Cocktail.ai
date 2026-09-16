@@ -1,0 +1,57 @@
+{
+  "Sazerac": {
+    "creator": "Antoine Amédée Peychaud",
+    "year": { "fr": "1838", "en": "1838" },
+    "place": { "fr": "Nouvelle-Orléans, États-Unis", "en": "New Orleans, USA" }
+  },
+  "Corpse Reviver": {
+    "creator": "Harry Craddock",
+    "year": { "fr": "1930", "en": "1930" },
+    "place": { "fr": "Londres, Royaume-Uni", "en": "London, UK" }
+  },
+  "White Lady": {
+    "creator": "Harry MacElhone",
+    "year": { "fr": "1919", "en": "1919" },
+    "place": { "fr": "Paris, France", "en": "Paris, France" }
+  },
+  "Bramble": {
+    "creator": "Dick Bradsell",
+    "year": { "fr": "1984", "en": "1984" },
+    "place": { "fr": "Londres, Royaume-Uni", "en": "London, UK" }
+  },
+  "Espresso Martini": {
+    "creator": "Dick Bradsell",
+    "year": { "fr": "~1983", "en": "~1983" },
+    "place": { "fr": "Londres, Royaume-Uni", "en": "London, UK" }
+  },
+  "Aviation": {
+    "creator": "Hugo Ensslin",
+    "year": { "fr": "1916", "en": "1916" },
+    "place": { "fr": "New York, États-Unis", "en": "New York, USA" }
+  },
+  "French 75": {
+    "creator": "Harry MacElhone",
+    "year": { "fr": "~1915", "en": "~1915" },
+    "place": { "fr": "Paris, France", "en": "Paris, France" }
+  },
+  "Penicillin": {
+    "creator": "Sam Ross",
+    "year": { "fr": "2005", "en": "2005" },
+    "place": { "fr": "New York, États-Unis", "en": "New York, USA" }
+  },
+  "Mary Pickford": {
+    "creator": "Fred Kaufman",
+    "year": { "fr": "années 1920", "en": "1920s" },
+    "place": { "fr": "La Havane, Cuba", "en": "Havana, Cuba" }
+  },
+  "Old Cuban": {
+    "creator": "Audrey Saunders",
+    "year": { "fr": "2001", "en": "2001" },
+    "place": { "fr": "New York, États-Unis", "en": "New York, USA" }
+  },
+  "Zombie": {
+    "creator": "Donn Beach",
+    "year": { "fr": "1934", "en": "1934" },
+    "place": { "fr": "Hollywood, États-Unis", "en": "Hollywood, USA" }
+  }
+}

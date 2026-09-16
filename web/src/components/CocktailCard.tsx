@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import type { Cocktail } from "../domain/types";
 import { useFavoritesStore } from "../state/favorites";
+import { useHistoryStore } from "../state/history";
 import { CocktailVisual } from "./CocktailVisual";
 import { tasteProfile } from "../domain/tasteProfile";
+import { isSignatureRecipe } from "../domain/signatureRecipe";
 import { TasteTags } from "./TasteTags";
 import { useTranslation } from "../domain/i18n/useTranslation";
 import { getLocalizedCategory, getLocalizedTasteTags } from "../domain/i18n/localizedCocktail";
@@ -22,8 +24,10 @@ interface CocktailCardProps {
 // une version localisée EN, sous peine de casser silencieusement l'illustration
 // et les tags de goût. Seul le texte affiché (catégorie, tags) est traduit.
 export function CocktailCard({ cocktail, width, showTaste = true, caption }: CocktailCardProps) {
-  const { locale } = useTranslation();
+  const { t, locale } = useTranslation();
   const isFavorite = useFavoritesStore((s) => s.isFavorite(cocktail.id));
+  const historyEntries = useHistoryStore((s) => s.entries);
+  const signature = isSignatureRecipe(cocktail, historyEntries);
   const tags = getLocalizedTasteTags(tasteProfile(cocktail), locale);
 
   return (
@@ -50,6 +54,17 @@ export function CocktailCard({ cocktail, width, showTaste = true, caption }: Coc
             aria-hidden
           >
             ❤️
+          </span>
+        )}
+        {signature && (
+          <span
+            className="absolute top-2 left-2 flex items-center justify-center rounded-full text-xs"
+            style={{ width: 22, height: 22, background: "rgba(0,0,0,0.35)" }}
+            role="img"
+            aria-label={t("cocktailDetail.signatureBadgeAria")}
+            title={t("cocktailDetail.signatureBadgeAria")}
+          >
+            ✨
           </span>
         )}
       </div>

@@ -33,5 +33,22 @@
     "name": "Ambiance Tiki",
     "iconName": "leaf.arrow.circlepath",
     "cocktailNames": ["Mai Tai", "Piña Colada"]
+  },
+  {
+    "name": "Cocktails d'exception",
+    "iconName": "crown.fill",
+    "cocktailNames": [
+      "Sazerac",
+      "Corpse Reviver",
+      "White Lady",
+      "Bramble",
+      "Espresso Martini",
+      "Aviation",
+      "French 75",
+      "Penicillin",
+      "Mary Pickford",
+      "Old Cuban",
+      "Zombie"
+    ]
   }
 ]

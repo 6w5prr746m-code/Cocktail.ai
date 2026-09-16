@@ -10,6 +10,7 @@ import { useAllIngredients, useCocktail } from "../domain/catalog";
 import { computeAdvancedMatches } from "../domain/matchingEngine";
 import { SEED_SUBSTITUTIONS } from "../domain/seed";
 import { useFavoritesStore } from "../state/favorites";
+import { useHistoryStore } from "../state/history";
 import { useMyBarStore } from "../state/myBar";
 import { useShoppingListStore } from "../state/shoppingList";
 import { tasteProfile } from "../domain/tasteProfile";
@@ -18,6 +19,8 @@ import { type StockStatus } from "../domain/types";
 import { useTranslation } from "../domain/i18n/useTranslation";
 import { useLocalizedCocktail, useLocalizedIngredients } from "../domain/i18n/useLocalizedCocktail";
 import { getLocalizedTasteTags, getLocalizedUnit } from "../domain/i18n/localizedCocktail";
+import { getNotableCreator } from "../domain/notableCreators";
+import { isSignatureRecipe, preparedCount } from "../domain/signatureRecipe";
 
 // IMPORTANT : CocktailVisual/tasteProfile/buildPhotoPrompt tournent sur des
 // heuristiques qui pattern-matchent le texte français brut (glassware/
@@ -42,6 +45,7 @@ export default function CocktailDetailPage() {
   const [promptCopied, setPromptCopied] = useState(false);
   const myBarEntries = useMyBarStore((s) => s.entries);
   const addShoppingItems = useShoppingListStore((s) => s.addItems);
+  const historyEntries = useHistoryStore((s) => s.entries);
 
   // Confronte cette recette à Mon Bar — n'affiche rien tant que le bar est
   // vide, pour ne pas polluer l'écran d'un utilisateur qui n'a encore rien
@@ -82,6 +86,8 @@ export default function CocktailDetailPage() {
   }
 
   const tags = getLocalizedTasteTags(tasteProfile(rawCocktail!), locale);
+  const notableCreator = getNotableCreator(cocktail.id, locale);
+  const signature = isSignatureRecipe(cocktail, historyEntries);
 
   async function copyPhotoPrompt() {
     if (!rawCocktail) return;
@@ -150,6 +156,11 @@ export default function CocktailDetailPage() {
         </div>
 
         <div className="relative z-10 p-5 pt-4 w-full text-center" style={{ background: "linear-gradient(transparent, rgba(0,0,0,0.6))" }}>
+          {signature && (
+            <p className="text-xs font-semibold mb-1" style={{ color: "var(--color-accent-gold-soft)" }}>
+              {t("cocktailDetail.signatureLine", { count: preparedCount(cocktail.id, historyEntries) })}
+            </p>
+          )}
           <h1 className="text-3xl font-bold text-white leading-tight">{cocktail.name}</h1>
           <div className="flex items-center justify-center gap-3 mt-2 text-sm text-white/85">
             <span>⏱ {formatDuration(cocktail.preparationTimeMinutes)}</span>
@@ -292,6 +303,11 @@ export default function CocktailDetailPage() {
             <h2 className="text-lg font-semibold mb-2" style={{ color: "var(--color-text-primary)" }}>
               {t("cocktailDetail.historyHeading")}
             </h2>
+            {notableCreator && (
+              <p className="text-xs font-medium mb-1.5" style={{ color: "var(--color-accent-gold-text)" }}>
+                🏆 {t("notableCreator.detailLine", { name: notableCreator.creator, year: notableCreator.year, place: notableCreator.place })}
+              </p>
+            )}
             <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
               {cocktail.history} <span>— {cocktail.origin}</span>
             </p>

@@ -3,10 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { AlmostReadyBanner } from "../components/AlmostReadyBanner";
 import { CocktailCard } from "../components/CocktailCard";
 import { CocktailVisual } from "../components/CocktailVisual";
+import { MonthlyChallengeCard } from "../components/MonthlyChallengeCard";
 import { TasteTags } from "../components/TasteTags";
 import { WeeklyChallengeCard } from "../components/WeeklyChallengeCard";
 import { useAllCocktails } from "../domain/catalog";
 import { dailyPick } from "../domain/gradient";
+import { isMonthlyChallengeCompletedThisMonth, monthlyChallengePick } from "../domain/monthlyChallenge";
 import { explainRecommendation, pickSurprise, recommendCocktails } from "../domain/recommendation";
 import { tasteProfile } from "../domain/tasteProfile";
 import { isChallengeCompletedThisWeek, weeklyChallengePick } from "../domain/weeklyChallenge";
@@ -147,6 +149,10 @@ export default function HomePage() {
   const featured = useMemo(() => dailyPick(cocktails), [cocktails]);
   const weeklyChallenge = useMemo(() => weeklyChallengePick(cocktails), [cocktails]);
   const weeklyChallengeCompleted = weeklyChallenge ? isChallengeCompletedThisWeek(historyEntries, weeklyChallenge.id) : false;
+  const monthlyChallenge = useMemo(() => monthlyChallengePick(cocktails), [cocktails]);
+  const monthlyChallengeCompleted = monthlyChallenge
+    ? isMonthlyChallengeCompletedThisMonth(historyEntries, monthlyChallenge.cocktail.id)
+    : false;
 
   function surpriseMe() {
     const excluded = new Set([...favoriteIds, ...historyCocktailIds]);
@@ -198,6 +204,11 @@ export default function HomePage() {
       {weeklyChallenge && (
         <div className="px-4 mt-4">
           <WeeklyChallengeCard cocktail={weeklyChallenge} completed={weeklyChallengeCompleted} />
+        </div>
+      )}
+      {monthlyChallenge && (
+        <div className="px-4 mt-3">
+          <MonthlyChallengeCard theme={monthlyChallenge.theme} cocktail={monthlyChallenge.cocktail} completed={monthlyChallengeCompleted} />
         </div>
       )}
       <AlmostReadyBanner />
