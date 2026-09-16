@@ -7,17 +7,21 @@ import { fuzzyIncludes } from "../domain/fuzzySearch";
 import { computeAdvancedMatches } from "../domain/matchingEngine";
 import { SEED_SUBSTITUTIONS } from "../domain/seed";
 import { STARTER_INGREDIENTS } from "../domain/starterIngredients";
-import { evaluateBarReadiness, BAR_READINESS_TEXT, STOCK_STATUS_LABEL, STOCK_STATUS_ORDER } from "../domain/types";
+import { evaluateBarReadiness, STOCK_STATUS_ORDER } from "../domain/types";
 import type { StockStatus } from "../domain/types";
 import { useMyBarStore } from "../state/myBar";
 import { useShoppingListStore } from "../state/shoppingList";
+import { useTranslation } from "../domain/i18n/useTranslation";
+import { useLocalizedIngredients } from "../domain/i18n/useLocalizedCocktail";
+import { getLocalizedIngredientCategory, getLocalizedIngredientName } from "../domain/i18n/localizedCocktail";
 
 const ALMOST_READY_LIMIT = 6;
 
 const STOCK_OPTIONS: StockStatus[] = ["available", "low", "almostEmpty"];
 
 export default function MyBarPage() {
-  const ingredients = useAllIngredients();
+  const { t, locale } = useTranslation();
+  const ingredients = useLocalizedIngredients(useAllIngredients());
   const cocktails = useAllCocktails();
   const { entries, addIngredient, removeIngredient, setStockStatus, setApproximateQuantity } = useMyBarStore();
   const { items: shoppingItems, addItems, removeItem: removeShoppingItem, toggleChecked, clearChecked } = useShoppingListStore();
@@ -38,12 +42,14 @@ export default function MyBarPage() {
   );
   const unlockedCount = advancedMatches.filter((m) => m.availability === "ready").length;
   const readiness = evaluateBarReadiness(Object.keys(entries).length, unlockedCount);
-  const readinessText = BAR_READINESS_TEXT[readiness];
+  const readinessText = { title: t(`barReadiness.${readiness}Title`), subtitle: t(`barReadiness.${readiness}Subtitle`) };
 
   const almostReady = useMemo(
     () => advancedMatches.filter((m) => m.availability === "missingFew").slice(0, ALMOST_READY_LIMIT),
     [advancedMatches],
   );
+
+  const ingredientNameById = useMemo(() => new Map(ingredients.map((i) => [i.id, i.name])), [ingredients]);
 
   const shoppingRows = useMemo(
     () =>
@@ -77,10 +83,10 @@ export default function MyBarPage() {
   }, [ingredients, entries, query, category]);
 
   return (
-    <div className="pb-8">
+    <div className="pb-8 max-w-[560px] md:max-w-[720px] lg:max-w-[1100px] xl:max-w-[1300px] mx-auto">
       <div className="px-4 pt-6 pb-4">
         <h1 className="text-2xl font-bold mb-4" style={{ color: "var(--color-text-primary)" }}>
-          Mon Bar
+          {t("myBar.title")}
         </h1>
         <div
           className="rounded-2xl p-4 flex items-center gap-4 glass-card"
@@ -107,10 +113,10 @@ export default function MyBarPage() {
         <section className="px-4 pb-6">
           <div className="rounded-2xl p-4 glass-card">
             <p className="font-semibold mb-1" style={{ color: "var(--color-text-primary)" }}>
-              Ton bar est encore vide
+              {t("myBar.emptyTitle")}
             </p>
             <p className="text-sm mb-3" style={{ color: "var(--color-text-secondary)" }}>
-              Ajoute quelques ingrédients courants pour voir tout de suite quels cocktails deviennent réalisables.
+              {t("myBar.emptyBody")}
             </p>
             <div className="flex flex-wrap gap-2">
               {STARTER_INGREDIENTS.map((ingredient) => (
@@ -121,7 +127,7 @@ export default function MyBarPage() {
                   className="text-sm rounded-full px-3.5 py-2 font-medium"
                   style={{ background: "var(--color-bg)", color: "var(--color-text-primary)", border: "1px solid var(--color-border)" }}
                 >
-                  ✨ {ingredient.name}
+                  ✨ {getLocalizedIngredientName(ingredient.id, ingredient.name, locale)}
                 </button>
               ))}
             </div>
@@ -132,7 +138,7 @@ export default function MyBarPage() {
       {almostReady.length > 0 && (
         <section className="px-4 pb-6">
           <h2 className="text-base font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
-            Presque prêt
+            {t("myBar.almostReadyTitle")}
           </h2>
           <ul className="flex flex-col gap-2">
             {almostReady.map((match) => (
@@ -144,7 +150,7 @@ export default function MyBarPage() {
                       {match.cocktail.name}
                     </p>
                     <p className="text-xs truncate" style={{ color: "var(--color-text-secondary)" }}>
-                      Manque : {match.missingIngredients.map((i) => i.name).join(", ")}
+                      {t("myBar.missingPrefix", { items: match.missingIngredients.map((i) => ingredientNameById.get(i.id) ?? i.name).join(", ") })}
                     </p>
                   </div>
                 </Link>
@@ -152,8 +158,8 @@ export default function MyBarPage() {
                 <button
                   type="button"
                   onClick={() => addItems(match.missingIngredients.map((i) => i.id))}
-                  aria-label={`Ajouter les ingrédients manquants pour ${match.cocktail.name} à la liste de courses`}
-                  title="Ajouter à la liste de courses"
+                  aria-label={t("myBar.addMissingAria", { name: match.cocktail.name })}
+                  title={t("myBar.addToShoppingTitle")}
                   className="flex-shrink-0 rounded-full flex items-center justify-center"
                   style={{ width: 30, height: 30, background: "var(--color-bg)" }}
                 >
@@ -169,11 +175,11 @@ export default function MyBarPage() {
         <section className="px-4 pb-6">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-base font-semibold" style={{ color: "var(--color-text-primary)" }}>
-              🛒 Liste de courses
+              {t("myBar.shoppingListTitle")}
             </h2>
             {hasCheckedItems && (
               <button type="button" onClick={clearChecked} className="text-xs font-medium underline" style={{ color: "var(--color-text-secondary)" }}>
-                Vider les cochés
+                {t("myBar.clearChecked")}
               </button>
             )}
           </div>
@@ -187,7 +193,7 @@ export default function MyBarPage() {
                 <button
                   type="button"
                   onClick={() => toggleChecked(item.ingredientId)}
-                  aria-label={item.checked ? `Décocher ${ingredient!.name}` : `Cocher ${ingredient!.name}`}
+                  aria-label={item.checked ? t("myBar.uncheckAria", { name: ingredient!.name }) : t("myBar.checkAria", { name: ingredient!.name })}
                   className="flex-shrink-0 rounded-full flex items-center justify-center"
                   style={{
                     width: 22,
@@ -209,7 +215,7 @@ export default function MyBarPage() {
                 <button
                   type="button"
                   onClick={() => removeShoppingItem(item.ingredientId)}
-                  aria-label={`Retirer ${ingredient!.name} de la liste`}
+                  aria-label={t("myBar.removeFromListAria", { name: ingredient!.name })}
                   className="flex-shrink-0 text-xs"
                   style={{ color: "var(--color-text-secondary)" }}
                 >
@@ -224,7 +230,7 @@ export default function MyBarPage() {
       {ownedIngredients.length > 0 && (
         <section className="px-4 pb-6">
           <h2 className="text-base font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
-            Déjà dans ton bar ({ownedIngredients.length})
+            {t("myBar.ownedTitle", { count: ownedIngredients.length })}
           </h2>
           <ul className="flex flex-col gap-2">
             {ownedIngredients.map(({ entry, ingredient }) => (
@@ -249,7 +255,7 @@ export default function MyBarPage() {
                           color: entry.stockStatus === status ? "#0b0b0f" : "var(--color-text-secondary)",
                         }}
                       >
-                        {STOCK_STATUS_LABEL[status]}
+                        {t(`stockStatus.${status}`)}
                       </button>
                     ))}
                   </div>
@@ -261,8 +267,8 @@ export default function MyBarPage() {
                         setApproximateQuantity(entry.ingredientId, e.target.value);
                         setEditingQtyFor(null);
                       }}
-                      placeholder="Quantité approximative (ex: 1 bouteille)"
-                      aria-label={`Quantité approximative pour ${ingredient!.name}`}
+                      placeholder={t("myBar.approximateQtyPlaceholder")}
+                      aria-label={t("myBar.approximateQtyAria", { name: ingredient!.name })}
                       className="mt-2 w-full text-xs rounded-lg px-2 py-1.5 outline-none"
                       style={{ background: "var(--color-bg)", color: "var(--color-text-primary)", border: "1px solid var(--color-border)" }}
                     />
@@ -273,14 +279,14 @@ export default function MyBarPage() {
                       className="text-[11px] mt-1.5 underline"
                       style={{ color: "var(--color-text-secondary)" }}
                     >
-                      {entry.approximateQuantity ?? "Ajouter une quantité approximative"}
+                      {entry.approximateQuantity ?? t("myBar.addApproximateQty")}
                     </button>
                   )}
                 </div>
                 <button
                   type="button"
                   onClick={() => removeIngredient(entry.ingredientId)}
-                  aria-label={`Retirer ${ingredient!.name}`}
+                  aria-label={t("myBar.removeIngredientAria", { name: ingredient!.name })}
                   className="flex-shrink-0 rounded-full flex items-center justify-center"
                   style={{ width: 30, height: 30, background: "var(--color-bg)", color: "var(--color-danger-text)" }}
                 >
@@ -294,13 +300,13 @@ export default function MyBarPage() {
 
       <section className="px-4">
         <h2 className="text-base font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
-          Ajouter un ingrédient
+          {t("myBar.addIngredientTitle")}
         </h2>
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Chercher…"
-          aria-label="Chercher un ingrédient à ajouter"
+          placeholder={t("myBar.searchIngredientPlaceholder")}
+          aria-label={t("myBar.searchIngredientAria")}
           className="w-full rounded-xl px-4 py-3 text-sm outline-none mb-3"
           style={{ background: "var(--color-surface)", color: "var(--color-text-primary)", border: "1px solid var(--color-border)" }}
         />
@@ -314,7 +320,7 @@ export default function MyBarPage() {
               color: category === null ? "#0b0b0f" : "var(--color-text-primary)",
             }}
           >
-            Tout
+            {t("myBar.allCategories")}
           </button>
           {categories.map((cat) => (
             <button
@@ -327,7 +333,7 @@ export default function MyBarPage() {
                 color: category === cat ? "#0b0b0f" : "var(--color-text-primary)",
               }}
             >
-              {cat}
+              {getLocalizedIngredientCategory(cat, locale)}
             </button>
           ))}
         </div>

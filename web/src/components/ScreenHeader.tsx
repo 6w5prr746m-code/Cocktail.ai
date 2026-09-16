@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "../domain/i18n/useTranslation";
 
 interface ScreenHeaderProps {
   title?: string;
@@ -10,6 +11,7 @@ interface ScreenHeaderProps {
 
 export function ScreenHeader({ title, onBack, action, transparent = false }: ScreenHeaderProps) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <header
       className="sticky top-0 z-10 flex items-center justify-between px-3 py-3"
@@ -23,7 +25,7 @@ export function ScreenHeader({ title, onBack, action, transparent = false }: Scr
         onClick={() => (onBack ? onBack() : navigate(-1))}
         className="flex items-center justify-center rounded-full"
         style={{ width: 36, height: 36, background: "var(--color-surface)", color: "var(--color-text-primary)" }}
-        aria-label="Retour"
+        aria-label={t("common.back")}
       >
         ←
       </button>

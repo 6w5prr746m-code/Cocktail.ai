@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { isIOS, isRunningStandalone, useInstallPromptStore } from "../state/installPrompt";
+import { useTranslation } from "../domain/i18n/useTranslation";
 
 export function InstallAppCard() {
   const { deferredEvent, installed } = useInstallPromptStore();
   const [standalone, setStandalone] = useState(false);
   const [dismissed, setDismissed] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setStandalone(isRunningStandalone());
@@ -15,7 +17,7 @@ export function InstallAppCard() {
       <div className="rounded-2xl p-4 flex items-center gap-3 glass-card mb-6">
         <span className="text-xl">✓</span>
         <p className="text-sm" style={{ color: "var(--color-text-primary)" }}>
-          App installée — merci !
+          {t("installCard.installed")}
         </p>
       </div>
     );
@@ -29,10 +31,10 @@ export function InstallAppCard() {
         <span className="text-2xl">📲</span>
         <div className="flex-1 min-w-0">
           <p className="text-sm font-semibold" style={{ color: "var(--color-text-primary)" }}>
-            Installer Cocktail.ai
+            {t("installCard.title")}
           </p>
           <p className="text-xs" style={{ color: "var(--color-text-secondary)" }}>
-            Lance l'app directement depuis ton écran d'accueil, même hors ligne.
+            {t("installCard.body")}
           </p>
         </div>
         <button
@@ -44,7 +46,7 @@ export function InstallAppCard() {
           className="flex-shrink-0 rounded-xl px-3.5 py-2 text-sm font-semibold"
           style={{ background: "var(--color-accent-gold)", color: "#0b0b0f" }}
         >
-          Installer
+          {t("installCard.installButton")}
         </button>
       </div>
     );
@@ -56,16 +58,16 @@ export function InstallAppCard() {
         <span className="text-2xl">📲</span>
         <div className="flex-1 min-w-0">
           <p className="text-sm font-semibold mb-1" style={{ color: "var(--color-text-primary)" }}>
-            Installer sur iPhone/iPad
+            {t("installCard.iosTitle")}
           </p>
           <p className="text-xs leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-            Appuie sur <strong>Partager</strong> (⬆️) dans Safari, puis <strong>"Sur l'écran d'accueil"</strong>.
+            {t("installCard.iosBody")}
           </p>
         </div>
         <button
           type="button"
           onClick={() => setDismissed(true)}
-          aria-label="Masquer"
+          aria-label={t("installCard.dismiss")}
           className="flex-shrink-0 text-sm"
           style={{ color: "var(--color-text-secondary)" }}
         >

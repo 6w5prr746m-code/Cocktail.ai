@@ -4,28 +4,31 @@ import type { CocktailArt } from "../domain/glassArt";
 import { STARTER_INGREDIENTS } from "../domain/starterIngredients";
 import { useMyBarStore } from "../state/myBar";
 import { useOnboardingStore } from "../state/onboarding";
+import { useTranslation } from "../domain/i18n/useTranslation";
+import type { TranslationKey } from "../domain/i18n/useTranslation";
+import { getLocalizedIngredientName } from "../domain/i18n/localizedCocktail";
 
 interface Step {
   art: CocktailArt;
-  title: string;
-  body: string;
+  titleKey: TranslationKey;
+  bodyKey: TranslationKey;
 }
 
 const STEPS: Step[] = [
   {
     art: { shape: "coupe", liquidColor: "#c9a227", garnish: "citrusTwist", garnishColor: "#e8d9a8", ice: "none" },
-    title: "Bienvenue sur Cocktail.ai",
-    body: "Trouve le cocktail parfait selon ce que tu as sous la main, prépare-le pas à pas, et découvre de nouvelles recettes en chemin.",
+    titleKey: "onboarding.step1Title",
+    bodyKey: "onboarding.step1Body",
   },
   {
     art: { shape: "highball", liquidColor: "#2dd4bf", garnish: "mint", ice: "crushed" },
-    title: "Dis-nous ce que tu as",
-    body: "Dans la recherche magique, sélectionne tes ingrédients : les cocktails réalisables apparaissent en temps réel, triés par compatibilité.",
+    titleKey: "onboarding.step2Title",
+    bodyKey: "onboarding.step2Body",
   },
   {
     art: { shape: "rocks", liquidColor: "#d9a441", garnish: "cherry", ice: "cubes" },
-    title: "Garde Mon Bar à jour",
-    body: "Mon Bar retient ce que tu as chez toi et débloque automatiquement de nouveaux cocktails. Quelques ingrédients courants pour commencer :",
+    titleKey: "onboarding.step3Title",
+    bodyKey: "onboarding.step3Body",
   },
 ];
 
@@ -35,6 +38,7 @@ export function OnboardingFlow() {
   const myBarEntries = useMyBarStore((s) => s.entries);
   const addIngredient = useMyBarStore((s) => s.addIngredient);
   const [step, setStep] = useState(0);
+  const { t, locale } = useTranslation();
 
   if (completed) return null;
 
@@ -53,7 +57,7 @@ export function OnboardingFlow() {
           className="text-sm font-medium"
           style={{ color: "var(--color-text-secondary)" }}
         >
-          Passer
+          {t("onboarding.skip")}
         </button>
       </div>
 
@@ -62,10 +66,10 @@ export function OnboardingFlow() {
           <GlassArt art={current.art} size={110} fillFraction={0.62} />
         </div>
         <h1 className="text-2xl font-bold" style={{ color: "var(--color-text-primary)" }}>
-          {current.title}
+          {t(current.titleKey)}
         </h1>
         <p className="text-sm leading-relaxed max-w-[320px]" style={{ color: "var(--color-text-secondary)" }}>
-          {current.body}
+          {t(current.bodyKey)}
         </p>
 
         {isLast && (
@@ -86,7 +90,7 @@ export function OnboardingFlow() {
                   }}
                 >
                   {owned ? "✓ " : "+ "}
-                  {ingredient.name}
+                  {getLocalizedIngredientName(ingredient.id, ingredient.name, locale)}
                 </button>
               );
             })}
@@ -115,7 +119,7 @@ export function OnboardingFlow() {
           className="w-full rounded-2xl py-4 font-semibold text-base"
           style={{ background: "var(--color-accent-gold)", color: "#0b0b0f" }}
         >
-          {isLast ? "Commencer" : "Suivant"}
+          {isLast ? t("onboarding.start") : t("onboarding.next")}
         </button>
       </div>
     </div>

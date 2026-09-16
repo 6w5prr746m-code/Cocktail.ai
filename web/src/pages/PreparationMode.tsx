@@ -6,11 +6,15 @@ import { useCocktail } from "../domain/catalog";
 import { artFor } from "../domain/glassArt";
 import { gradientClassFor } from "../domain/gradient";
 import { useHistoryStore } from "../state/history";
+import { useTranslation } from "../domain/i18n/useTranslation";
+import { useLocalizedCocktail } from "../domain/i18n/useLocalizedCocktail";
 
 export default function PreparationModePage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const cocktail = useCocktail(id);
+  const { t } = useTranslation();
+  const rawCocktail = useCocktail(id);
+  const cocktail = useLocalizedCocktail(rawCocktail);
   const addHistoryEntry = useHistoryStore((s) => s.addEntry);
 
   const [stepIndex, setStepIndex] = useState(0);
@@ -42,7 +46,7 @@ export default function PreparationModePage() {
   if (!cocktail) {
     return (
       <div className="p-4">
-        <p style={{ color: "var(--color-text-secondary)" }}>Cocktail introuvable.</p>
+        <p style={{ color: "var(--color-text-secondary)" }}>{t("preparationMode.notFound")}</p>
       </div>
     );
   }
@@ -59,17 +63,17 @@ export default function PreparationModePage() {
     }
   }
 
-  const art = artFor(cocktail);
+  const art = artFor(rawCocktail!);
 
   if (done) {
     return (
       <div className="flex flex-col items-center justify-center min-h-full p-6 text-center gap-4">
         <GlassArt art={art} size={120} fillFraction={0.82} glow />
         <h1 className="text-2xl font-bold" style={{ color: "var(--color-text-primary)" }}>
-          Ton {cocktail.name} est prêt !
+          {t("preparationMode.readyTitle", { name: cocktail.name })}
         </h1>
         <p className="text-sm" style={{ color: "var(--color-text-secondary)" }}>
-          Santé 🥂
+          {t("preparationMode.cheers")}
         </p>
         <button
           type="button"
@@ -77,7 +81,7 @@ export default function PreparationModePage() {
           className="mt-4 rounded-2xl px-6 py-3 font-semibold"
           style={{ background: "var(--color-accent-gold)", color: "#0b0b0f" }}
         >
-          Retour à la fiche
+          {t("preparationMode.backToRecipe")}
         </button>
       </div>
     );
@@ -86,22 +90,22 @@ export default function PreparationModePage() {
   const progress = (stepIndex + 1) / cocktail.steps.length;
 
   return (
-    <div className={`flex flex-col min-h-full ${gradientClassFor(cocktail.category)}`}>
+    <div className={`flex flex-col min-h-full ${gradientClassFor(rawCocktail!.category)}`}>
       <div className="p-4">
         <button
           type="button"
           onClick={() => navigate(-1)}
           className="rounded-full flex items-center justify-center"
           style={{ width: 36, height: 36, background: "rgba(0,0,0,0.35)", color: "white" }}
-          aria-label="Fermer"
+          aria-label={t("preparationMode.closeAria")}
         >
           ✕
         </button>
       </div>
 
-      <div className="flex-1 flex flex-col items-center justify-center px-8 text-center gap-6">
+      <div className="flex-1 flex flex-col items-center justify-center px-8 text-center gap-6 max-w-[480px] mx-auto w-full">
         <p className="text-white/70 text-sm font-medium">
-          Étape {stepIndex + 1} / {cocktail.steps.length}
+          {t("preparationMode.stepCounter", { current: stepIndex + 1, total: cocktail.steps.length })}
         </p>
 
         {currentStep?.durationSeconds ? (
@@ -120,7 +124,7 @@ export default function PreparationModePage() {
         <p className="text-xl font-semibold text-white leading-snug">{currentStep?.instruction}</p>
       </div>
 
-      <div className="p-5 flex flex-col gap-3">
+      <div className="p-5 flex flex-col gap-3 max-w-[480px] mx-auto w-full">
         <div className="h-1.5 rounded-full bg-white/20 overflow-hidden">
           <div className="h-full bg-white" style={{ width: `${progress * 100}%`, transition: "width 0.3s" }} />
         </div>
@@ -130,7 +134,7 @@ export default function PreparationModePage() {
           className="w-full rounded-2xl py-4 font-semibold text-base"
           style={{ background: "var(--color-accent-gold)", color: "#0b0b0f" }}
         >
-          {stepIndex < cocktail.steps.length - 1 ? "Valider l'étape" : "Terminer"}
+          {stepIndex < cocktail.steps.length - 1 ? t("preparationMode.validateStep") : t("preparationMode.finish")}
         </button>
       </div>
     </div>

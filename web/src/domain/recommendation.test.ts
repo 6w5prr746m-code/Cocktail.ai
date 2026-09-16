@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { pickSurprise, recommendCocktails } from "./recommendation";
+import { explainRecommendation, pickSurprise, recommendCocktails } from "./recommendation";
 import type { Cocktail, CocktailIngredientLink } from "./types";
 
 function link(ingredientId: string): CocktailIngredientLink {
@@ -76,6 +76,30 @@ describe("recommendCocktails", () => {
     const cocktails = [cocktail("A"), cocktail("B"), cocktail("C")];
     const result = recommendCocktails(cocktails, { favoriteIds: [], historyCocktailIds: [] }, 2);
     expect(result).toHaveLength(2);
+  });
+});
+
+describe("explainRecommendation", () => {
+  it("returns null with no liked cocktails (cold start)", () => {
+    expect(explainRecommendation(cocktail("Mojito"), [])).toBeNull();
+  });
+
+  it("prefers a shared main spirit over a shared taste tag", () => {
+    const liked = [cocktail("Daiquiri", { mainSpirit: "Rhum", ingredients: [link("citron_vert")] })];
+    const candidate = cocktail("Mojito", { mainSpirit: "Rhum", ingredients: [link("citron_vert")] });
+    expect(explainRecommendation(candidate, liked)).toEqual({ kind: "spirit", value: "Rhum" });
+  });
+
+  it("falls back to a shared taste tag when main spirits differ", () => {
+    const liked = [cocktail("Mojito", { mainSpirit: "Rhum", ingredients: [link("menthe_fraiche")] })];
+    const candidate = cocktail("Virgin Mojito", { mainSpirit: "Sans alcool", ingredients: [link("menthe_fraiche")] });
+    expect(explainRecommendation(candidate, liked)).toEqual({ kind: "taste", value: "Frais" });
+  });
+
+  it("returns null when nothing is shared with liked cocktails", () => {
+    const liked = [cocktail("Old Fashioned", { mainSpirit: "Whisky", ingredients: [] })];
+    const candidate = cocktail("Margarita", { mainSpirit: "Tequila", ingredients: [] });
+    expect(explainRecommendation(candidate, liked)).toBeNull();
   });
 });
 
