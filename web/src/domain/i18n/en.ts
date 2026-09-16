@@ -324,7 +324,8 @@ export const en: TranslationSchema = {
   menuView: {
     title: "Menu",
     invalidLink: "This menu link is invalid or corrupted.",
-    subtitle: "Menu generated with Cocktail.ai",
+    eyebrow: "Cocktail menu",
+    footerNote: "Menu generated with Cocktail.ai",
     printAria: "Print the menu",
   },
   cosmetics: {

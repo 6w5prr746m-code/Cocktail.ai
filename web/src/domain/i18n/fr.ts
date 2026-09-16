@@ -325,7 +325,8 @@ export const fr = {
   menuView: {
     title: "Carte",
     invalidLink: "Ce lien de carte est invalide ou corrompu.",
-    subtitle: "Carte générée avec Cocktail.ai",
+    eyebrow: "Carte de cocktails",
+    footerNote: "Carte générée avec Cocktail.ai",
     printAria: "Imprimer la carte",
   },
   cosmetics: {
