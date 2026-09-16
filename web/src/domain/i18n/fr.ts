@@ -93,6 +93,8 @@ export const fr = {
     recommendedSubtitle: "Basé sur tes favoris et cocktails déjà préparés",
     favoritesTitle: "Tes favoris",
     favoritesEmptyHint: "Ajoute des cocktails en favori depuis leur fiche pour les retrouver ici.",
+    exceptionalTitle: "🏆 Cocktails d'exception",
+    exceptionalSubtitle: "Des classiques imaginés par des bartenders devenus légendaires",
     weeklyChallengeLabel: "🎯 Défi de la semaine",
     weeklyChallengeDone: "Réussi ✓",
     almostReadyBannerTitle: "Tu es à 1 ingrédient de {{count}} nouveaux cocktails",
@@ -114,6 +116,8 @@ export const fr = {
     collectionCount: "{{count}} cocktails",
     allCocktailsTitle: "Tous les cocktails ({{count}})",
     noResults: "Aucun résultat pour cette recherche.",
+    exceptionalFilterLabel: "🏆 Cocktails d'exception",
+    exceptionalFilterAria: "Filtrer sur la collection Cocktails d'exception",
   },
   myBar: {
     title: "Mon Bar",
@@ -251,7 +255,7 @@ export const fr = {
   },
   notableCreator: {
     cardCaption: "{{name}} · {{year}}",
-    detailLine: "Créé par {{name}} · {{year}} · {{place}}",
+    eyebrow: "🏆 Créé par",
   },
   monthlyChallenge: {
     label: "Défi du mois",

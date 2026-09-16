@@ -93,6 +93,8 @@ export const en: TranslationSchema = {
     recommendedSubtitle: "Based on your favorites and cocktails you've already made",
     favoritesTitle: "Your favorites",
     favoritesEmptyHint: "Add cocktails to your favorites from their page to find them here.",
+    exceptionalTitle: "🏆 Cocktails of exception",
+    exceptionalSubtitle: "Classics imagined by bartenders who became legends",
     weeklyChallengeLabel: "🎯 Weekly challenge",
     weeklyChallengeDone: "Done ✓",
     almostReadyBannerTitle: "You're 1 ingredient away from {{count}} new cocktails",
@@ -114,6 +116,8 @@ export const en: TranslationSchema = {
     collectionCount: "{{count}} cocktails",
     allCocktailsTitle: "All cocktails ({{count}})",
     noResults: "No results for this search.",
+    exceptionalFilterLabel: "🏆 Cocktails of exception",
+    exceptionalFilterAria: "Filter to the Cocktails of exception collection",
   },
   myBar: {
     title: "My Bar",
@@ -250,7 +254,7 @@ export const en: TranslationSchema = {
   },
   notableCreator: {
     cardCaption: "{{name}} · {{year}}",
-    detailLine: "Created by {{name}} · {{year}} · {{place}}",
+    eyebrow: "🏆 Created by",
   },
   monthlyChallenge: {
     label: "Monthly challenge",

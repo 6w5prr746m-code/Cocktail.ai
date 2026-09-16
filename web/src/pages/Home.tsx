@@ -9,6 +9,7 @@ import { WeeklyChallengeCard } from "../components/WeeklyChallengeCard";
 import { useAllCocktails } from "../domain/catalog";
 import { dailyPick } from "../domain/gradient";
 import { isMonthlyChallengeCompletedThisMonth, monthlyChallengePick } from "../domain/monthlyChallenge";
+import { getNotableCreator, notableCocktailIds } from "../domain/notableCreators";
 import { explainRecommendation, pickSurprise, recommendCocktails } from "../domain/recommendation";
 import { tasteProfile } from "../domain/tasteProfile";
 import { isChallengeCompletedThisWeek, weeklyChallengePick } from "../domain/weeklyChallenge";
@@ -146,6 +147,16 @@ export default function HomePage() {
     [cocktails, favoriteIds],
   );
 
+  const exceptional = useMemo(() => {
+    const ids = new Set(notableCocktailIds());
+    return cocktails.filter((c) => ids.has(c.id));
+  }, [cocktails]);
+  const exceptionalCaptions = new Map<string, string>();
+  for (const c of exceptional) {
+    const notable = getNotableCreator(c.id, locale);
+    if (notable) exceptionalCaptions.set(c.id, t("notableCreator.cardCaption", { name: notable.creator, year: notable.year }));
+  }
+
   const featured = useMemo(() => dailyPick(cocktails), [cocktails]);
   const weeklyChallenge = useMemo(() => weeklyChallengePick(cocktails), [cocktails]);
   const weeklyChallengeCompleted = weeklyChallenge ? isChallengeCompletedThisWeek(historyEntries, weeklyChallenge.id) : false;
@@ -213,6 +224,12 @@ export default function HomePage() {
       )}
       <AlmostReadyBanner />
 
+      <Section
+        title={t("home.exceptionalTitle")}
+        subtitle={t("home.exceptionalSubtitle")}
+        cocktails={exceptional}
+        captions={exceptionalCaptions}
+      />
       <Section title={t("home.popularTitle")} cocktails={popular} />
       <Section title={t("home.freshTitle")} cocktails={fresh} />
       <Section

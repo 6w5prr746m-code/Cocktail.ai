@@ -76,6 +76,8 @@ export interface CollectionDef {
   name: string;
   iconName: string;
   cocktailIds: string[];
+  /** Chapeau éditorial optionnel affiché sous le titre sur la fiche collection (ex: "Cocktails d'exception") — comme le nom, non localisé (voir README § Limites connues). */
+  description?: string;
 }
 
 export interface SubstitutionOption {

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { CocktailCard } from "../components/CocktailCard";
 import { useAllCocktails, useCollections } from "../domain/catalog";
 import { fuzzyIncludes } from "../domain/fuzzySearch";
+import { hasNotableCreator } from "../domain/notableCreators";
 import { COCKTAIL_CATEGORIES, MAIN_SPIRITS } from "../domain/seed";
 import { formatDifficulty } from "../domain/formatting";
 import { useTranslation } from "../domain/i18n/useTranslation";
@@ -23,6 +24,7 @@ export default function LibraryPage() {
   const [spirits, setSpirits] = useState<Set<string>>(new Set());
   const [difficulties, setDifficulties] = useState<Set<number>>(new Set());
   const [occasions, setOccasions] = useState<Set<string>>(new Set());
+  const [exceptionalOnly, setExceptionalOnly] = useState(false);
 
   function toggle<T>(set: Set<T>, value: T, setter: (s: Set<T>) => void) {
     const next = new Set(set);
@@ -37,13 +39,14 @@ export default function LibraryPage() {
       if (spirits.size > 0 && !spirits.has(c.mainSpirit)) return false;
       if (difficulties.size > 0 && !difficulties.has(c.difficulty)) return false;
       if (occasions.size > 0 && !occasions.has(c.category)) return false;
+      if (exceptionalOnly && !hasNotableCreator(c.id)) return false;
       if (!q) return true;
       if (fuzzyIncludes(q, c.name)) return true;
       return c.ingredients.some((link) => fuzzyIncludes(q, link.ingredientId.replace(/_/g, " ")));
     });
-  }, [cocktails, query, spirits, difficulties, occasions]);
+  }, [cocktails, query, spirits, difficulties, occasions, exceptionalOnly]);
 
-  const activeFilterCount = spirits.size + difficulties.size + occasions.size;
+  const activeFilterCount = spirits.size + difficulties.size + occasions.size + (exceptionalOnly ? 1 : 0);
 
   return (
     <div className="pb-8 max-w-[560px] md:max-w-[720px] lg:max-w-[1100px] xl:max-w-[1300px] mx-auto">
@@ -86,6 +89,23 @@ export default function LibraryPage() {
               {activeFilterCount}
             </span>
           )}
+        </button>
+      </div>
+
+      <div className="px-4 mt-3">
+        <button
+          type="button"
+          onClick={() => setExceptionalOnly((v) => !v)}
+          aria-pressed={exceptionalOnly}
+          aria-label={t("library.exceptionalFilterAria")}
+          className="text-xs rounded-full px-3 py-1.5 font-medium"
+          style={{
+            background: exceptionalOnly ? "var(--color-accent-gold)" : "var(--color-surface)",
+            color: exceptionalOnly ? "#0b0b0f" : "var(--color-text-primary)",
+            border: "1px solid var(--color-border)",
+          }}
+        >
+          {t("library.exceptionalFilterLabel")}
         </button>
       </div>
 

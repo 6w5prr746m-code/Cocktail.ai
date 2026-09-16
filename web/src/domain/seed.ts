@@ -48,6 +48,7 @@ interface RawCollection {
   name: string;
   iconName: string;
   cocktailNames: string[];
+  description?: string;
 }
 
 interface RawSubstitution {
@@ -115,6 +116,7 @@ export const SEED_COLLECTIONS: CollectionDef[] = rawCollections
     id: slugify(raw.name),
     name: raw.name,
     iconName: raw.iconName,
+    description: raw.description,
     cocktailIds: raw.cocktailNames.map((n) => cocktailIdByName.get(n)).filter((v): v is string => Boolean(v)),
   }))
   .filter((collection) => collection.cocktailIds.length > 0);

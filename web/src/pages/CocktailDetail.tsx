@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ScreenHeader } from "../components/ScreenHeader";
+import { NotableCreatorCard } from "../components/NotableCreatorCard";
 import { CocktailVisual } from "../components/CocktailVisual";
 import { CompatibilityRing } from "../components/CompatibilityRing";
 import { TasteTags } from "../components/TasteTags";
@@ -298,16 +299,13 @@ export default function CocktailDetailPage() {
           </p>
         </section>
 
+        {notableCreator && <NotableCreatorCard notable={notableCreator} />}
+
         {cocktail.history && (
           <section>
             <h2 className="text-lg font-semibold mb-2" style={{ color: "var(--color-text-primary)" }}>
               {t("cocktailDetail.historyHeading")}
             </h2>
-            {notableCreator && (
-              <p className="text-xs font-medium mb-1.5" style={{ color: "var(--color-accent-gold-text)" }}>
-                🏆 {t("notableCreator.detailLine", { name: notableCreator.creator, year: notableCreator.year, place: notableCreator.place })}
-              </p>
-            )}
             <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
               {cocktail.history} <span>— {cocktail.origin}</span>
             </p>
