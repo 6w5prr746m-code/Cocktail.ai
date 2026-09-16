@@ -294,3 +294,27 @@ select:focus-visible,
     transition: none;
   }
 }
+
+/* ---------------------------------------------------------------------
+   Impression de la carte de cocktails (MenuView.tsx, mise en page
+   "pages") — à l'écran, une seule page à la fois est visible (.hidden côté
+   Tailwind) ; à l'impression, chaque page doit ressortir sur son propre
+   feuillet plutôt que rester cachée. Les contrôles de pagination n'ont pas
+   de sens sur papier.
+--------------------------------------------------------------------- */
+@media print {
+  .menu-page.hidden {
+    display: block !important;
+  }
+  .menu-page {
+    break-after: page;
+    page-break-after: always;
+  }
+  .menu-page:last-of-type {
+    break-after: auto;
+    page-break-after: auto;
+  }
+  .menu-pagination-controls {
+    display: none !important;
+  }
+}

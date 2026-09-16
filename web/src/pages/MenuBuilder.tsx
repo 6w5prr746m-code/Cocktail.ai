@@ -3,9 +3,20 @@ import QRCode from "qrcode";
 import { ScreenHeader } from "../components/ScreenHeader";
 import { useAllCocktails } from "../domain/catalog";
 import { fuzzyIncludes } from "../domain/fuzzySearch";
-import { encodeMenu, type MenuItem } from "../domain/menuShareCode";
+import { encodeMenu, type MenuItem, type MenuLayout } from "../domain/menuShareCode";
 import { buildAppUrl } from "../domain/appUrl";
 import { useTranslation } from "../domain/i18n/useTranslation";
+import type { TranslationKey } from "../domain/i18n/useTranslation";
+
+const DEFAULT_ITEMS_PER_PAGE = 4;
+
+const LAYOUT_OPTIONS: { value: MenuLayout; labelKey: TranslationKey; descKey: TranslationKey }[] = [
+  { value: "list", labelKey: "menuBuilder.layoutList", descKey: "menuBuilder.layoutListDesc" },
+  { value: "grid2", labelKey: "menuBuilder.layoutGrid2", descKey: "menuBuilder.layoutGrid2Desc" },
+  { value: "grid3", labelKey: "menuBuilder.layoutGrid3", descKey: "menuBuilder.layoutGrid3Desc" },
+  { value: "pages", labelKey: "menuBuilder.layoutPages", descKey: "menuBuilder.layoutPagesDesc" },
+  { value: "featured", labelKey: "menuBuilder.layoutFeatured", descKey: "menuBuilder.layoutFeaturedDesc" },
+];
 
 export default function MenuBuilderPage() {
   const { t } = useTranslation();
@@ -19,6 +30,8 @@ export default function MenuBuilderPage() {
   const [barName, setBarName] = useState("");
   const [query, setQuery] = useState("");
   const [items, setItems] = useState<MenuItem[]>([]);
+  const [layout, setLayout] = useState<MenuLayout>("list");
+  const [itemsPerPage, setItemsPerPage] = useState(DEFAULT_ITEMS_PER_PAGE);
   const [menuUrl, setMenuUrl] = useState<string | null>(null);
   const [qrDataUrl, setQrDataUrl] = useState<string | null>(null);
   const [linkCopied, setLinkCopied] = useState(false);
@@ -53,9 +66,24 @@ export default function MenuBuilderPage() {
     invalidateGenerated();
   }
 
+  function toggleFeatured(id: string) {
+    setItems((prev) => prev.map((i) => (i.cocktailId === id ? { ...i, featured: !i.featured } : i)));
+    invalidateGenerated();
+  }
+
+  function changeLayout(next: MenuLayout) {
+    setLayout(next);
+    invalidateGenerated();
+  }
+
   async function generate() {
     if (!barName.trim() || items.length === 0) return;
-    const code = encodeMenu({ barName: barName.trim(), items });
+    const code = encodeMenu({
+      barName: barName.trim(),
+      layout,
+      itemsPerPage: layout === "pages" ? itemsPerPage : undefined,
+      items,
+    });
     const url = buildAppUrl(`/menu/${code}`);
     setMenuUrl(url);
     setQrDataUrl(await QRCode.toDataURL(url, { margin: 1, width: 240 }));
@@ -99,6 +127,66 @@ export default function MenuBuilderPage() {
 
         <div>
           <h2 className="text-base font-semibold mb-2" style={{ color: "var(--color-text-primary)" }}>
+            {t("menuBuilder.layoutTitle")}
+          </h2>
+          <div className="flex flex-col gap-2">
+            {LAYOUT_OPTIONS.map((opt) => (
+              <button
+                key={opt.value}
+                type="button"
+                onClick={() => changeLayout(opt.value)}
+                aria-pressed={layout === opt.value}
+                className="text-left rounded-xl px-3.5 py-2.5"
+                style={{
+                  background: layout === opt.value ? "var(--color-accent-gold)" : "var(--color-surface)",
+                  color: layout === opt.value ? "#0b0b0f" : "var(--color-text-primary)",
+                }}
+              >
+                <p className="text-sm font-semibold">{t(opt.labelKey)}</p>
+                <p className="text-xs" style={{ color: layout === opt.value ? "rgba(11,11,15,0.7)" : "var(--color-text-secondary)" }}>
+                  {t(opt.descKey)}
+                </p>
+              </button>
+            ))}
+          </div>
+          {layout === "pages" && (
+            <div className="flex items-center gap-4 mt-3 rounded-xl px-3.5 py-2.5" style={{ background: "var(--color-surface)" }}>
+              <span className="text-sm flex-1" style={{ color: "var(--color-text-primary)" }}>
+                {t("menuBuilder.itemsPerPageLabel")}
+              </span>
+              <button
+                type="button"
+                onClick={() => {
+                  setItemsPerPage((n) => Math.max(1, n - 1));
+                  invalidateGenerated();
+                }}
+                aria-label={t("menuBuilder.decreaseItemsPerPageAria")}
+                className="rounded-full flex items-center justify-center text-base font-semibold"
+                style={{ width: 32, height: 32, background: "var(--color-bg)", color: "var(--color-text-primary)" }}
+              >
+                −
+              </button>
+              <span className="text-base font-bold w-6 text-center" style={{ color: "var(--color-text-primary)" }}>
+                {itemsPerPage}
+              </span>
+              <button
+                type="button"
+                onClick={() => {
+                  setItemsPerPage((n) => Math.min(12, n + 1));
+                  invalidateGenerated();
+                }}
+                aria-label={t("menuBuilder.increaseItemsPerPageAria")}
+                className="rounded-full flex items-center justify-center text-base font-semibold"
+                style={{ width: 32, height: 32, background: "var(--color-bg)", color: "var(--color-text-primary)" }}
+              >
+                +
+              </button>
+            </div>
+          )}
+        </div>
+
+        <div>
+          <h2 className="text-base font-semibold mb-2" style={{ color: "var(--color-text-primary)" }}>
             {t("menuBuilder.selectCocktailsTitle", { count: items.length })}
           </h2>
           <input
@@ -127,6 +215,24 @@ export default function MenuBuilderPage() {
                     <span aria-hidden>{item ? "✓" : ""}</span>
                     {c.name}
                   </button>
+                  {item && layout === "featured" && (
+                    <button
+                      type="button"
+                      onClick={() => toggleFeatured(c.id)}
+                      aria-pressed={Boolean(item.featured)}
+                      aria-label={t("menuBuilder.featuredAria", { name: c.name })}
+                      title={t("menuBuilder.featuredAria", { name: c.name })}
+                      className="flex-shrink-0 rounded-full flex items-center justify-center"
+                      style={{
+                        width: 32,
+                        height: 32,
+                        background: item.featured ? "var(--color-accent-gold)" : "var(--color-surface)",
+                        border: "1px solid var(--color-border)",
+                      }}
+                    >
+                      {item.featured ? "★" : "☆"}
+                    </button>
+                  )}
                   {item && (
                     <input
                       type="number"
