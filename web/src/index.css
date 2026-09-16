@@ -27,7 +27,7 @@
   --color-danger-text: var(--color-danger);
   --color-success-text: var(--color-success);
 
-  --font-display: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-display: "Playfair Display", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
   --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: "SF Mono", ui-monospace, "Cascadia Code", monospace;
 
@@ -191,4 +191,84 @@ select:focus-visible,
 }
 .animate-fade-in {
   animation: fade-in 0.25s ease-out;
+}
+
+/* Marque "Cocktail.ai" (SideNav) — texte en dégradé or qui glisse au survol,
+   icône verre qui se penche légèrement. Effets purement au survol (jamais en
+   boucle) pour rester sobres sur un élément affiché en permanence. */
+.brand-mark-text {
+  background-image: linear-gradient(100deg, var(--color-accent-gold-soft) 20%, var(--color-accent-gold) 45%, var(--color-accent-gold-soft) 70%);
+  background-size: 220% auto;
+  background-position: 0% center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--color-accent-gold) 30%, transparent));
+  transition: background-position 0.8s ease, filter 0.3s ease;
+}
+.brand-mark:hover .brand-mark-text {
+  background-position: -120% center;
+  filter: drop-shadow(0 0 16px color-mix(in srgb, var(--color-accent-gold) 55%, transparent));
+}
+.brand-mark-icon {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.brand-mark:hover .brand-mark-icon {
+  transform: rotate(-6deg) scale(1.12);
+}
+
+/* Liens de nav (SideNav desktop) — glissement + fond ambré au survol,
+   pastille active en dégradé avec halo lumineux. */
+.nav-link {
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.nav-link:hover {
+  background: color-mix(in srgb, var(--color-accent-gold) 12%, transparent);
+  transform: translateX(2px);
+}
+.nav-link.is-active {
+  box-shadow: 0 6px 18px -6px color-mix(in srgb, var(--color-accent-gold) 65%, transparent);
+}
+.nav-link-icon {
+  transition: transform 0.2s ease;
+}
+.nav-link:hover .nav-link-icon {
+  transform: scale(1.15) rotate(-4deg);
+}
+
+/* Onglets (TabBar mobile/tablette) — icône active qui "rebondit" avec un
+   halo doré, petit point indicateur qui apparaît en fondu. */
+.tab-link-icon-wrap {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s ease;
+}
+.tab-link.is-active .tab-link-icon-wrap {
+  transform: translateY(-3px) scale(1.1);
+  filter: drop-shadow(0 2px 10px color-mix(in srgb, var(--color-accent-gold) 60%, transparent));
+}
+.tab-link-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 9999px;
+  background: var(--color-accent-gold);
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.tab-link.is-active .tab-link-dot {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-mark-text,
+  .brand-mark-icon,
+  .nav-link,
+  .nav-link-icon,
+  .tab-link-icon-wrap,
+  .tab-link-dot {
+    transition: none;
+  }
+  .brand-mark:hover .brand-mark-icon {
+    transform: none;
+  }
 }

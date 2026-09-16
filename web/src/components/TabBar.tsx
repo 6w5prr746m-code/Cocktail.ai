@@ -19,14 +19,15 @@ export function TabBar() {
           key={tab.to}
           to={tab.to}
           end={tab.end}
-          className="relative flex-1 flex flex-col items-center gap-0.5 py-2.5 text-[11px] font-medium"
+          className={({ isActive }) => `tab-link relative flex-1 flex flex-col items-center gap-0.5 py-2.5 text-[11px] font-medium ${isActive ? "is-active" : ""}`}
           style={({ isActive }) => ({ color: isActive ? "var(--color-accent-gold-text)" : "var(--color-text-secondary)" })}
         >
-          <span className="relative" style={{ fontSize: 20 }}>
+          <span className="tab-link-icon-wrap relative" style={{ fontSize: 20 }}>
             {tab.icon}
             {tab.to === "/mybar" && almostReadyCount > 0 && <NavBadgeDot />}
           </span>
           {t(tab.key)}
+          <span className="tab-link-dot" aria-hidden />
         </NavLink>
       ))}
     </nav>
