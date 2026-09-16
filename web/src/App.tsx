@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { AchievementToast } from "./components/AchievementToast";
 import { LanguagePicker } from "./components/LanguagePicker";
@@ -68,9 +68,21 @@ function SkipLink() {
   );
 }
 
+// Un lien externe (carte QR-codée, recette partagée, cocktail partagé) doit
+// s'afficher immédiatement pour qui le reçoit — même sans jamais avoir
+// ouvert l'app. Le forcer à choisir une langue puis traverser l'onboarding
+// avant de voir le contenu qu'on lui a envoyé casse complètement l'usage
+// "aucun compte requis" de ces liens. useTranslation() retombe déjà sur le
+// français quand la langue n'est pas choisie, donc rien ne casse à l'omettre.
+function isPublicShareRoute(pathname: string): boolean {
+  return /^\/(menu|shared|cocktail)(\/|$)/.test(pathname);
+}
+
 export default function App() {
   const preference = useThemeStore((s) => s.preference);
   const skinId = useCosmeticsStore((s) => s.skinId);
+  const location = useLocation();
+  const skipOnboarding = isPublicShareRoute(location.pathname);
 
   useEffect(() => {
     applyThemeToDocument(preference);
@@ -83,8 +95,8 @@ export default function App() {
   return (
     <>
       <SkipLink />
-      <LanguagePicker />
-      <OnboardingFlow />
+      {!skipOnboarding && <LanguagePicker />}
+      {!skipOnboarding && <OnboardingFlow />}
       <AchievementToast />
       <Suspense fallback={<PageLoader />}>
         <Routes>
