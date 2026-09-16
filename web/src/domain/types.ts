@@ -78,6 +78,8 @@ export interface CollectionDef {
   cocktailIds: string[];
   /** Chapeau éditorial optionnel affiché sous le titre sur la fiche collection (ex: "Cocktails d'exception") — comme le nom, non localisé (voir README § Limites connues). */
   description?: string;
+  /** Nom d'un partenaire éditorial ("Présenté par X") — mécanisme de sponsoring prêt à l'emploi, inactif tant qu'aucune donnée ne le renseigne (voir collections.json). */
+  sponsor?: string;
 }
 
 export interface SubstitutionOption {

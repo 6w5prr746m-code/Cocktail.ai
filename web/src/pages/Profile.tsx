@@ -11,6 +11,9 @@ import { MiniGlassBadge } from "../components/MiniGlassBadge";
 import { InstallAppCard } from "../components/InstallAppCard";
 import { ShareCardModal } from "../components/ShareCardModal";
 import { useAchievements } from "../hooks/useAchievements";
+import { isSkinUnlocked, SKINS } from "../domain/cosmetics";
+import { useCosmeticsStore } from "../state/cosmetics";
+import { SUPPORT_URL } from "../domain/supportLink";
 import { useTranslation } from "../domain/i18n/useTranslation";
 import { useLocaleStore, type Locale } from "../state/locale";
 import type { TranslationKey } from "../domain/i18n/useTranslation";
@@ -35,6 +38,8 @@ export default function ProfilePage() {
   const { preference, setPreference } = useThemeStore();
   const { all: allAchievements, unlockedIds } = useAchievements();
   const [shareAchievement, setShareAchievement] = useState<(typeof allAchievements)[number] | null>(null);
+  const skinId = useCosmeticsStore((s) => s.skinId);
+  const setSkin = useCosmeticsStore((s) => s.setSkin);
 
   const sortedHistory = [...history].sort((a, b) => b.completedAt.localeCompare(a.completedAt));
   const stats = useMemo(() => computeHistoryStats(history, cocktails), [history, cocktails]);
@@ -149,6 +154,43 @@ export default function ProfilePage() {
 
       <section className="px-4 pb-6">
         <h2 className="text-base font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
+          {t("cosmetics.title")}
+        </h2>
+        <div className="flex gap-3 flex-wrap">
+          {SKINS.map((skin) => {
+            const unlocked = isSkinUnlocked(skin, unlockedIds.size);
+            const selected = skinId === skin.id;
+            return (
+              <button
+                key={skin.id}
+                type="button"
+                disabled={!unlocked}
+                onClick={() => setSkin(skin.id)}
+                title={unlocked ? t(skin.labelKey) : t("cosmetics.lockedHint", { count: skin.unlockBadgeCount })}
+                className="flex flex-col items-center gap-1 rounded-2xl p-2"
+                style={{ opacity: unlocked ? 1 : 0.45 }}
+              >
+                <span
+                  className="rounded-full"
+                  style={{
+                    width: 40,
+                    height: 40,
+                    background: skin.previewColor,
+                    boxShadow: selected ? `0 0 0 3px var(--color-bg), 0 0 0 5px ${skin.previewColor}` : undefined,
+                  }}
+                  aria-hidden
+                />
+                <span className="text-[11px] font-medium" style={{ color: "var(--color-text-primary)" }}>
+                  {unlocked ? t(skin.labelKey) : "🔒"}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="px-4 pb-6">
+        <h2 className="text-base font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
           {t("achievements.title")}
         </h2>
         <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
@@ -220,6 +262,28 @@ export default function ProfilePage() {
           </ul>
         )}
       </section>
+
+      {SUPPORT_URL && (
+        <section className="px-4 pb-6">
+          <div className="rounded-2xl p-4 glass-card">
+            <p className="font-semibold mb-1" style={{ color: "var(--color-text-primary)" }}>
+              {t("profile.supportTitle")}
+            </p>
+            <p className="text-sm mb-3" style={{ color: "var(--color-text-secondary)" }}>
+              {t("profile.supportBody")}
+            </p>
+            <a
+              href={SUPPORT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block text-center w-full rounded-2xl py-3 font-semibold text-sm"
+              style={{ background: "var(--color-accent-gold)", color: "#0b0b0f" }}
+            >
+              {t("profile.supportButton")}
+            </a>
+          </div>
+        </section>
+      )}
 
       <section className="px-4">
         <button

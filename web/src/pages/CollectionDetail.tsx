@@ -31,6 +31,11 @@ export default function CollectionDetailPage() {
           {collection.description}
         </p>
       )}
+      {collection.sponsor && (
+        <p className="px-4 pt-2 text-xs font-medium uppercase tracking-wide" style={{ color: "var(--color-accent-gold-text)" }}>
+          {t("collectionDetail.presentedBy", { name: collection.sponsor })}
+        </p>
+      )}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 px-4 pt-4">
         {cocktails.map((c) => {
           const notable = getNotableCreator(c.id, locale);

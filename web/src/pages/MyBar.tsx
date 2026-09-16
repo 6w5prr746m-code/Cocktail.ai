@@ -5,6 +5,8 @@ import { MiniGlassBadge } from "../components/MiniGlassBadge";
 import { useAllCocktails, useAllIngredients } from "../domain/catalog";
 import { fuzzyIncludes } from "../domain/fuzzySearch";
 import { computeAdvancedMatches } from "../domain/matchingEngine";
+import { computeNextBestBottle } from "../domain/nextBestBottle";
+import { buildBuyLinkUrl } from "../domain/affiliateLinks";
 import { SEED_SUBSTITUTIONS } from "../domain/seed";
 import { STARTER_INGREDIENTS } from "../domain/starterIngredients";
 import { evaluateBarReadiness, STOCK_STATUS_ORDER } from "../domain/types";
@@ -48,6 +50,14 @@ export default function MyBarPage() {
     () => advancedMatches.filter((m) => m.availability === "missingFew").slice(0, ALMOST_READY_LIMIT),
     [advancedMatches],
   );
+
+  const nextBestBottles = useMemo(() => {
+    const oneMissing = advancedMatches.filter((m) => m.availability === "missingFew" && m.missingIngredients.length === 1);
+    // Un ingrédient déjà dans la liste de courses n'a plus besoin d'être
+    // suggéré à l'achat ici — évite de répéter le même nom deux fois sur
+    // l'écran une fois que l'utilisateur a déjà agi dessus.
+    return computeNextBestBottle(oneMissing, 3).filter((bottle) => !shoppingItems[bottle.ingredient.id]);
+  }, [advancedMatches, shoppingItems]);
 
   const ingredientNameById = useMemo(() => new Map(ingredients.map((i) => [i.id, i.name])), [ingredients]);
 
@@ -107,6 +117,25 @@ export default function MyBarPage() {
             </p>
           </div>
         </div>
+        <Link
+          to="/party"
+          className="mt-3 rounded-2xl p-4 flex items-center gap-3 glass-card transition-transform active:scale-[0.98]"
+        >
+          <span style={{ fontSize: 26 }} aria-hidden>
+            🎉
+          </span>
+          <div className="flex-1 min-w-0">
+            <p className="font-semibold" style={{ color: "var(--color-text-primary)" }}>
+              {t("myBar.partyPlannerTitle")}
+            </p>
+            <p className="text-xs" style={{ color: "var(--color-text-secondary)" }}>
+              {t("myBar.partyPlannerSubtitle")}
+            </p>
+          </div>
+          <span className="flex-shrink-0 text-xl" aria-hidden>
+            →
+          </span>
+        </Link>
       </div>
 
       {Object.keys(entries).length === 0 && (
@@ -132,6 +161,52 @@ export default function MyBarPage() {
               ))}
             </div>
           </div>
+        </section>
+      )}
+
+      {nextBestBottles.length > 0 && (
+        <section className="px-4 pb-6">
+          <h2 className="text-base font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
+            {t("myBar.nextBestBottleTitle")}
+          </h2>
+          <ul className="flex flex-col gap-2">
+            {nextBestBottles.map((bottle) => (
+              <li key={bottle.ingredient.id} className="rounded-2xl p-3 flex items-center gap-3 glass-card">
+                <div className="flex-1 min-w-0">
+                  <p className="font-medium truncate" style={{ color: "var(--color-text-primary)" }}>
+                    {bottle.ingredient.name}
+                  </p>
+                  <p className="text-xs truncate" style={{ color: "var(--color-text-secondary)" }}>
+                    {t("myBar.nextBestBottleUnlocks", {
+                      count: bottle.unlockableCocktailNames.length,
+                      names: bottle.unlockableCocktailNames.slice(0, 3).join(", "),
+                    })}
+                  </p>
+                </div>
+                <a
+                  href={buildBuyLinkUrl(bottle.ingredient.name)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={t("myBar.buyLinkAria", { name: bottle.ingredient.name })}
+                  title={t("myBar.buyLinkTitle")}
+                  className="flex-shrink-0 rounded-full flex items-center justify-center"
+                  style={{ width: 30, height: 30, background: "var(--color-bg)" }}
+                >
+                  🛍️
+                </a>
+                <button
+                  type="button"
+                  onClick={() => addItems([bottle.ingredient.id])}
+                  aria-label={t("myBar.addToShoppingAria", { name: bottle.ingredient.name })}
+                  title={t("myBar.addToShoppingTitle")}
+                  className="flex-shrink-0 rounded-full flex items-center justify-center"
+                  style={{ width: 30, height: 30, background: "var(--color-bg)" }}
+                >
+                  🛒
+                </button>
+              </li>
+            ))}
+          </ul>
         </section>
       )}
 

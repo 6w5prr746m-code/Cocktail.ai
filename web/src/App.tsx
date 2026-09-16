@@ -7,6 +7,7 @@ import { OnboardingFlow } from "./components/OnboardingFlow";
 import { TabBar } from "./components/TabBar";
 import { SideNav } from "./components/SideNav";
 import { applyThemeToDocument, useThemeStore } from "./state/theme";
+import { applySkinToDocument, useCosmeticsStore } from "./state/cosmetics";
 
 // Home reste chargée eagerly (page d'entrée quasi systématique) — le reste
 // est découpé par route : chaque écran devient son propre chunk JS, chargé
@@ -15,6 +16,7 @@ import HomePage from "./pages/Home";
 const LibraryPage = lazy(() => import("./pages/Library"));
 const CollectionDetailPage = lazy(() => import("./pages/CollectionDetail"));
 const MyBarPage = lazy(() => import("./pages/MyBar"));
+const PartyPlannerPage = lazy(() => import("./pages/PartyPlanner"));
 const FavoritesPage = lazy(() => import("./pages/Favorites"));
 const ProfilePage = lazy(() => import("./pages/Profile"));
 const CocktailDetailPage = lazy(() => import("./pages/CocktailDetail"));
@@ -65,10 +67,15 @@ function SkipLink() {
 
 export default function App() {
   const preference = useThemeStore((s) => s.preference);
+  const skinId = useCosmeticsStore((s) => s.skinId);
 
   useEffect(() => {
     applyThemeToDocument(preference);
   }, [preference]);
+
+  useEffect(() => {
+    applySkinToDocument(skinId);
+  }, [skinId]);
 
   return (
     <>
@@ -83,6 +90,7 @@ export default function App() {
             <Route path="/library" element={<LibraryPage />} />
             <Route path="/library/collection/:id" element={<CollectionDetailPage />} />
             <Route path="/mybar" element={<MyBarPage />} />
+            <Route path="/party" element={<PartyPlannerPage />} />
             <Route path="/favorites" element={<FavoritesPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/cocktail/:id" element={<CocktailDetailPage />} />

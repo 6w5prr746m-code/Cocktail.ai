@@ -49,6 +49,7 @@ interface RawCollection {
   iconName: string;
   cocktailNames: string[];
   description?: string;
+  sponsor?: string;
 }
 
 interface RawSubstitution {
@@ -117,6 +118,7 @@ export const SEED_COLLECTIONS: CollectionDef[] = rawCollections
     name: raw.name,
     iconName: raw.iconName,
     description: raw.description,
+    sponsor: raw.sponsor,
     cocktailIds: raw.cocktailNames.map((n) => cocktailIdByName.get(n)).filter((v): v is string => Boolean(v)),
   }))
   .filter((collection) => collection.cocktailIds.length > 0);

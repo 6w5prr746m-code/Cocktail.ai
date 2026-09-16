@@ -11,6 +11,7 @@ import { dailyPick } from "../domain/gradient";
 import { isMonthlyChallengeCompletedThisMonth, monthlyChallengePick } from "../domain/monthlyChallenge";
 import { getNotableCreator, notableCocktailIds } from "../domain/notableCreators";
 import { explainRecommendation, pickSurprise, recommendCocktails } from "../domain/recommendation";
+import { currentSeason, seasonalCocktails } from "../domain/seasonalCollections";
 import { tasteProfile } from "../domain/tasteProfile";
 import { isChallengeCompletedThisWeek, weeklyChallengePick } from "../domain/weeklyChallenge";
 import { useFavoritesStore } from "../state/favorites";
@@ -147,6 +148,9 @@ export default function HomePage() {
     [cocktails, favoriteIds],
   );
 
+  const season = useMemo(() => currentSeason(), []);
+  const seasonal = useMemo(() => seasonalCocktails(season, cocktails).slice(0, SECTION_LIMIT), [season, cocktails]);
+
   const exceptional = useMemo(() => {
     const ids = new Set(notableCocktailIds());
     return cocktails.filter((c) => ids.has(c.id));
@@ -224,6 +228,11 @@ export default function HomePage() {
       )}
       <AlmostReadyBanner />
 
+      <Section
+        title={`${season.icon} ${t(season.titleKey)}`}
+        subtitle={t(season.subtitleKey)}
+        cocktails={seasonal}
+      />
       <Section
         title={t("home.exceptionalTitle")}
         subtitle={t("home.exceptionalSubtitle")}

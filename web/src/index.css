@@ -62,6 +62,51 @@
   }
 }
 
+/* ---------------------------------------------------------------------
+   Skins cosmétiques (Profil > Personnalisation) — ne touchent que la
+   couleur d'accent, débloqués par nombre de badges (src/domain/cosmetics.ts).
+   Même cascade que le thème clair/sombre ci-dessus : une variante -text
+   dédiée en mode clair pour rester lisible en contraste texte.
+--------------------------------------------------------------------- */
+:root[data-skin="emeraude"] {
+  --color-accent-gold: #1f9d6e;
+  --color-accent-gold-soft: #a8e8d0;
+}
+:root[data-skin="emeraude"][data-theme="light"] {
+  --color-accent-gold-text: #0f6b48;
+}
+@media (prefers-color-scheme: light) {
+  :root[data-skin="emeraude"]:not([data-theme="dark"]) {
+    --color-accent-gold-text: #0f6b48;
+  }
+}
+
+:root[data-skin="rubis"] {
+  --color-accent-gold: #c92e3f;
+  --color-accent-gold-soft: #f0a8ae;
+}
+:root[data-skin="rubis"][data-theme="light"] {
+  --color-accent-gold-text: #8f1f2c;
+}
+@media (prefers-color-scheme: light) {
+  :root[data-skin="rubis"]:not([data-theme="dark"]) {
+    --color-accent-gold-text: #8f1f2c;
+  }
+}
+
+:root[data-skin="amethyste"] {
+  --color-accent-gold: #7c4dc9;
+  --color-accent-gold-soft: #d3bdf0;
+}
+:root[data-skin="amethyste"][data-theme="light"] {
+  --color-accent-gold-text: #5a349e;
+}
+@media (prefers-color-scheme: light) {
+  :root[data-skin="amethyste"]:not([data-theme="dark"]) {
+    --color-accent-gold-text: #5a349e;
+  }
+}
+
 * {
   box-sizing: border-box;
 }

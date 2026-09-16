@@ -217,6 +217,29 @@ Quatre mécaniques additives, toutes dérivées des données déjà stockées lo
   - **Badge débloqué** : bouton 📤 sur le toast de déblocage (`AchievementToast.tsx`) et sur chaque badge débloqué dans la grille du Profil (`Profile.tsx`) — partage à l'instant du déblocage ou rétroactivement depuis le Profil.
   - **Défi de la semaine / du mois relevé** : bouton 📤 à côté du badge "Réussi ✓" sur `WeeklyChallengeCard.tsx`/`MonthlyChallengeCard.tsx` une fois le défi complété.
 
+## Nouvelles fonctionnalités & monétisation sans backend
+
+Suite à la question "comment monétiser et générer plus de valeur" : cinq nouvelles fonctionnalités et trois mécanismes de monétisation, tous réalisables sans compte ni serveur (cohérent avec l'architecture 100% locale de l'app). Ce qui demande un vrai backend (comptes, abonnement, sync) reste dans la todo en fin de section.
+
+- **Mode Soirée** (`src/domain/partyPlanner.ts`, `src/pages/PartyPlanner.tsx`, route `/party`) : sélection de plusieurs cocktails + nombre d'invités, quantités additionnées (par ingrédient et unité — des unités différentes pour un même ingrédient restent des lignes séparées plutôt que d'être converties) et ajoutables en un clic à la liste de courses. Point d'entrée depuis Mon Bar.
+- **Achat malin** (`src/domain/nextBestBottle.ts`, section dans `MyBar.tsx`) : parmi les cocktails à 1 ingrédient manquant, quel ingrédient reviendrait le plus souvent ? L'acheter débloque plusieurs cocktails d'un coup. N'affiche que les ingrédients qui débloquent au moins 2 cocktails (en dessous, la section "Presque prêt" suffit déjà) et masque un ingrédient déjà ajouté à la liste de courses pour éviter de le suggérer deux fois sur le même écran.
+- **Collections saisonnières** (`src/domain/seasonalCollections.ts`, section sur `Home.tsx`) : Cocktails d'été (catégories Tropical/Tiki, 15 cocktails) ou Cocktails d'hiver (famille whisky/cognac/brandy, 61 cocktails) affichés automatiquement selon le mois en cours — mêmes critères vérifiés sur le catalogue que le défi du mois (Sprint 13).
+- **Accord mets-cocktail** (`src/domain/foodPairing.ts`, ligne dédiée sur `CocktailDetail.tsx`) : suggestion d'accord dérivée du même profil de goût que `tasteProfile.ts` (le tag prioritaire décide), pas de nouveau champ de données.
+- **Personnalisation cosmétique** (`src/domain/cosmetics.ts`, `src/state/cosmetics.ts`, section Profil) : 4 skins de couleur d'accent (Or, Émeraude, Rubis, Améthyste) débloqués par nombre de badges — mécanique d'engagement à la jeu vidéo, appliquée via `[data-skin]` en CSS (`index.css`), même cascade que le thème clair/sombre.
+
+Monétisation :
+
+- **Liens d'affiliation** (`src/domain/affiliateLinks.ts`, bouton 🛍️ sur les cartes "Achat malin") : pointent aujourd'hui vers une recherche shopping générique (aucun programme d'affiliation réel branché) — le point d'entrée UI est prêt, il suffit de remplacer `buildBuyLinkUrl` par un lien vers un partenaire réel avec son identifiant de tracking pour monétiser.
+- **Sponsoring de collection** (`CollectionDef.sponsor` optionnel, affichage "Présenté par" sur `CollectionDetail.tsx`) : mécanisme inactif par défaut, prêt à s'activer en renseignant `sponsor` dans `collections.json` le jour où un partenariat éditorial existe.
+- **Soutenir Cocktail.ai** (`src/domain/supportLink.ts`, section Profil) : écran de soutien masqué tant que `SUPPORT_URL` vaut `null` — s'active en y renseignant un vrai lien de paiement (Stripe Payment Link), sans autre changement de code.
+
+### Todo "avec backend" (mise de côté pour plus tard)
+
+- **Sprint 4 — vrai fil communautaire** : comptes, publications, likes/commentaires. Demande une infra serveur complète (auth, base de données, modération), hors de portée de l'architecture 100% locale actuelle.
+- **Génération de recette par IA** ("invente-moi un cocktail avec ce que j'ai") : nécessite un appel serveur (une clé API ne peut pas être exposée côté client en toute sécurité).
+- **Abonnement freemium** (comptes + Stripe Subscriptions, sync multi-appareils, contenu exclusif) : le modèle de monétisation à plus fort revenu récurrent, mais suppose le chantier compte/backend ci-dessus déjà construit.
+- **B2B / marque blanche** : licencier le moteur de matching + l'UI à des bars/restaurants pour leur carte interactive — chantier commercial à part, pas seulement technique.
+
 ## Limites connues
 
 - Comme documenté dans le README iOS pour la V1, deux noms d'ingrédients personnalisés produisant le même slug (accents) entreraient en conflit.

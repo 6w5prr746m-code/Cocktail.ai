@@ -23,6 +23,7 @@ import { useLocalizedCocktail, useLocalizedIngredients } from "../domain/i18n/us
 import { getLocalizedTasteTags, getLocalizedUnit } from "../domain/i18n/localizedCocktail";
 import { getNotableCreator } from "../domain/notableCreators";
 import { isSignatureRecipe, preparedCount } from "../domain/signatureRecipe";
+import { foodPairingKey } from "../domain/foodPairing";
 
 // IMPORTANT : CocktailVisual/tasteProfile/buildPhotoPrompt tournent sur des
 // heuristiques qui pattern-matchent le texte français brut (glassware/
@@ -90,6 +91,7 @@ export default function CocktailDetailPage() {
   }
 
   const tags = getLocalizedTasteTags(tasteProfile(rawCocktail!), locale);
+  const pairingKey = foodPairingKey(rawCocktail!);
   const notableCreator = getNotableCreator(cocktail.id, locale);
   const signature = isSignatureRecipe(cocktail, historyEntries);
 
@@ -303,6 +305,10 @@ export default function CocktailDetailPage() {
         </section>
 
         {notableCreator && <NotableCreatorCard notable={notableCreator} />}
+
+        <p className="text-sm rounded-2xl px-4 py-3" style={{ background: "var(--color-surface)", color: "var(--color-text-secondary)" }}>
+          🍽️ {t(pairingKey)}
+        </p>
 
         {cocktail.history && (
           <section>
