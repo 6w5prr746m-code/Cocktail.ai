@@ -78,6 +78,10 @@ export const en: TranslationSchema = {
     degradationLowStock: "low stock in My Bar",
     degradationAlmostEmpty: "almost empty in My Bar",
     degradationSubstitution: "replaced with an ingredient from My Bar",
+    myNoteHeading: "📝 My note",
+    myNotePlaceholder: "What you thought of this cocktail, your tweaks…",
+    myNotePrivateHint: "Only visible to you, on this device.",
+    myNoteAria: "Your personal note for {{name}}",
   },
   home: {
     brand: "Cocktail.ai",

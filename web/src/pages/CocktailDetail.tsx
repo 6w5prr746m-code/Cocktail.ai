@@ -12,6 +12,7 @@ import { computeAdvancedMatches } from "../domain/matchingEngine";
 import { SEED_SUBSTITUTIONS } from "../domain/seed";
 import { useFavoritesStore } from "../state/favorites";
 import { useHistoryStore } from "../state/history";
+import { useCocktailNotesStore } from "../state/cocktailNotes";
 import { useMyBarStore } from "../state/myBar";
 import { useShoppingListStore } from "../state/shoppingList";
 import { tasteProfile } from "../domain/tasteProfile";
@@ -47,6 +48,8 @@ export default function CocktailDetailPage() {
   const myBarEntries = useMyBarStore((s) => s.entries);
   const addShoppingItems = useShoppingListStore((s) => s.addItems);
   const historyEntries = useHistoryStore((s) => s.entries);
+  const myNote = useCocktailNotesStore((s) => (cocktail ? s.notes[cocktail.id] : undefined));
+  const setNote = useCocktailNotesStore((s) => s.setNote);
 
   // Confronte cette recette à Mon Bar — n'affiche rien tant que le bar est
   // vide, pour ne pas polluer l'écran d'un utilisateur qui n'a encore rien
@@ -322,6 +325,25 @@ export default function CocktailDetailPage() {
             </p>
           </section>
         )}
+
+        <section>
+          <h2 className="text-lg font-semibold mb-2" style={{ color: "var(--color-text-primary)" }}>
+            {t("cocktailDetail.myNoteHeading")}
+          </h2>
+          <textarea
+            key={cocktail.id}
+            defaultValue={myNote ?? ""}
+            onBlur={(e) => setNote(cocktail.id, e.target.value)}
+            placeholder={t("cocktailDetail.myNotePlaceholder")}
+            aria-label={t("cocktailDetail.myNoteAria", { name: cocktail.name })}
+            rows={3}
+            className="w-full text-sm rounded-2xl px-3 py-2.5 outline-none resize-none"
+            style={{ background: "var(--color-surface)", color: "var(--color-text-primary)" }}
+          />
+          <p className="text-xs mt-1.5" style={{ color: "var(--color-text-secondary)" }}>
+            {t("cocktailDetail.myNotePrivateHint")}
+          </p>
+        </section>
       </div>
 
       <div

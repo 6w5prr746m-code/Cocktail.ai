@@ -206,6 +206,10 @@ Quatre mécaniques additives, toutes dérivées des données déjà stockées lo
 - **Recettes signature** (`src/domain/signatureRecipe.ts`) : une recette perso préparée au moins 3 fois par son créateur (le seul utilisateur possible, app 100% locale) devient "signature" — pastille ✨ sur sa carte (`CocktailCard`) et ligne dédiée sur sa fiche (`CocktailDetail.tsx`), sans nouvel état à stocker (dérivé de l'historique existant).
 - Trois nouveaux badges tirent parti de ce contenu : `connoisseur` (3 cocktails de la collection préparés), `monthlyChallenger` (défi du mois relevé), `signatureCreator` (une recette perso devient signature) — même mécanique rétroactive sans état dédié que les badges du Sprint 12.
 
+## Notes personnelles
+
+- **Ma note** (`src/state/cocktailNotes.ts`, section dédiée sur `CocktailDetail.tsx`) : un champ libre par cocktail, privé à l'appareil (`cocktailai:cocktail-notes` en localStorage, aucune synchronisation ni partage — cohérent avec le reste de l'app, voir § Limites connues). Sauvegarde au blur (comme la quantité approximative dans Mon Bar) ; une note vidée est supprimée du store plutôt que stockée vide.
+
 ## Limites connues
 
 - Comme documenté dans le README iOS pour la V1, deux noms d'ingrédients personnalisés produisant le même slug (accents) entreraient en conflit.

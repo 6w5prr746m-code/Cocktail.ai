@@ -78,6 +78,10 @@ export const fr = {
     degradationLowStock: "stock faible dans Mon Bar",
     degradationAlmostEmpty: "presque terminé dans Mon Bar",
     degradationSubstitution: "remplacé par un ingrédient de Mon Bar",
+    myNoteHeading: "📝 Ma note",
+    myNotePlaceholder: "Ce que tu as pensé de ce cocktail, tes ajustements…",
+    myNotePrivateHint: "Visible uniquement par toi, sur cet appareil.",
+    myNoteAria: "Ta note personnelle pour {{name}}",
   },
   home: {
     brand: "Cocktail.ai",
