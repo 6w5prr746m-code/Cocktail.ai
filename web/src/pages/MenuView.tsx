@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 import { Link, useParams } from "react-router-dom";
 import { ScreenHeader } from "../components/ScreenHeader";
 import { CocktailVisual } from "../components/CocktailVisual";
@@ -14,6 +15,12 @@ import { getLocalizedTasteTags } from "../domain/i18n/localizedCocktail";
 import type { Cocktail } from "../domain/types";
 
 const DEFAULT_ITEMS_PER_PAGE = 4;
+
+/** Dimensions physiques (mm) du format papier choisi dans MenuBuilder.tsx — voir PrintBooklet. */
+const PRINT_PAGE_SIZE_MM: Record<"a5" | "a4", { width: number; height: number }> = {
+  a5: { width: 148, height: 210 },
+  a4: { width: 210, height: 297 },
+};
 
 function chunk<T>(arr: T[], size: number): T[][] {
   const step = Math.max(1, size);
@@ -242,6 +249,147 @@ function BackCoverBlack({ payload }: { payload: MenuPayload }) {
   );
 }
 
+/**
+ * Rendu dédié à l'impression — complètement distinct du rendu écran
+ * (`.print-booklet`, masqué à l'écran et seul visible à l'impression, voir
+ * index.css). Les mises en page grille/photo (`MenuLayout`) sont pensées
+ * pour naviguer au doigt sur mobile ; sur papier on veut une vraie carte de
+ * bar (liste typographique, nom/prix reliés par un pointillé, ingrédients
+ * en petit italique) quel que soit le `layout` choisi pour l'écran — les
+ * deux rendus partagent les données (`rows`) mais pas la mise en page.
+ * Couverture/histoire/dos gardent une hauteur de page fixe (contenu court
+ * et maîtrisé) ; la liste des cocktails n'a pas de hauteur fixée et
+ * s'étale naturellement sur autant de feuillets que nécessaire — c'est la
+ * pagination native du navigateur (@page + break-after) qui découpe le
+ * flux, plutôt qu'un calcul manuel du nombre de cocktails par page.
+ */
+function PrintCover({ payload }: { payload: MenuPayload }) {
+  const { t } = useTranslation();
+  const themeStyle = MENU_THEMES[payload.theme ?? "classic"];
+  return (
+    <div className="print-page print-page-fixed print-cover" style={{ background: themeStyle.coverBackground }}>
+      {payload.logo && (
+        <div className="print-cover-logo">
+          <img src={payload.logo} alt={payload.barName} />
+        </div>
+      )}
+      <p className="print-eyebrow" style={{ color: themeStyle.onCoverText }}>
+        {t("menuView.eyebrow")}
+      </p>
+      <h1 className="print-cover-title" style={{ color: themeStyle.onCoverText, fontFamily: themeStyle.fontFamily }}>
+        {payload.barName}
+      </h1>
+      <div className="print-cover-rule" style={{ background: themeStyle.onCoverText }} />
+    </div>
+  );
+}
+
+function PrintStory({ story, theme }: { story: MenuStory; theme: MenuPayload["theme"] }) {
+  const { t } = useTranslation();
+  const themeStyle = MENU_THEMES[theme ?? "classic"];
+  return (
+    <div className="print-page print-page-fixed print-story">
+      <p className="print-eyebrow" style={{ color: themeStyle.accentColor }}>
+        {t("menuView.storyEyebrow")}
+      </p>
+      {story.image && (
+        <div className="print-story-image">
+          <img src={story.image} alt="" />
+        </div>
+      )}
+      {story.text && <p className="print-story-text">{story.text}</p>}
+    </div>
+  );
+}
+
+function PrintCocktailList({ payload, rows, ingredientNameById }: { payload: MenuPayload; rows: MenuRow[]; ingredientNameById: Map<string, string> }) {
+  const { t } = useTranslation();
+  const themeStyle = MENU_THEMES[payload.theme ?? "classic"];
+  return (
+    <div className="print-page print-cocktails">
+      <div className="print-cocktails-header">
+        <p className="print-cocktails-barname">{payload.barName}</p>
+        <p className="print-cocktails-eyebrow" style={{ color: themeStyle.accentColor }}>
+          {t("menuView.eyebrow")}
+        </p>
+      </div>
+      <div className="print-cocktails-rule" style={{ background: themeStyle.accentColor }} />
+      <ul className="print-cocktails-list">
+        {rows.map(({ item, cocktail }) => {
+          const ingredientNames = cocktail.ingredients.map((link) => ingredientNameById.get(link.ingredientId) ?? link.ingredientId);
+          return (
+            <li key={item.cocktailId} className="print-item">
+              <div className="print-item-row">
+                <span className="print-item-name">{cocktail.name}</span>
+                <span className="print-item-leader" />
+                {item.price !== null && <span className="print-item-price">{formatCurrency(item.price)}</span>}
+              </div>
+              {ingredientNames.length > 0 && <p className="print-item-ingredients">{ingredientNames.join(" · ")}</p>}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
+
+function PrintBackWhite({ payload }: { payload: MenuPayload }) {
+  return (
+    <div className="print-page print-page-fixed print-back-white">
+      {payload.logo ? <img src={payload.logo} alt={payload.barName} className="print-back-logo" /> : <p className="print-back-name">{payload.barName}</p>}
+    </div>
+  );
+}
+
+function PrintBackBlack({ payload }: { payload: MenuPayload }) {
+  return (
+    <div className="print-page print-page-fixed print-back-black">
+      {payload.logo && (
+        <div className="print-back-black-logo">
+          <img src={payload.logo} alt="" />
+        </div>
+      )}
+      <p className="print-back-black-name">{payload.barName}</p>
+    </div>
+  );
+}
+
+function PrintBooklet({ payload, rows, ingredientNameById }: { payload: MenuPayload; rows: MenuRow[]; ingredientNameById: Map<string, string> }) {
+  const size = PRINT_PAGE_SIZE_MM[payload.printFormat ?? "a5"];
+  // Portalé directement sous <body>, hors de <main id="main-content"
+  // class="overflow-y-auto"> (AppShell, App.tsx) : un contenu plus grand
+  // qu'un feuillet à l'intérieur d'un ancêtre scrollable se fait tronquer
+  // par le pipeline d'impression/PDF de Chromium (seul ce qui tient dans
+  // un "viewport" ressort, le reste du flux "break-after: page" est
+  // silencieusement perdu) — vérifié en inspectant le PDF réellement
+  // généré, pas seulement l'aperçu à l'écran sous emulateMedia("print").
+  return createPortal(
+    <div className="print-booklet">
+      {/* @page ne lit pas les variables CSS de façon fiable sur tous les
+          moteurs — on génère donc la règle avec les dimensions mm déjà
+          résolues plutôt que de la conditionner à @media print, certains
+          moteurs de rendu PDF/impression ignorant une règle @page imbriquée
+          dans un bloc @media (elle ne s'applique de toute façon qu'au
+          moment de l'impression). */}
+      <style>{`
+        @page { size: ${size.width}mm ${size.height}mm; margin: 0; }
+        .print-page-fixed { height: ${size.height}mm; }
+        .print-page { width: ${size.width}mm; }
+      `}</style>
+      {payload.logo && <PrintCover payload={payload} />}
+      {payload.story && <PrintStory story={payload.story} theme={payload.theme} />}
+      <PrintCocktailList payload={payload} rows={rows} ingredientNameById={ingredientNameById} />
+      {payload.logo && (
+        <>
+          <PrintBackWhite payload={payload} />
+          <PrintBackBlack payload={payload} />
+        </>
+      )}
+    </div>,
+    document.body,
+  );
+}
+
 export default function MenuViewPage() {
   const { code } = useParams<{ code: string }>();
   const { t } = useTranslation();
@@ -297,7 +445,9 @@ export default function MenuViewPage() {
   const safePageIndex = Math.min(pageIndex, pages.length - 1);
 
   return (
-    <div className={`pb-8 mx-auto ${maxWidth}`}>
+    <>
+    <PrintBooklet payload={payload} rows={rows} ingredientNameById={ingredientNameById} />
+    <div className={`screen-only pb-8 mx-auto ${maxWidth}`}>
       <ScreenHeader
         action={
           <button
@@ -368,5 +518,6 @@ export default function MenuViewPage() {
         {t("menuView.footerNote")}
       </p>
     </div>
+    </>
   );
 }

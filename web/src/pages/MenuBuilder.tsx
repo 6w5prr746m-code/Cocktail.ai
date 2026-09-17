@@ -3,7 +3,7 @@ import QRCode from "qrcode";
 import { ScreenHeader } from "../components/ScreenHeader";
 import { useAllCocktails } from "../domain/catalog";
 import { fuzzyIncludes } from "../domain/fuzzySearch";
-import { encodeMenu, type MenuItem, type MenuLayout, type MenuPayload } from "../domain/menuShareCode";
+import { encodeMenu, MENU_PRINT_FORMATS, type MenuItem, type MenuLayout, type MenuPayload, type MenuPrintFormat } from "../domain/menuShareCode";
 import { MENU_THEMES, MENU_THEME_IDS, type MenuTheme } from "../domain/menuThemes";
 import { compressImageFile } from "../domain/imageCompression";
 import { buildAppUrl } from "../domain/appUrl";
@@ -35,6 +35,11 @@ const THEME_LABEL_KEYS: Record<MenuTheme, TranslationKey> = {
   apple: "menuBuilder.themeApple",
 };
 
+const PRINT_FORMAT_LABEL_KEYS: Record<MenuPrintFormat, { labelKey: TranslationKey; descKey: TranslationKey }> = {
+  a5: { labelKey: "menuBuilder.printFormatA5", descKey: "menuBuilder.printFormatA5Desc" },
+  a4: { labelKey: "menuBuilder.printFormatA4", descKey: "menuBuilder.printFormatA4Desc" },
+};
+
 export default function MenuBuilderPage() {
   const { t } = useTranslation();
   // Une carte publique ne peut référencer que des cocktails du catalogue
@@ -46,6 +51,7 @@ export default function MenuBuilderPage() {
 
   const [barName, setBarName] = useState("");
   const [theme, setTheme] = useState<MenuTheme>("classic");
+  const [printFormat, setPrintFormat] = useState<MenuPrintFormat>("a5");
   const [logo, setLogo] = useState<string | null>(null);
   const [storyText, setStoryText] = useState("");
   const [storyImage, setStoryImage] = useState<string | null>(null);
@@ -106,6 +112,11 @@ export default function MenuBuilderPage() {
     invalidateGenerated();
   }
 
+  function changePrintFormat(next: MenuPrintFormat) {
+    setPrintFormat(next);
+    invalidateGenerated();
+  }
+
   async function handleLogoUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     e.target.value = "";
@@ -160,9 +171,10 @@ export default function MenuBuilderPage() {
       theme,
       logo: logo ?? undefined,
       story: storyText.trim() || storyImage ? { text: storyText.trim() || undefined, image: storyImage ?? undefined } : undefined,
+      printFormat,
       items,
     }),
-    [barName, layout, itemsPerPage, theme, logo, storyText, storyImage, items],
+    [barName, layout, itemsPerPage, theme, logo, storyText, storyImage, printFormat, items],
   );
 
   const codeLength = useMemo(() => (items.length > 0 ? encodeMenu(currentPayload).length : 0), [currentPayload, items.length]);
@@ -399,6 +411,35 @@ export default function MenuBuilderPage() {
               </button>
             </div>
           )}
+        </div>
+
+        <div>
+          <h2 className="text-base font-semibold mb-1" style={{ color: "var(--color-text-primary)" }}>
+            {t("menuBuilder.printFormatTitle")}
+          </h2>
+          <p className="text-xs mb-2" style={{ color: "var(--color-text-secondary)" }}>
+            {t("menuBuilder.printFormatHint")}
+          </p>
+          <div className="flex gap-2">
+            {MENU_PRINT_FORMATS.map((id) => (
+              <button
+                key={id}
+                type="button"
+                onClick={() => changePrintFormat(id)}
+                aria-pressed={printFormat === id}
+                className="flex-1 text-left rounded-xl px-3.5 py-2.5"
+                style={{
+                  background: printFormat === id ? "var(--color-accent-gold)" : "var(--color-surface)",
+                  color: printFormat === id ? "#0b0b0f" : "var(--color-text-primary)",
+                }}
+              >
+                <p className="text-sm font-semibold">{t(PRINT_FORMAT_LABEL_KEYS[id].labelKey)}</p>
+                <p className="text-xs" style={{ color: printFormat === id ? "rgba(11,11,15,0.7)" : "var(--color-text-secondary)" }}>
+                  {t(PRINT_FORMAT_LABEL_KEYS[id].descKey)}
+                </p>
+              </button>
+            ))}
+          </div>
         </div>
 
         <div>

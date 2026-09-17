@@ -19,7 +19,7 @@ export function SideNav() {
   return (
     <nav
       aria-label={t("tabBar.desktopNavLabel")}
-      className="hidden lg:flex flex-col flex-shrink-0 gap-1 p-4 border-r sticky top-0 self-start"
+      className="app-chrome hidden lg:flex flex-col flex-shrink-0 gap-1 p-4 border-r sticky top-0 self-start"
       style={{
         width: SIDE_NAV_WIDTH,
         height: "100svh",

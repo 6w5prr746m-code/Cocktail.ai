@@ -11,6 +11,11 @@ export type MenuLayout = "list" | "grid2" | "grid3" | "pages" | "featured";
 
 export const MENU_LAYOUTS: MenuLayout[] = ["list", "grid2", "grid3", "pages", "featured"];
 
+/** Format papier visé par le bouton "Imprimer" de MenuView.tsx — n'affecte que l'impression, pas l'affichage écran. */
+export type MenuPrintFormat = "a5" | "a4";
+
+export const MENU_PRINT_FORMATS: MenuPrintFormat[] = ["a5", "a4"];
+
 export interface MenuItem {
   cocktailId: string;
   price: number | null;
@@ -35,6 +40,8 @@ export interface MenuPayload {
   /** Data URI (image compressée côté client). Sa présence déclenche l'affichage des pages de couverture et de dos — voir MenuView.tsx. */
   logo?: string;
   story?: MenuStory;
+  /** Format papier de l'impression — défaut "a5" (format carnet de bar classique). */
+  printFormat?: MenuPrintFormat;
 }
 
 const MAX_ITEMS = 60;
@@ -64,6 +71,7 @@ interface RawMenuPayload {
   theme?: unknown;
   logo?: unknown;
   story?: { text?: unknown; image?: unknown } | unknown;
+  printFormat?: unknown;
 }
 
 function isValidImageDataUri(value: unknown): value is string {
@@ -99,6 +107,7 @@ export function decodeMenu(code: string): MenuPayload | null {
         : undefined;
     const theme = MENU_THEME_IDS.includes(parsed.theme as MenuTheme) ? (parsed.theme as MenuTheme) : "classic";
     const logo = isValidImageDataUri(parsed.logo) ? parsed.logo : undefined;
+    const printFormat = MENU_PRINT_FORMATS.includes(parsed.printFormat as MenuPrintFormat) ? (parsed.printFormat as MenuPrintFormat) : "a5";
 
     let story: MenuStory | undefined;
     if (parsed.story && typeof parsed.story === "object") {
@@ -115,6 +124,7 @@ export function decodeMenu(code: string): MenuPayload | null {
       theme,
       logo,
       story,
+      printFormat,
       items: parsed.items.map((i) => ({
         cocktailId: i.cocktailId,
         price: typeof i.price === "number" && Number.isFinite(i.price) ? i.price : null,

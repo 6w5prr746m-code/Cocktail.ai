@@ -8,6 +8,7 @@ describe("encodeMenu / decodeMenu", () => {
       layout: "grid2",
       itemsPerPage: undefined,
       theme: "classic",
+      printFormat: "a4",
       items: [
         { cocktailId: "mojito", price: 12, featured: false },
         { cocktailId: "old_fashioned", price: null, featured: false },
@@ -23,6 +24,7 @@ describe("encodeMenu / decodeMenu", () => {
       layout: "pages",
       itemsPerPage: 1,
       theme: "instagram",
+      printFormat: "a5",
       items: [{ cocktailId: "mojito", price: 12, featured: true }],
     };
     const code = encodeMenu(payload);
@@ -36,6 +38,7 @@ describe("encodeMenu / decodeMenu", () => {
       theme: "apple",
       logo: "data:image/jpeg;base64,AAAA",
       story: { text: "Fondé en 2020…", image: "data:image/jpeg;base64,BBBB" },
+      printFormat: "a5",
       items: [{ cocktailId: "mojito", price: 9, featured: false }],
     };
     const code = encodeMenu(payload);
@@ -55,6 +58,16 @@ describe("encodeMenu / decodeMenu", () => {
   it("drops an unknown theme value and falls back to 'classic'", () => {
     const code = encodeMenu({ barName: "X", layout: "list", theme: "neon" as MenuPayload["theme"], items: [{ cocktailId: "mojito", price: null }] });
     expect(decodeMenu(code)?.theme).toBe("classic");
+  });
+
+  it("drops an unknown printFormat value and falls back to 'a5'", () => {
+    const code = encodeMenu({
+      barName: "X",
+      layout: "list",
+      printFormat: "letter" as MenuPayload["printFormat"],
+      items: [{ cocktailId: "mojito", price: null }],
+    });
+    expect(decodeMenu(code)?.printFormat).toBe("a5");
   });
 
   it("returns null for a corrupted code", () => {
@@ -81,6 +94,7 @@ describe("encodeMenu / decodeMenu", () => {
       layout: "list",
       itemsPerPage: undefined,
       theme: "classic",
+      printFormat: "a5",
       items: [{ cocktailId: "mojito", price: 9, featured: false }],
     });
   });

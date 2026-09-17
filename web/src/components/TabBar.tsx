@@ -14,7 +14,7 @@ export function TabBar() {
   return (
     <nav
       aria-label={t("tabBar.mobileNavLabel")}
-      className="lg:hidden sticky bottom-0 left-0 right-0 flex justify-around items-stretch border-t"
+      className="app-chrome lg:hidden sticky bottom-0 left-0 right-0 flex justify-around items-stretch border-t"
       style={{
         background: "color-mix(in srgb, var(--color-surface) 75%, transparent)",
         backdropFilter: "blur(24px) saturate(180%)",

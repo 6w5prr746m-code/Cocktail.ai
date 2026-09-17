@@ -296,25 +296,263 @@ select:focus-visible,
 }
 
 /* ---------------------------------------------------------------------
-   Impression de la carte de cocktails (MenuView.tsx, mise en page
-   "pages") — à l'écran, une seule page à la fois est visible (.hidden côté
-   Tailwind) ; à l'impression, chaque page doit ressortir sur son propre
-   feuillet plutôt que rester cachée. Les contrôles de pagination n'ont pas
-   de sens sur papier.
+   Impression de la carte de cocktails (MenuView.tsx) — deux rendus
+   totalement séparés partagent les mêmes données : `.screen-only`
+   (navigation à l'écran, page par page, chrome de l'app) n'apparaît
+   jamais sur papier ; `.print-booklet` (typographie de vraie carte de
+   bar, dimensions physiques mm) n'apparaît jamais à l'écran. La taille du
+   feuillet (A5/A4, mm exacts) est injectée par MenuView.tsx (PrintBooklet)
+   via un <style> inline car @page ne peut pas lire une variable CSS.
 --------------------------------------------------------------------- */
+.print-booklet {
+  display: none;
+}
+
 @media print {
-  .menu-page.hidden {
-    display: block !important;
+  /* .app-chrome : barre latérale, barre d'onglets, en-tête d'écran —
+     jamais sur papier, sur aucune page de l'app (pas seulement la carte
+     de cocktails). .skip-link (lien d'évitement clavier, App.tsx) est en
+     `position: fixed` hors écran (top négatif) : à l'impression, Chromium
+     génère quand même une page dédiée pour cet élément fixe au lieu de le
+     laisser hors-champ — sans ce masquage, un feuillet blanc fantôme
+     s'intercale avant la couverture de toute carte imprimée. */
+  .screen-only,
+  .app-chrome,
+  .skip-link {
+    display: none !important;
   }
-  .menu-page {
+
+  /* #root garde `min-height: 100svh` même une fois tout son contenu visible
+     masqué ci-dessus — un feuillet fantôme entièrement vide s'intercalait
+     donc avant la carte (portalée hors de #root, directement sous <body>,
+     voir PrintBooklet dans MenuView.tsx). #root n'a plus rien à imprimer. */
+  #root {
+    display: none !important;
+  }
+
+  .print-booklet {
+    display: block;
+  }
+
+  .print-page {
+    box-sizing: border-box;
+    /* Les couleurs de fond (couverture, dos noir) doivent sortir à
+       l'impression — sans ça la plupart des navigateurs les ignorent par
+       défaut pour économiser l'encre. */
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
     break-after: page;
     page-break-after: always;
   }
-  .menu-page:last-of-type {
+  .print-page:last-child {
     break-after: auto;
     page-break-after: auto;
   }
-  .menu-pagination-controls {
-    display: none !important;
+
+  /* Couverture, histoire, dos : contenu court et maîtrisé, un feuillet
+     entier même si le contenu est plus petit que la page. La liste des
+     cocktails, elle, n'a volontairement pas de hauteur fixée : elle
+     s'étale naturellement sur autant de feuillets que nécessaire — c'est
+     la pagination native du navigateur (@page + break-after) qui la
+     découpe, jamais un calcul manuel du nombre de cocktails par page. */
+  .print-page-fixed {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .print-cover {
+    padding: 16mm;
+    text-align: center;
+  }
+  .print-cover-logo {
+    width: 32mm;
+    height: 32mm;
+    border-radius: 4mm;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8mm;
+    overflow: hidden;
+  }
+  .print-cover-logo img {
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: contain;
+  }
+  .print-eyebrow {
+    font-family: var(--font-body);
+    font-size: 9pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.85;
+    margin: 0 0 3mm;
+  }
+  .print-cover-title {
+    font-size: 26pt;
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 0;
+  }
+  .print-cover-rule {
+    width: 14mm;
+    height: 0.5mm;
+    opacity: 0.6;
+    margin-top: 8mm;
+  }
+
+  .print-story {
+    padding: 18mm 16mm;
+    text-align: center;
+    background: #fffdf8;
+  }
+  .print-story-image {
+    width: 60mm;
+    height: 60mm;
+    border-radius: 3mm;
+    overflow: hidden;
+    margin: 4mm 0 6mm;
+  }
+  .print-story-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .print-story-text {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 11pt;
+    line-height: 1.7;
+    color: #2a2a2a;
+    max-width: 100mm;
+    margin: 0;
+  }
+
+  .print-cocktails {
+    width: 100%;
+    padding: 14mm 12mm 6mm;
+    background: #fffefb;
+    color: #17140d;
+  }
+  .print-cocktails-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4mm;
+  }
+  .print-cocktails-barname {
+    font-family: var(--font-display);
+    font-size: 13pt;
+    font-weight: 700;
+    margin: 0;
+  }
+  .print-cocktails-eyebrow {
+    font-family: var(--font-body);
+    font-size: 8pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0;
+  }
+  .print-cocktails-rule {
+    height: 0.4mm;
+    margin: 3mm 0 7mm;
+    opacity: 0.7;
+  }
+  .print-cocktails-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6mm;
+  }
+  .print-item {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .print-item-row {
+    display: flex;
+    align-items: baseline;
+    gap: 2mm;
+  }
+  .print-item-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 12pt;
+    white-space: nowrap;
+  }
+  .print-item-leader {
+    flex: 1;
+    border-bottom: 0.3mm dotted #b8b0a0;
+    transform: translateY(-2.5pt);
+  }
+  .print-item-price {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 10.5pt;
+    white-space: nowrap;
+  }
+  .print-item-ingredients {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 8.5pt;
+    color: #6b6459;
+    margin: 1.5mm 0 0;
+    line-height: 1.4;
+  }
+
+  .print-back-white {
+    background: #ffffff;
+    padding: 16mm;
+  }
+  .print-back-logo {
+    max-width: 60mm;
+    max-height: 60mm;
+    object-fit: contain;
+  }
+  .print-back-name {
+    font-family: var(--font-display);
+    font-size: 16pt;
+    font-weight: 700;
+    color: #0b0b0f;
+    margin: 0;
+  }
+
+  .print-back-black {
+    background: #0b0b0b;
+    padding: 16mm;
+  }
+  .print-back-black-logo {
+    width: 26mm;
+    height: 26mm;
+    border-radius: 3mm;
+    background: rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6mm;
+    overflow: hidden;
+  }
+  .print-back-black-logo img {
+    max-width: 75%;
+    max-height: 75%;
+    object-fit: contain;
+  }
+  .print-back-black-name {
+    font-family: var(--font-display);
+    font-size: 15pt;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-align: center;
+    margin: 0;
+    background: linear-gradient(135deg, #f2f2f2 0%, #a8a8a8 45%, #f2f2f2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 }

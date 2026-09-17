@@ -14,7 +14,7 @@ export function ScreenHeader({ title, onBack, action, transparent = false }: Scr
   const { t } = useTranslation();
   return (
     <header
-      className="sticky top-0 z-10 flex items-center justify-between px-3 py-3"
+      className="app-chrome sticky top-0 z-10 flex items-center justify-between px-3 py-3"
       style={{
         background: transparent ? "transparent" : "var(--color-bg)",
         borderBottom: transparent ? "none" : "1px solid var(--color-border)",
