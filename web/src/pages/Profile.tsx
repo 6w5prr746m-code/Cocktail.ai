@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { Calculator, ChevronRight, ClipboardList, Lock, Share2, Flame, Briefcase, Palette, Heart } from "lucide-react";
 import { useAllCocktails } from "../domain/catalog";
 import { computeHistoryStats } from "../domain/historyStats";
 import { useHistoryStore } from "../state/history";
@@ -57,7 +58,7 @@ export default function ProfilePage() {
     <div className="pb-8 max-w-[640px] mx-auto">
       {shareAchievement && (
         <ShareCardModal
-          emoji={shareAchievement.icon}
+          emoji={shareAchievement.emoji}
           title={t(shareAchievement.titleKey)}
           subtitle={t("shareCard.achievementSubtitle")}
           onClose={() => setShareAchievement(null)}
@@ -119,14 +120,13 @@ export default function ProfilePage() {
       </section>
 
       <section className="px-4 pb-6">
-        <h2 className="text-base font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
+        <h2 className="text-base font-semibold mb-3 flex items-center gap-1.5" style={{ color: "var(--color-text-primary)" }}>
+          <Briefcase size={17} strokeWidth={1.75} aria-hidden />
           {t("profile.proToolsTitle")}
         </h2>
         <div className="flex flex-col gap-2">
           <Link to="/costing" className="flex items-center gap-3 rounded-2xl p-3 glass-card transition-transform active:scale-[0.98]">
-            <span style={{ fontSize: 24 }} aria-hidden>
-              💰
-            </span>
+            <Calculator size={24} strokeWidth={1.75} aria-hidden style={{ color: "var(--color-accent-gold-text)" }} />
             <div className="flex-1 min-w-0">
               <p className="font-semibold" style={{ color: "var(--color-text-primary)" }}>
                 {t("profile.proToolsCostingTitle")}
@@ -135,14 +135,10 @@ export default function ProfilePage() {
                 {t("profile.proToolsCostingSubtitle")}
               </p>
             </div>
-            <span className="flex-shrink-0 text-xl" aria-hidden>
-              →
-            </span>
+            <ChevronRight size={20} className="flex-shrink-0" aria-hidden style={{ color: "var(--color-text-secondary)" }} />
           </Link>
           <Link to="/menu-builder" className="flex items-center gap-3 rounded-2xl p-3 glass-card transition-transform active:scale-[0.98]">
-            <span style={{ fontSize: 24 }} aria-hidden>
-              📋
-            </span>
+            <ClipboardList size={24} strokeWidth={1.75} aria-hidden style={{ color: "var(--color-accent-gold-text)" }} />
             <div className="flex-1 min-w-0">
               <p className="font-semibold" style={{ color: "var(--color-text-primary)" }}>
                 {t("profile.proToolsMenuTitle")}
@@ -151,9 +147,7 @@ export default function ProfilePage() {
                 {t("profile.proToolsMenuSubtitle")}
               </p>
             </div>
-            <span className="flex-shrink-0 text-xl" aria-hidden>
-              →
-            </span>
+            <ChevronRight size={20} className="flex-shrink-0" aria-hidden style={{ color: "var(--color-text-secondary)" }} />
           </Link>
         </div>
       </section>
@@ -193,7 +187,8 @@ export default function ProfilePage() {
       )}
 
       <section className="px-4 pb-6">
-        <h2 className="text-base font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
+        <h2 className="text-base font-semibold mb-3 flex items-center gap-1.5" style={{ color: "var(--color-text-primary)" }}>
+          <Palette size={17} strokeWidth={1.75} aria-hidden />
           {t("cosmetics.title")}
         </h2>
         <div className="flex gap-3 flex-wrap">
@@ -220,8 +215,8 @@ export default function ProfilePage() {
                   }}
                   aria-hidden
                 />
-                <span className="text-[11px] font-medium" style={{ color: "var(--color-text-primary)" }}>
-                  {unlocked ? t(skin.labelKey) : "🔒"}
+                <span className="text-[11px] font-medium flex items-center justify-center" style={{ color: "var(--color-text-primary)" }}>
+                  {unlocked ? t(skin.labelKey) : <Lock size={12} strokeWidth={2.25} aria-hidden />}
                 </span>
               </button>
             );
@@ -247,13 +242,16 @@ export default function ProfilePage() {
                 style={{ background: "var(--color-surface)", opacity: unlocked ? 1 : 0.4 }}
               >
                 {unlocked && (
-                  <span className="absolute top-1.5 right-1.5 text-xs" aria-hidden>
-                    📤
+                  <span className="absolute top-1.5 right-1.5" aria-hidden style={{ color: "var(--color-text-secondary)" }}>
+                    <Share2 size={13} strokeWidth={2.25} />
                   </span>
                 )}
-                <span style={{ fontSize: 26, filter: unlocked ? undefined : "grayscale(1)" }} aria-hidden>
-                  {achievement.icon}
-                </span>
+                <achievement.icon
+                  size={26}
+                  strokeWidth={1.75}
+                  aria-hidden
+                  style={{ color: unlocked ? "var(--color-accent-gold-text)" : "var(--color-text-secondary)" }}
+                />
                 <p className="text-[11px] font-medium leading-tight" style={{ color: "var(--color-text-primary)" }}>
                   {t(achievement.titleKey)}
                 </p>
@@ -306,7 +304,8 @@ export default function ProfilePage() {
       {SUPPORT_URL && (
         <section className="px-4 pb-6">
           <div className="rounded-2xl p-4 glass-card">
-            <p className="font-semibold mb-1" style={{ color: "var(--color-text-primary)" }}>
+            <p className="font-semibold mb-1 flex items-center gap-1.5" style={{ color: "var(--color-text-primary)" }}>
+              <Heart size={16} strokeWidth={1.75} fill="currentColor" aria-hidden />
               {t("profile.supportTitle")}
             </p>
             <p className="text-sm mb-3" style={{ color: "var(--color-text-secondary)" }}>
@@ -346,10 +345,11 @@ function StatTile({ label, value, emphasis = false }: { label: string; value: st
   return (
     <div className="rounded-2xl p-3 text-center" style={{ background: "var(--color-surface)" }}>
       <p
-        className="text-xl font-bold"
+        className="text-xl font-bold flex items-center justify-center gap-1"
         style={{ color: emphasis ? "var(--color-accent-gold-text)" : "var(--color-text-primary)" }}
       >
-        {emphasis ? `🔥 ${value}` : value}
+        {emphasis && <Flame size={16} strokeWidth={2.25} aria-hidden />}
+        {value}
       </p>
       <p className="text-[11px] mt-0.5" style={{ color: "var(--color-text-secondary)" }}>
         {label}

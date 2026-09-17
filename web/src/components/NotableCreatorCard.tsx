@@ -1,3 +1,4 @@
+import { Trophy } from "lucide-react";
 import type { NotableCreator } from "../domain/notableCreators";
 import { useTranslation } from "../domain/i18n/useTranslation";
 
@@ -15,11 +16,11 @@ export function NotableCreatorCard({ notable }: NotableCreatorCardProps) {
   return (
     <div className="rounded-2xl p-4 glass-card flex gap-3">
       <span
-        className="flex-shrink-0 flex items-center justify-center rounded-full text-xl"
-        style={{ width: 44, height: 44, background: "var(--color-accent-gold)" }}
+        className="flex-shrink-0 flex items-center justify-center rounded-full"
+        style={{ width: 44, height: 44, background: "var(--color-accent-gold)", color: "#0b0b0f" }}
         aria-hidden
       >
-        🏆
+        <Trophy size={20} strokeWidth={1.75} />
       </span>
       <div className="flex-1 min-w-0">
         <p className="text-[11px] font-semibold uppercase tracking-wide mb-0.5" style={{ color: "var(--color-accent-gold-text)" }}>

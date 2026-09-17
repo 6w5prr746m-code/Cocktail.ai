@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { PartyPopper, ChevronRight, Sparkles, ShoppingBag, ShoppingCart, Check, X, Lightbulb } from "lucide-react";
 import { CompatibilityRing } from "../components/CompatibilityRing";
 import { MiniGlassBadge } from "../components/MiniGlassBadge";
 import { useAllCocktails, useAllIngredients } from "../domain/catalog";
@@ -121,9 +122,7 @@ export default function MyBarPage() {
           to="/party"
           className="mt-3 rounded-2xl p-4 flex items-center gap-3 glass-card transition-transform active:scale-[0.98]"
         >
-          <span style={{ fontSize: 26 }} aria-hidden>
-            🎉
-          </span>
+          <PartyPopper size={26} strokeWidth={1.75} aria-hidden style={{ color: "var(--color-accent-gold-text)" }} />
           <div className="flex-1 min-w-0">
             <p className="font-semibold" style={{ color: "var(--color-text-primary)" }}>
               {t("myBar.partyPlannerTitle")}
@@ -132,9 +131,7 @@ export default function MyBarPage() {
               {t("myBar.partyPlannerSubtitle")}
             </p>
           </div>
-          <span className="flex-shrink-0 text-xl" aria-hidden>
-            →
-          </span>
+          <ChevronRight size={20} className="flex-shrink-0" aria-hidden style={{ color: "var(--color-text-secondary)" }} />
         </Link>
       </div>
 
@@ -153,10 +150,11 @@ export default function MyBarPage() {
                   key={ingredient.id}
                   type="button"
                   onClick={() => addIngredient(ingredient.id)}
-                  className="text-sm rounded-full px-3.5 py-2 font-medium"
+                  className="text-sm rounded-full px-3.5 py-2 font-medium flex items-center gap-1.5"
                   style={{ background: "var(--color-bg)", color: "var(--color-text-primary)", border: "1px solid var(--color-border)" }}
                 >
-                  ✨ {getLocalizedIngredientName(ingredient.id, ingredient.name, locale)}
+                  <Sparkles size={13} strokeWidth={2} aria-hidden />
+                  {getLocalizedIngredientName(ingredient.id, ingredient.name, locale)}
                 </button>
               ))}
             </div>
@@ -166,7 +164,8 @@ export default function MyBarPage() {
 
       {nextBestBottles.length > 0 && (
         <section className="px-4 pb-6">
-          <h2 className="text-base font-semibold mb-3" style={{ color: "var(--color-text-primary)" }}>
+          <h2 className="text-base font-semibold mb-3 flex items-center gap-1.5" style={{ color: "var(--color-text-primary)" }}>
+            <Lightbulb size={17} strokeWidth={1.75} aria-hidden />
             {t("myBar.nextBestBottleTitle")}
           </h2>
           <ul className="flex flex-col gap-2">
@@ -192,7 +191,7 @@ export default function MyBarPage() {
                   className="flex-shrink-0 rounded-full flex items-center justify-center"
                   style={{ width: 30, height: 30, background: "var(--color-bg)" }}
                 >
-                  🛍️
+                  <ShoppingBag size={15} strokeWidth={1.75} aria-hidden />
                 </a>
                 <button
                   type="button"
@@ -202,7 +201,7 @@ export default function MyBarPage() {
                   className="flex-shrink-0 rounded-full flex items-center justify-center"
                   style={{ width: 30, height: 30, background: "var(--color-bg)" }}
                 >
-                  🛒
+                  <ShoppingCart size={15} strokeWidth={1.75} aria-hidden />
                 </button>
               </li>
             ))}
@@ -238,7 +237,7 @@ export default function MyBarPage() {
                   className="flex-shrink-0 rounded-full flex items-center justify-center"
                   style={{ width: 30, height: 30, background: "var(--color-bg)" }}
                 >
-                  🛒
+                  <ShoppingCart size={15} strokeWidth={1.75} aria-hidden />
                 </button>
               </li>
             ))}
@@ -249,7 +248,8 @@ export default function MyBarPage() {
       {shoppingRows.length > 0 && (
         <section className="px-4 pb-6">
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-base font-semibold" style={{ color: "var(--color-text-primary)" }}>
+            <h2 className="text-base font-semibold flex items-center gap-1.5" style={{ color: "var(--color-text-primary)" }}>
+              <ShoppingCart size={17} strokeWidth={1.75} aria-hidden />
               {t("myBar.shoppingListTitle")}
             </h2>
             {hasCheckedItems && (
@@ -276,10 +276,9 @@ export default function MyBarPage() {
                     border: `2px solid ${item.checked ? "var(--color-success)" : "var(--color-border)"}`,
                     background: item.checked ? "var(--color-success)" : "transparent",
                     color: "#0b0b0f",
-                    fontSize: 12,
                   }}
                 >
-                  {item.checked ? "✓" : ""}
+                  {item.checked && <Check size={13} strokeWidth={2.5} aria-hidden />}
                 </button>
                 <span
                   className="flex-1 text-sm"
@@ -291,10 +290,10 @@ export default function MyBarPage() {
                   type="button"
                   onClick={() => removeShoppingItem(item.ingredientId)}
                   aria-label={t("myBar.removeFromListAria", { name: ingredient!.name })}
-                  className="flex-shrink-0 text-xs"
+                  className="flex-shrink-0 flex items-center"
                   style={{ color: "var(--color-text-secondary)" }}
                 >
-                  ✕
+                  <X size={16} strokeWidth={2} aria-hidden />
                 </button>
               </li>
             ))}
@@ -365,7 +364,7 @@ export default function MyBarPage() {
                   className="flex-shrink-0 rounded-full flex items-center justify-center"
                   style={{ width: 30, height: 30, background: "var(--color-bg)", color: "var(--color-danger-text)" }}
                 >
-                  ✕
+                  <X size={15} strokeWidth={2} aria-hidden />
                 </button>
               </li>
             ))}

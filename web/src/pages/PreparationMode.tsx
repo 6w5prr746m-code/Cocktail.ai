@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { X, PartyPopper } from "lucide-react";
 import { CompatibilityRing } from "../components/CompatibilityRing";
 import { GlassArt } from "../components/GlassArt";
 import { useCocktail } from "../domain/catalog";
@@ -72,8 +73,9 @@ export default function PreparationModePage() {
         <h1 className="text-2xl font-bold" style={{ color: "var(--color-text-primary)" }}>
           {t("preparationMode.readyTitle", { name: cocktail.name })}
         </h1>
-        <p className="text-sm" style={{ color: "var(--color-text-secondary)" }}>
+        <p className="text-sm flex items-center justify-center gap-1.5" style={{ color: "var(--color-text-secondary)" }}>
           {t("preparationMode.cheers")}
+          <PartyPopper size={15} strokeWidth={2} aria-hidden />
         </p>
         <button
           type="button"
@@ -99,7 +101,7 @@ export default function PreparationModePage() {
           style={{ width: 36, height: 36, background: "rgba(0,0,0,0.35)", color: "white" }}
           aria-label={t("preparationMode.closeAria")}
         >
-          ✕
+          <X size={17} strokeWidth={2} aria-hidden />
         </button>
       </div>
 

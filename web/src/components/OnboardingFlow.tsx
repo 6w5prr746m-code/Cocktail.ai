@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Check, Plus } from "lucide-react";
 import { GlassArt } from "./GlassArt";
 import type { CocktailArt } from "../domain/glassArt";
 import { STARTER_INGREDIENTS } from "../domain/starterIngredients";
@@ -82,14 +83,14 @@ export function OnboardingFlow() {
                   type="button"
                   onClick={() => !owned && addIngredient(ingredient.id)}
                   disabled={owned}
-                  className="text-sm rounded-full px-3.5 py-2 font-medium"
+                  className="text-sm rounded-full px-3.5 py-2 font-medium flex items-center gap-1"
                   style={{
                     background: owned ? "var(--color-accent-gold)" : "var(--color-surface)",
                     color: owned ? "#0b0b0f" : "var(--color-text-primary)",
                     border: "1px solid var(--color-border)",
                   }}
                 >
-                  {owned ? "✓ " : "+ "}
+                  {owned ? <Check size={14} strokeWidth={2.5} aria-hidden /> : <Plus size={14} strokeWidth={2.5} aria-hidden />}
                   {getLocalizedIngredientName(ingredient.id, ingredient.name, locale)}
                 </button>
               );

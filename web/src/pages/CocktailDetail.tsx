@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { Camera, Check, Heart, Share2, Pencil, Timer, X, TriangleAlert, ShoppingCart, UtensilsCrossed, Lightbulb, Sparkles, NotebookPen } from "lucide-react";
 import { ScreenHeader } from "../components/ScreenHeader";
 import { NotableCreatorCard } from "../components/NotableCreatorCard";
 import { CocktailVisual } from "../components/CocktailVisual";
@@ -124,9 +125,9 @@ export default function CocktailDetailPage() {
                   aria-label={t("cocktailDetail.copyPhotoPromptAria")}
                   title={t("cocktailDetail.copyPhotoPromptTitle")}
                   className="flex items-center justify-center rounded-full text-sm"
-                  style={{ width: 36, height: 36, background: "rgba(0,0,0,0.35)" }}
+                  style={{ width: 36, height: 36, background: "rgba(0,0,0,0.35)", color: "#fff" }}
                 >
-                  {promptCopied ? "✓" : "📸"}
+                  {promptCopied ? <Check size={17} strokeWidth={2.25} aria-hidden /> : <Camera size={17} strokeWidth={1.75} aria-hidden />}
                 </button>
                 <button
                   type="button"
@@ -134,26 +135,26 @@ export default function CocktailDetailPage() {
                   aria-label={t("cocktailDetail.favoriteAria")}
                   data-testid="favorite-button"
                   className="flex items-center justify-center rounded-full"
-                  style={{ width: 36, height: 36, background: "rgba(0,0,0,0.35)" }}
+                  style={{ width: 36, height: 36, background: "rgba(0,0,0,0.35)", color: isFavorite ? "#FF375F" : "#fff" }}
                 >
-                  {isFavorite ? "❤️" : "🤍"}
+                  <Heart size={17} strokeWidth={1.75} fill={isFavorite ? "currentColor" : "none"} aria-hidden />
                 </button>
                 <Link
                   to={`/cocktail/${cocktail.id}/share`}
                   aria-label={t("cocktailDetail.shareAria")}
                   className="flex items-center justify-center rounded-full"
-                  style={{ width: 36, height: 36, background: "rgba(0,0,0,0.35)" }}
+                  style={{ width: 36, height: 36, background: "rgba(0,0,0,0.35)", color: "#fff" }}
                 >
-                  ⤴
+                  <Share2 size={17} strokeWidth={1.75} aria-hidden />
                 </Link>
                 {cocktail.isUserCreated && (
                   <Link
                     to={`/recipe/${cocktail.id}/edit`}
                     aria-label={t("cocktailDetail.editAria")}
                     className="flex items-center justify-center rounded-full"
-                    style={{ width: 36, height: 36, background: "rgba(0,0,0,0.35)" }}
+                    style={{ width: 36, height: 36, background: "rgba(0,0,0,0.35)", color: "#fff" }}
                   >
-                    ✎
+                    <Pencil size={17} strokeWidth={1.75} aria-hidden />
                   </Link>
                 )}
               </div>
@@ -163,13 +164,17 @@ export default function CocktailDetailPage() {
 
         <div className="relative z-10 p-5 pt-4 w-full text-center" style={{ background: "linear-gradient(transparent, rgba(0,0,0,0.6))" }}>
           {signature && (
-            <p className="text-xs font-semibold mb-1" style={{ color: "var(--color-accent-gold-soft)" }}>
+            <p className="text-xs font-semibold mb-1 flex items-center justify-center gap-1" style={{ color: "var(--color-accent-gold-soft)" }}>
+              <Sparkles size={13} strokeWidth={2.25} aria-hidden />
               {t("cocktailDetail.signatureLine", { count: preparedCount(cocktail.id, historyEntries) })}
             </p>
           )}
           <h1 className="text-3xl font-bold text-white leading-tight">{cocktail.name}</h1>
           <div className="flex items-center justify-center gap-3 mt-2 text-sm text-white/85">
-            <span>⏱ {formatDuration(cocktail.preparationTimeMinutes)}</span>
+            <span className="flex items-center gap-1">
+              <Timer size={14} strokeWidth={2} aria-hidden />
+              {formatDuration(cocktail.preparationTimeMinutes)}
+            </span>
             <span className="flex items-center gap-1.5">
               • <DifficultyDots level={cocktail.difficulty} />
             </span>
@@ -210,18 +215,18 @@ export default function CocktailDetailPage() {
                   <div className="min-w-0">
                     <div className="flex items-center gap-1.5">
                       {status?.kind === "missing" && (
-                        <span style={{ color: "var(--color-danger-text)" }} aria-label={t("cocktailDetail.missingAria")}>
-                          ✗
+                        <span className="flex items-center" style={{ color: "var(--color-danger-text)" }} aria-label={t("cocktailDetail.missingAria")}>
+                          <X size={15} strokeWidth={2.5} aria-hidden />
                         </span>
                       )}
                       {status?.kind === "degraded" && (
-                        <span style={{ color: "var(--color-accent-gold-text)" }} aria-label={t("cocktailDetail.degradedAria")}>
-                          ⚠
+                        <span className="flex items-center" style={{ color: "var(--color-accent-gold-text)" }} aria-label={t("cocktailDetail.degradedAria")}>
+                          <TriangleAlert size={14} strokeWidth={2.25} aria-hidden />
                         </span>
                       )}
                       {advanced && !status && (
-                        <span style={{ color: "var(--color-success-text)" }} aria-label={t("cocktailDetail.availableAria")}>
-                          ✓
+                        <span className="flex items-center" style={{ color: "var(--color-success-text)" }} aria-label={t("cocktailDetail.availableAria")}>
+                          <Check size={15} strokeWidth={2.5} aria-hidden />
                         </span>
                       )}
                       <span style={{ color: "var(--color-text-primary)" }}>{ingredientName(link.ingredientId)}</span>
@@ -253,7 +258,7 @@ export default function CocktailDetailPage() {
                         className="rounded-full flex items-center justify-center"
                         style={{ width: 26, height: 26, background: "var(--color-bg)" }}
                       >
-                        🛒
+                        <ShoppingCart size={13} strokeWidth={2} aria-hidden />
                       </button>
                     )}
                   </div>
@@ -265,9 +270,10 @@ export default function CocktailDetailPage() {
             <button
               type="button"
               onClick={() => addShoppingItems(advanced.explanation.missingIngredients.map((m) => m.ingredient.id))}
-              className="w-full mt-3 rounded-xl py-2.5 text-sm font-medium"
+              className="w-full mt-3 rounded-xl py-2.5 text-sm font-medium flex items-center justify-center gap-1.5"
               style={{ background: "var(--color-surface)", color: "var(--color-accent-gold-text)" }}
             >
+              <ShoppingCart size={15} strokeWidth={2} aria-hidden />
               {advanced.explanation.missingIngredients.length > 1
                 ? t("cocktailDetail.addMissingMany", { count: advanced.explanation.missingIngredients.length })
                 : t("cocktailDetail.addMissingOne")}
@@ -306,8 +312,9 @@ export default function CocktailDetailPage() {
 
         {notableCreator && <NotableCreatorCard notable={notableCreator} />}
 
-        <p className="text-sm rounded-2xl px-4 py-3" style={{ background: "var(--color-surface)", color: "var(--color-text-secondary)" }}>
-          🍽️ {t(pairingKey)}
+        <p className="text-sm rounded-2xl px-4 py-3 flex items-center gap-2" style={{ background: "var(--color-surface)", color: "var(--color-text-secondary)" }}>
+          <UtensilsCrossed size={16} strokeWidth={1.75} className="flex-shrink-0" aria-hidden />
+          {t(pairingKey)}
         </p>
 
         {cocktail.history && (
@@ -326,14 +333,16 @@ export default function CocktailDetailPage() {
             <h2 className="text-lg font-semibold mb-2" style={{ color: "var(--color-text-primary)" }}>
               {t("cocktailDetail.tipsHeading")}
             </h2>
-            <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-              💡 {cocktail.tips}
+            <p className="text-sm leading-relaxed flex items-start gap-2" style={{ color: "var(--color-text-secondary)" }}>
+              <Lightbulb size={16} strokeWidth={1.75} className="flex-shrink-0 mt-0.5" aria-hidden />
+              {cocktail.tips}
             </p>
           </section>
         )}
 
         <section>
-          <h2 className="text-lg font-semibold mb-2" style={{ color: "var(--color-text-primary)" }}>
+          <h2 className="text-lg font-semibold mb-2 flex items-center gap-1.5" style={{ color: "var(--color-text-primary)" }}>
+            <NotebookPen size={18} strokeWidth={1.75} aria-hidden />
             {t("cocktailDetail.myNoteHeading")}
           </h2>
           <textarea

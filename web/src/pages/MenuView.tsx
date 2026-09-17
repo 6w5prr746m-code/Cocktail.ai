@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { Link, useParams } from "react-router-dom";
+import { Printer, ChevronLeft, ChevronRight } from "lucide-react";
 import { ScreenHeader } from "../components/ScreenHeader";
 import { CocktailVisual } from "../components/CocktailVisual";
 import { TasteTags } from "../components/TasteTags";
@@ -456,9 +457,9 @@ export default function MenuViewPage() {
             aria-label={t("menuView.printAria")}
             title={t("menuView.printAria")}
             className="rounded-full flex items-center justify-center"
-            style={{ width: 36, height: 36, background: "var(--color-surface)" }}
+            style={{ width: 36, height: 36, background: "var(--color-surface)", color: "var(--color-text-primary)" }}
           >
-            🖨️
+            <Printer size={17} strokeWidth={1.75} aria-hidden />
           </button>
         }
       />
@@ -484,7 +485,7 @@ export default function MenuViewPage() {
             className="rounded-full flex items-center justify-center text-lg font-semibold"
             style={{ width: 36, height: 36, background: "var(--color-surface)", color: "var(--color-text-primary)", opacity: safePageIndex === 0 ? 0.4 : 1 }}
           >
-            ←
+            <ChevronLeft size={20} strokeWidth={2.25} aria-hidden />
           </button>
           <span className="text-sm font-medium" style={{ color: "var(--color-text-primary)" }}>
             {t("menuView.pageIndicator", { current: safePageIndex + 1, total: pages.length })}
@@ -503,7 +504,7 @@ export default function MenuViewPage() {
               opacity: safePageIndex === pages.length - 1 ? 0.4 : 1,
             }}
           >
-            →
+            <ChevronRight size={20} strokeWidth={2.25} aria-hidden />
           </button>
         </div>
       )}

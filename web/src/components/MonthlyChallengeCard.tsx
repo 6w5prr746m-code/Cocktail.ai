@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Share2, ChevronRight, Check } from "lucide-react";
 import type { Cocktail } from "../domain/types";
 import type { MonthlyTheme } from "../domain/monthlyChallenge";
 import { useTranslation } from "../domain/i18n/useTranslation";
@@ -28,8 +29,9 @@ export function MonthlyChallengeCard({ theme, cocktail, completed }: MonthlyChal
           <CocktailVisual cocktail={cocktail} glassSize={40} variant="thumb" />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-[11px] font-semibold uppercase tracking-wide mb-0.5" style={{ color: "var(--color-accent-gold-text)" }}>
-            {theme.icon} {t("monthlyChallenge.label")} · {t(theme.titleKey)}
+          <p className="text-[11px] font-semibold uppercase tracking-wide mb-0.5 flex items-center gap-1" style={{ color: "var(--color-accent-gold-text)" }}>
+            <theme.icon size={12} strokeWidth={2.25} aria-hidden />
+            {t("monthlyChallenge.label")} · {t(theme.titleKey)}
           </p>
           <p className="font-semibold truncate" style={{ color: "var(--color-text-primary)" }}>
             {cocktail.name}
@@ -51,24 +53,23 @@ export function MonthlyChallengeCard({ theme, cocktail, completed }: MonthlyChal
               className="rounded-full flex items-center justify-center"
               style={{ width: 28, height: 28, background: "var(--color-surface)" }}
             >
-              📤
+              <Share2 size={14} strokeWidth={2} aria-hidden />
             </button>
             <span
-              className="rounded-full text-xs font-semibold px-2.5 py-1"
+              className="rounded-full text-xs font-semibold px-2.5 py-1 flex items-center gap-1"
               style={{ background: "var(--color-success)", color: "#0b0b0f" }}
             >
+              <Check size={12} strokeWidth={2.5} aria-hidden />
               {t("monthlyChallenge.done")}
             </span>
           </div>
         ) : (
-          <span className="flex-shrink-0 text-xl" aria-hidden>
-            →
-          </span>
+          <ChevronRight size={20} className="flex-shrink-0" aria-hidden style={{ color: "var(--color-text-secondary)" }} />
         )}
       </Link>
       {sharing && (
         <ShareCardModal
-          emoji={theme.icon}
+          emoji={theme.emoji}
           title={t("shareCard.monthlyTitle")}
           subtitle={`${t(theme.titleKey)} · ${cocktail.name}`}
           onClose={() => setSharing(false)}

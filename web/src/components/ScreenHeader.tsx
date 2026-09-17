@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 import { useTranslation } from "../domain/i18n/useTranslation";
 
 interface ScreenHeaderProps {
@@ -27,7 +28,7 @@ export function ScreenHeader({ title, onBack, action, transparent = false }: Scr
         style={{ width: 36, height: 36, background: "var(--color-surface)", color: "var(--color-text-primary)" }}
         aria-label={t("common.back")}
       >
-        ←
+        <ArrowLeft size={18} strokeWidth={2} aria-hidden />
       </button>
       {title && (
         <h1 className="text-base font-semibold truncate px-2" style={{ color: "var(--color-text-primary)" }}>

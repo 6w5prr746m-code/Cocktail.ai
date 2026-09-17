@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Heart, Sparkles } from "lucide-react";
 import type { Cocktail } from "../domain/types";
 import { useFavoritesStore } from "../state/favorites";
 import { useHistoryStore } from "../state/history";
@@ -49,22 +50,22 @@ export function CocktailCard({ cocktail, width, showTaste = true, caption }: Coc
         />
         {isFavorite && (
           <span
-            className="absolute top-2 right-2 flex items-center justify-center rounded-full text-xs"
-            style={{ width: 22, height: 22, background: "rgba(0,0,0,0.35)" }}
+            className="absolute top-2 right-2 flex items-center justify-center rounded-full"
+            style={{ width: 22, height: 22, background: "rgba(0,0,0,0.35)", color: "#FF375F" }}
             aria-hidden
           >
-            ❤️
+            <Heart size={12} strokeWidth={2} fill="currentColor" />
           </span>
         )}
         {signature && (
           <span
-            className="absolute top-2 left-2 flex items-center justify-center rounded-full text-xs"
-            style={{ width: 22, height: 22, background: "rgba(0,0,0,0.35)" }}
+            className="absolute top-2 left-2 flex items-center justify-center rounded-full"
+            style={{ width: 22, height: 22, background: "rgba(0,0,0,0.35)", color: "var(--color-accent-gold)" }}
             role="img"
             aria-label={t("cocktailDetail.signatureBadgeAria")}
             title={t("cocktailDetail.signatureBadgeAria")}
           >
-            ✨
+            <Sparkles size={12} strokeWidth={2} />
           </span>
         )}
       </div>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Share2 } from "lucide-react";
 import type { Achievement } from "../domain/achievements";
 import { useTranslation } from "../domain/i18n/useTranslation";
 import { useAchievements } from "../hooks/useAchievements";
@@ -42,9 +43,7 @@ export function AchievementToast() {
               className="rounded-2xl px-4 py-3 flex items-center gap-3 shadow-lg animate-fade-in"
               style={{ background: "var(--color-accent-gold)", color: "#0b0b0f" }}
             >
-              <span style={{ fontSize: 24 }} aria-hidden>
-                {achievement.icon}
-              </span>
+              <achievement.icon size={24} strokeWidth={2} aria-hidden />
               <div className="min-w-0 flex-1">
                 <p className="text-xs font-semibold uppercase tracking-wide opacity-80">{t("achievements.unlockedToast")}</p>
                 <p className="text-sm font-bold truncate">{t(achievement.titleKey)}</p>
@@ -56,7 +55,7 @@ export function AchievementToast() {
                 className="flex-shrink-0 rounded-full flex items-center justify-center"
                 style={{ width: 30, height: 30, background: "rgba(11,11,15,0.15)" }}
               >
-                📤
+                <Share2 size={15} strokeWidth={2.25} aria-hidden />
               </button>
             </div>
           ))}
@@ -64,7 +63,7 @@ export function AchievementToast() {
       )}
       {shareTarget && (
         <ShareCardModal
-          emoji={shareTarget.icon}
+          emoji={shareTarget.emoji}
           title={t(shareTarget.titleKey)}
           subtitle={t("shareCard.achievementSubtitle")}
           onClose={() => setShareTarget(null)}

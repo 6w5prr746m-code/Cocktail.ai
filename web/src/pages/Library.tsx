@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { SlidersHorizontal, Trophy, Sparkles } from "lucide-react";
 import { CocktailCard } from "../components/CocktailCard";
 import { useAllCocktails, useCollections } from "../domain/catalog";
 import { fuzzyIncludes } from "../domain/fuzzySearch";
@@ -77,9 +78,10 @@ export default function LibraryPage() {
         <button
           type="button"
           onClick={() => setShowFilters((v) => !v)}
-          className="rounded-xl px-3 text-sm font-medium relative"
+          className="rounded-xl px-3 text-sm font-medium relative flex items-center gap-1.5"
           style={{ background: "var(--color-surface)", color: "var(--color-text-primary)", border: "1px solid var(--color-border)" }}
         >
+          <SlidersHorizontal size={15} strokeWidth={2} aria-hidden />
           {t("library.filtersButton")}
           {activeFilterCount > 0 && (
             <span
@@ -98,13 +100,14 @@ export default function LibraryPage() {
           onClick={() => setExceptionalOnly((v) => !v)}
           aria-pressed={exceptionalOnly}
           aria-label={t("library.exceptionalFilterAria")}
-          className="text-xs rounded-full px-3 py-1.5 font-medium"
+          className="text-xs rounded-full px-3 py-1.5 font-medium flex items-center gap-1.5"
           style={{
             background: exceptionalOnly ? "var(--color-accent-gold)" : "var(--color-surface)",
             color: exceptionalOnly ? "#0b0b0f" : "var(--color-text-primary)",
             border: "1px solid var(--color-border)",
           }}
         >
+          <Trophy size={13} strokeWidth={2} aria-hidden />
           {t("library.exceptionalFilterLabel")}
         </button>
       </div>
@@ -148,7 +151,7 @@ export default function LibraryPage() {
                 className="flex-shrink-0 rounded-2xl px-4 py-5 flex flex-col gap-2"
                 style={{ width: 150, background: "var(--color-surface)" }}
               >
-                <span className="text-2xl">✨</span>
+                <Sparkles size={22} strokeWidth={1.75} aria-hidden style={{ color: "var(--color-accent-gold-text)" }} />
                 <span className="text-sm font-medium" style={{ color: "var(--color-text-primary)" }}>
                   {col.name}
                 </span>

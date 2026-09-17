@@ -31,8 +31,8 @@ export function TabBar() {
           className={({ isActive }) => `tab-link relative flex-1 flex flex-col items-center gap-0.5 py-2.5 text-[11px] font-medium ${isActive ? "is-active" : ""}`}
           style={({ isActive }) => ({ color: isActive ? tab.tint : "var(--color-text-secondary)" })}
         >
-          <span className="tab-link-icon-wrap relative" style={{ fontSize: 20 }}>
-            {tab.icon}
+          <span className="tab-link-icon-wrap relative flex items-center justify-center">
+            <tab.icon size={22} strokeWidth={2} aria-hidden />
             {tab.to === "/mybar" && almostReadyCount > 0 && <NavBadgeDot />}
           </span>
           {t(tab.key)}

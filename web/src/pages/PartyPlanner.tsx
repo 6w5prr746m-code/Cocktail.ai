@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { Check, ShoppingCart } from "lucide-react";
 import { ScreenHeader } from "../components/ScreenHeader";
 import { useAllCocktails, useAllIngredients } from "../domain/catalog";
 import { fuzzyIncludes } from "../domain/fuzzySearch";
@@ -119,7 +120,7 @@ export default function PartyPlannerPage() {
                       color: selected ? "#0b0b0f" : "var(--color-text-primary)",
                     }}
                   >
-                    <span aria-hidden>{selected ? "✓" : ""}</span>
+                    {selected && <Check size={15} strokeWidth={2.5} aria-hidden />}
                     {c.name}
                   </button>
                 </li>
@@ -130,7 +131,8 @@ export default function PartyPlannerPage() {
 
         {lines.length > 0 && (
           <div>
-            <h2 className="text-base font-semibold mb-2" style={{ color: "var(--color-text-primary)" }}>
+            <h2 className="text-base font-semibold mb-2 flex items-center gap-1.5" style={{ color: "var(--color-text-primary)" }}>
+              <ShoppingCart size={17} strokeWidth={1.75} aria-hidden />
               {t("partyPlanner.shoppingListTitle")}
             </h2>
             <ul className="flex flex-col gap-2 mb-3">
@@ -152,9 +154,10 @@ export default function PartyPlannerPage() {
             <button
               type="button"
               onClick={addAllToShoppingList}
-              className="w-full rounded-2xl py-4 font-semibold text-base"
+              className="w-full rounded-2xl py-4 font-semibold text-base flex items-center justify-center gap-1.5"
               style={{ background: "var(--color-accent-gold)", color: "#0b0b0f" }}
             >
+              {added && <Check size={17} strokeWidth={2.5} aria-hidden />}
               {added ? t("partyPlanner.added") : t("partyPlanner.addAllButton")}
             </button>
           </div>

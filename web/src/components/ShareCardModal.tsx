@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { X } from "lucide-react";
 import { wrapText } from "../domain/canvasText";
 import { useTranslation } from "../domain/i18n/useTranslation";
 
@@ -90,10 +91,10 @@ export function ShareCardModal({ emoji, title, subtitle, onClose }: ShareCardMod
         type="button"
         onClick={onClose}
         aria-label={t("shareCard.closeAria")}
-        className="absolute top-5 right-5 rounded-full flex items-center justify-center text-lg"
+        className="absolute top-5 right-5 rounded-full flex items-center justify-center"
         style={{ width: 36, height: 36, background: "rgba(255,255,255,0.15)", color: "#fff" }}
       >
-        ✕
+        <X size={18} strokeWidth={2.25} aria-hidden />
       </button>
       <div className="rounded-2xl overflow-hidden" style={{ width: "100%", maxWidth: 260, aspectRatio: `${WIDTH} / ${HEIGHT}` }}>
         <canvas ref={canvasRef} style={{ width: "100%", height: "100%", display: "block" }} />

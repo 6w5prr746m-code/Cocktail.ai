@@ -1,9 +1,10 @@
+import { Sun, Snowflake, type LucideIcon } from "lucide-react";
 import type { Cocktail } from "./types";
 import type { TranslationKey } from "./i18n/useTranslation";
 
 export interface Season {
   id: string;
-  icon: string;
+  icon: LucideIcon;
   titleKey: TranslationKey;
   subtitleKey: TranslationKey;
   matches: (cocktail: Cocktail) => boolean;
@@ -30,14 +31,14 @@ const WINTER_SPIRITS = [
 export const SEASONS: Season[] = [
   {
     id: "ete",
-    icon: "☀️",
+    icon: Sun,
     titleKey: "seasonalCollection.ete.title",
     subtitleKey: "seasonalCollection.ete.subtitle",
     matches: (c) => c.category === "Tropical" || c.category === "Tiki",
   },
   {
     id: "hiver",
-    icon: "❄️",
+    icon: Snowflake,
     titleKey: "seasonalCollection.hiver.title",
     subtitleKey: "seasonalCollection.hiver.subtitle",
     matches: (c) => WINTER_SPIRITS.includes(c.mainSpirit),

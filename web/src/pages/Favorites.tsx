@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Heart } from "lucide-react";
 import { useAllCocktails } from "../domain/catalog";
 import { useFavoritesStore } from "../state/favorites";
 import { MiniGlassBadge } from "../components/MiniGlassBadge";
@@ -30,9 +31,9 @@ function FavoriteRow({ cocktail, onRemove }: { cocktail: ReturnType<typeof useAl
         onClick={onRemove}
         aria-label={t("favorites.remove", { name: localized.name })}
         className="flex-shrink-0 rounded-full flex items-center justify-center"
-        style={{ width: 32, height: 32, background: "var(--color-bg)" }}
+        style={{ width: 32, height: 32, background: "var(--color-bg)", color: "#FF375F" }}
       >
-        ❤️
+        <Heart size={16} strokeWidth={1.75} fill="currentColor" aria-hidden />
       </button>
     </li>
   );

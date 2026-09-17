@@ -1,3 +1,4 @@
+import { Flower2, Leaf, Martini, Cherry, type LucideIcon } from "lucide-react";
 import type { Cocktail } from "./types";
 import type { HistoryEntry } from "../state/history";
 import { tasteProfile } from "./tasteProfile";
@@ -19,7 +20,10 @@ function hashKey(key: string): number {
 
 export interface MonthlyTheme {
   id: string;
-  icon: string;
+  /** Icône vectorielle utilisée à l'écran. */
+  icon: LucideIcon;
+  /** Emoji utilisé uniquement pour la carte de partage dessinée en <canvas> (ShareCardModal) — voir le même commentaire dans achievements.ts. */
+  emoji: string;
   titleKey: TranslationKey;
   descKey: TranslationKey;
   matches: (cocktail: Cocktail) => boolean;
@@ -32,28 +36,32 @@ export interface MonthlyTheme {
 export const MONTHLY_THEMES: MonthlyTheme[] = [
   {
     id: "tiki",
-    icon: "🌺",
+    icon: Flower2,
+    emoji: "🌺",
     titleKey: "monthlyChallenge.themeTiki.title",
     descKey: "monthlyChallenge.themeTiki.desc",
     matches: (c) => c.category === "Tropical" || c.category === "Tiki",
   },
   {
     id: "sans_alcool",
-    icon: "🍃",
+    icon: Leaf,
+    emoji: "🍃",
     titleKey: "monthlyChallenge.themeSansAlcool.title",
     descKey: "monthlyChallenge.themeSansAlcool.desc",
     matches: (c) => c.category === "Sans alcool",
   },
   {
     id: "corse",
-    icon: "🥃",
+    icon: Martini,
+    emoji: "🥃",
     titleKey: "monthlyChallenge.themeCorse.title",
     descKey: "monthlyChallenge.themeCorse.desc",
     matches: (c) => tasteProfile(c).includes("Corsé"),
   },
   {
     id: "fruite",
-    icon: "🍓",
+    icon: Cherry,
+    emoji: "🍓",
     titleKey: "monthlyChallenge.themeFruite.title",
     descKey: "monthlyChallenge.themeFruite.desc",
     matches: (c) => tasteProfile(c).includes("Fruité"),

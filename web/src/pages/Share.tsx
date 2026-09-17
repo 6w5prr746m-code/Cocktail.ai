@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import QRCode from "qrcode";
+import { Check, Link2 } from "lucide-react";
 import { ScreenHeader } from "../components/ScreenHeader";
 import { useAllIngredients, useCocktail } from "../domain/catalog";
 import { artFor } from "../domain/glassArt";
@@ -253,9 +254,10 @@ export default function SharePage() {
           <button
             type="button"
             onClick={copyRecipeLink}
-            className="w-full rounded-2xl py-3 text-sm font-medium"
+            className="w-full rounded-2xl py-3 text-sm font-medium flex items-center justify-center gap-1.5"
             style={{ background: "var(--color-surface)", color: "var(--color-text-primary)" }}
           >
+            {linkCopied ? <Check size={15} strokeWidth={2.25} aria-hidden /> : <Link2 size={15} strokeWidth={2} aria-hidden />}
             {linkCopied ? t("share.linkCopied") : t("share.copyRecipeLink")}
           </button>
         )}

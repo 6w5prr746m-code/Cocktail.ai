@@ -1,3 +1,4 @@
+import { Martini } from "lucide-react";
 import { useLocaleStore } from "../state/locale";
 
 /** Plein écran, affiché une seule fois avant tout le reste (y compris l'onboarding, dont le texte dépend de la langue choisie ici). */
@@ -12,9 +13,7 @@ export function LanguagePicker() {
       className="fixed inset-0 z-[60] flex flex-col items-center justify-center gap-6 px-8 animate-fade-in"
       style={{ background: "var(--color-bg)", maxWidth: 560, margin: "0 auto" }}
     >
-      <span style={{ fontSize: 40 }} aria-hidden>
-        🍸
-      </span>
+      <Martini size={44} strokeWidth={1.5} aria-hidden style={{ color: "var(--color-accent-gold-text)" }} />
       <div className="text-center">
         <p className="text-xl font-bold mb-1" style={{ color: "var(--color-text-primary)" }}>
           Choisis ta langue

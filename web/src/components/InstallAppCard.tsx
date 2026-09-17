@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Check, Smartphone, X } from "lucide-react";
 import { isIOS, isRunningStandalone, useInstallPromptStore } from "../state/installPrompt";
 import { useTranslation } from "../domain/i18n/useTranslation";
 
@@ -15,7 +16,7 @@ export function InstallAppCard() {
   if (standalone || installed) {
     return (
       <div className="rounded-2xl p-4 flex items-center gap-3 glass-card mb-6">
-        <span className="text-xl">✓</span>
+        <Check size={20} strokeWidth={2.25} aria-hidden style={{ color: "var(--color-success-text)" }} />
         <p className="text-sm" style={{ color: "var(--color-text-primary)" }}>
           {t("installCard.installed")}
         </p>
@@ -28,7 +29,7 @@ export function InstallAppCard() {
   if (deferredEvent) {
     return (
       <div className="rounded-2xl p-4 flex items-center gap-4 glass-card mb-6">
-        <span className="text-2xl">📲</span>
+        <Smartphone size={26} strokeWidth={1.75} aria-hidden style={{ color: "var(--color-accent-gold-text)" }} />
         <div className="flex-1 min-w-0">
           <p className="text-sm font-semibold" style={{ color: "var(--color-text-primary)" }}>
             {t("installCard.title")}
@@ -55,7 +56,7 @@ export function InstallAppCard() {
   if (isIOS()) {
     return (
       <div className="rounded-2xl p-4 flex items-start gap-3 glass-card mb-6">
-        <span className="text-2xl">📲</span>
+        <Smartphone size={26} strokeWidth={1.75} aria-hidden style={{ color: "var(--color-accent-gold-text)" }} />
         <div className="flex-1 min-w-0">
           <p className="text-sm font-semibold mb-1" style={{ color: "var(--color-text-primary)" }}>
             {t("installCard.iosTitle")}
@@ -68,10 +69,10 @@ export function InstallAppCard() {
           type="button"
           onClick={() => setDismissed(true)}
           aria-label={t("installCard.dismiss")}
-          className="flex-shrink-0 text-sm"
+          className="flex-shrink-0"
           style={{ color: "var(--color-text-secondary)" }}
         >
-          ✕
+          <X size={16} strokeWidth={2} aria-hidden />
         </button>
       </div>
     );

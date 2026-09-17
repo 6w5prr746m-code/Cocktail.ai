@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { Timer, Lightbulb } from "lucide-react";
 import { ScreenHeader } from "../components/ScreenHeader";
 import { CocktailVisual } from "../components/CocktailVisual";
 import { DifficultyDots } from "../components/DifficultyDots";
@@ -102,7 +103,10 @@ export default function SharedRecipePage() {
           <p className="text-[11px] font-semibold uppercase tracking-wide text-white/75 mb-1.5">{t("sharedRecipe.title")}</p>
           <h1 className="text-3xl font-bold text-white leading-tight">{preview.name}</h1>
           <div className="flex items-center justify-center gap-3 mt-2 text-sm text-white/85">
-            <span>⏱ {formatDuration(preview.preparationTimeMinutes)}</span>
+            <span className="flex items-center gap-1">
+              <Timer size={14} strokeWidth={2} aria-hidden />
+              {formatDuration(preview.preparationTimeMinutes)}
+            </span>
             <span className="flex items-center gap-1.5">
               • <DifficultyDots level={preview.difficulty} />
             </span>
@@ -181,8 +185,9 @@ export default function SharedRecipePage() {
             <h2 className="text-lg font-semibold mb-2" style={{ color: "var(--color-text-primary)" }}>
               {t("cocktailDetail.tipsHeading")}
             </h2>
-            <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-              💡 {preview.tips}
+            <p className="text-sm leading-relaxed flex items-start gap-2" style={{ color: "var(--color-text-secondary)" }}>
+              <Lightbulb size={16} strokeWidth={1.75} className="flex-shrink-0 mt-0.5" aria-hidden />
+              {preview.tips}
             </p>
           </section>
         )}

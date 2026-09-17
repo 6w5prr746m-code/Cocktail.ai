@@ -1,5 +1,6 @@
 import { useMemo, useRef, useState } from "react";
 import QRCode from "qrcode";
+import { Check, Star, Link2 } from "lucide-react";
 import { ScreenHeader } from "../components/ScreenHeader";
 import { useAllCocktails } from "../domain/catalog";
 import { fuzzyIncludes } from "../domain/fuzzySearch";
@@ -469,7 +470,7 @@ export default function MenuBuilderPage() {
                       color: item ? "#0b0b0f" : "var(--color-text-primary)",
                     }}
                   >
-                    <span aria-hidden>{item ? "✓" : ""}</span>
+                    {item && <Check size={15} strokeWidth={2.5} aria-hidden />}
                     {c.name}
                   </button>
                   {item && layout === "featured" && (
@@ -484,10 +485,11 @@ export default function MenuBuilderPage() {
                         width: 32,
                         height: 32,
                         background: item.featured ? "var(--color-accent-gold)" : "var(--color-surface)",
+                        color: item.featured ? "#0b0b0f" : "var(--color-text-primary)",
                         border: "1px solid var(--color-border)",
                       }}
                     >
-                      {item.featured ? "★" : "☆"}
+                      <Star size={15} strokeWidth={1.75} fill={item.featured ? "currentColor" : "none"} aria-hidden />
                     </button>
                   )}
                   {item && (
@@ -535,9 +537,10 @@ export default function MenuBuilderPage() {
               <button
                 type="button"
                 onClick={copyLink}
-                className="flex-1 rounded-2xl py-3 text-sm font-medium"
+                className="flex-1 rounded-2xl py-3 text-sm font-medium flex items-center justify-center gap-1.5"
                 style={{ background: "var(--color-surface)", color: "var(--color-text-primary)" }}
               >
+                {linkCopied ? <Check size={15} strokeWidth={2.25} aria-hidden /> : <Link2 size={15} strokeWidth={2} aria-hidden />}
                 {linkCopied ? t("menuBuilder.linkCopied") : t("menuBuilder.copyLink")}
               </button>
               <a

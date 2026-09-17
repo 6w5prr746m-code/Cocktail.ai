@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Dices, Sparkles, Trophy, ArrowRight, type LucideIcon } from "lucide-react";
 import { AlmostReadyBanner } from "../components/AlmostReadyBanner";
 import { CocktailCard } from "../components/CocktailCard";
 import { CocktailVisual } from "../components/CocktailVisual";
@@ -25,12 +26,14 @@ const SECTION_LIMIT = 20;
 
 function Section({
   title,
+  icon: Icon,
   subtitle,
   cocktails,
   emptyHint,
   captions,
 }: {
   title: string;
+  icon?: LucideIcon;
   subtitle?: string;
   cocktails: Cocktail[];
   emptyHint?: string;
@@ -40,7 +43,8 @@ function Section({
   return (
     <section className="mt-7">
       <div className="px-4 mb-3">
-        <h2 className="text-lg font-semibold" style={{ color: "var(--color-text-primary)" }}>
+        <h2 className="text-lg font-semibold flex items-center gap-1.5" style={{ color: "var(--color-text-primary)" }}>
+          {Icon && <Icon size={18} strokeWidth={1.75} aria-hidden />}
           {title}
         </h2>
         {subtitle && (
@@ -84,7 +88,10 @@ function FeaturedCocktail({ cocktail }: { cocktail: Cocktail }) {
         <p className="text-[11px] font-semibold uppercase tracking-wide text-white/75 mb-1.5">{t("home.featuredLabel")}</p>
         <h2 className="text-2xl font-bold text-white leading-tight mb-2">{cocktail.name}</h2>
         <TasteTags tags={tags} size="md" variant="onImage" />
-        <p className="text-sm text-white/85 mt-3 font-medium">{t("home.discoverRecipe")}</p>
+        <p className="text-sm text-white/85 mt-3 font-medium flex items-center gap-1">
+          {t("home.discoverRecipe")}
+          <ArrowRight size={15} strokeWidth={2.25} aria-hidden />
+        </p>
       </div>
     </Link>
   );
@@ -196,14 +203,17 @@ export default function HomePage() {
             className="flex-1 rounded-2xl py-4 font-semibold text-base"
             style={{ background: "var(--color-accent-gold)", color: "#0b0b0f" }}
           >
-            {t("home.addIngredientsButton")}
+            <span className="inline-flex items-center gap-1.5">
+              <Sparkles size={17} strokeWidth={2} aria-hidden />
+              {t("home.addIngredientsButton")}
+            </span>
           </button>
           <button
             type="button"
             onClick={surpriseMe}
             aria-label={t("home.surpriseAria")}
             title={t("home.surpriseTitle")}
-            className="rounded-2xl px-5 font-semibold text-base transition-transform"
+            className="rounded-2xl px-5 font-semibold text-base transition-transform flex items-center justify-center"
             style={{
               background: "var(--color-surface)",
               color: "var(--color-text-primary)",
@@ -211,7 +221,7 @@ export default function HomePage() {
               transform: surpriseFlash ? "rotate(18deg) scale(1.1)" : undefined,
             }}
           >
-            🎲
+            <Dices size={20} strokeWidth={1.75} aria-hidden />
           </button>
         </div>
       </div>
@@ -229,12 +239,14 @@ export default function HomePage() {
       <AlmostReadyBanner />
 
       <Section
-        title={`${season.icon} ${t(season.titleKey)}`}
+        title={t(season.titleKey)}
+        icon={season.icon}
         subtitle={t(season.subtitleKey)}
         cocktails={seasonal}
       />
       <Section
         title={t("home.exceptionalTitle")}
+        icon={Trophy}
         subtitle={t("home.exceptionalSubtitle")}
         cocktails={exceptional}
         captions={exceptionalCaptions}

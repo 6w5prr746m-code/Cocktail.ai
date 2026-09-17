@@ -40,10 +40,9 @@ export function SideNav() {
         >
           <span
             className="nav-link-tile relative flex items-center justify-center flex-shrink-0"
-            style={{ width: 30, height: 30, borderRadius: 8, background: tab.tint, fontSize: 15 }}
-            aria-hidden
+            style={{ width: 30, height: 30, borderRadius: 8, background: tab.tint }}
           >
-            {tab.icon}
+            <tab.icon size={17} strokeWidth={2.25} color="#ffffff" aria-hidden />
             {tab.to === "/mybar" && almostReadyCount > 0 && <NavBadgeDot />}
           </span>
           {t(tab.key)}
