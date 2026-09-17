@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Dices, Sparkles, Trophy, ArrowRight, type LucideIcon } from "lucide-react";
+import { Dices, Sparkles, Trophy, ArrowRight, CircleCheck, type LucideIcon } from "lucide-react";
 import { AlmostReadyBanner } from "../components/AlmostReadyBanner";
 import { CocktailCard } from "../components/CocktailCard";
 import { CocktailVisual } from "../components/CocktailVisual";
@@ -9,14 +9,18 @@ import { TasteTags } from "../components/TasteTags";
 import { WeeklyChallengeCard } from "../components/WeeklyChallengeCard";
 import { useAllCocktails } from "../domain/catalog";
 import { dailyPick } from "../domain/gradient";
+import { computeAdvancedMatches } from "../domain/matchingEngine";
 import { isMonthlyChallengeCompletedThisMonth, monthlyChallengePick } from "../domain/monthlyChallenge";
 import { getNotableCreator, notableCocktailIds } from "../domain/notableCreators";
 import { explainRecommendation, pickSurprise, recommendCocktails } from "../domain/recommendation";
 import { currentSeason, seasonalCocktails } from "../domain/seasonalCollections";
+import { SEED_SUBSTITUTIONS } from "../domain/seed";
 import { tasteProfile } from "../domain/tasteProfile";
+import type { StockStatus } from "../domain/types";
 import { isChallengeCompletedThisWeek, weeklyChallengePick } from "../domain/weeklyChallenge";
 import { useFavoritesStore } from "../state/favorites";
 import { useHistoryStore } from "../state/history";
+import { useMyBarStore } from "../state/myBar";
 import { useUserRecipesStore } from "../state/userRecipes";
 import type { Cocktail } from "../domain/types";
 import { useTranslation } from "../domain/i18n/useTranslation";
@@ -104,6 +108,7 @@ export default function HomePage() {
   const favoriteIds = useFavoritesStore((s) => s.favoriteIds);
   const historyEntries = useHistoryStore((s) => s.entries);
   const userRecipes = useUserRecipesStore((s) => s.recipes);
+  const myBarEntries = useMyBarStore((s) => s.entries);
   const [surpriseFlash, setSurpriseFlash] = useState(false);
 
   // Heuristique simple documentée (voir README iOS, Sprint 2) — en attendant
@@ -167,6 +172,22 @@ export default function HomePage() {
     const notable = getNotableCreator(c.id, locale);
     if (notable) exceptionalCaptions.set(c.id, t("notableCreator.cardCaption", { name: notable.creator, year: notable.year }));
   }
+
+  // Le moteur V2 (Mon Bar) sait déjà distinguer "réalisable dès maintenant"
+  // (availability "ready", tous les ingrédients requis en stock "available")
+  // de "presque prêt" (voir AlmostReadyBanner) — mais jusqu'ici ce résultat
+  // n'existait qu'agrégé en un compteur dans l'anneau de Mon Bar, jamais
+  // sous forme de liste consultable. Mise en avant ici, comme les autres
+  // collections de l'accueil.
+  const readyToMake = useMemo(() => {
+    if (Object.keys(myBarEntries).length === 0) return [];
+    const inventory = new Map<string, StockStatus>();
+    for (const entry of Object.values(myBarEntries)) inventory.set(entry.ingredientId, entry.stockStatus);
+    return computeAdvancedMatches(inventory, cocktails, SEED_SUBSTITUTIONS)
+      .filter((m) => m.availability === "ready")
+      .map((m) => m.cocktail)
+      .slice(0, SECTION_LIMIT);
+  }, [cocktails, myBarEntries]);
 
   const featured = useMemo(() => dailyPick(cocktails), [cocktails]);
   const weeklyChallenge = useMemo(() => weeklyChallengePick(cocktails), [cocktails]);
@@ -237,6 +258,13 @@ export default function HomePage() {
         </div>
       )}
       <AlmostReadyBanner />
+
+      <Section
+        title={t("home.readyToMakeTitle")}
+        icon={CircleCheck}
+        subtitle={t("home.readyToMakeSubtitle")}
+        cocktails={readyToMake}
+      />
 
       <Section
         title={t(season.titleKey)}

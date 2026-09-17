@@ -99,6 +99,8 @@ export const fr = {
     favoritesEmptyHint: "Ajoute des cocktails en favori depuis leur fiche pour les retrouver ici.",
     exceptionalTitle: "Cocktails d'exception",
     exceptionalSubtitle: "Des classiques imaginés par des bartenders devenus légendaires",
+    readyToMakeTitle: "Prêts à préparer",
+    readyToMakeSubtitle: "Tu as déjà tout ce qu'il faut dans Mon Bar",
     weeklyChallengeLabel: "Défi de la semaine",
     weeklyChallengeDone: "Réussi",
     almostReadyBannerTitle: "Tu es à 1 ingrédient de {{count}} nouveaux cocktails",

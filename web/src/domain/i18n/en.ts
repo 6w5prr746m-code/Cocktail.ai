@@ -99,6 +99,8 @@ export const en: TranslationSchema = {
     favoritesEmptyHint: "Add cocktails to your favorites from their page to find them here.",
     exceptionalTitle: "Cocktails of exception",
     exceptionalSubtitle: "Classics imagined by bartenders who became legends",
+    readyToMakeTitle: "Ready to make",
+    readyToMakeSubtitle: "You already have everything you need in My Bar",
     weeklyChallengeLabel: "Weekly challenge",
     weeklyChallengeDone: "Done",
     almostReadyBannerTitle: "You're 1 ingredient away from {{count}} new cocktails",

@@ -82,6 +82,8 @@ Le moteur de matching (`src/domain/matchingEngine.ts`) est un **portage ligne à
 
 **Le moteur V2 est exposé dans l'interface, pas seulement dans le calcul** : Mon Bar affiche une section "Presque prêt" (cocktails à un ou deux ingrédients près, triés par score) en plus du compteur de cocktails débloqués ; la fiche cocktail confronte la recette à Mon Bar dès qu'il contient au moins un ingrédient et annote chaque ligne (icône disponible, dégradé avec la raison — stock faible/presque terminé/substitution —, ou manquant) plutôt que de se contenter d'un score global. Une **liste de courses** (`src/state/shoppingList.ts`, persistée) se remplit en un tap depuis "Presque prêt" ou depuis une fiche cocktail, et vit dans l'onglet Mon Bar.
 
+**"Prêts à préparer" sur l'accueil** (`Home.tsx`) : jusqu'ici, `availability === "ready"` (tous les ingrédients requis en stock "disponible", sans dégradation) n'existait qu'agrégé en un compteur dans l'anneau de compatibilité de Mon Bar — jamais sous forme de liste consultable. Une nouvelle section met en avant ces cocktails intégralement réalisables, juste après la bannière "presque prêt", même style que les autres collections de l'accueil (carrousel horizontal, `CocktailCard`) ; masquée quand Mon Bar est vide ou que rien n'est encore prêt.
+
 ## Différences assumées par rapport à l'app iOS
 
 - **Pas de compte ni de synchronisation multi-appareil.** L'app iOS synchronise Mon Bar/Favoris/Historique via CloudKit ; ici tout est stocké dans le `localStorage` du navigateur (documenté à l'utilisateur dans l'écran Profil). C'est la limitation structurelle attendue d'une version web sans backend — un vrai compte nécessiterait une API et une base de données.
