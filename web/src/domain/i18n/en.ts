@@ -129,6 +129,7 @@ export const en: TranslationSchema = {
     title: "My Bar",
     emptyTitle: "Your bar is still empty",
     emptyBody: "Add a few common ingredients to instantly see which cocktails become possible.",
+    readyTitle: "Ready to make ({{count}})",
     almostReadyTitle: "Almost ready",
     missingPrefix: "Missing: {{items}}",
     addMissingAria: "Add the missing ingredients for {{name}} to the shopping list",

@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { PartyPopper, ChevronRight, Sparkles, ShoppingBag, ShoppingCart, Check, X, Lightbulb } from "lucide-react";
+import { PartyPopper, ChevronRight, Sparkles, ShoppingBag, ShoppingCart, Check, X, Lightbulb, CircleCheck } from "lucide-react";
 import { CompatibilityRing } from "../components/CompatibilityRing";
 import { MiniGlassBadge } from "../components/MiniGlassBadge";
 import { useAllCocktails, useAllIngredients } from "../domain/catalog";
@@ -19,6 +19,7 @@ import { useLocalizedIngredients } from "../domain/i18n/useLocalizedCocktail";
 import { getLocalizedIngredientCategory, getLocalizedIngredientName } from "../domain/i18n/localizedCocktail";
 
 const ALMOST_READY_LIMIT = 6;
+const READY_LIMIT = 6;
 
 const STOCK_OPTIONS: StockStatus[] = ["available", "low", "almostEmpty"];
 
@@ -46,6 +47,11 @@ export default function MyBarPage() {
   const unlockedCount = advancedMatches.filter((m) => m.availability === "ready").length;
   const readiness = evaluateBarReadiness(Object.keys(entries).length, unlockedCount);
   const readinessText = { title: t(`barReadiness.${readiness}Title`), subtitle: t(`barReadiness.${readiness}Subtitle`) };
+
+  const readyToMake = useMemo(
+    () => advancedMatches.filter((m) => m.availability === "ready").slice(0, READY_LIMIT),
+    [advancedMatches],
+  );
 
   const almostReady = useMemo(
     () => advancedMatches.filter((m) => m.availability === "missingFew").slice(0, ALMOST_READY_LIMIT),
@@ -134,6 +140,37 @@ export default function MyBarPage() {
           <ChevronRight size={20} className="flex-shrink-0" aria-hidden style={{ color: "var(--color-text-secondary)" }} />
         </Link>
       </div>
+
+      {readyToMake.length > 0 && (
+        <section className="px-4 pb-6">
+          <h2 className="text-base font-semibold mb-3 flex items-center gap-1.5" style={{ color: "var(--color-text-primary)" }}>
+            <CircleCheck size={17} strokeWidth={1.75} aria-hidden />
+            {t("myBar.readyTitle", { count: unlockedCount })}
+          </h2>
+          <ul className="flex flex-col gap-2">
+            {readyToMake.map((match) => (
+              <li key={match.cocktail.id}>
+                <Link
+                  to={`/cocktail/${match.cocktail.id}`}
+                  className="flex items-center gap-3 rounded-2xl p-3"
+                  style={{ background: "var(--color-surface)" }}
+                >
+                  <MiniGlassBadge cocktail={match.cocktail} size={44} />
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium truncate" style={{ color: "var(--color-text-primary)" }}>
+                      {match.cocktail.name}
+                    </p>
+                    <p className="text-xs truncate" style={{ color: "var(--color-text-secondary)" }}>
+                      {match.cocktail.category}
+                    </p>
+                  </div>
+                  <ChevronRight size={18} className="flex-shrink-0" aria-hidden style={{ color: "var(--color-text-secondary)" }} />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {Object.keys(entries).length === 0 && (
         <section className="px-4 pb-6">

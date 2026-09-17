@@ -129,6 +129,7 @@ export const fr = {
     title: "Mon Bar",
     emptyTitle: "Ton bar est encore vide",
     emptyBody: "Ajoute quelques ingrédients courants pour voir tout de suite quels cocktails deviennent réalisables.",
+    readyTitle: "Prêts à préparer ({{count}})",
     almostReadyTitle: "Presque prêt",
     missingPrefix: "Manque : {{items}}",
     addMissingAria: "Ajouter les ingrédients manquants pour {{name}} à la liste de courses",
